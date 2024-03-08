@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/v_mealsToday.dart';
 
 void main() {
   runApp(
@@ -20,7 +21,9 @@ class TutorialHome extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Dairy'),
       ),
-      body: Column(),
+      body: Column(
+        children: [mealsToday()],
+      ),
     );
   }
 }
