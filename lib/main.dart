@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
-
+import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
 void main() {
   runApp(
     const MaterialApp(
@@ -10,28 +9,37 @@ void main() {
   );
 }
 
-AppBar appbar = AppBar(title: Text('My Dairy'),
-leading: Row(
-  children: [
-    Icon(Icons.arrow_back_ios_new_rounded),
-    Icon(Icons.calendar_today_outlined),
-    Text('')
-  ],
-),);
-
-class TutorialHome extends StatelessWidget {
+class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
 
+  @override
+  State<TutorialHome> createState() => _TutorialHomeState();
+}
+
+class _TutorialHomeState extends State<TutorialHome> {
+  AppBar appbar = AppBar(
+    title: const Text('My Dairy'),
+    actions: const [
+      Row(
+        children: [
+         
+          DatepickerCustom(),
+         
+        ],
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     // Scaffold is a layout for
     // the major Material Components.
     return Scaffold(
       appBar: appbar,
+      // ignore: prefer_const_constructors
       body: Column(
-        children: [
+        children: const [
           // mealsToday(),
-          ],
+        ],
       ),
     );
   }
