@@ -307,14 +307,6 @@ class mealsTodayState extends State<mealsToday> {
             ),
           ],
         ),
-<<<<<<< Updated upstream:lib/v_mealsToday.dart
-        Text(
-          "data",
-          style: TextStyle(fontFamily: 'FontMain'),
-        ),
-        Text("vinesh")
-      ],
-=======
       ),
     );
   }
@@ -516,7 +508,7 @@ class _Meal_ItemsState extends State<Meal_Items> {
           ),
         ],
       ),
->>>>>>> Stashed changes:lib/Vinesh/v_mealsToday.dart
     );
   }
 }
+
