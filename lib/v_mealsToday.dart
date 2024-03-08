@@ -31,7 +31,10 @@ class mealsTodayState extends State<mealsToday> {
             children: [],
           ),
         ),
-        Text("data")
+        Text(
+          "data",
+          style: TextStyle(fontFamily: 'FontMain'),
+        )
       ],
     );
   }
