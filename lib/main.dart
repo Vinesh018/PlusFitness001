@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/v_mealsToday.dart';
+import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 
 void main() {
   runApp(
@@ -11,6 +11,17 @@ void main() {
   );
 }
 
+AppBar appbar = AppBar(
+  title: Text('My Dairy'),
+  leading: Row(
+    children: [
+      Icon(Icons.arrow_back_ios_new_rounded),
+      Icon(Icons.calendar_today_outlined),
+      Text('')
+    ],
+  ),
+);
+
 class TutorialHome extends StatelessWidget {
   const TutorialHome({super.key});
 
@@ -19,17 +30,11 @@ class TutorialHome extends StatelessWidget {
     // Scaffold is a layout for
     // the major Material Components.
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Dairy'),
-      ),
+      appBar: appbar,
       body: Column(
-<<<<<<< Updated upstream
-        children: [mealsToday()],
-=======
         children: [
           mealsToday(),
-          ],
->>>>>>> Stashed changes
+        ],
       ),
     );
   }
