@@ -4,20 +4,23 @@ import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 void main() {
   runApp(
     const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       home: TutorialHome(),
     ),
   );
 }
 
-AppBar appbar = AppBar(title: Text('My Dairy'),
-leading: Row(
-  children: [
-    Icon(Icons.arrow_back_ios_new_rounded),
-    Icon(Icons.calendar_today_outlined),
-    Text('')
-  ],
-),);
+AppBar appbar = AppBar(
+  title: Text('My Dairy'),
+  leading: Row(
+    children: [
+      Icon(Icons.arrow_back_ios_new_rounded),
+      Icon(Icons.calendar_today_outlined),
+      Text('')
+    ],
+  ),
+);
 
 class TutorialHome extends StatelessWidget {
   const TutorialHome({super.key});
@@ -30,8 +33,8 @@ class TutorialHome extends StatelessWidget {
       appBar: appbar,
       body: Column(
         children: [
-          // mealsToday(),
-          ],
+          mealsToday(),
+        ],
       ),
     );
   }
