@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
 
 import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
@@ -34,6 +35,7 @@ class TutorialHome extends StatefulWidget {
 class _TutorialHomeState extends State<TutorialHome> {
   AppBar appbar = AppBar(
     title: const Text('My Dairy'),
+    backgroundColor:  Color.fromARGB(255, 231, 235, 237),
     actions: const [
       Row(
         children: [
@@ -58,6 +60,7 @@ class _TutorialHomeState extends State<TutorialHome> {
           padding: const EdgeInsets.only(top: 20),
           child: Column(
             children: [
+              firstContainer(),
               heading_mealsToday(),
               mealsToday(),
               heading_BodyMeasurement(),
