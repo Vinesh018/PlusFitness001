@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plus_fitnss/Vinesh/exercise.dart';
-import 'package:plus_fitnss/Vinesh/main.dart';
+import 'package:plus_fitnss/main.dart';
 
 class footer extends StatefulWidget {
   const footer({super.key});
