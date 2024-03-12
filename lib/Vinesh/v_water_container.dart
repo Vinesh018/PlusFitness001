@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 
 class waterContainer extends StatefulWidget {
@@ -171,9 +172,30 @@ class waterContainerState extends State<waterContainer> {
                         ],
                       ),
                     ),
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.only(right: 25, top: 20),
-                      child: SizedBox(height: 200, child: waterIndicator()),
+                      child: SizedBox(height: 200, child: Container(
+                          width: 60,
+                          height: 160,
+                          decoration: BoxDecoration(
+                             color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(80.0),
+                                bottomLeft: Radius.circular(80.0),
+                                bottomRight: Radius.circular(80.0),
+                                topRight: Radius.circular(80.0)),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  // color: FitnessAppTheme.grey.withOpacity(0.4),
+                                  offset: const Offset(2, 2),
+                                  blurRadius: 4),
+                            ],
+                          ),
+                          child: WaveView(
+                            percentageValue: 60.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )
