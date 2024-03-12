@@ -24,18 +24,7 @@ void main() {
   );
 }
 
-AppBar appbar = AppBar(
-  title: Text('My Dairy'),
-  leading: Row(
-    children: [
-      Icon(Icons.arrow_back_ios_new_rounded),
-      Icon(Icons.calendar_today_outlined),
-      Text('')
-    ],
-  ),
-);
-
-class TutorialHome extends StatelessWidget {
+class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
 
   @override
@@ -65,8 +54,8 @@ class _TutorialHomeState extends State<TutorialHome> {
       appBar: appbar,
 <<<<<<< Updated upstream
       body: Column(
-        children: [
-          mealsToday(),
+        children: const [
+          // mealsToday(),
         ],
 =======
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
