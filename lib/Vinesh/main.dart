@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
+
 import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
-=======
 import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
 import 'package:plus_fitnss/Vinesh/footer.dart';
 import 'package:plus_fitnss/Vinesh/heading_BodyMeasurement.dart';
@@ -11,7 +10,7 @@ import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitnss/Vinesh/v_waterHeading.dart';
 import 'package:plus_fitnss/Vinesh/v_water_container.dart';
 import 'package:plus_fitnss/Vinesh/waterGlass.dart';
->>>>>>> Stashed changes
+
 
 void main() {
   runApp(
@@ -28,8 +27,7 @@ class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
 
   @override
-<<<<<<< Updated upstream
-=======
+
   State<TutorialHome> createState() => _TutorialHomeState();
 }
 
@@ -45,7 +43,7 @@ class _TutorialHomeState extends State<TutorialHome> {
     ],
   );
   @override
->>>>>>> Stashed changes
+
   Widget build(BuildContext context) {
     // Scaffold is a layout for
     // the major Material Components.
