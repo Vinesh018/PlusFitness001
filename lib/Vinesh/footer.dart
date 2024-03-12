@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/exercise.dart';
+import 'package:plus_fitnss/exercise.dart';
 import 'package:plus_fitnss/main.dart';
 
 class footer extends StatefulWidget {
