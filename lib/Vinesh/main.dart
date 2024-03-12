@@ -50,12 +50,7 @@ class _TutorialHomeState extends State<TutorialHome> {
     return Scaffold(
       bottomNavigationBar: footer(),
       appBar: appbar,
-<<<<<<< Updated upstream
-      body: Column(
-        children: const [
-          // mealsToday(),
-        ],
-=======
+
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
       // ignore: prefer_const_constructors
       body: SingleChildScrollView(
@@ -74,8 +69,7 @@ class _TutorialHomeState extends State<TutorialHome> {
           ),
         ),
         
->>>>>>> Stashed changes
-      ),
-    );
+        ));
+ 
   }
 }
