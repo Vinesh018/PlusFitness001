@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 
 class waterContainer extends StatefulWidget {
   @override
@@ -196,19 +196,19 @@ class waterIndicator extends StatefulWidget {
 class _waterIndicatorState extends State<waterIndicator> {
   @override
   Widget build(BuildContext context) {
-    // return LiquidLinearProgressIndicator(
-    //   value: 0.25, // Defaults to 0.5.
-    //   valueColor: const AlwaysStoppedAnimation(
-    //       Colors.pink), // Defaults to the current Theme's accentColor.
-    //   backgroundColor: const Color.fromARGB(255, 231, 235,
-    //       237), // Defaults to the current Theme's backgroundColor.
-    //   borderColor: Colors.black12,
-    //   borderWidth: 2.0,
-    //   borderRadius: 50.0,
+    return LiquidLinearProgressIndicator(
+      value: 0.25, // Defaults to 0.5.
+      valueColor: const AlwaysStoppedAnimation(
+          Colors.pink), // Defaults to the current Theme's accentColor.
+      backgroundColor: const Color.fromARGB(255, 231, 235,
+          237), // Defaults to the current Theme's backgroundColor.
+      borderColor: Colors.black12,
+      borderWidth: 2.0,
+      borderRadius: 50.0,
 
-    //   direction: Axis.vertical,
-    //   center: const Text("Loading"),
-    // );
+      direction: Axis.vertical,
+      center: const Text("Loading"),
+    );
 
     return Container();
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/addMeals.dart';
 import 'package:plus_fitnss/exercise.dart';
 import 'package:plus_fitnss/main.dart';
 
@@ -14,6 +15,7 @@ class _footerState extends State<footer> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Container(
+      color: const Color.fromARGB(0, 0, 0, 0),
       height: 80,
       child: Stack(
         children: [
@@ -21,6 +23,7 @@ class _footerState extends State<footer> {
               bottom: 0,
               left: 0,
               child: Container(
+                color: Colors.white.withOpacity(0),
                 width: size.width,
                 height: 80,
                 child: Stack(
@@ -41,6 +44,7 @@ class _footerState extends State<footer> {
                           ),
                         )),
                     Container(
+                        color: Colors.white.withOpacity(0),
                         width: size.width,
                         height: 80,
                         child: Row(
@@ -49,10 +53,7 @@ class _footerState extends State<footer> {
                             IconButton(
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => TutorialHome()),
-                                  );
+                                      context, FadeRoute(page: TutorialHome()));
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_1.png"),
@@ -62,10 +63,7 @@ class _footerState extends State<footer> {
                             IconButton(
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => exercisePage()),
-                                  );
+                                      context, FadeRoute(page: exercisePage()));
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_2.png"),
@@ -76,7 +74,10 @@ class _footerState extends State<footer> {
                               width: size.width * 0.20,
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context, FadeRoute(page: addMeals()));
+                                },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_3.png"),
                                   height: 50,
@@ -128,4 +129,26 @@ class customPainter extends CustomPainter {
     // TODO: implement shouldRepaint
     return false;
   }
+}
+class FadeRoute extends PageRouteBuilder {
+  final Widget page;
+  FadeRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
 }

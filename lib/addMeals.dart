@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Vinesh/T_addMeals.dart';
 import 'package:plus_fitnss/Vinesh/footer.dart';
 
-class exercisePage extends StatefulWidget {
+class addMeals extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => exercisePageState();
+  State<StatefulWidget> createState() => addMealsState();
 }
 
-class exercisePageState extends State<exercisePage> {
+class addMealsState extends State<addMeals> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
+      appBar: AppBar(),
       bottomNavigationBar: footer(),
 
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
       // ignore: prefer_const_constructors
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 20),
           child: Column(
-            children: [],
+            children: [addMealsPage()],
           ),
         ),
       ),
