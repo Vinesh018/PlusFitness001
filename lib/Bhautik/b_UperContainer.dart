@@ -309,9 +309,17 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
       animation: true,
       animationDuration: 1000,
       percent: widget.per,
-      center:Text(
-        '${(widget.per * 1000)*2 + 104}',
-        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      center:SizedBox(
+        height: 50,
+        child: Column(
+          children: [
+            Text(
+              '${((widget.per * 1000)*2 + 104).toInt()}',
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+            ),
+            Text('Kcal left',style: TextStyle(fontFamily: 'FontMain',fontSize: 12),)
+          ],
+        ),
       ),
       backgroundColor: Colors.indigo.shade500,
       circularStrokeCap: CircularStrokeCap.round,
