@@ -19,7 +19,7 @@ void main() {
      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home:DragandDrop(),
+      home: TutorialHome(),
         
       
     ),
@@ -62,14 +62,14 @@ class _TutorialHomeState extends State<TutorialHome> {
           padding: const EdgeInsets.only(top: 20),
           child: Column(
             children: [
-              // firstContainer(),
-              // heading_mealsToday(),
-              // mealsToday(),
-              // heading_BodyMeasurement(),
-              // bodyMeasureCont(),
-              // heading_water(),
-              // waterContainer(),
-              // waterGlass(),
+                firstContainer(),
+                heading_mealsToday(),
+                mealsToday(),
+                heading_BodyMeasurement(),
+                bodyMeasureCont(),
+                heading_water(),
+                waterContainer(),
+                waterGlass(),
             ],
           ),
         ),

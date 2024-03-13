@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Vinesh/footer.dart';
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -6,15 +7,65 @@ List<MealsItems> _mealsItem = [
       uid: '1',
       imageurl: 'assets/meals/avocado.png'),
   MealsItems(
-      itemname: 'bread',
+      itemname: 'Bread',
       calaries: 265,
       uid: '2',
       imageurl: 'assets/meals/bread.png'),
   MealsItems(
-      itemname: 'butter',
-      calaries: 717,
+      itemname: 'Butter',
+      calaries: 102,
       uid: '3',
       imageurl: 'assets/meals/butter.png'),
+  MealsItems(
+      itemname: 'Naan (Indian bread)',
+      calaries: 262,
+      uid: '4',
+      imageurl: 'assets/meals/naan.png'),
+  MealsItems(
+      itemname: 'Pizza',
+      calaries: 266,
+      uid: '5',
+      imageurl: 'assets/meals/pizza.png'),
+  MealsItems(
+      itemname: 'Rajma',
+      calaries: 333,
+      uid: '6',
+      imageurl: 'assets/meals/rajma.png'),
+  MealsItems(
+      itemname: 'Rice',
+      calaries: 130,
+      uid: '7',
+      imageurl: 'assets/meals/rice.png'),
+  MealsItems(
+      itemname: 'Roti (Indian Bread)',
+      calaries: 120,
+      uid: '9',
+      imageurl: 'assets/meals/roti.jpg'),
+  MealsItems(
+      itemname: 'Salad',
+      calaries: 100,
+      uid: '10',
+      imageurl: 'assets/meals/salad.png'),
+  MealsItems(
+      itemname: 'Sandwich',
+      calaries: 280,
+      uid: '10',
+      imageurl: 'assets/meals/sandwich.png'),
+  MealsItems(
+      itemname: 'Soup',
+      calaries: 190,
+      uid: '11',
+      imageurl: 'assets/meals/soup.png'),
+  MealsItems(
+      itemname: 'Tomatoes',
+      calaries: 20,
+      uid: '12',
+      imageurl: 'assets/meals/tomato.png'),
+  MealsItems(
+      itemname: 'Veggies',
+      calaries: 65,
+      uid: '13',
+      imageurl: 'assets/meals/veggies.png'),
 ];
 
 class MealsItems {
@@ -57,8 +108,20 @@ class _DragandDropState extends State<DragandDrop>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: _buildcontent(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 231, 235, 237),
+        title: Text(
+          "Add Meals to your Bucket",
+          style: TextStyle(color: Colors.indigo, fontFamily: "FontMain"),
+        ),
+      ),
+      bottomNavigationBar: footer(),
+      backgroundColor: Color.fromARGB(255, 231, 235, 237),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: _buildcontent(),
+      ),
     );
   }
 
@@ -106,10 +169,17 @@ class _DragandDropState extends State<DragandDrop>
 
   Widget _builditemRow() {
     return Container(
+      decoration: BoxDecoration(
+          color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
+      
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-        child: Row(
-          children: _mealtype.map(_buildIteamWithDropZone).toList(),
+        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+        child: Column(
+          children: [
+            Row(
+              children: _mealtype.map(_buildIteamWithDropZone).toList(),
+            ),
+          ],
         ),
       ),
     );
@@ -148,67 +218,72 @@ class MealsCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textcolor = highlighted ? Colors.black : Colors.black;
-    return Transform.scale(
-      scale: highlighted ? 1.075 : 1.0,
-      child: Material(
-        elevation: highlighted ? 8 : 4,
-        borderRadius: BorderRadius.circular(22),
-        color: highlighted ? const Color(0xFFF64209) : Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 24,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipOval(
-                child: SizedBox(
-                  width: 46,
-                  height: 46,
-                  child: Image.asset(
-                    mealtype.mealtypeimageurl,
-                    fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Transform.scale(
+        scale: highlighted ? 1.075 : 1.0,
+        child: Material(
+          elevation: highlighted ? 8 : 4,
+          borderRadius: BorderRadius.circular(22),
+          color: highlighted ? Colors.indigo.shade200 : Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipOval(
+                  child: SizedBox(
+                    width: 56,
+                    height: 56,
+                    child: Image.asset(
+                      mealtype.mealtypeimageurl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                mealtype.mealtype,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                const SizedBox(height: 8),
+                Text(
+                  mealtype.mealtype,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: textcolor,
                       fontWeight:
                           hasItems ? FontWeight.normal : FontWeight.bold,
-                    ),
-              ),
-              Visibility(
-                visible: hasItems,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 4),
-                    Text(
-                      mealtype.formattedtotalcalaries,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: textcolor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${mealtype.mealitem.length} item${mealtype.mealitem.length != 1 ? 's' : ''}',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: textcolor,
-                            fontSize: 12,
-                          ),
-                    ),
-                  ],
+                      fontFamily: "FontMain"
+                      ),
                 ),
-              )
-            ],
+                Visibility(
+                  visible: hasItems,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  maintainSize: true,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 4),
+                      Text(
+                        mealtype.formattedtotalcalaries,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: textcolor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${mealtype.mealitem.length} item${mealtype.mealitem.length != 1 ? 's' : ''}',
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  color: textcolor,
+                                  fontSize: 15,
+                                ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -225,7 +300,7 @@ class Mealtype {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
         print(totalcalaries);
-    return 'cal${(totalcalaries).toStringAsFixed(2)}';
+    return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
 
   Mealtype(
@@ -279,18 +354,26 @@ class MenuListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      
       elevation: 12,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(10),
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(60),
+        bottomRight: Radius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
             ClipRRect(
+              
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
-                width: 120,
-                height: 120,
+                
+                width: 80,
+                height: 80,
                 child: Center(
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 100),
@@ -323,7 +406,7 @@ class MenuListItem extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  '${foodcalories}',
+                  '${foodcalories} Kcal',
                   style: TextStyle(
                       fontFamily: 'FontMain',
                       color: Colors.black,

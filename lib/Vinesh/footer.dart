@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Vinesh/T_Meals.dart';
 import 'package:plus_fitnss/addMeals.dart';
 import 'package:plus_fitnss/exercise.dart';
 import 'package:plus_fitnss/main.dart';
@@ -76,7 +77,9 @@ class _footerState extends State<footer> {
                             IconButton(
                                 onPressed: () {
                                   Navigator.push(
-                                      context, FadeRoute(page: addMeals()));
+                                      context, FadeRoute(page: DragandDrop()));
+                                      
+                                      
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_3.png"),
