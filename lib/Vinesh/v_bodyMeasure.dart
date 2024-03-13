@@ -55,7 +55,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: RichText(
                                   text: const TextSpan(
-                                    text: '206.8 ',
+                                    text: '203.8 ',
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 19, 75, 232),
                                         fontFamily: 'FontMain',
