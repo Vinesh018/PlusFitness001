@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
+import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
 
 import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
@@ -14,10 +15,10 @@ import 'package:plus_fitnss/Vinesh/waterGlass.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home: TutorialHome(),
+      home: MainSignUpPage(),
         
       
     ),
@@ -60,14 +61,14 @@ class _TutorialHomeState extends State<TutorialHome> {
           padding: const EdgeInsets.only(top: 20),
           child: Column(
             children: [
-              firstContainer(),
-              heading_mealsToday(),
-              mealsToday(),
-              heading_BodyMeasurement(),
-              bodyMeasureCont(),
-              heading_water(),
-              waterContainer(),
-              waterGlass(),
+              // firstContainer(),
+              // heading_mealsToday(),
+              // mealsToday(),
+              // heading_BodyMeasurement(),
+              // bodyMeasureCont(),
+              // heading_water(),
+              // waterContainer(),
+              // waterGlass(),
             ],
           ),
         ),
