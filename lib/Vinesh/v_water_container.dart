@@ -174,13 +174,13 @@ class waterContainerState extends State<waterContainer> {
                       ),
                     ),
                      Padding(
-                      padding: EdgeInsets.only(right: 25, top: 20),
+                      padding: const EdgeInsets.only(right: 25, top: 20),
                       child: SizedBox(height: 200, child: Container(
                           width: 60,
                           height: 160,
-                          decoration: BoxDecoration(
-                             color: Colors.white,
-                            borderRadius: const BorderRadius.only(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 224, 226, 227),
+                            borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(80.0),
                                 bottomLeft: Radius.circular(80.0),
                                 bottomRight: Radius.circular(80.0),
@@ -188,11 +188,11 @@ class waterContainerState extends State<waterContainer> {
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                   // color: FitnessAppTheme.grey.withOpacity(0.4),
-                                  offset: const Offset(2, 2),
+                                  offset: Offset(2, 2),
                                   blurRadius: 4),
                             ],
                           ),
-                          child: WaveView(
+                          child: const WaveView(
                             percentageValue: 60.0,
                           ),
                         ),
