@@ -1,18 +1,4 @@
 import 'package:flutter/material.dart';
-
-
-class Meals extends StatefulWidget {
-  @override
-  State<Meals> createState() => _MealsState();
-}
-
-class _MealsState extends State<Meals> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -41,8 +27,6 @@ class MealsItems {
       required this.calaries,
       required this.uid,
       required this.imageurl});
-
-    
 }
 
 class DragandDrop extends StatefulWidget {
@@ -140,17 +124,16 @@ class _DragandDropState extends State<DragandDrop>
           return MealsCart(
             hasItems: mealtype.mealitem.isNotEmpty,
             highlighted: candidateData.isNotEmpty,
-          mealtype: mealtype,
+            mealtype: mealtype,
           );
         },
         onAcceptWithDetails: (details) {
-         _itemDroppedOnMealsItem(mealsItems: details.data,mealtype: mealtype);
+          _itemDroppedOnMealsItem(mealsItems: details.data, mealtype: mealtype);
         },
       ),
     ));
   }
 }
-
 
 class MealsCart extends StatelessWidget {
   final Mealtype mealtype;
@@ -238,10 +221,13 @@ class Mealtype {
   final String mealtypeimageurl;
   final List<MealsItems> mealitem;
 
-    String get formattedtotalcalaries{
-        final totalcalaries = _mealsItem.fold(0, (pre, item) => (pre + item.calaries).toInt());
-        return 'calaries${(totalcalaries / 100).toStringAsFixed(2)}';
-      }
+  String get formattedtotalcalaries {
+    final totalcalaries =
+        mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
+        print(totalcalaries);
+    return 'cal${(totalcalaries).toStringAsFixed(2)}';
+  }
+
   Mealtype(
       {required this.mealtype,
       required this.mealtypeimageurl,
@@ -330,7 +316,7 @@ class MenuListItem extends StatelessWidget {
                   foodname,
                   style: TextStyle(
                       fontFamily: 'FontMain',
-                      color: Colors.black ,
+                      color: Colors.black,
                       fontSize: 18),
                 ),
                 SizedBox(
@@ -340,7 +326,7 @@ class MenuListItem extends StatelessWidget {
                   '${foodcalories}',
                   style: TextStyle(
                       fontFamily: 'FontMain',
-                      color: Colors.black ,
+                      color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w600),
                 ),
