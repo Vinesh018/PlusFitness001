@@ -179,7 +179,7 @@ class waterContainerState extends State<waterContainer> {
                           width: 60,
                           height: 160,
                           decoration: BoxDecoration(
-                             color: Colors.white,
+                            color: Color.fromARGB(255, 224, 226, 227),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(80.0),
                                 bottomLeft: Radius.circular(80.0),
