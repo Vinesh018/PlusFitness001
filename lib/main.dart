@@ -19,7 +19,8 @@ void main() {
      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home:DragandDrop(),
+      // home:DragandDrop(),
+      home: MainSignUpPage(),
         
       
     ),
