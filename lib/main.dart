@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
+import 'package:plus_fitnss/Bhautik/b_login.dart';
 import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
 import 'package:plus_fitnss/Vinesh/T_Meals.dart';
 
@@ -19,7 +20,7 @@ void main() {
      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home: TutorialHome(),
+      home: MainLogInPage(),
         
       
     ),
