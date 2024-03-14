@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -74,31 +75,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 110, left: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Sign Up',
-                  style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    'Sign up with your username or password',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'FontMain',
-                        fontSize: 16),
-                  ),
-                )
-              ],
-            ),
-          ),
+          mainAndSubHeading(),
           Padding(
             padding: const EdgeInsets.only(left: 30, top: 70),
             child: Column(
@@ -117,146 +94,181 @@ class InnerdataOfBlueContainer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 15,
-                          left: 15,
-                          right: 15,
-                        ),
-                        child: TextField(
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Colors.indigo.shade700,
-                              decoration: TextDecoration.none,
-                              decorationColor:
-                                  Color.fromARGB(0, 252, 230, 166)),
-                          cursorColor: Colors.grey,
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade300)),
-                            hintText: 'enter Username',
-                            hintStyle: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'FontMain',
-                                color: Colors.grey.shade600),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 15,
-                          left: 15,
-                          right: 15,
-                        ),
-                        child: TextField(
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Colors.indigo.shade700,
-                              decoration: TextDecoration.none,
-                              decorationColor:
-                                  Color.fromARGB(0, 252, 230, 166)),
-                          cursorColor: Colors.grey,
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade300)),
-                            hintText: 'enter email',
-                            hintStyle: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'FontMain',
-                                color: Colors.grey.shade600),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 15, left: 15, right: 15, bottom: 15),
-                        child: TextField(
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Colors.indigo.shade700,
-                              decoration: TextDecoration.none,
-                              decorationColor:
-                                  Color.fromARGB(0, 252, 230, 166)),
-                          cursorColor: Colors.grey,
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade300)),
-                            hintText: 'enter password',
-                            hintStyle: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'FontMain',
-                                color: Colors.grey.shade600),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                        ),
-                      ),
+                      enterUsernameTextField(),
+                      enterEmailTextField(),
+                      enterPasswordTextField()
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 45, right: 125),
-                  child: InkWell(
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black.withOpacity(0.80),
-                        ),
-                        width: 200,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 35),
-                          child: Center(
-                              child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'FontMain',
-                                fontSize: 17),
-                          )),
-                        )),
-                    onTap: null,
-                  ),
-                )
+                signUpButtonField(),
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: InkWell(
+          fogotPassword(),
+        ],
+      ),
+    );
+  }
+
+  Widget enterPasswordTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
+      child: TextField(
+        maxLines: 1,
+        style: TextStyle(
+            color: Colors.indigo.shade700,
+            decoration: TextDecoration.none,
+            decorationColor: Color.fromARGB(0, 252, 230, 166)),
+        cursorColor: Colors.grey,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300)),
+          hintText: 'enter password',
+          hintStyle: TextStyle(
+              fontSize: 16,
+              fontFamily: 'FontMain',
+              color: Colors.grey.shade600),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade300),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget signUpButtonField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 45, right: 125),
+      child: InkWell(
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.black.withOpacity(0.80),
+            ),
+            width: 200,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 35),
+              child: Center(
                   child: Text(
-                    'Create Account',
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontSize: 20,
-                        color: Colors.transparent,
-                        fontFamily: 'FontMainLight',
-                        decorationColor: Colors.indigo,
-                        decorationThickness: 3,
-                        shadows: [
-                          Shadow(color: Colors.black, offset: Offset(0, -5))
-                        ]),
-                  ),
-                  onTap: null,
-                ),
+                "Sign Up",
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'FontMain', fontSize: 17),
+              )),
+            )),
+        onTap: null,
+      ),
+    );
+  }
+
+  Widget fogotPassword() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 5, top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: InkWell(
+              child: Text(
+                'Forgot Password',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 17,
+                    color: Colors.transparent,
+                    fontFamily: 'FontMain',
+                    fontWeight: FontWeight.w100,
+                    decorationColor: Colors.indigo,
+                    decorationThickness: 3,
+                    shadows: [
+                      Shadow(color: Colors.grey.shade800, offset: Offset(0, -5))
+                    ]),
               ),
-            ],
+              onTap: null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget enterEmailTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 15,
+        left: 15,
+        right: 15,
+      ),
+      child: TextField(
+        maxLines: 1,
+        style: TextStyle(
+            color: Colors.indigo.shade700,
+            decoration: TextDecoration.none,
+            decorationColor: Color.fromARGB(0, 252, 230, 166)),
+        cursorColor: Colors.grey,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300)),
+          hintText: 'enter email',
+          hintStyle: TextStyle(
+              fontSize: 16,
+              fontFamily: 'FontMain',
+              color: Colors.grey.shade600),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade300),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget enterUsernameTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 15,
+        left: 15,
+        right: 15,
+      ),
+      child: TextField(
+        maxLines: 1,
+        style: TextStyle(
+            color: Colors.indigo.shade700,
+            decoration: TextDecoration.none,
+            decorationColor: Color.fromARGB(0, 252, 230, 166)),
+        cursorColor: Colors.grey,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300)),
+          hintText: 'enter Username',
+          hintStyle: TextStyle(
+              fontSize: 16,
+              fontFamily: 'FontMain',
+              color: Colors.grey.shade600),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade300),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget mainAndSubHeading() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 110, left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Sign Up',
+            style: TextStyle(
+                fontSize: 35, color: Colors.white, fontWeight: FontWeight.w600),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              'Sign up with your username or password',
+              style: TextStyle(
+                  color: Colors.white, fontFamily: 'FontMain', fontSize: 16),
+            ),
           )
         ],
       ),
