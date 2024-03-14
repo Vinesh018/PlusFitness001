@@ -104,10 +104,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                         ),
                       ],
                     ),
-                    Text(
-                      "_______________________________________________",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+               Divider(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: Row(

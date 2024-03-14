@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
 import 'package:plus_fitnss/Bhautik/b_login.dart';
 import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
@@ -17,7 +18,7 @@ import 'package:plus_fitnss/Vinesh/waterGlass.dart';
 
 void main() {
   runApp(
-     MaterialApp(
+     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),

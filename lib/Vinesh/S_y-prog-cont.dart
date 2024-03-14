@@ -14,7 +14,7 @@ class yourProgramState extends State<yourProgram> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: 230,
+            height: 240,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,

@@ -11,6 +11,7 @@ class waterContainer extends StatefulWidget {
 class waterContainerState extends State<waterContainer> {
   @override
   Widget build(BuildContext context) {
+    var screenwidth = MediaQuery.of(context).size.width;
     // TODO: implement build
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -36,9 +37,9 @@ class waterContainerState extends State<waterContainer> {
               ],
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 30, bottom: 30, left: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,12 +66,21 @@ class waterContainerState extends State<waterContainer> {
                                 fontFamily: 'FontMain',
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700),
-                          )
+                          ),
                         ],
                       ),
-                      Text(
-                        "______________________________",
-                        style: TextStyle(color: Colors.grey),
+                      Column(
+                        children: [
+                          Container(
+                            width: screenwidth/2 - 30,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(width: 1,color: Colors.grey.shade500)
+                              )
+                            ),
+                            
+                          ),
+                        ],
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -106,7 +116,7 @@ class waterContainerState extends State<waterContainer> {
                                 width: 5,
                               ),
                               SizedBox(
-                                width: 140,
+                                width: 110,
                                 child: Text(
                                   "Your bottle is empty refill it!.",
                                   style: TextStyle(
@@ -124,10 +134,11 @@ class waterContainerState extends State<waterContainer> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(right: 20, top: 50, bottom: 50),
+                          const EdgeInsets.only(right: 15, top: 50, bottom: 50),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -173,10 +184,12 @@ class waterContainerState extends State<waterContainer> {
                         ],
                       ),
                     ),
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.only(right: 25, top: 20),
-                      child: SizedBox(height: 200, child: Container(
-                          width: 60,
+                      child: SizedBox(
+                        height: 200,
+                        child: Container(
+                          width: 50,
                           height: 160,
                           decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 224, 226, 227),

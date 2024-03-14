@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+var width;
 class areaOfFocusCont extends StatefulWidget {
   const areaOfFocusCont({super.key});
 
@@ -9,8 +10,11 @@ class areaOfFocusCont extends StatefulWidget {
 }
 
 class _areaOfFocusContState extends State<areaOfFocusCont> {
+
   @override
   Widget build(BuildContext context) {
+    var screenwidth = MediaQuery.of(context).size.width;
+    width = screenwidth/2;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -23,7 +27,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 180,
-                  width: 160,
+                  width: width - 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -46,7 +50,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 180,
-                  width: 160,
+                 width: width -  40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -73,7 +77,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 180,
-                  width: 160,
+                  width: width - 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -96,7 +100,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 180,
-                  width: 160,
+              width: width - 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -123,3 +127,43 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
     );
   }
 }
+
+// GridView.count(
+//   primary: false,
+//   padding: const EdgeInsets.all(20),
+//   crossAxisSpacing: 10,
+//   mainAxisSpacing: 10,
+//   crossAxisCount: 2,
+//   children: <Widget>[
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[100],
+//       child: const Text("He'd have you all unravel at the"),
+//     ),
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[200],
+//       child: const Text('Heed not the rabble'),
+//     ),
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[300],
+//       child: const Text('Sound of screams but the'),
+//     ),
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[400],
+//       child: const Text('Who scream'),
+//     ),
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[500],
+//       child: const Text('Revolution is coming...'),
+//     ),
+//     Container(
+//       padding: const EdgeInsets.all(8),
+//       color: Colors.teal[600],
+//       child: const Text('Revolution, they...'),
+//     ),
+//   ],
+// )
