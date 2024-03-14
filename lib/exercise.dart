@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/S_AreaOfFocus_cont.dart';
-import 'package:plus_fitnss/Vinesh/S_AreaOfFocus_heading.dart';
-import 'package:plus_fitnss/Vinesh/S_doing-great.dart';
-import 'package:plus_fitnss/Vinesh/S_y-prog-cont.dart';
-import 'package:plus_fitnss/Vinesh/S_y-program_heading.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
+import 'package:plus_fitness/Vinesh/S_AreaOfFocus_cont.dart';
+import 'package:plus_fitness/Vinesh/S_AreaOfFocus_heading.dart';
+import 'package:plus_fitness/Vinesh/S_doing-great.dart';
+import 'package:plus_fitness/Vinesh/S_y-prog-cont.dart';
+import 'package:plus_fitness/Vinesh/S_y-program_heading.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
 
 class exercisePage extends StatefulWidget {
   @override

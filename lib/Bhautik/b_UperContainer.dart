@@ -122,33 +122,31 @@ class FirstRowOfContainer extends StatelessWidget {
                             fontFamily: 'FontMain', color: Colors.grey),
                       ),
                     ),
-                    SizedBox(
-                      width: 140,
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            // 'assets/images/eaten.png',
-                            imgadress,
-                            height: 40,
-                            width: 40,
-                          ),
-                          Text(
-                            subtext,
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'FontMain'),
-                          ),
-                          const Align(
-                              child: Text(
-                            ' kcal',
-                            style: TextStyle(
-                                fontFamily: 'FontMain',
-                                fontSize: 13,
-                                color: Colors.grey),
-                          ))
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          // 'assets/images/eaten.png',
+                          imgadress,
+                          height: 40,
+                          width: 40,
+                        ),
+                        Text(
+                          subtext,
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'FontMain'),
+                        ),
+                        const Align(
+                            child: Text(
+                          ' kcal',
+                          style: TextStyle(
+                              fontFamily: 'FontMain',
+                              fontSize: 13,
+                              color: Colors.grey),
+                        ))
+                      ],
                     ),
                   ],
                 ),
@@ -167,6 +165,8 @@ class FirstRowMakeCommon extends StatelessWidget {
     return Row(
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15),
@@ -309,15 +309,18 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
       animation: true,
       animationDuration: 1000,
       percent: widget.per,
-      center:SizedBox(
+      center: SizedBox(
         height: 50,
         child: Column(
           children: [
             Text(
-              '${((widget.per * 1000)*2 + 104).toInt()}',
+              '${((widget.per * 1000) * 2 + 104).toInt()}',
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
-            Text('Kcal left',style: TextStyle(fontFamily: 'FontMain',fontSize: 12),)
+            Text(
+              'Kcal left',
+              style: TextStyle(fontFamily: 'FontMain', fontSize: 12),
+            )
           ],
         ),
       ),

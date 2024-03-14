@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/main.dart';
 
 class MainLogInPage extends StatelessWidget {
   @override
@@ -266,7 +269,9 @@ class InnerdataOfBlueContainer extends StatelessWidget {
                     color: Colors.white, fontFamily: 'FontMain', fontSize: 17),
               )),
             )),
-        onTap: null,
+        onTap: () {
+            Get.to(TutorialHome());
+        },
       ),
     );
   }

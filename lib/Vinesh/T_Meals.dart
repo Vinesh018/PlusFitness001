@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -68,6 +68,7 @@ List<MealsItems> _mealsItem = [
       uid: '13',
       imageurl: 'assets/meals/veggies.png'),
 ];
+ var screenwidth;
 
 class MealsItems {
   final String itemname;
@@ -108,6 +109,8 @@ class _DragandDropState extends State<DragandDrop>
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    screenwidth = width;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -217,7 +220,7 @@ class MealsCart extends StatelessWidget {
       this.hasItems = false});
   @override
   Widget build(BuildContext context) {
-    final textcolor = highlighted ? Colors.black : Colors.black;
+    final textcolor = highlighted ? Colors.white : Colors.black;
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Transform.scale(
@@ -250,7 +253,7 @@ class MealsCart extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: textcolor,
                       fontWeight:
-                          hasItems ? FontWeight.normal : FontWeight.bold,
+                          hasItems ? FontWeight.normal : FontWeight.bold,fontSize: 15,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(

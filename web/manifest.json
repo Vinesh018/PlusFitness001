@@ -1,6 +1,6 @@
 {
-    "name": "plus_fitnss",
-    "short_name": "plus_fitnss",
+    "name": "plus_fitness",
+    "short_name": "plus_fitness",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

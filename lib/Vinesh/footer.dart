@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
-import 'package:plus_fitnss/Vinesh/T_Meals.dart';
-import 'package:plus_fitnss/addMeals.dart';
-import 'package:plus_fitnss/exercise.dart';
-import 'package:plus_fitnss/main.dart';
+import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
+import 'package:plus_fitness/addMeals.dart';
+import 'package:plus_fitness/exercise.dart';
+import 'package:plus_fitness/main.dart';
 
 class footer extends StatefulWidget {
   const footer({super.key});

@@ -12,7 +12,6 @@ class doingGreat extends StatelessWidget {
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
                   height: 100,
@@ -38,28 +37,26 @@ class doingGreat extends StatelessWidget {
                       Image.asset("assets/images/back.png"),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: SizedBox(
-                            width: 180,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("You're doing great !",
-                                    style: TextStyle(
-                                        fontFamily: 'FontMainBold',
-                                        fontSize: 15,
-                                        color: Colors.indigo)),
-                                Text("Keep it up",
-                                    style: TextStyle(
-                                        fontFamily: 'FontMain',
-                                        color: Colors.grey,
-                                        fontSize: 13)),
-                                Text("and stick to your plan.",
-                                    style: TextStyle(
-                                        fontFamily: 'FontMain',
-                                        color: Colors.grey,
-                                        fontSize: 13)),
-                              ],
-                            )),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("You're doing great !",
+                                style: TextStyle(
+                                    fontFamily: 'FontMainBold',
+                                    fontSize: 15,
+                                    color: Colors.indigo)),
+                            Text("Keep it up",
+                                style: TextStyle(
+                                    fontFamily: 'FontMain',
+                                    color: Colors.grey,
+                                    fontSize: 13)),
+                            Text("and stick to your plan.",
+                                style: TextStyle(
+                                    fontFamily: 'FontMain',
+                                    color: Colors.grey,
+                                    fontSize: 13)),
+                          ],
+                        ),
                       ),
                     ],
                   ),

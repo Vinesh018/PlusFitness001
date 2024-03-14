@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
-import 'package:plus_fitnss/Bhautik/b_login.dart';
-import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
+import 'package:plus_fitness/Bhautik/b_login.dart';
+import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
 
-import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
-import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
-import 'package:plus_fitnss/Vinesh/heading_BodyMeasurement.dart';
-import 'package:plus_fitnss/Vinesh/v_bodyMeasure.dart';
-import 'package:plus_fitnss/Vinesh/v_heading_mealsToday.dart';
-import 'package:plus_fitnss/Vinesh/v_waterHeading.dart';
-import 'package:plus_fitnss/Vinesh/v_water_container.dart';
-import 'package:plus_fitnss/Vinesh/waterGlass.dart';
+import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
+import 'package:plus_fitness/Bhautik/datepickercustom.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:plus_fitness/Vinesh/heading_BodyMeasurement.dart';
+import 'package:plus_fitness/Vinesh/v_bodyMeasure.dart';
+import 'package:plus_fitness/Vinesh/v_heading_mealsToday.dart';
+import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
+import 'package:plus_fitness/Vinesh/v_waterHeading.dart';
+import 'package:plus_fitness/Vinesh/v_water_container.dart';
+import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
 void main() {
   runApp(
-     MaterialApp(
+     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       home: TutorialHome(),

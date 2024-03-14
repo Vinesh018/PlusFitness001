@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
+var width;
+
 class DatepickerCustom extends StatefulWidget {
   const DatepickerCustom({super.key});
 
@@ -12,6 +14,21 @@ class DatepickerCustom extends StatefulWidget {
 class _DatepickerCustomState extends State<DatepickerCustom> {
   var dateValue = TextEditingController();
   DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    DateTime now1 = DateTime.now();
+    DateTime dateOnly = DateTime(now1.year, now1.month, now1.day);
+
+    if (dateOnly.day > 9) {
+      width = 10.0;
+      print(width);
+      print('Above nine');
+    } else {
+      width = 0.0;
+      print('Below nine');
+    }
+  }
 
   void _selectDate() {
     showDatePicker(
@@ -81,8 +98,14 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
             ),
           ),
         ),
+        SizedBox(
+          width: width,
+        ),
         GestureDetector(
-          child: const Icon(Icons.arrow_forward_ios_rounded),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: const Icon(Icons.arrow_forward_ios_rounded),
+          ),
           onTap: () {
             setState(() {
               DateTime t1 = selectedDate;
@@ -95,6 +118,7 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
                         .format(selectedDate)
                         .trim()
                         .substring(0, 3);
+                print(dateOnly.day.runtimeType);
               }
             });
           },

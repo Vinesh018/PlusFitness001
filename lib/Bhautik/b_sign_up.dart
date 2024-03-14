@@ -1,8 +1,14 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/Bhautik/b_login.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:plus_fitness/exercise.dart';
 
 class MainSignUpPage extends StatelessWidget {
   @override
@@ -75,9 +81,11 @@ class InnerdataOfBlueContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var ScreenWidth = MediaQuery.of(context).size.width;
     width = ScreenWidth;
+      
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           mainAndSubHeading(),
           Padding(
@@ -111,55 +119,60 @@ class InnerdataOfBlueContainer extends StatelessWidget {
           fogotPassword(),
           // sfgbjhsdfghsdgvfhj
           TextandThumb()
-       
         ],
       ),
     );
+   
   }
 
-  Widget TextandThumb(){
-    return    Padding(
+  Widget TextandThumb() {
+    return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Social login can save your valuable time',style: 
-                    TextStyle(fontSize: 15,color: Colors.black),),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1))),
-                        width: width / 2 - 80,
-                        child: Text('')),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 25, left: 20, right: 20),
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: Image.asset('assets/images/Down_thumb.png',height: 25,width: 25,)),
-                    ),
-                    Container(
-                        decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1))),
-                        width: width / 2 - 80,
-                        child: Text('')),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25,bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [socialButtons()],
-                  ),
-                )
-              ],
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Social login can save your valuable time',
+                style: TextStyle(fontSize: 15, color: Colors.black),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(width: 1))),
+                  width: width / 2 - 80,
+                  child: Text('')),
+              Padding(
+                padding: const EdgeInsets.only(top: 25, left: 20, right: 20),
+                child: RotatedBox(
+                    quarterTurns: 1,
+                    child: Image.asset(
+                      'assets/images/Down_thumb.png',
+                      height: 25,
+                      width: 25,
+                    )),
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(width: 1))),
+                  width: width / 2 - 80,
+                  child: Text('')),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 25, bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [socialButtons()],
             ),
+          )
+        ],
+      ),
     );
   }
 
@@ -253,9 +266,9 @@ class InnerdataOfBlueContainer extends StatelessWidget {
       ),
     );
   }
-
+ 
   Widget signUpButtonField() {
-    return Padding(
+     return Padding(
       padding: const EdgeInsets.only(top: 45, right: 125),
       child: InkWell(
         child: Container(
@@ -273,9 +286,12 @@ class InnerdataOfBlueContainer extends StatelessWidget {
                     color: Colors.white, fontFamily: 'FontMain', fontSize: 17),
               )),
             )),
-        onTap: null,
+        onTap: () {
+            Get.to((MainLogInPage()));
+        },
       ),
     );
+    
   }
 
   Widget fogotPassword() {
@@ -385,7 +401,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'Sign up with your username or password',
+              'Sign up with your username and email',
               style: TextStyle(
                   color: Colors.white, fontFamily: 'FontMain', fontSize: 16),
             ),
