@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plus_fitnss/Vinesh/footer.dart';
+
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -171,7 +172,6 @@ class _DragandDropState extends State<DragandDrop>
     return Container(
       decoration: BoxDecoration(
           color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
-      
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
         child: Column(
@@ -251,8 +251,7 @@ class MealsCart extends StatelessWidget {
                       color: textcolor,
                       fontWeight:
                           hasItems ? FontWeight.normal : FontWeight.bold,
-                      fontFamily: "FontMain"
-                      ),
+                      fontFamily: "FontMain"),
                 ),
                 Visibility(
                   visible: hasItems,
@@ -299,7 +298,7 @@ class Mealtype {
   String get formattedtotalcalaries {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
-        print(totalcalaries);
+    print(totalcalaries);
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
 
@@ -354,7 +353,6 @@ class MenuListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      
       elevation: 12,
       borderRadius: const BorderRadius.only(
         bottomLeft: Radius.circular(10),
@@ -368,10 +366,8 @@ class MenuListItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             ClipRRect(
-              
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
-                
                 width: 80,
                 height: 80,
                 child: Center(

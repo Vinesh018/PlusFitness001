@@ -71,6 +71,7 @@ class MyPainter extends CustomPainter {
 class InnerdataOfBlueContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var ScreenWidth = MediaQuery.of(context).size.width;
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,8 +106,61 @@ class InnerdataOfBlueContainer extends StatelessWidget {
             ),
           ),
           fogotPassword(),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Social login can save your valuable time '),
+                ],
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1)
+                    )
+                  ),
+                  width: ScreenWidth/2 - 70,
+                  child: Text('')),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25,left: 20,right: 20),
+                    child: Icon(Icons.thumb_down),
+                  ),
+                      Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1)
+                    )
+                  ),
+                  width: ScreenWidth/2 - 70,
+                  child: Text('')),
 
-          Text('Social login can save your valuable time ')
+              ],
+            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.gpp_good),
+                      Text('Google')
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.gpp_good),
+                      Text('Google')
+                    ],
+                  )
+                ],
+              )
+            ],
+          )
         ],
       ),
     );
@@ -115,7 +169,9 @@ class InnerdataOfBlueContainer extends StatelessWidget {
   Widget enterPasswordTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
-      child: TextField(
+      child: TextFormField(
+        obscureText: true,
+        enableSuggestions: false,
         maxLines: 1,
         style: TextStyle(
             color: Colors.indigo.shade700,
@@ -125,7 +181,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300)),
-          hintText: 'enter password',
+          hintText: 'Enter Password',
           hintStyle: TextStyle(
               fontSize: 16,
               fontFamily: 'FontMain',
@@ -200,7 +256,8 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         left: 15,
         right: 15,
       ),
-      child: TextField(
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
         maxLines: 1,
         style: TextStyle(
             color: Colors.indigo.shade700,
@@ -210,7 +267,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300)),
-          hintText: 'enter email',
+          hintText: 'Enter Email',
           hintStyle: TextStyle(
               fontSize: 16,
               fontFamily: 'FontMain',
@@ -230,7 +287,8 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         left: 15,
         right: 15,
       ),
-      child: TextField(
+      child: TextFormField(
+        keyboardType: TextInputType.name,
         maxLines: 1,
         style: TextStyle(
             color: Colors.indigo.shade700,
@@ -240,7 +298,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300)),
-          hintText: 'enter Username',
+          hintText: 'Enter Username',
           hintStyle: TextStyle(
               fontSize: 16,
               fontFamily: 'FontMain',
