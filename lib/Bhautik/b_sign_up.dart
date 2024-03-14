@@ -11,6 +11,7 @@ class MainSignUpPage extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 231, 235, 237),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [BlueConatier()],
           ),
         ));
@@ -56,7 +57,7 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = Colors.indigo.shade400;
     canvas.drawArc(
-      Rect.fromPoints(Offset(650, 900), Offset(-100, 50)),
+      Rect.fromPoints(Offset(600, 800), Offset(-100, 50)),
       3.14,
       3.14,
       false,

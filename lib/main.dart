@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plus_fitnss/Bhautik/b_UperContainer.dart';
 import 'package:plus_fitnss/Bhautik/b_login.dart';
 import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
-import 'package:plus_fitnss/Vinesh/T_Meals.dart';
 
 import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitnss/Bhautik/datepickercustom.dart';
@@ -10,7 +9,6 @@ import 'package:plus_fitnss/Vinesh/footer.dart';
 import 'package:plus_fitnss/Vinesh/heading_BodyMeasurement.dart';
 import 'package:plus_fitnss/Vinesh/v_bodyMeasure.dart';
 import 'package:plus_fitnss/Vinesh/v_heading_mealsToday.dart';
-import 'package:plus_fitnss/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitnss/Vinesh/v_waterHeading.dart';
 import 'package:plus_fitnss/Vinesh/v_water_container.dart';
 import 'package:plus_fitnss/Vinesh/waterGlass.dart';
@@ -20,9 +18,9 @@ void main() {
      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      // home: TutorialHome(),
+      home: TutorialHome(),
       // home: MainLogInPage(),
-      home: MainSignUpPage(),
+      // home: MainSignUpPage(),
         
       
     ),
