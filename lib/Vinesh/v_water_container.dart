@@ -50,7 +50,7 @@ class waterContainerState extends State<waterContainer> {
                               text: '2500 ',
                               style: TextStyle(
                                   fontFamily: 'FontMain',
-                                  fontSize: 30,
+                                  fontSize: 35,
                                   color: Color.fromARGB(255, 19, 75, 232)),
                               children: <InlineSpan>[
                                 TextSpan(

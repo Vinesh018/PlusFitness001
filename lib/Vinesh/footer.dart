@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_fitnss/Bhautik/b_sign_up.dart';
 import 'package:plus_fitnss/Vinesh/T_Meals.dart';
 import 'package:plus_fitnss/addMeals.dart';
 import 'package:plus_fitnss/exercise.dart';
@@ -87,7 +88,10 @@ class _footerState extends State<footer> {
                                   width: 50,
                                 )),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      FadeRoute(page: MainSignUpPage()));
+                                },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_4.png"),
                                   height: 50,

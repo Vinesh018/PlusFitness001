@@ -123,7 +123,7 @@ class FirstRowOfContainer extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 140,
                       child: Row(
                         children: [
                           Image.asset(
