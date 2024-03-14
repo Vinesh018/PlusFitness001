@@ -69,8 +69,11 @@ class MyPainter extends CustomPainter {
 }
 
 class InnerdataOfBlueContainer extends StatelessWidget {
+  var width;
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    width = screenWidth;
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,13 +107,58 @@ class InnerdataOfBlueContainer extends StatelessWidget {
             ),
           ),
           createAccount(),
-          socialButtons(),
+          TextandThumb(),
         ],
       ),
     );
   }
+   Widget TextandThumb(){
+    return    Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Social login can save your valuable time',style: 
+                    TextStyle(fontSize: 15,color: Colors.black),),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1))),
+                        width: width / 2 - 80,
+                        child: Text('')),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 25, left: 20, right: 20),
+                      child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Image.asset('assets/images/Down_thumb.png',height: 25,width: 25,)),
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1))),
+                        width: width / 2 - 80,
+                        child: Text('')),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25,bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [socialButtons()],
+                  ),
+                )
+              ],
+            ),
+    );
+  }
 
-  Widget socialButtons() {
+ Widget socialButtons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -139,6 +187,9 @@ class InnerdataOfBlueContainer extends StatelessWidget {
                 )
               ],
             )),
+        SizedBox(
+          width: 20,
+        ),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade800,
@@ -299,7 +350,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
             child: Text(
               'Log in with your username and password',
               style: TextStyle(
-                  color: Colors.indigo, fontFamily: 'FontMain', fontSize: 16),
+                  color: Colors.indigo.shade800, fontFamily: 'FontMain', fontSize: 16),
             ),
           )
         ],

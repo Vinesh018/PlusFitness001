@@ -21,6 +21,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),
+      // home: MainLogInPage(),
       home: MainSignUpPage(),
         
       

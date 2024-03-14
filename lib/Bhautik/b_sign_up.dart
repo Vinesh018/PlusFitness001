@@ -69,9 +69,11 @@ class MyPainter extends CustomPainter {
 }
 
 class InnerdataOfBlueContainer extends StatelessWidget {
+  var width;
   @override
   Widget build(BuildContext context) {
     var ScreenWidth = MediaQuery.of(context).size.width;
+    width = ScreenWidth;
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -106,63 +108,120 @@ class InnerdataOfBlueContainer extends StatelessWidget {
             ),
           ),
           fogotPassword(),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Social login can save your valuable time '),
-                ],
-              ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1)
-                    )
-                  ),
-                  width: ScreenWidth/2 - 70,
-                  child: Text('')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25,left: 20,right: 20),
-                    child: Icon(Icons.thumb_down),
-                  ),
-                      Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1)
-                    )
-                  ),
-                  width: ScreenWidth/2 - 70,
-                  child: Text('')),
-
-              ],
-            ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(Icons.gpp_good),
-                      Text('Google')
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(Icons.gpp_good),
-                      Text('Google')
-                    ],
-                  )
-                ],
-              )
-            ],
-          )
+          // sfgbjhsdfghsdgvfhj
+          TextandThumb()
+       
         ],
       ),
+    );
+  }
+
+  Widget TextandThumb(){
+    return    Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Social login can save your valuable time',style: 
+                    TextStyle(fontSize: 15,color: Colors.black),),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1))),
+                        width: width / 2 - 80,
+                        child: Text('')),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 25, left: 20, right: 20),
+                      child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Image.asset('assets/images/Down_thumb.png',height: 25,width: 25,)),
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1))),
+                        width: width / 2 - 80,
+                        child: Text('')),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25,bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [socialButtons()],
+                  ),
+                )
+              ],
+            ),
+    );
+  }
+
+  Widget socialButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size(160, 45),
+                side: const BorderSide(
+                  width: 1.0,
+                  color: Colors.blue,
+                )),
+            onPressed: () {},
+            child: Row(
+              children: [
+                Image.asset(
+                  "assets/images/g_logo.png",
+                  height: 25,
+                  width: 25,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Google",
+                  style: TextStyle(
+                      fontFamily: "FontMain",
+                      fontSize: 17,
+                      color: Colors.black),
+                )
+              ],
+            )),
+        SizedBox(
+          width: 20,
+        ),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade800,
+                minimumSize: Size(160, 45),
+                side: const BorderSide(
+                  width: 1.0,
+                  color: Colors.blue,
+                )),
+            onPressed: () {},
+            child: Row(
+              children: [
+                Image.asset(
+                  "assets/images/fb.png",
+                  height: 20,
+                  width: 20,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Facebook",
+                  style: TextStyle(
+                      fontFamily: "FontMain",
+                      fontSize: 17,
+                      color: Colors.white),
+                )
+              ],
+            )),
+      ],
     );
   }
 
@@ -313,7 +372,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
 
   Widget mainAndSubHeading() {
     return Padding(
-      padding: const EdgeInsets.only(top: 110, left: 20),
+      padding: const EdgeInsets.only(top: 90, left: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
