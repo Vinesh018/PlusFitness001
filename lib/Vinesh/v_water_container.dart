@@ -206,7 +206,7 @@ class waterContainerState extends State<waterContainer> {
                             ],
                           ),
                           child: const WaveView(
-                            percentageValue: 60.0,
+                            percentageValue: 70.0,
                           ),
                         ),
                       ),
