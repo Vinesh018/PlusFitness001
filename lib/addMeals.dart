@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/T_addMeals.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
+import 'package:plus_fitness/Vinesh/T_addMeals.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
 
 class addMeals extends StatefulWidget {
   @override

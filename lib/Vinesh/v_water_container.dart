@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/waveviwe.dart';
+import 'package:plus_fitness/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 

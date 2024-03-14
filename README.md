@@ -1,4 +1,4 @@
-# plus_fitnss
+# plus_fitness
 
 A new Flutter project.
 

@@ -6,9 +6,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:plus_fitnss/Bhautik/b_login.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
-import 'package:plus_fitnss/exercise.dart';
+import 'package:plus_fitness/Bhautik/b_login.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:plus_fitness/exercise.dart';
 
 class MainSignUpPage extends StatelessWidget {
   @override

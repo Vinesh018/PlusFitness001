@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/footer.dart';
+import 'package:plus_fitness/Vinesh/footer.dart';
 
 List<MealsItems> _mealsItem = [
   MealsItems(

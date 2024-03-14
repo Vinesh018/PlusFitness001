@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitnss/Vinesh/T_all-meals.dart';
+import 'package:plus_fitness/Vinesh/T_all-meals.dart';
 
 class addMealsPage extends StatefulWidget {
   const addMealsPage({super.key});
