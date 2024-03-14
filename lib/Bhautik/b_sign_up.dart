@@ -56,7 +56,7 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = Colors.indigo.shade400;
     canvas.drawArc(
-      Rect.fromPoints(Offset(650, 900), Offset(-100, 60)),
+      Rect.fromPoints(Offset(650, 900), Offset(-100, 50)),
       3.14,
       3.14,
       false,
@@ -77,7 +77,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
         children: [
           mainAndSubHeading(),
           Padding(
-            padding: const EdgeInsets.only(left: 30, top: 70),
+            padding: const EdgeInsets.only(top: 70),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -85,7 +85,7 @@ class InnerdataOfBlueContainer extends StatelessWidget {
                   width: 330,
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.75),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(80),
                         bottomLeft: Radius.circular(10),
@@ -105,6 +105,8 @@ class InnerdataOfBlueContainer extends StatelessWidget {
             ),
           ),
           fogotPassword(),
+
+          Text('Social login can save your valuable time ')
         ],
       ),
     );
