@@ -46,6 +46,7 @@ dependencies:
   get: ^4.6.6
   email_validator: '^2.1.16'
   firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
 
 
 dev_dependencies:

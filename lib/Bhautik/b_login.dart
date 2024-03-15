@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
@@ -5,6 +7,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/main.dart';
 
 class MainLogInPage extends StatelessWidget {
@@ -79,13 +82,36 @@ class InnerdataOfBlueContainer extends StatefulWidget {
 
 class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   var width;
-  TextEditingController pswdController = TextEditingController();
-  TextEditingController _emailcontroller = TextEditingController();
-  TextEditingController usernamecontroller = TextEditingController();
-  final _passwordValidationkey = GlobalKey<FormState>();
-  final _UsernameValidationKey = GlobalKey<FormState>();
-  FocusNode _username = FocusNode();
-  FocusNode pswdFocus = FocusNode();
+  TextEditingController pswdController1 = TextEditingController();
+  TextEditingController _emailcontroller1 = TextEditingController();
+  final _passwordValidationkey1 = GlobalKey<FormState>();
+  final _emailValidationkey1 = GlobalKey<FormState>();
+  FocusNode pswdFocus1 = FocusNode();
+  FocusNode _emailfocus1 = FocusNode();
+  int validateEmail(String? emailadress) {
+    String pattternemail = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    RegExp regExp = RegExp(pattternemail);
+    if (emailadress!.isEmpty || emailadress.length == 0) {
+      return 1;
+    } else if (!regExp.hasMatch(emailadress)) {
+      return 2;
+    } else {
+      return 0;
+    }
+  }
+
+  bool validateEmailbool(String? emailadress) {
+    String pattternemail = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    RegExp regExp = RegExp(pattternemail);
+    if (emailadress!.isEmpty || emailadress.length == 0) {
+      return false;
+    } else if (!regExp.hasMatch(emailadress)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   int validatePassword(String? pswd) {
     String pattternpassword =
         r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
@@ -107,32 +133,6 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
     if (pswd!.isEmpty || pswd.length == 0) {
       return false;
     } else if (!regExp.hasMatch(pswd)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  int validateUsername(String? urname) {
-    String patternforusername =
-        r'^(?=.{4,9}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'; //Only contains alphanumeric characters, underscore and dot.
-    RegExp regExp = RegExp(patternforusername);
-    if (urname!.isEmpty || urname.length == 0) {
-      return 1;
-    } else if (!regExp.hasMatch(urname)) {
-      return 2;
-    } else {
-      return 0;
-    }
-  }
-
-  bool validateUsernamebool(String? urname) {
-    String patternforusername =
-        r"^(?=[a-zA-Z0-9._]{4,9}$)(?!.*[_.]{2})[^_.].*[^_.]$";
-    RegExp regExp = RegExp(patternforusername);
-    if (urname!.isEmpty || urname.length == 0) {
-      return false;
-    } else if (!regExp.hasMatch(urname)) {
       return false;
     } else {
       return true;
@@ -165,10 +165,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                       )),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      enterUsernameTextField(),
-                      enterPasswordTextField()
-                    ],
+                    children: [enterEmailTextField(), enterPasswordTextField()],
                   ),
                 ),
                 logInButtonField(),
@@ -229,6 +226,70 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget enterEmailTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 5,
+        left: 15,
+        right: 15,
+      ),
+      child: Form(
+        key: _emailValidationkey1,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          maxLines: 1,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: _emailcontroller1,
+          onChanged: (value) {},
+          validator: (value) {
+            int res = validateEmail(value);
+            if (res == 1) {
+              return "Please  fill email address";
+            } else if (res == 2) {
+              return "Please enter valid email address";
+            } else {
+              return null;
+            }
+          },
+          focusNode: _emailfocus1,
+          autofocus: false,
+          //  Before Editaed Code
+          style: TextStyle(
+              color: Colors.indigo.shade700,
+              decoration: TextDecoration.none,
+              decorationColor: Color.fromARGB(0, 252, 230, 166)),
+          cursorColor: Colors.grey,
+          decoration: InputDecoration(
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade300)),
+            hintText: 'Enter Email',
+            errorText: '',
+            hintStyle: TextStyle(
+                fontSize: 16,
+                fontFamily: 'FontMain',
+                color: Colors.grey.shade600),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            errorBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(
+                  width: 1,
+                  color: Colors.grey.shade300,
+                )),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderSide: BorderSide(
+                width: 1,
+                color: Colors.grey.shade300,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -300,11 +361,11 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
     return Padding(
       padding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
       child: Form(
-        key: _passwordValidationkey,
+        key: _passwordValidationkey1,
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          controller: pswdController,
-          focusNode: pswdFocus,
+          controller: pswdController1,
+          focusNode: pswdFocus1,
           obscureText: true,
           enableSuggestions: false,
           maxLines: 1,
@@ -375,32 +436,37 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
               )),
             )),
         onTap: () {
-          _UsernameValidationKey.currentState?.validate();
-          _passwordValidationkey.currentState?.validate();
-          if (usernamecontroller.text.isEmpty) {
-            var snackBar = SnackBar(content: Text('Plese enter username'));
+          _emailValidationkey1.currentState?.validate();
+          _passwordValidationkey1.currentState?.validate();
+          if (_emailcontroller1.text.isEmpty) {
+            var snackBar = SnackBar(content: Text('Plese enter email adress'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            _username.requestFocus();
-          } else if (validateUsernamebool(usernamecontroller.text) == false) {
-            var snackBar = SnackBar(
-                content: Text(
-                    'username should contain 4 - 9 character,numbers,.and _'));
+            _emailfocus1.requestFocus();
+          } else if (validateEmailbool(_emailcontroller1.text) == false) {
+            var snackBar =
+                SnackBar(content: Text('Plese enter valid email adress'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            _username.requestFocus();
-          } else if (pswdController.text.isEmpty) {
+            _emailfocus1.requestFocus();
+          } else if (pswdController1.text.isEmpty) {
             var snackBar = SnackBar(content: Text('Plese enter password'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            pswdFocus.requestFocus();
-          } else if (validatePasswordbool(pswdController.text) == false) {
+            pswdFocus1.requestFocus();
+          } else if (validatePasswordbool(pswdController1.text) == false) {
             var snackBar = SnackBar(
                 content: Text(
                     'Password must have Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            pswdFocus.requestFocus();
-          }else{
-              Get.to(TutorialHome());
+            pswdFocus1.requestFocus();
+          } else {
+            FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailcontroller1.text, password: pswdController1.text)
+                .then((value) {
+                  Get.off(TutorialHome()); 
+                }, ).onError((error, stackTrace) {
+                  var snackBar = SnackBar(content: Text('Invalid Username or Password !'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  print('Error in password ${error.toString()}');
+                }, );
           }
-          
         },
       ),
     );
@@ -429,70 +495,13 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                       Shadow(color: Colors.white, offset: Offset(0, -5))
                     ]),
               ),
-              onTap: null,
+              onTap:() {
+               
+               Get.off(MainSignUpPage());
+              } ,
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget enterUsernameTextField() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 15,
-        left: 15,
-        right: 15,
-      ),
-      child: TextFormField(
-        focusNode: _username,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        controller: usernamecontroller,
-        keyboardType: TextInputType.text,
-        onChanged: (value) {},
-        validator: (value) {
-          int res = validateUsername(value);
-          if (res == 1) {
-            return 'Plese fill username';
-          } else if (res == 2) {
-            return " should Contain character,number or . and _";
-          } else {
-            return null;
-          }
-        },
-        maxLines: 1,
-        style: TextStyle(
-            color: Colors.indigo.shade700,
-            decoration: TextDecoration.none,
-            decorationColor: Color.fromARGB(0, 252, 230, 166)),
-        cursorColor: Colors.grey,
-        decoration: InputDecoration(
-          errorMaxLines: 1,
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300)),
-          hintText: 'Enter Username',
-          errorText: '',
-          hintStyle: TextStyle(
-              fontSize: 16,
-              fontFamily: 'FontMain',
-              color: Colors.grey.shade600),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade300),
-          ),
-          errorBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(
-                width: 1,
-                color: Colors.grey.shade300,
-              )),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(
-              width: 1,
-              color: Colors.grey.shade300,
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -513,7 +522,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'Log in with your username and password',
+              'Log in with your email and password',
               style: TextStyle(
                   color: Colors.indigo.shade800,
                   fontFamily: 'FontMain',

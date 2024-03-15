@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -83,7 +83,6 @@ class InnerdataOfBlueContainer extends StatefulWidget {
 
 class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   var width;
-
   TextEditingController pswdController = TextEditingController();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController usernamecontroller = TextEditingController();
@@ -410,7 +409,6 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
               )),
             )),
         onTap: () {
-          //
           _UsernameValidationKey.currentState?.validate();
           _emailValidationkey.currentState?.validate();
           _passwordValidationkey.currentState?.validate();
@@ -444,7 +442,14 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             pswdFocus.requestFocus();
           } else {
-            Get.to((MainLogInPage()));
+
+          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailcontroller.text, password: pswdController.text).then((value) => 
+          Get.off((MainLogInPage())),
+          ).onError((error, stackTrace) {
+            var snackBar = SnackBar(content: Text('Plese Enter Valid Details !'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            print('Error While Sign Up ${error.toString()}');
+          });  
           }
         },
       ),

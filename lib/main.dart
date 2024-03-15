@@ -20,6 +20,7 @@ import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
 
 Future<void> main() async {
+  // For Firebase intigration
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -28,13 +29,14 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home: TutorialHome(),
-      // home: MainLogInPage(),
+      // home: TutorialHome(),
+      home: MainLogInPage(),
       //home: MainSignUpPage(),
     ),
   );
 }
 
+// Main Class Where Code Start Executin
 class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
 
