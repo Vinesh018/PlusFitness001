@@ -82,7 +82,7 @@ class InnerdataOfBlueContainer extends StatefulWidget {
 
 class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   var width;
-  FocusNode pswdFocus = FocusNode();
+
   TextEditingController pswdController = TextEditingController();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController usernamecontroller = TextEditingController();
@@ -91,6 +91,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   final _UsernameValidationKey = GlobalKey<FormState>();
   FocusNode _emailfocus = FocusNode();
   FocusNode _username = FocusNode();
+    FocusNode pswdFocus = FocusNode();
   int validateEmail(String? emailadress) {
     String pattternemail = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
     RegExp regExp = RegExp(pattternemail);
