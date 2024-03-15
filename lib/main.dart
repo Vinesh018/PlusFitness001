@@ -18,14 +18,12 @@ import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
 void main() {
   runApp(
-     GetMaterialApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),
       // home: MainLogInPage(),
       home: MainSignUpPage(),
-        
-      
     ),
   );
 }
@@ -34,14 +32,13 @@ class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
 
   @override
-
   State<TutorialHome> createState() => _TutorialHomeState();
 }
 
 class _TutorialHomeState extends State<TutorialHome> {
   AppBar appbar = AppBar(
     title: const Text('My Dairy'),
-    backgroundColor:  Color.fromARGB(255, 231, 235, 237),
+    backgroundColor: Color.fromARGB(255, 231, 235, 237),
     actions: const [
       Row(
         children: [
@@ -51,21 +48,19 @@ class _TutorialHomeState extends State<TutorialHome> {
     ],
   );
   @override
-
   Widget build(BuildContext context) {
     // Scaffold is a layout for
     // the major Material Components.
     return Scaffold(
-      bottomNavigationBar: footer(),
-      appBar: appbar,
-
-      backgroundColor: Color.fromARGB(255, 231, 235, 237),
-      // ignore: prefer_const_constructors
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            children: [
+        bottomNavigationBar: footer(),
+        appBar: appbar,
+        backgroundColor: Color.fromARGB(255, 231, 235, 237),
+        // ignore: prefer_const_constructors
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
                 firstContainer(),
                 heading_mealsToday(),
                 mealsToday(),
@@ -74,11 +69,9 @@ class _TutorialHomeState extends State<TutorialHome> {
                 heading_water(),
                 waterContainer(),
                 waterGlass(),
-            ],
+              ],
+            ),
           ),
-        ),
-        
         ));
- 
   }
 }
