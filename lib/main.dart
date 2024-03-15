@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
@@ -16,14 +18,19 @@ import 'package:plus_fitness/Vinesh/v_waterHeading.dart';
 import 'package:plus_fitness/Vinesh/v_water_container.dart';
 import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       home: TutorialHome(),
       // home: MainLogInPage(),
-      home: MainSignUpPage(),
+      //home: MainSignUpPage(),
     ),
   );
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "175702299790",
+    "project_id": "plusfitness",
+    "storage_bucket": "plusfitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175702299790:android:1154fc62790774d280e5df",
+        "android_client_info": {
+          "package_name": "com.example.plus_fitness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA11X7fLNcUxixLXzhiIdRhf0liYnBproo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
