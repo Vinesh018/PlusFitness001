@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:plus_fitness/addMeals.dart';
 import 'package:plus_fitness/exercise.dart';
@@ -54,8 +56,7 @@ class _footerState extends State<footer> {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context, FadeRoute(page: TutorialHome()));
+                                  Get.off(TutorialHome());
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_1.png"),
@@ -64,8 +65,7 @@ class _footerState extends State<footer> {
                                 )),
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context, FadeRoute(page: exercisePage()));
+                                 Get.off(exercisePage());
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_2.png"),
@@ -77,8 +77,7 @@ class _footerState extends State<footer> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context, FadeRoute(page: DragandDrop()));
+                                  Get.off(DragandDrop());
                                       
                                       
                                 },
@@ -89,8 +88,8 @@ class _footerState extends State<footer> {
                                 )),
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(context,
-                                      FadeRoute(page: MainSignUpPage()));
+                                  // clears the previous routes and opens a new screen.
+                                  Get.off(UserProfileMainRun());
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_4.png"),

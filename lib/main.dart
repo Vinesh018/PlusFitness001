@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/splashScreen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
-
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitness/Bhautik/datepickercustom.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
@@ -33,6 +33,7 @@ Future<void> main() async {
       // home: TutorialHome(),
       home: SplashScreen(),
       //home: MainSignUpPage(),
+      // home:UserProfileMainRun()
     ),
   );
 }
