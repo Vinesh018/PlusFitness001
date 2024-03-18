@@ -244,7 +244,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
       padding: const EdgeInsets.only(
         top: 5,
         left: 15,
-        right: 15,
+        right: 35,
       ),
       child: Form(
         key: _emailValidationkey1,
@@ -368,7 +368,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
 
   Widget enterPasswordTextField() {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
+      padding: const EdgeInsets.only(top: 5, left: 15, right: 35, bottom: 5),
       child: Form(
         key: _passwordValidationkey1,
         child: TextFormField(
