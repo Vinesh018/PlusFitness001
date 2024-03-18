@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Vinesh/forgotPass.dart';
 import 'package:plus_fitness/main.dart';
 
 class MainLogInPage extends StatelessWidget {
@@ -470,8 +471,27 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
     return Padding(
       padding: const EdgeInsets.only(right: 5, top: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          InkWell(
+            child: Text(
+              'Forgot Password',
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontSize: 17,
+                  color: Colors.transparent,
+                  fontFamily: 'FontMain',
+                  fontWeight: FontWeight.w100,
+                  decorationColor: Colors.black,
+                  decorationThickness: 2,
+                  shadows: [
+                    Shadow(color: Colors.black, offset: Offset(0, -5))
+                  ]),
+            ),
+            onTap: () {
+              Get.off(ForgotPassword());
+            },
+          ),
           Padding(
             padding: const EdgeInsets.all(10),
             child: InkWell(

@@ -208,7 +208,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
               ],
             ),
           ),
-          fogotPassword(),
+          redirectLogin(),
           // sfgbjhsdfghsdgvfhj
           TextandThumb()
         ],
@@ -332,7 +332,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
 
   Widget enterPasswordTextField() {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
+      padding: const EdgeInsets.only(top: 5, left: 15, right: 35, bottom: 5),
       child: Form(
         key: _passwordValidationkey,
         child: TextFormField(
@@ -456,30 +456,35 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
     );
   }
 
-  Widget fogotPassword() {
+  Widget redirectLogin() {
     return Padding(
       padding: const EdgeInsets.only(right: 5, top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15),
             child: InkWell(
               child: Text(
-                'Forgot Password',
+                'Log In',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
-                    fontSize: 17,
+                    fontSize: 20,
                     color: Colors.transparent,
                     fontFamily: 'FontMain',
                     fontWeight: FontWeight.w100,
-                    decorationColor: Colors.indigo,
+                    decorationColor: Colors.indigo.shade400,
                     decorationThickness: 3,
                     shadows: [
-                      Shadow(color: Colors.grey.shade800, offset: Offset(0, -5))
+                      Shadow(
+                          color: Colors.indigo.shade800, offset: Offset(0, -5))
                     ]),
               ),
-              onTap: null,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return MainLogInPage();
+                }));
+              },
             ),
           ),
         ],
@@ -492,7 +497,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
       padding: const EdgeInsets.only(
         top: 5,
         left: 15,
-        right: 15,
+        right: 35,
       ),
       child: Form(
         key: _emailValidationkey,
@@ -556,7 +561,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
       padding: const EdgeInsets.only(
         top: 15,
         left: 15,
-        right: 15,
+        right: 35,
       ),
       child: TextFormField(
         focusNode: _username,
