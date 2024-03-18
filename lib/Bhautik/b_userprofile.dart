@@ -23,7 +23,6 @@ class UserProfileMainRun extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text('MyProfile',style: TextStyle(fontSize: 2),),
             NameImageRow(),
             HeightWeightAge(),
             AccountContainer(heading: "Account",),
