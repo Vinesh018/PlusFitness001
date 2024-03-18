@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/splashScreen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,9 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),
-      home: SplashScreen(),
+      // home: SplashScreen(),
       //home: MainSignUpPage(),
+      home:UserProfileMainRun()
     ),
   );
 }
