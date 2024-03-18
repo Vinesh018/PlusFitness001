@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 
 double screenWidth = 0;
@@ -34,7 +38,12 @@ class UserProfileMainRun extends StatelessWidget {
   }
 }
 
-class NameImageRow extends StatelessWidget {
+class NameImageRow extends StatefulWidget {
+  @override
+  State<NameImageRow> createState() => _NameImageRowState();
+}
+
+class _NameImageRowState extends State<NameImageRow> {
   @override
   Widget build(BuildContext context) {
     double x = MediaQuery.of(context).size.width;
@@ -43,7 +52,7 @@ class NameImageRow extends StatelessWidget {
     screenHeight = y;
     return ListTile(
       leading: SizedBox(
-        width: 80,
+        width: 50,
         height: 80,
         child: CircleAvatar(
             radius: 100,
@@ -54,7 +63,9 @@ class NameImageRow extends StatelessWidget {
               width: 200,
             )),
       ),
-      title: Text(
+      title:
+
+       Text(
         'John Doe',
         style: TextStyle(fontFamily: 'FontMain', fontSize: 19),
       ),
@@ -63,36 +74,45 @@ class NameImageRow extends StatelessWidget {
       //   style: TextStyle(
       //       fontFamily: 'FontMain', color: Colors.grey.shade700, fontSize: 14),
       // ),
-      trailing: Container(
-        width: 100,
-        height: 40,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.indigo.shade100, Colors.indigo.shade500]),
-            borderRadius: BorderRadius.circular(40)),
-        child: ElevatedButton(
-          onPressed: null,
-          child: Row(
-            children: [
-              Icon(
-                Icons.edit,
-                size: 15,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                'Edit',
-                style: TextStyle(
-                    fontFamily: 'FontMain', color: Colors.white, fontSize: 16),
-              ),
-            ],
+      trailing: InkWell(
+        onTap: () {
+          FirebaseAuth.instance.signOut();
+          Get.off(MainLogInPage());
+        },
+        child: Container(
+          width: screenWidth/3,
+          height: 40,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Colors.indigo.shade100, Colors.indigo.shade500]),
+              borderRadius: BorderRadius.circular(40)),
+          child: ElevatedButton(
+            onPressed: null,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              
+                Text(
+                  'Logout',
+                  style: TextStyle(
+                      fontFamily: 'FontMain', color: Colors.white, fontSize: 16),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                  Icon(
+                  Icons.logout_rounded,
+                  size: 15,
+                  color: Colors.white,
+                ),
+                
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35))),
           ),
-          style: ElevatedButton.styleFrom(
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35))),
         ),
       ),
     );

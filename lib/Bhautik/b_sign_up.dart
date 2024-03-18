@@ -83,6 +83,14 @@ class InnerdataOfBlueContainer extends StatefulWidget {
 
 class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   var width;
+  bool _obscured = true;
+    void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (pswdFocus.hasPrimaryFocus) return; // If focus is on text field, dont unfocus
+       pswdFocus.canRequestFocus = false;     // Prevents focus if tap on eye
+    });
+  }
   TextEditingController pswdController = TextEditingController();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController usernamecontroller = TextEditingController();
@@ -339,7 +347,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: pswdController,
           focusNode: pswdFocus,
-          obscureText: true,
+          obscureText: _obscured,
           enableSuggestions: false,
           maxLines: 1,
           validator: (value) {
@@ -358,6 +366,14 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
               decorationColor: Color.fromARGB(0, 252, 230, 166)),
           cursorColor: Colors.grey,
           decoration: InputDecoration(
+             suffixIcon: GestureDetector(
+              onTap: _toggleObscured,
+              child: Icon(
+                 _obscured
+                  ? Icons.visibility_rounded
+                  : Icons.visibility_off_rounded,
+                  color: Colors.indigo.shade400,
+                )),
             errorMaxLines: 2,
             enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade300)),
@@ -443,8 +459,19 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
             pswdFocus.requestFocus();
           } else {
 
-          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailcontroller.text, password: pswdController.text).then((value) => 
-          Get.off((MainLogInPage())),
+          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailcontroller.text, password: pswdController.text).then((value) {
+               Get.off(
+                  () => MainLogInPage(),
+                  transition: Transition.downToUp,
+                );
+// Named Route
+                GetPage(
+                  name: "/next_Screen",
+                  page: () => MainSignUpPage(),
+                  transition: Transition.rightToLeft,
+                );
+          },  
+         
           ).onError((error, stackTrace) {
             var snackBar = SnackBar(content: Text('Plese Enter Valid Details !'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -481,9 +508,16 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                     ]),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return MainLogInPage();
-                }));
+                 Get.off(
+                  () => MainLogInPage(),
+                  transition: Transition.leftToRight,
+                );
+// Named Route
+                GetPage(
+                  name: "/next_Screen",
+                  page: () => MainSignUpPage(),
+                  transition: Transition.rightToLeft,
+                );
               },
             ),
           ),

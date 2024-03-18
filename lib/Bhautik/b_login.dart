@@ -83,6 +83,14 @@ class InnerdataOfBlueContainer extends StatefulWidget {
 
 class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
   var width;
+   bool _obscured = true;
+    void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (pswdFocus1.hasPrimaryFocus) return; // If focus is on text field, dont unfocus
+       pswdFocus1.canRequestFocus = false;     // Prevents focus if tap on eye
+    });
+  }
   TextEditingController pswdController1 = TextEditingController();
   TextEditingController _emailcontroller1 = TextEditingController();
   final _passwordValidationkey1 = GlobalKey<FormState>();
@@ -367,7 +375,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: pswdController1,
           focusNode: pswdFocus1,
-          obscureText: true,
+          obscureText: _obscured,
           enableSuggestions: false,
           maxLines: 1,
           validator: (value) {
@@ -385,7 +393,16 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
               decoration: TextDecoration.none,
               decorationColor: Color.fromARGB(0, 252, 230, 166)),
           cursorColor: Colors.grey,
+          
           decoration: InputDecoration(
+            suffixIcon: GestureDetector(
+              onTap: _toggleObscured,
+              child: Icon(
+                 _obscured
+                  ? Icons.visibility_rounded
+                  : Icons.visibility_off_rounded,
+                  color: Colors.indigo.shade400,
+                )),
             errorMaxLines: 2,
             enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade300)),
@@ -453,14 +470,31 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             pswdFocus1.requestFocus();
           } else {
-            FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailcontroller1.text, password: pswdController1.text)
-                .then((value) {
-                  Get.off(TutorialHome()); 
-                }, ).onError((error, stackTrace) {
-                  var snackBar = SnackBar(content: Text('Invalid Username or Password !'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  print('Error in password ${error.toString()}');
-                }, );
+            FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+                    email: _emailcontroller1.text,
+                    password: pswdController1.text)
+                .then(
+              (value) {
+                Get.off(
+                  () => TutorialHome(),
+                  transition: Transition.rightToLeft,
+                );
+// Named Route
+                GetPage(
+                  name: "/next_Screen",
+                  page: () => TutorialHome(),
+                  transition: Transition.rightToLeft,
+                );
+              },
+            ).onError(
+              (error, stackTrace) {
+                var snackBar =
+                    SnackBar(content: Text('Invalid Username or Password !'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                print('Error in password ${error.toString()}');
+              },
+            );
           }
         },
       ),
@@ -509,10 +543,18 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                       Shadow(color: Colors.white, offset: Offset(0, -5))
                     ]),
               ),
-              onTap:() {
-               
-               Get.off(MainSignUpPage());
-              } ,
+              onTap: () {
+                Get.off(
+                  () => MainSignUpPage(),
+                  transition: Transition.rightToLeft,
+                );
+// Named Route
+                GetPage(
+                  name: "/next_Screen",
+                  page: () => MainLogInPage(),
+                  transition: Transition.rightToLeft,
+                );
+              },
             ),
           ),
         ],
