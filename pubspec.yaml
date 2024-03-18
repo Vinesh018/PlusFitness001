@@ -48,6 +48,7 @@ dependencies:
   email_validator: '^2.1.16'
   firebase_core: ^2.27.1
   firebase_auth: ^4.17.9
+  flutter_native_splash: ^2.4.0
 
 
 dev_dependencies:

@@ -451,12 +451,6 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
             var snackBar = SnackBar(content: Text('Plese enter password'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             pswdFocus1.requestFocus();
-          } else if (validatePasswordbool(pswdController1.text) == false) {
-            var snackBar = SnackBar(
-                content: Text(
-                    'Password must have Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            pswdFocus1.requestFocus();
           } else {
             FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailcontroller1.text, password: pswdController1.text)
                 .then((value) {

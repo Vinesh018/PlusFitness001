@@ -19,6 +19,8 @@ import 'package:plus_fitness/Vinesh/v_waterHeading.dart';
 import 'package:plus_fitness/Vinesh/v_water_container.dart';
 import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 
 Future<void> main() async {
   // For Firebase intigration
@@ -35,7 +37,9 @@ Future<void> main() async {
       //home: MainSignUpPage(),
     ),
   );
+  FlutterNativeSplash.remove();
 }
+
 
 // Main Class Where Code Start Executin
 class TutorialHome extends StatefulWidget {
