@@ -6,7 +6,6 @@ import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
-
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:plus_fitness/Bhautik/datepickercustom.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
@@ -29,8 +28,8 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      // home: TutorialHome(),
-      home: MainLogInPage(),
+      home: TutorialHome(),
+      // home: MainLogInPage(),
       //home: MainSignUpPage(),
     ),
   );
