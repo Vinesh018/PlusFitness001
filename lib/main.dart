@@ -31,9 +31,9 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),
-      // home: SplashScreen(),
+      home: SplashScreen(),
       //home: MainSignUpPage(),
-      home:UserProfileMainRun()
+      // home:UserProfileMainRun()
     ),
   );
 }

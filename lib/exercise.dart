@@ -15,7 +15,14 @@ class exercisePageState extends State<exercisePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 25),
+          child: Text('Myexercise'),
+        ),
+        backgroundColor: Color.fromARGB(255, 231, 235, 237),
+          surfaceTintColor: Color.fromARGB(255, 231, 235, 237),
+      ),
       bottomNavigationBar: footer(),
 
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
