@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/Personaldatabottom.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +18,12 @@ class PersonalDataMainShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GradientContainerandimage(),
+      body: Column(
+        children: [
+          userdatacontainer(),
+        ],
+      ),
+
     );
   }
 }
@@ -90,16 +97,16 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
           ),
         ),
         Positioned(
-            left: screenWidth / 1.65,
-            top: screenHeight / 2.9,
-            child: CircleAvatar(
-                backgroundColor: Colors.deepOrange.shade100,
-                child: IconButton(
-                    onPressed: () {
-                      print("hjhdfa");
-                    },
-                    icon: Icon(Icons.edit))
-            ))
+             // left: screenWidth / 1.65,
+                top: screenHeight / 2.9,
+          child: InkWell(
+            onTap: () {
+              print(
+                  "hjhdfasfhgfdjhdfsjggggggggggggggggggggggggggggggggggggggggggggggggg");
+            },
+            child: Icon(Icons.edit),
+          ),
+        )
       ],
     );
   }

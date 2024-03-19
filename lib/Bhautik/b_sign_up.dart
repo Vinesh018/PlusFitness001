@@ -344,6 +344,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
       child: Form(
         key: _passwordValidationkey,
         child: TextFormField(
+          enableInteractiveSelection: false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: pswdController,
           focusNode: pswdFocus,
