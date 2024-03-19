@@ -30,8 +30,8 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-      home: TutorialHome(),
-      // home: SplashScreen(),
+      // home: TutorialHome(),
+      home: SplashScreen(),
       //home: MainSignUpPage(),
       // home:UserProfileMainRun()
     ),

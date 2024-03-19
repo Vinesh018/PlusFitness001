@@ -23,34 +23,39 @@ class GradientContainerandimage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [Container(
-        height: screenHeight / 3,
-        decoration: BoxDecoration(
-          boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 10,
-                spreadRadius: 2,
+      children: [
+        Container(
+          height: screenHeight / 3,
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
+              ],
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.indigo.shade100,
+                    Colors.indigo.shade900,
+                  ]),
+              border: Border(
+                bottom: BorderSide(color: Colors.indigo.shade500),
               ),
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.indigo.shade100,
-                  Colors.indigo.shade900,
-                ]),
-            border: Border(
-              bottom: BorderSide(color: Colors.indigo.shade500),
-            ),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(45),
-              bottomRight: Radius.circular(45),
-            )),
-      ),
-        Image.asset('assets/images/userprofile.png',
-              height: 200,
-              width: 200,)
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(45),
+                bottomRight: Radius.circular(45),
+              )),
+
+              child: Image.asset(
+          'assets/images/userprofile.png',
+          height: 150,
+          width: 150,
+        ),
+        ),
+        
       ],
     );
   }
