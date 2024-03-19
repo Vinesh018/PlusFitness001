@@ -66,6 +66,7 @@ class _footerState extends State<footer> {
                             IconButton(
                                 onPressed: () {
                                  Get.off(exercisePage());
+
                                 },
                                 icon: Image(
                                   image: AssetImage("assets/images/tab_2.png"),
