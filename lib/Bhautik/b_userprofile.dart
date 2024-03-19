@@ -77,6 +77,7 @@ class _NameImageRowState extends State<NameImageRow> {
       trailing: InkWell(
         onTap: () {
           FirebaseAuth.instance.signOut();
+          
           Get.off(MainLogInPage());
         },
         child: Container(
