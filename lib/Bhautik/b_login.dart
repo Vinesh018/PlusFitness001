@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Bhautik/googleAuth.dart';
 import 'package:plus_fitness/Vinesh/forgotPass.dart';
 import 'package:plus_fitness/main.dart';
 
@@ -314,7 +315,9 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                   width: 1.0,
                   color: Colors.blue,
                 )),
-            onPressed: () {},
+            onPressed: () {
+              GoogleAuth().signInwithGoogle(context);
+            },
             child: Row(
               children: [
                 Image.asset(
