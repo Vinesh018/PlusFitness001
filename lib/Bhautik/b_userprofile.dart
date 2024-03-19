@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 
@@ -352,10 +355,10 @@ class AccountContainer extends StatelessWidget {
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
-                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',),
-                OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',),
-                OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',),
-                OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',),
+                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap: Personaldataontap,),
+                OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: Personaldataontap),
               ],
             ),
           ),
@@ -363,6 +366,9 @@ class AccountContainer extends StatelessWidget {
       ),
     );
   }
+}
+ Personaldataontap(){
+  Get.to(PersonalDataMainShow());
 }
 class AccountContainerforother extends StatelessWidget {
 
@@ -406,9 +412,9 @@ class AccountContainerforother extends StatelessWidget {
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
-                OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',),
-                OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',),
-                OneListtileForAccountData(icons: Icons.settings,str: 'Setting',),
+                OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.settings,str: 'Setting',ontap: Personaldataontap),
               ],
             ),
           ),
@@ -421,12 +427,16 @@ class AccountContainerforother extends StatelessWidget {
 class OneListtileForAccountData extends StatelessWidget {
 final IconData icons;
 final String str;
+final Function ontap;
 
-  const OneListtileForAccountData({ required this.icons, required this.str});
+  const OneListtileForAccountData({ required this.icons, required this.str,required this.ontap});
 
   @override
   Widget build(BuildContext context) {
 return  ListTile(
+          onTap: () {
+            ontap();
+          },
           leading: GradientIcon(
             icon: icons,
             gradient: LinearGradient(
