@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/splashScreen.dart';
 import 'firebase_options.dart';
@@ -31,7 +32,8 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
       // home: TutorialHome(),
-      home: SplashScreen(),
+      home: PersonalDataMainShow(),
+      // home: SplashScreen(),
       //home: MainSignUpPage(),
       // home:UserProfileMainRun()
     ),
