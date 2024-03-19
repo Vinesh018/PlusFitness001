@@ -50,14 +50,8 @@ dependencies:
   firebase_auth: ^4.17.9
   flutter_native_splash: ^2.4.0
   gradient_icon: ^2.0.9
-<<<<<<< HEAD
-  google_sign_in: ^6.2.1
-  cloud_firestore: ^4.15.9
-  image_picker: ^1.0.7
-=======
   image_picker: ^1.0.7
   path_provider: ^2.1.2
->>>>>>> Bhautik
 
 
 dev_dependencies:
