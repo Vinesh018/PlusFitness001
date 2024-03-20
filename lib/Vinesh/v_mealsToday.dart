@@ -9,11 +9,11 @@ class mealsTodayState extends State<mealsToday> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20),
+      padding: const EdgeInsets.only(top: 15, left: 20),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 30),
           child: Row(
                  
             children: [

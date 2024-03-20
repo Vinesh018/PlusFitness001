@@ -35,7 +35,10 @@ class GoogleAuth {
         "email": userDetails!.email,
         "name": userDetails.displayName,
         "imgUrl": userDetails.photoURL,
-        "id": userDetails.uid
+        "id": userDetails.uid,
+        "weight": "65",
+        "height": "56"
+       
       };
       await DatabaseMethods()
           .addUser(userDetails.uid, userInfoMap)
