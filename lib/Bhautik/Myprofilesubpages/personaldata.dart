@@ -8,10 +8,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/Personaldatabottom.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/tempvarstore.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plus_fitness/main.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
@@ -21,7 +23,12 @@ class PersonalDataMainShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: GradientContainerandimage()),
+      body: Column(
+        children: [
+          GradientContainerandimage(),
+          StoreusingSharedPreferences(),
+        ],
+      ),
     );
   }
 }
