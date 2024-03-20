@@ -6,9 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/Personaldatabottom.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
@@ -122,8 +124,22 @@ class _NameImageRowState extends State<NameImageRow> {
     );
   }
 }
+String? weightvaluefromsharedprefrence;
+class HeightWeightAge extends StatefulWidget {
+  @override
+  State<HeightWeightAge> createState() => _HeightWeightAgeState();
+}
 
-class HeightWeightAge extends StatelessWidget {
+class _HeightWeightAgeState extends State<HeightWeightAge> {
+  getStringValuesSF() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
+  String? stringValue = prefs.getString('weighenterintextfield');
+  weightvaluefromsharedprefrence = stringValue;
+  print('------------------------------------------------------$weightvaluefromsharedprefrence-----------------------');
+  return stringValue;
+
+}
   @override
   Widget build(BuildContext context) {
     return Padding(

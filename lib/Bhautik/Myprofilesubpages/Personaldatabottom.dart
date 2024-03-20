@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool readonly = true;
+String weightValue ='25';
 
 class userdatacontainer extends StatefulWidget {
   @override
@@ -15,6 +17,10 @@ class _userdatacontainerState extends State<userdatacontainer> {
       readonly = false;
     });
   }
+  addStringToSF() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('weighenterintextfield', weightValue);
+}
 
   void _togglenot() {
     setState(() {
@@ -51,6 +57,11 @@ class _userdatacontainerState extends State<userdatacontainer> {
                     },
                     icon: Icon(Icons.edit)),
                 border: InputBorder.none),
+                onChanged: (value) {
+                     print('First text field: $value');
+                    weightValue = value;
+                    print(weightValue);
+                },
           ),
         ],
       ),
