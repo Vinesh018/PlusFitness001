@@ -131,15 +131,6 @@ class HeightWeightAge extends StatefulWidget {
 }
 
 class _HeightWeightAgeState extends State<HeightWeightAge> {
-  getStringValuesSF() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  //Return String
-  String? stringValue = prefs.getString('weighenterintextfield');
-  weightvaluefromsharedprefrence = stringValue;
-  print('------------------------------------------------------$weightvaluefromsharedprefrence-----------------------');
-  return stringValue;
-
-}
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
-
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/tempvarstore.dart';
+import 'package:plus_fitness/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+String? weighonbody;
 class bodyMeasureCont extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => bodyMeasureContState();
 }
 
 class bodyMeasureContState extends State<bodyMeasureCont> {
+  void initState() {
+    super.initState();
+    getweightfordisplay();
+  }
+
+  void getweightfordisplay() async {
+    var prefs = await SharedPreferences.getInstance();
+    var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
+    weighonbody = getweight != Null ? getweight : '0' ;
+    print('Getting Weight fromdatabase is $weighonbody');
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,15 +70,15 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: RichText(
-                                  text: const TextSpan(
-                                    text: '203.8 ',
+                                  text:  TextSpan(
+                                    text: weighonbody,
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 19, 75, 232),
                                         fontFamily: 'FontMain',
                                         fontSize: 30),
                                     children: <TextSpan>[
                                       TextSpan(
-                                          text: 'lbs',
+                                          text: ' Kgs',
                                           style: TextStyle(fontSize: 17)),
                                     ],
                                   ),
