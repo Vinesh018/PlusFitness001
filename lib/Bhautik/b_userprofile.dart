@@ -13,10 +13,37 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
+String? weighonbody;
+String? Heightonbody;
 
-class UserProfileMainRun extends StatelessWidget {
+class UserProfileMainRun extends StatefulWidget {
+  @override
+  State<UserProfileMainRun> createState() => _UserProfileMainRunState();
+}
+
+class _UserProfileMainRunState extends State<UserProfileMainRun> {
+  void initState() {
+    super.initState();
+    getweightfordisplay();
+    setState(() {});
+  }
+
+  void getweightfordisplay() async {
+    setState(() {});
+    var prefs = await SharedPreferences.getInstance();
+    var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
+    var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
+    weighonbody = getweight != Null ? getweight : '0';
+    Heightonbody = getheight != Null ? getheight : '0';
+    print('Getting Weight from database is in third page $weighonbody');
+    print('Getting height from database is in third page $Heightonbody');
+
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
+
+    setState(() {});
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
       appBar: AppBar(
@@ -24,7 +51,7 @@ class UserProfileMainRun extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 231, 235, 237),
         title: Padding(
           padding: const EdgeInsets.only(left: 25),
-          child: Text("Myprofile"),
+          child: Text("My Profile"),
         ),
       ),
       bottomNavigationBar: footer(),
@@ -48,6 +75,7 @@ class NameImageRow extends StatefulWidget {
 }
 
 class _NameImageRowState extends State<NameImageRow> {
+  
   @override
   Widget build(BuildContext context) {
     double x = MediaQuery.of(context).size.width;
@@ -130,8 +158,12 @@ class HeightWeightAge extends StatefulWidget {
 }
 
 class _HeightWeightAgeState extends State<HeightWeightAge> {
+
+  
+
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 20, right: 20),
       child: Row(
@@ -157,17 +189,20 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(Heightonbody.toString()),
+                          // GradientText(
+
+                          //   Heightonbody!,
+
+                          //   style:
+                          //       TextStyle(fontSize: 15, fontFamily: 'FontMain'),
+                          //   gradient: LinearGradient(colors: [
+                          //     Colors.indigo.shade300,
+                          //     Colors.indigo.shade600
+                          //   ]),
+                          // ),
                           GradientText(
-                            '180',
-                            style:
-                                TextStyle(fontSize: 15, fontFamily: 'FontMain'),
-                            gradient: LinearGradient(colors: [
-                              Colors.indigo.shade300,
-                              Colors.indigo.shade600
-                            ]),
-                          ),
-                          GradientText(
-                            'cm',
+                            ' cm',
                             style:
                                 TextStyle(fontSize: 15, fontFamily: 'FontMain'),
                             gradient: LinearGradient(colors: [
@@ -208,17 +243,18 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(weighonbody.toString()),
+                          // GradientText(
+                          //   weighonbody!,
+                          //   style:
+                          //       TextStyle(fontSize: 15, fontFamily: 'FontMain'),
+                          //   gradient: LinearGradient(colors: [
+                          //     Colors.indigo.shade300,
+                          //     Colors.indigo.shade600
+                          //   ]),
+                          // ),
                           GradientText(
-                            '65',
-                            style:
-                                TextStyle(fontSize: 15, fontFamily: 'FontMain'),
-                            gradient: LinearGradient(colors: [
-                              Colors.indigo.shade300,
-                              Colors.indigo.shade600
-                            ]),
-                          ),
-                          GradientText(
-                            'kg',
+                            ' kg',
                             style:
                                 TextStyle(fontSize: 15, fontFamily: 'FontMain'),
                             gradient: LinearGradient(colors: [
