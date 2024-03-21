@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 String? weighonbody;
+String? Heightonbody;
+
 class bodyMeasureCont extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => bodyMeasureContState();
@@ -17,8 +20,11 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
   void getweightfordisplay() async {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
-    weighonbody = getweight != Null ? getweight : '0' ;
+    var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
+    weighonbody = getweight != Null ? getweight : '0';
+    Heightonbody = getheight != Null ? getheight : '0';
     print('Getting Weight fromdatabase is $weighonbody');
+    print('Getting height fromdatabase is $Heightonbody');
     setState(() {});
   }
 
@@ -70,7 +76,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: RichText(
-                                  text:  TextSpan(
+                                  text: TextSpan(
                                     text: weighonbody,
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 19, 75, 232),
@@ -120,7 +126,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                         ),
                       ],
                     ),
-               Divider(),
+                    Divider(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: Row(
@@ -129,8 +135,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                           Column(
                             children: [
                               RichText(
-                                text: const TextSpan(
-                                  text: '185 ',
+                                text: TextSpan(
+                                  text: Heightonbody,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'FontMain',
@@ -138,7 +144,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                                       fontWeight: FontWeight.w700),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: 'cm',
+                                        text: ' cm',
                                         style: TextStyle(fontSize: 15)),
                                   ],
                                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String? weighdat;
+String? heightdata;
 
 class StoreusingSharedPreferences extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _StoreusingSharedPreferencesState
     extends State<StoreusingSharedPreferences> {
   String? newvalue;
   FocusNode weightfocus = FocusNode();
+  FocusNode heightfocus = FocusNode();
   void initState() {
     super.initState();
     getweightfordisplay();
@@ -21,8 +23,11 @@ class _StoreusingSharedPreferencesState
   void getweightfordisplay() async {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
+    var getheight= prefs.getString('finalHeightvaluestoredinsharedpref');
      weighdat = getweight != Null ? getweight : '0' ;
-    print('Getting Weight fromdatabase id $weighdat');
+     heightdata  = getheight != Null ? getheight: '0' ;
+    print('Getting Weight fromdatabase is $weighdat');
+    print('Getting height fromdatabase is $heightdata');
     setState(() {
     });
   }
@@ -47,19 +52,37 @@ class _StoreusingSharedPreferencesState
             hintText: weighdat,
             ),
           ),
+             Text('Enter height  in cm'),
+          TextFormField(
+            focusNode: heightfocus,
+            keyboardType: TextInputType.number,
+            controller: heightcontroller,
+            decoration: InputDecoration(
+            hintText: heightdata,
+            ),
+          ),
           Center(
             child: FloatingActionButton(
               onPressed: () async {
                 var savedat = weightcontroller.text.toString();
+                var heighttextfieldvalue = heightcontroller.text.toString();
                 if (savedat.isEmpty || savedat == null) {
                   weightfocus.requestFocus();
                   print('enter some Values Plese');
-                } else {
+                }else if(heighttextfieldvalue.isEmpty || heighttextfieldvalue == null){
+                    heightfocus.requestFocus();
+                    print('enter Height Plese');
+                }
+                 else {
                   weighdat = savedat;
+                  heightdata = heighttextfieldvalue;
                   var pef = await SharedPreferences.getInstance();
+                  var peftwo = await SharedPreferences.getInstance();
                   pef.setString(
                       'finalweightvaluestoredinsharedpref', weighdat!);
-                  print('Setting new value to databse is $weighdat');
+                      peftwo.setString('finalHeightvaluestoredinsharedpref',heightdata!);
+                  print('Setting new value to databse weight  is $weighdat');
+                  print('Setting new value of Height in database is  $heightdata');
                   setState(() {});
                 }
               },
