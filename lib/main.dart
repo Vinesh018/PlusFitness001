@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
-import 'package:plus_fitness/Bhautik/Myprofilesubpages/tempvarstore.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +22,6 @@ import 'package:plus_fitness/Vinesh/v_waterHeading.dart';
 import 'package:plus_fitness/Vinesh/v_water_container.dart';
 import 'package:plus_fitness/Vinesh/waterGlass.dart';
 
-
 Future<void> main() async {
   // For Firebase intigration
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +42,6 @@ Future<void> main() async {
   );
 }
 
-
 // Main Class Where Code Start Executin
 class TutorialHome extends StatefulWidget {
   const TutorialHome({super.key});
@@ -53,19 +51,6 @@ class TutorialHome extends StatefulWidget {
 }
 
 class _TutorialHomeState extends State<TutorialHome> {
-  // void initState() {
-  //   super.initState();
-  //   getweightfordisplay();
-  // } 
-  
-  //  void getweightfordisplay() async {
-  //   var prefs = await SharedPreferences.getInstance();
-  //   var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
-  //   weightdat = getweight!;
-  //   print('Getting Weight fromdatabase is $weightdat');
-
-  // }
-
   AppBar appbar = AppBar(
     title: const Text('My Dairy'),
     backgroundColor: Color.fromARGB(255, 231, 235, 237),
@@ -105,5 +90,3 @@ class _TutorialHomeState extends State<TutorialHome> {
         ));
   }
 }
-
-

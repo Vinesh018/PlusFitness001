@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
-import 'package:plus_fitness/Bhautik/Myprofilesubpages/Personaldatabottom.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
