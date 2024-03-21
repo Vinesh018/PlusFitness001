@@ -37,7 +37,8 @@ class GoogleAuth {
         "imgUrl": userDetails.photoURL,
         "id": userDetails.uid,
         "weight": "65",
-        "height": "56"
+        "height": "56",
+        "age": 22
        
       };
       await DatabaseMethods()
