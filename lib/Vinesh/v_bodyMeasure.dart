@@ -5,8 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String? weighonbody;
 String? Heightonbody;
+double bmi = 0;
+
+
 
 class bodyMeasureCont extends StatefulWidget {
+  
   @override
   State<StatefulWidget> createState() => bodyMeasureContState();
 }
@@ -18,6 +22,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
   }
 
   void getweightfordisplay() async {
+
+
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
@@ -25,7 +31,20 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
     Heightonbody = getheight != Null ? getheight : '0';
     print('Getting Weight fromdatabase is $weighonbody');
     print('Getting height fromdatabase is $Heightonbody');
+
+    double height = double.parse(Heightonbody!);
+    double weight = double.parse(weighonbody!);
+    print(height);
+    print(height.runtimeType);
+
+    print(weight);
+    print(weight.runtimeType);
+
+    bmi = (weight / (height * height)) * 10000;
     setState(() {});
+
+
+    print(bmi);
   }
 
   @override
@@ -159,8 +178,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                           Column(
                             children: [
                               RichText(
-                                text: const TextSpan(
-                                  text: '27.3 ',
+                                text: TextSpan(
+                                  text: bmi.toStringAsFixed(2),
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'FontMain',
@@ -168,7 +187,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                                       fontWeight: FontWeight.w700),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: 'BMI',
+                                        text: ' BMI',
                                         style: TextStyle(fontSize: 15)),
                                   ],
                                 ),
