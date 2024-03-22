@@ -5,4 +5,5 @@ class sharedprefkeysfinal {
   static String ageoffuser = 'finalagevaluestoredinsharedpref';
   static String waterdrinkinml = 'finalDrikedwatertoredinsharedpref';
   static String waterpercentageonbottle = 'Percentageonbottonstoreinsharedpref';
+  static String lastwaterdrinktime = 'lastwaterdrinktime';
 }

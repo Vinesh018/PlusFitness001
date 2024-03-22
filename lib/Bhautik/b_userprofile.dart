@@ -15,10 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
-String? weighonbody;
-String? Heightonbody;
-String? namedataonbody;
-String? ageonbody;
+String weighonbody = '40';
+String? Heightonbody = '100';
+String? namedataonbody = 'Your Name';
+String? ageonbody = '18';
 
 
 class UserProfileMainRun extends StatefulWidget {
@@ -38,10 +38,10 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     var getheight = prefs.getString(sharedprefkeysfinal.heighoffuser);
     var getname = prefs.getString(sharedprefkeysfinal.nameofuser);
     var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
-    weighonbody = getweight != Null ? getweight : '0';
-    Heightonbody = getheight != Null ? getheight : '0';
-    namedataonbody  = getname != Null ? getname: 'myname' ;
-    ageonbody  = getage != Null ? getage: '22' ;
+    weighonbody = getweight!;
+    Heightonbody = getheight!;
+    namedataonbody  = getname! ;
+    ageonbody  = getage! ;
 
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');

@@ -3,8 +3,8 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String? weighonbody;
-String? Heightonbody;
+String weighonbody = '40';
+String  Heightonbody = '100';
 double bmi = 0;
 var BmiIndicator;
 
@@ -28,8 +28,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
-    weighonbody = getweight != Null ? getweight : '0';
-    Heightonbody = getheight != Null ? getheight : '0';
+    weighonbody = getweight!;
+    Heightonbody = getheight!;
     print('Getting Weight fromdatabase is $weighonbody');
     print('Getting height fromdatabase is $Heightonbody');
 

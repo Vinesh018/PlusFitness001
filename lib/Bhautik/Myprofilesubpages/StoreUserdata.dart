@@ -4,10 +4,10 @@ import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String? weighdat;
-String? heightdata;
-String? namedata;
-String? agedata;
+String  weighdat = '40';
+String heightdata = '100';
+String namedata = 'Your Name';
+String agedata = '18';
 
 
 class StoreusingSharedPreferences extends StatefulWidget {
@@ -33,10 +33,10 @@ class _StoreusingSharedPreferencesState
     var getheight = prefs.getString(sharedprefkeysfinal.heighoffuser);
     var getname = prefs.getString(sharedprefkeysfinal.nameofuser);
     var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
-    weighdat = getweight != Null ? getweight : '0';
-    heightdata = getheight != Null ? getheight : '0';
-    namedata = getname != Null ? getname : 'myname';
-    agedata = getage != Null ? getage: '22';
+    weighdat = getweight!;
+    heightdata = getheight!;
+    namedata = getname!;
+    agedata = getage!;
     print('Getting Weight fromdatabase is $weighdat');
     print('Getting height fromdatabase is $heightdata');
     print('Getting name fromdatabase is $namedata');
@@ -46,10 +46,10 @@ class _StoreusingSharedPreferencesState
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController weightcontroller = TextEditingController();
-    TextEditingController namecontroller = TextEditingController();
-    TextEditingController heightcontroller = TextEditingController();
-    TextEditingController agecontroller = TextEditingController();
+    TextEditingController weightcontroller = TextEditingController(text: weighdat);
+    TextEditingController namecontroller = TextEditingController(text: namedata);
+    TextEditingController heightcontroller = TextEditingController(text: heightdata);
+    TextEditingController agecontroller = TextEditingController(text: agedata);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(

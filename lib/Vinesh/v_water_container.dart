@@ -19,15 +19,28 @@ String waterNotification = "Keep drinking water !!";
 int i = 1;
 
 class waterContainerState extends State<waterContainer> {
+     void initState() {
+      super.initState();
+       getweightfordisplay();
+    }
+
+     Future<void> getweightfordisplay() async {
+         var prefs = await SharedPreferences.getInstance();
+         var getwaterml = prefs.getInt(sharedprefkeysfinal.waterdrinkinml);
+         var getwaterperctage = prefs.getDouble(sharedprefkeysfinal.waterpercentageonbottle);
+         var getwaterdrinktime = prefs.getString(sharedprefkeysfinal.lastwaterdrinktime);
+         waterInMl = getwaterml!;
+         waterpercentage = getwaterperctage!;
+         waterDrinkTime = getwaterdrinktime!;
+         print('Getting value of Water in ml is $getwaterml');
+         setState(() {
+         });
+
+     }
+
   @override
   Widget build(BuildContext context) {
-    void initState() {
-      super.initState();
-      waterpercentage = waterpercentage;
-      waterInMl = waterInMl;
-      waterDrinkTime = waterDrinkTime;
-      waterNotification = waterNotification;
-    }
+ 
 
     var screenwidth = MediaQuery.of(context).size.width;
     // TODO: implement build
@@ -176,7 +189,6 @@ class waterContainerState extends State<waterContainer> {
                               onTap: () async {
                                 DateTime date = DateTime.now();
                                 String time = "${date.hour}:${date.minute}";
-                                final now = DateTime.now().hour;
 
                                 waterDrinkTime = time;
 
@@ -201,8 +213,10 @@ class waterContainerState extends State<waterContainer> {
                                 pef.setInt(sharedprefkeysfinal.waterdrinkinml,
                                     waterInMl);
                                     pef.setDouble(sharedprefkeysfinal.waterpercentageonbottle,waterpercentage);
+                                    pef.setString(sharedprefkeysfinal.lastwaterdrinktime, waterDrinkTime);
                                 print( 'Stored dwater ml  in shared Prefrence is $waterInMl');
                                 print( 'Stored dwater percetgae  in shared Prefrence is $waterpercentage');
+                                print( 'Stored dwater percetgae  in shared Prefrence is $waterDrinkTime');
                                     
                                     
                                     
@@ -310,6 +324,8 @@ class waterContainerState extends State<waterContainer> {
       ),
     );
   }
+  
+ 
 }
 
 class waterIndicator extends StatefulWidget {
