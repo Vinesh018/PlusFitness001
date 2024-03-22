@@ -143,6 +143,9 @@ class _StoreusingSharedPreferencesState
                 height: 60,
                 width: MediaQuery.of(context).size.width - 100,
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Colors.indigo.shade400)),
                   onPressed: () async {
                     var weighttextfieldvalue = weightcontroller.text.toString();
                     var heighttextfieldvalue = heightcontroller.text.toString();
@@ -196,7 +199,7 @@ class _StoreusingSharedPreferencesState
                       style: TextStyle(
                           fontFamily: "FontMain",
                           fontSize: 20,
-                          color: Colors.indigo.shade700)),
+                          color: Colors.white)),
                 ),
               ),
             ),
