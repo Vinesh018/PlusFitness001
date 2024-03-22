@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
@@ -15,6 +16,9 @@ double screenWidth = 0;
 double screenHeight = 0;
 String? weighonbody;
 String? Heightonbody;
+String? namedataonbody;
+String? ageonbody;
+
 
 class UserProfileMainRun extends StatefulWidget {
   @override
@@ -31,12 +35,20 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
+    var getname = prefs.getString('finalnamevaluestoredinsharedpref');
+    var getage = prefs.getString('finalagevaluestoredinsharedpref');
     weighonbody = getweight != Null ? getweight : '0';
     Heightonbody = getheight != Null ? getheight : '0';
+    namedataonbody  = getname != Null ? getname: 'myname' ;
+    ageonbody  = getage != Null ? getage: '22' ;
+
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');
+    print('Gettin name from database is in third page $namedataonbody');
+    print('Gettin age from database is in fourth page $ageonbody');
     setState(() {});
   }
+
 
 
   @override
@@ -95,7 +107,7 @@ class _NameImageRowState extends State<NameImageRow> {
       title:
 
        Text(
-        'John Doe',
+       namedataonbody.toString(),
         style: TextStyle(fontFamily: 'FontMain', fontSize: 19),
       ),
       // subtitle: Text(
@@ -291,17 +303,18 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(ageonbody.toString()),
+                          // GradientText(
+                          //   '22',
+                          //   style:
+                          //       TextStyle(fontSize: 15, fontFamily: 'FontMain'),
+                          //   gradient: LinearGradient(colors: [
+                          //     Colors.indigo.shade300,
+                          //     Colors.indigo.shade600
+                          //   ]),
+                          // ),
                           GradientText(
-                            '22',
-                            style:
-                                TextStyle(fontSize: 15, fontFamily: 'FontMain'),
-                            gradient: LinearGradient(colors: [
-                              Colors.indigo.shade300,
-                              Colors.indigo.shade600
-                            ]),
-                          ),
-                          GradientText(
-                            'yo',
+                            ' yo',
                             style:
                                 TextStyle(fontSize: 15, fontFamily: 'FontMain'),
                             gradient: LinearGradient(colors: [
@@ -351,11 +364,17 @@ class GradientText extends StatelessWidget {
   }
 }
 
-class AccountContainer extends StatelessWidget {
+class AccountContainer extends StatefulWidget {
 
   final String heading;
 
   const AccountContainer({required this.heading});
+
+  @override
+  State<AccountContainer> createState() => _AccountContainerState();
+}
+
+class _AccountContainerState extends State<AccountContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -389,11 +408,11 @@ class AccountContainer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: Text(
-                    heading,
+                    widget.heading,
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
-                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap: Personaldataontap,),
+                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap:  Personaldataontap,),
                 OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: Personaldataontap),
                 OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: Personaldataontap),
                 OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: Personaldataontap),
@@ -404,15 +423,24 @@ class AccountContainer extends StatelessWidget {
       ),
     );
   }
+   Personaldataontap() async{
+  await Get.off(PersonalDataMainShow());
+  setState(() {
+  });
 }
- Personaldataontap(){
-  Get.to(PersonalDataMainShow());
 }
-class AccountContainerforother extends StatelessWidget {
+
+class AccountContainerforother extends StatefulWidget {
 
   final String heading;
 
   const AccountContainerforother({required this.heading});
+
+  @override
+  State<AccountContainerforother> createState() => _AccountContainerforotherState();
+}
+
+class _AccountContainerforotherState extends State<AccountContainerforother> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -446,7 +474,7 @@ class AccountContainerforother extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: Text(
-                    heading,
+                    widget.heading,
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
@@ -460,6 +488,12 @@ class AccountContainerforother extends StatelessWidget {
       ),
     );
   }
+
+     Personaldataontap() async{
+  await Get.to(PersonalDataMainShow());
+  setState(() {
+  });
+}
 }
 
 class OneListtileForAccountData extends StatelessWidget {
