@@ -22,11 +22,31 @@ class PersonalDataMainShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          GradientContainerandimage(),
-          StoreusingSharedPreferences(),
-        ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.off(UserProfileMainRun());
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+        title: Text(
+          "My Profile",
+          style: TextStyle(
+              fontFamily: "FontMain",
+              fontSize: 22,
+              color: Colors.indigo.shade700),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: GradientContainerandimage(),
+            ),
+            StoreusingSharedPreferences(),
+          ],
+        ),
       ),
     );
   }
