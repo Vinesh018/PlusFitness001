@@ -291,6 +291,7 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
   }
 }
 
+// ignore: must_be_immutable
 class CircularIndicatorcustom extends StatefulWidget {
   double per = 0.7;
   @override

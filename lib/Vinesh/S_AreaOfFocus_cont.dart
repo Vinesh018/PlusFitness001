@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 var width;
 class areaOfFocusCont extends StatefulWidget {

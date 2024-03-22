@@ -30,20 +30,19 @@ class GoogleAuth {
 
     User? userDetails = result.user;
 
-    if (result != null) {
-      Map<String, dynamic> userInfoMap = {
-        "email": userDetails!.email,
-        "name": userDetails.displayName,
-        "imgUrl": userDetails.photoURL,
-        "id": userDetails.uid,
-        "weight": "65",
-        "height": "56",
-        "age": 22
-       
-      };
-      await DatabaseMethods()
-          .addUser(userDetails.uid, userInfoMap)
-          .then((value) => Get.off(TutorialHome()));
+
+    Map<String, dynamic> userInfoMap = {
+      "email": userDetails!.email,
+      "name": userDetails.displayName,
+      "imgUrl": userDetails.photoURL,
+      "id": userDetails.uid,
+      "weight": "65",
+      "height": "56",
+      "age": 22
+     
+    };
+    await DatabaseMethods()
+        .addUser(userDetails.uid, userInfoMap)
+        .then((value) => Get.off(TutorialHome()));
     }
-  }
 }

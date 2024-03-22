@@ -388,8 +388,8 @@ class mealsTodayState extends State<mealsToday> {
   }
 }
 
+// ignore: must_be_immutable
 class cont_meals extends StatefulWidget {
-  @override
   String mealType = "";
   String meal = "";
 

@@ -1,12 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
-
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/Bhautik/googleAuth.dart';
 import 'package:plus_fitness/Vinesh/forgotPass.dart';
@@ -28,7 +22,6 @@ class MainLogInPage extends StatelessWidget {
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Stack(
       children: [

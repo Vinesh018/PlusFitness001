@@ -17,6 +17,7 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
 
   @override
   void initState() {
+    super.initState();
     DateTime now1 = DateTime.now();
     DateTime dateOnly = DateTime(now1.year, now1.month, now1.day);
 

@@ -8,7 +8,7 @@ class heading_BodyMeasurement extends StatefulWidget {
 class heading_bodyMeasurementState extends State<heading_BodyMeasurement> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Row(

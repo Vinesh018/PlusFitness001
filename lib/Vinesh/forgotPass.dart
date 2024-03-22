@@ -1,22 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
-
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
-
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
 TextEditingController _emailcontroller1 = TextEditingController();
 FocusNode _emailfocus1 = FocusNode();
-final _emailValidationkey1 = GlobalKey<FormState>();
 int validateEmail(String? emailadress) {
   String pattternemail = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
   RegExp regExp = RegExp(pattternemail);

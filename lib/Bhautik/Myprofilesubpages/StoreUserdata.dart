@@ -152,26 +152,22 @@ class _StoreusingSharedPreferencesState
                     var nametextfieldvalue = namecontroller.text.toString();
                     var agetextfieldvalue = agecontroller.text.toString();
                 
-                    if (weighttextfieldvalue.isEmpty ||
-                        weighttextfieldvalue == null) {
-                      weighttextfieldvalue = weighdat!;
+                    if (weighttextfieldvalue.isEmpty) {
+                      weighttextfieldvalue = weighdat;
                       print('now weighttextfieldvaluee is is old weighdata');
                     }
                 
-                    if (agetextfieldvalue.isEmpty ||
-                        agetextfieldvalue == null) {
-                      agetextfieldvalue = agedata!;
+                    if (agetextfieldvalue.isEmpty) {
+                      agetextfieldvalue = agedata;
                       print('now weighttextfieldvaluee is is old weighdata');
                     }
                 
-                    if (nametextfieldvalue.isEmpty ||
-                        nametextfieldvalue == null) {
-                      nametextfieldvalue = namedata!;
+                    if (nametextfieldvalue.isEmpty) {
+                      nametextfieldvalue = namedata;
                       print('if name is null then its take old ');
                     }
-                    if (heighttextfieldvalue.isEmpty ||
-                        heighttextfieldvalue == null) {
-                      heighttextfieldvalue = heightdata!;
+                    if (heighttextfieldvalue.isEmpty) {
+                      heighttextfieldvalue = heightdata;
                       print('if height is null then takes old height');
                     }
                     weighdat = weighttextfieldvalue;
@@ -180,12 +176,12 @@ class _StoreusingSharedPreferencesState
                     agedata = agetextfieldvalue;
                     var pef = await SharedPreferences.getInstance();
                     pef.setString(
-                        'finalweightvaluestoredinsharedpref', weighdat!);
+                        'finalweightvaluestoredinsharedpref', weighdat);
                     pef.setString(
-                        'finalHeightvaluestoredinsharedpref', heightdata!);
+                        'finalHeightvaluestoredinsharedpref', heightdata);
                     pef.setString(
-                        'finalnamevaluestoredinsharedpref', namedata!);
-                    pef.setString('finalagevaluestoredinsharedpref', agedata!);
+                        'finalnamevaluestoredinsharedpref', namedata);
+                    pef.setString('finalagevaluestoredinsharedpref', agedata);
                     print('Setting new value to databse weight  is $weighdat');
                     print(
                         'Setting new value of Height in database is  $heightdata');

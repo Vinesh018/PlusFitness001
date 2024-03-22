@@ -1,12 +1,7 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
-import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';

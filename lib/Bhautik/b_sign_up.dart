@@ -1,14 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
-import 'package:plus_fitness/Vinesh/footer.dart';
-import 'package:plus_fitness/exercise.dart';
 
 class MainSignUpPage extends StatelessWidget {
   @override
@@ -27,7 +20,6 @@ class MainSignUpPage extends StatelessWidget {
 class BlueConatier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Stack(
       children: [

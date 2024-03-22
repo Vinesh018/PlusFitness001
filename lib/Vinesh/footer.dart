@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus_fitness/Bhautik/b_sign_up.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
-import 'package:plus_fitness/addMeals.dart';
 import 'package:plus_fitness/exercise.dart';
 import 'package:plus_fitness/main.dart';
 
@@ -133,7 +131,6 @@ class customPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

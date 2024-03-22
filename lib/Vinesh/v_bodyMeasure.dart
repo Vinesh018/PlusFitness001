@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
-import 'package:plus_fitness/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String weighonbody = '40';
@@ -33,8 +31,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
     print('Getting Weight fromdatabase is $weighonbody');
     print('Getting height fromdatabase is $Heightonbody');
 
-    double height = double.parse(Heightonbody!);
-    double weight = double.parse(weighonbody!);
+    double height = double.parse(Heightonbody);
+    double weight = double.parse(weighonbody);
     print(height);
     print(height.runtimeType);
 
