@@ -7,10 +7,19 @@ class waterContainer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => waterContainerState();
 }
-
+double waterpercentage = 0;
+int waterInMl = 0;
 class waterContainerState extends State<waterContainer> {
+
+
   @override
   Widget build(BuildContext context) {
+    
+    void initState() {
+      super.initState();
+      waterpercentage = waterpercentage;
+      waterInMl = waterInMl;
+    }
     var screenwidth = MediaQuery.of(context).size.width;
     // TODO: implement build
     return Padding(
@@ -48,7 +57,7 @@ class waterContainerState extends State<waterContainer> {
                       Column(
                         children: [
                           Text.rich(TextSpan(
-                              text: '2500 ',
+                              text: waterInMl.toString(),
                               style: TextStyle(
                                   fontFamily: 'FontMain',
                                   fontSize: 35,
@@ -155,13 +164,29 @@ class waterContainerState extends State<waterContainer> {
                                         blurRadius: 10,
                                         offset: const Offset(4, 7))
                                   ]),
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.add,
-                                    size: 25,
-                                    color: Color.fromARGB(255, 19, 75, 232),
-                                  ))),
+                            child: InkWell(
+                              onTap: () {
+                                waterpercentage = waterpercentage + 5;
+                                waterInMl = waterInMl + 175;
+                                setState(() {});
+                              },
+                              child: Icon(Icons.add),
+                            ),
+                            // child: IconButton(
+
+                            //     onPressed: () {
+                            //       waterpercentage = waterpercentage + 5;
+                            //       setState(() {
+                            //         print(
+                            //             "water percentage is in add is : $waterpercentage");
+                            //       });
+                            //     },
+                            //     icon: const Icon(
+                            //       Icons.add,
+                            //       size: 25,
+                            //       color: Color.fromARGB(255, 19, 75, 232),
+                            //     ))
+                          ),
                           Container(
                               height: 40,
                               width: 40,
@@ -176,7 +201,12 @@ class waterContainerState extends State<waterContainer> {
                                         offset: const Offset(4, 7))
                                   ]),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      waterpercentage = waterpercentage - 5;
+                                      waterInMl = waterInMl - 175;
+                                    });
+                                  },
                                   icon: const Icon(Icons.remove,
                                       size: 25,
                                       color:
@@ -187,9 +217,9 @@ class waterContainerState extends State<waterContainer> {
                     Padding(
                       padding: const EdgeInsets.only(right: 25, top: 20),
                       child: SizedBox(
-                        height: 200,
+                        height: 220,
                         child: Container(
-                          width: 50,
+                          width: 52,
                           height: 160,
                           decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 224, 226, 227),
@@ -205,8 +235,8 @@ class waterContainerState extends State<waterContainer> {
                                   blurRadius: 4),
                             ],
                           ),
-                          child: const WaveView(
-                            percentageValue: 70.0,
+                          child: WaveView(
+                            percentageValue: waterpercentage,
                           ),
                         ),
                       ),

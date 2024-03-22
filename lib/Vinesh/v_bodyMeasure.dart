@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String? weighonbody;
 String? Heightonbody;
 double bmi = 0;
+var BmiIndicator;
 
 
 
@@ -41,6 +42,16 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
     print(weight.runtimeType);
 
     bmi = (weight / (height * height)) * 10000;
+
+    if (bmi < 18.5) {
+      BmiIndicator = " Underweight";
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+      BmiIndicator = " Normalweight";
+    } else if (bmi >= 25 && bmi <= 29.9) {
+      BmiIndicator = " Overweight";
+    } else {
+      BmiIndicator = " Obesity";
+    }
     setState(() {});
 
 
@@ -192,7 +203,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
                                   ],
                                 ),
                               ),
-                              Text("Overweight",
+                              Text("$BmiIndicator",
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 15,
