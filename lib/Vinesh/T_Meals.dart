@@ -106,7 +106,7 @@ class _DragandDropState extends State<DragandDrop>
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
       print(" meal type : $_mealtype");
-      print(_element)
+      print(_mealtype);
       mealtype.mealitem.add(mealsItems);
     });
   }
