@@ -229,7 +229,7 @@ class waterContainerState extends State<waterContainer> {
                     Padding(
                       padding: const EdgeInsets.only(right: 25, top: 20),
                       child: SizedBox(
-                        height: 220,
+                        height: 200,
                         child: Container(
                           width: 52,
                           height: 160,
