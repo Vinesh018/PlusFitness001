@@ -7,19 +7,19 @@ class waterContainer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => waterContainerState();
 }
+
 double waterpercentage = 0;
 int waterInMl = 0;
+
 class waterContainerState extends State<waterContainer> {
-
-
   @override
   Widget build(BuildContext context) {
-    
     void initState() {
       super.initState();
       waterpercentage = waterpercentage;
       waterInMl = waterInMl;
     }
+
     var screenwidth = MediaQuery.of(context).size.width;
     // TODO: implement build
     return Padding(
@@ -81,13 +81,12 @@ class waterContainerState extends State<waterContainer> {
                       Column(
                         children: [
                           Container(
-                            width: screenwidth/2 - 30,
+                            width: screenwidth / 2 - 30,
                             decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(width: 1,color: Colors.grey.shade500)
-                              )
-                            ),
-                            
+                                border: Border(
+                                    bottom: BorderSide(
+                                        width: 1,
+                                        color: Colors.grey.shade500))),
                           ),
                         ],
                       ),
@@ -152,23 +151,30 @@ class waterContainerState extends State<waterContainer> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(25),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey.shade600,
-                                        spreadRadius: 1,
-                                        blurRadius: 10,
-                                        offset: const Offset(4, 7))
-                                  ]),
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade600,
+                                      spreadRadius: 1,
+                                      blurRadius: 10,
+                                      offset: const Offset(4, 7))
+                                ]),
                             child: InkWell(
                               onTap: () {
                                 waterpercentage = waterpercentage + 5;
                                 waterInMl = waterInMl + 175;
-                                setState(() {});
+                                setState(() {
+                                  if (waterpercentage >= 100) {
+                                    waterpercentage = 100;
+                                  }
+                                  if (waterInMl >= 3500) {
+                                    waterInMl = 3500;
+                                  }
+                                });
                               },
                               child: Icon(Icons.add),
                             ),
@@ -205,6 +211,12 @@ class waterContainerState extends State<waterContainer> {
                                     setState(() {
                                       waterpercentage = waterpercentage - 5;
                                       waterInMl = waterInMl - 175;
+                                      if (waterpercentage <= 0) {
+                                        waterpercentage = 0;
+                                      }
+                                      if (waterInMl <= 0) {
+                                        waterInMl = 0;
+                                      }
                                     });
                                   },
                                   icon: const Icon(Icons.remove,
@@ -217,7 +229,7 @@ class waterContainerState extends State<waterContainer> {
                     Padding(
                       padding: const EdgeInsets.only(right: 25, top: 20),
                       child: SizedBox(
-                        height: 220,
+                        height: 200,
                         child: Container(
                           width: 52,
                           height: 160,
