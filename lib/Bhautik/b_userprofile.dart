@@ -319,11 +319,17 @@ class GradientText extends StatelessWidget {
   }
 }
 
-class AccountContainer extends StatelessWidget {
+class AccountContainer extends StatefulWidget {
 
   final String heading;
 
   const AccountContainer({required this.heading});
+
+  @override
+  State<AccountContainer> createState() => _AccountContainerState();
+}
+
+class _AccountContainerState extends State<AccountContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -357,11 +363,11 @@ class AccountContainer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: Text(
-                    heading,
+                    widget.heading,
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
-                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap: Personaldataontap,),
+                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap:  Personaldataontap,),
                 OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: Personaldataontap),
                 OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: Personaldataontap),
                 OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: Personaldataontap),
@@ -372,15 +378,24 @@ class AccountContainer extends StatelessWidget {
       ),
     );
   }
+   Personaldataontap() async{
+  await Get.to(PersonalDataMainShow());
+  setState(() {
+  });
 }
- Personaldataontap(){
-  Get.to(PersonalDataMainShow());
 }
-class AccountContainerforother extends StatelessWidget {
+
+class AccountContainerforother extends StatefulWidget {
 
   final String heading;
 
   const AccountContainerforother({required this.heading});
+
+  @override
+  State<AccountContainerforother> createState() => _AccountContainerforotherState();
+}
+
+class _AccountContainerforotherState extends State<AccountContainerforother> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -414,7 +429,7 @@ class AccountContainerforother extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: Text(
-                    heading,
+                    widget.heading,
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
@@ -428,6 +443,12 @@ class AccountContainerforother extends StatelessWidget {
       ),
     );
   }
+
+     Personaldataontap() async{
+  await Get.to(PersonalDataMainShow());
+  setState(() {
+  });
+}
 }
 
 class OneListtileForAccountData extends StatelessWidget {
