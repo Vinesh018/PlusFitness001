@@ -25,11 +25,9 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
   void initState() {
     super.initState();
     getweightfordisplay();
-    setState(() {});
   }
 
   void getweightfordisplay() async {
-    setState(() {});
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
@@ -37,13 +35,12 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     Heightonbody = getheight != Null ? getheight : '0';
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');
-
     setState(() {});
   }
+
+
   @override
   Widget build(BuildContext context) {
-
-    setState(() {});
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
       appBar: AppBar(
@@ -163,7 +160,6 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {});
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 20, right: 20),
       child: Row(
