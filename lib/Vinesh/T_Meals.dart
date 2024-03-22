@@ -98,11 +98,15 @@ class _DragandDropState extends State<DragandDrop>
     Mealtype(mealtype: 'Dinner', mealtypeimageurl: 'assets/images/dinner.png'),
   ];
 
+  
+
   final GlobalKey _draggablekey = GlobalKey();
 
   void _itemDroppedOnMealsItem(
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
+      print(" meal type : $_mealtype");
+      print(_element)
       mealtype.mealitem.add(mealsItems);
     });
   }
