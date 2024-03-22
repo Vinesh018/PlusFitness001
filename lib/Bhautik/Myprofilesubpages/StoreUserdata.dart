@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String? weighdat;
@@ -28,10 +29,10 @@ class _StoreusingSharedPreferencesState
 
   void getweightfordisplay() async {
     var prefs = await SharedPreferences.getInstance();
-    var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
-    var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
-    var getname = prefs.getString('finalnamevaluestoredinsharedpref');
-    var getage = prefs.getString('finalagevaluestoredinsharedpref');
+    var getweight = prefs.getString(sharedprefkeysfinal.weighoffuser);
+    var getheight = prefs.getString(sharedprefkeysfinal.heighoffuser);
+    var getname = prefs.getString(sharedprefkeysfinal.nameofuser);
+    var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
     weighdat = getweight != Null ? getweight : '0';
     heightdata = getheight != Null ? getheight : '0';
     namedata = getname != Null ? getname : 'myname';
@@ -126,11 +127,10 @@ class _StoreusingSharedPreferencesState
                 namedata = nametextfieldvalue;
                 agedata = agetextfieldvalue;
                 var pef = await SharedPreferences.getInstance();
-                pef.setString('finalweightvaluestoredinsharedpref', weighdat!);
-                pef.setString(
-                    'finalHeightvaluestoredinsharedpref', heightdata!);
-                pef.setString('finalnamevaluestoredinsharedpref', namedata!);
-                pef.setString('finalagevaluestoredinsharedpref', agedata!);
+                pef.setString(sharedprefkeysfinal.weighoffuser, weighdat!);
+                pef.setString(sharedprefkeysfinal.heighoffuser, heightdata!);
+                pef.setString(sharedprefkeysfinal.nameofuser, namedata!);
+                pef.setString(sharedprefkeysfinal.ageoffuser, agedata!);
                 print('Setting new value to databse weight  is $weighdat');
                 print(
                     'Setting new value of Height in database is  $heightdata');

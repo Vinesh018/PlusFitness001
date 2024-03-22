@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class waterContainer extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class waterContainer extends StatefulWidget {
 double waterpercentage = 0;
 int waterInMl = 0;
 var waterDrinkTime = "--";
+
 String waterNotification = "Keep drinking water !!";
 int i = 1;
 
@@ -24,8 +27,6 @@ class waterContainerState extends State<waterContainer> {
       waterInMl = waterInMl;
       waterDrinkTime = waterDrinkTime;
       waterNotification = waterNotification;
-
-
     }
 
     var screenwidth = MediaQuery.of(context).size.width;
@@ -166,13 +167,13 @@ class waterContainerState extends State<waterContainer> {
                                 borderRadius: BorderRadius.circular(25),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.grey.shade600,
-                                      spreadRadius: 1,
-                                      blurRadius: 10,
-                                      offset: const Offset(4, 7))
+                                       color: Colors.grey.shade300,
+                                        spreadRadius: 0.1,
+                                        blurRadius: 5,
+                                        offset: const Offset(4, 7))
                                 ]),
                             child: InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 DateTime date = DateTime.now();
                                 String time = "${date.hour}:${date.minute}";
                                 final now = DateTime.now().hour;
@@ -181,24 +182,31 @@ class waterContainerState extends State<waterContainer> {
 
                                 waterpercentage = waterpercentage + 5;
                                 waterInMl = waterInMl + 175;
-                                setState(() {
-                                  if (waterpercentage >= 100) {
-                                    waterpercentage = 100;
-                                  }
-                                  if (waterInMl >= 3500) {
-                                    waterInMl = 3500;
-                                  }
-                               
-                                  if (waterInMl == 700 * i) {
-                                    print("multiple of 700");
-                                    i++;
-                                    waterNotification =
-                                        " Your bottle is empty refill it";
-                                  } else {
-                                    waterNotification =
-                                        "Keep drinking water !!";
-                                  }
-                                });
+                                if (waterpercentage >= 100) {
+                                  waterpercentage = 100;
+                                }
+                                if (waterInMl >= 3500) {
+                                  waterInMl = 3500;
+                                }
+
+                                if (waterInMl == 700 * i) {
+                                  print("multiple of 700");
+                                  i++;
+                                  waterNotification =
+                                      " Your bottle is empty refill it";
+                                } else {
+                                  waterNotification = "Keep drinking water !!";
+                                }
+                                var pef = await SharedPreferences.getInstance();
+                                pef.setInt(sharedprefkeysfinal.waterdrinkinml,
+                                    waterInMl);
+                                    pef.setDouble(sharedprefkeysfinal.waterpercentageonbottle,waterpercentage);
+                                print( 'Stored dwater ml  in shared Prefrence is $waterInMl');
+                                print( 'Stored dwater percetgae  in shared Prefrence is $waterpercentage');
+                                    
+                                    
+                                    
+                                setState(() {});
                               },
                               child: Icon(Icons.add),
                             ),
@@ -225,32 +233,39 @@ class waterContainerState extends State<waterContainer> {
                                   borderRadius: BorderRadius.circular(25),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.grey.shade600,
-                                        spreadRadius: 1,
-                                        blurRadius: 10,
+                                        color: Colors.grey.shade300,
+                                        spreadRadius: 0.1,
+                                        blurRadius: 5,
                                         offset: const Offset(4, 7))
                                   ]),
                               child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      waterpercentage = waterpercentage - 5;
-                                      waterInMl = waterInMl - 175;
-                                      if (waterpercentage <= 0) {
-                                        waterpercentage = 0;
-                                      }
-                                      if (waterInMl <= 0) {
-                                        waterInMl = 0;
-                                      }
-                                      if (waterInMl == 700 * i) {
-                                        print("multiple of 700");
-                                        i--;
-                                        waterNotification =
-                                            " Your bottle is empty refill it";
-                                      } else {
-                                        waterNotification =
-                                            "Keep drinking water !!";
-                                      }
-                                    });
+                                  onPressed: () async {
+                                    waterpercentage = waterpercentage - 5;
+                                    waterInMl = waterInMl - 175;
+                                    if (waterpercentage <= 0) {
+                                      waterpercentage = 0;
+                                    }
+                                    if (waterInMl <= 0) {
+                                      waterInMl = 0;
+                                    }
+                                    if (waterInMl == 700 * i) {
+                                      print("multiple of 700");
+                                      i--;
+                                      waterNotification =
+                                          " Your bottle is empty refill it";
+                                    } else {
+                                      waterNotification =
+                                          "Keep drinking water !!";
+                                    }
+                                    var pef =
+                                        await SharedPreferences.getInstance();
+                                    pef.setInt(
+                                        sharedprefkeysfinal.waterdrinkinml,
+                                        waterInMl);
+                                     pef.setDouble(sharedprefkeysfinal.waterpercentageonbottle,waterpercentage);
+                                print( 'Stored dwater ml  in shared Prefrence is $waterInMl');
+                                print( 'Stored dwater percetgae  in shared Prefrence is $waterpercentage');
+                                    setState(() {});
                                   },
                                   icon: const Icon(Icons.remove,
                                       size: 25,
