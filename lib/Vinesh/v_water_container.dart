@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:plus_fitness/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
@@ -10,6 +11,9 @@ class waterContainer extends StatefulWidget {
 
 double waterpercentage = 0;
 int waterInMl = 0;
+var waterDrinkTime = "--";
+String waterNotification = "Keep drinking water !!";
+int i = 1;
 
 class waterContainerState extends State<waterContainer> {
   @override
@@ -18,6 +22,10 @@ class waterContainerState extends State<waterContainer> {
       super.initState();
       waterpercentage = waterpercentage;
       waterInMl = waterInMl;
+      waterDrinkTime = waterDrinkTime;
+      waterNotification = waterNotification;
+
+
     }
 
     var screenwidth = MediaQuery.of(context).size.width;
@@ -105,7 +113,7 @@ class waterContainerState extends State<waterContainer> {
                                 width: 5,
                               ),
                               Text(
-                                "Last drink 8:26 AM",
+                                "Last drink $waterDrinkTime",
                                 style: TextStyle(
                                     fontFamily: "FontMain",
                                     fontSize: 13,
@@ -126,7 +134,7 @@ class waterContainerState extends State<waterContainer> {
                               SizedBox(
                                 width: 110,
                                 child: Text(
-                                  "Your bottle is empty refill it!.",
+                                  "$waterNotification",
                                   style: TextStyle(
                                       fontFamily: "FontMain",
                                       fontSize: 14,
@@ -165,6 +173,12 @@ class waterContainerState extends State<waterContainer> {
                                 ]),
                             child: InkWell(
                               onTap: () {
+                                DateTime date = DateTime.now();
+                                String time = "${date.hour}:${date.minute}";
+                                final now = DateTime.now().hour;
+
+                                waterDrinkTime = time;
+
                                 waterpercentage = waterpercentage + 5;
                                 waterInMl = waterInMl + 175;
                                 setState(() {
@@ -173,6 +187,16 @@ class waterContainerState extends State<waterContainer> {
                                   }
                                   if (waterInMl >= 3500) {
                                     waterInMl = 3500;
+                                  }
+                               
+                                  if (waterInMl == 700 * i) {
+                                    print("multiple of 700");
+                                    i++;
+                                    waterNotification =
+                                        " Your bottle is empty refill it";
+                                  } else {
+                                    waterNotification =
+                                        "Keep drinking water !!";
                                   }
                                 });
                               },
@@ -216,6 +240,15 @@ class waterContainerState extends State<waterContainer> {
                                       }
                                       if (waterInMl <= 0) {
                                         waterInMl = 0;
+                                      }
+                                      if (waterInMl == 700 * i) {
+                                        print("multiple of 700");
+                                        i--;
+                                        waterNotification =
+                                            " Your bottle is empty refill it";
+                                      } else {
+                                        waterNotification =
+                                            "Keep drinking water !!";
                                       }
                                     });
                                   },
