@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
@@ -15,6 +16,9 @@ double screenWidth = 0;
 double screenHeight = 0;
 String? weighonbody;
 String? Heightonbody;
+String? namedataonbody;
+String? ageonbody;
+
 
 class UserProfileMainRun extends StatefulWidget {
   @override
@@ -31,10 +35,17 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
+    var getname = prefs.getString('finalnamevaluestoredinsharedpref');
+    var getage = prefs.getString('finalagevaluestoredinsharedpref');
     weighonbody = getweight != Null ? getweight : '0';
     Heightonbody = getheight != Null ? getheight : '0';
+    namedataonbody  = getname != Null ? getname: 'myname' ;
+    ageonbody  = getage != Null ? getage: '22' ;
+
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');
+    print('Gettin name from database is in third page $namedataonbody');
+    print('Gettin age from database is in fourth page $ageonbody');
     setState(() {});
   }
 
@@ -96,7 +107,7 @@ class _NameImageRowState extends State<NameImageRow> {
       title:
 
        Text(
-        'John Doe',
+       namedataonbody.toString(),
         style: TextStyle(fontFamily: 'FontMain', fontSize: 19),
       ),
       // subtitle: Text(
@@ -292,17 +303,18 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(ageonbody.toString()),
+                          // GradientText(
+                          //   '22',
+                          //   style:
+                          //       TextStyle(fontSize: 15, fontFamily: 'FontMain'),
+                          //   gradient: LinearGradient(colors: [
+                          //     Colors.indigo.shade300,
+                          //     Colors.indigo.shade600
+                          //   ]),
+                          // ),
                           GradientText(
-                            '22',
-                            style:
-                                TextStyle(fontSize: 15, fontFamily: 'FontMain'),
-                            gradient: LinearGradient(colors: [
-                              Colors.indigo.shade300,
-                              Colors.indigo.shade600
-                            ]),
-                          ),
-                          GradientText(
-                            'yo',
+                            ' yo',
                             style:
                                 TextStyle(fontSize: 15, fontFamily: 'FontMain'),
                             gradient: LinearGradient(colors: [
