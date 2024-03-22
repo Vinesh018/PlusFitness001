@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 
 List<MealsItems> _mealsItem = [
@@ -89,6 +90,7 @@ class DragandDrop extends StatefulWidget {
 
 class _DragandDropState extends State<DragandDrop>
     with TickerProviderStateMixin {
+    
   final List<Mealtype> _mealtype = [
     Mealtype(
       mealtype: 'Breakfast',
@@ -106,7 +108,7 @@ class _DragandDropState extends State<DragandDrop>
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
       print(" meal type : $_mealtype");
-      print(_mealtype);
+
       mealtype.mealitem.add(mealsItems);
     });
   }
@@ -176,6 +178,8 @@ class _DragandDropState extends State<DragandDrop>
   }
 
   Widget _builditemRow() {
+    print("---------");
+    print(_mealtype);
     return Container(
       decoration: BoxDecoration(
           color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
@@ -190,6 +194,7 @@ class _DragandDropState extends State<DragandDrop>
         ),
       ),
     );
+
   }
 
   Widget _buildIteamWithDropZone(Mealtype mealtype) {
@@ -206,6 +211,7 @@ class _DragandDropState extends State<DragandDrop>
         },
         onAcceptWithDetails: (details) {
           _itemDroppedOnMealsItem(mealsItems: details.data, mealtype: mealtype);
+
         },
       ),
     ));
@@ -306,6 +312,9 @@ class Mealtype {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
     print(totalcalaries);
+    print(mealitem.length);
+    print(mealtype);
+
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
 
@@ -314,9 +323,11 @@ class Mealtype {
       required this.mealtypeimageurl,
       List<MealsItems>? mealitem})
       : mealitem = mealitem ?? [];
+      
 }
 
 class DraggingListItem extends StatelessWidget {
+  
   final GlobalKey dragkey;
   final String dragableimageurl;
 
