@@ -39,6 +39,7 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -411,7 +412,7 @@ class _AccountContainerState extends State<AccountContainer> {
     );
   }
    Personaldataontap() async{
-  await Get.to(PersonalDataMainShow());
+  await Get.off(PersonalDataMainShow());
   setState(() {
   });
 }

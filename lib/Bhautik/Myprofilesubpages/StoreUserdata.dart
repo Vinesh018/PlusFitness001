@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String? weighdat;
@@ -84,6 +86,8 @@ class _StoreusingSharedPreferencesState
                   print('Setting new value to databse weight  is $weighdat');
                   print('Setting new value of Height in database is  $heightdata');
                   setState(() {});
+
+                  Get.off(UserProfileMainRun());
                 }
               },
               child: Text('Save'),
