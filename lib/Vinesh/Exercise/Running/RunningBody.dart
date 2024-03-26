@@ -7,10 +7,6 @@ String formatDate(DateTime d) {
   return d.toString().substring(0, 19);
 }
 
-void main() {
-  runApp(MyApp());
-}
-
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
