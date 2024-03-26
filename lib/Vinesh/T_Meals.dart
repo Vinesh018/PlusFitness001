@@ -1,14 +1,16 @@
+import 'dart:convert';
+import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+var breakfastList = <String>[];
 
-var breakfastList = [];
+var lunchList = <String>[];
 
-var lunchList = [];
-
-var dinnerList = [];
-
-
+var dinnerList = <String>[];
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -77,7 +79,7 @@ List<MealsItems> _mealsItem = [
       uid: '13',
       imageurl: 'assets/meals/veggies.png'),
 ];
- var screenwidth;
+var screenwidth;
 
 class MealsItems {
   final String itemname;
@@ -94,13 +96,20 @@ class MealsItems {
 class DragandDrop extends StatefulWidget {
   @override
   State<DragandDrop> createState() => _DragandDropState();
-
-
 }
 
 class _DragandDropState extends State<DragandDrop>
     with TickerProviderStateMixin {
-    
+        
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    storeAndRetrieveList();
+  }
+
+
+
   final List<Mealtype> _mealtype = [
     Mealtype(
       mealtype: 'Breakfast',
@@ -108,26 +117,18 @@ class _DragandDropState extends State<DragandDrop>
     ),
     Mealtype(mealtype: 'Lunch', mealtypeimageurl: 'assets/images/lunch.png'),
     Mealtype(mealtype: 'Dinner', mealtypeimageurl: 'assets/images/dinner.png'),
-    
   ];
-
-  
 
   final GlobalKey _draggablekey = GlobalKey();
 
   void _itemDroppedOnMealsItem(
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
-
-      
       mealtype.mealitem.add(mealsItems);
-   
-
-
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
+          return "${object.itemname}";
         });
 
         breakfastList = breakfast.toList();
@@ -137,7 +138,7 @@ class _DragandDropState extends State<DragandDrop>
 
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries},  Item Name:: ${object.itemname}";
+          return "${object.itemname}";
         });
 
         lunchList = lunch.toList();
@@ -147,17 +148,63 @@ class _DragandDropState extends State<DragandDrop>
 
       if (mealtype.mealtype == "Dinner") {
         final dinner = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
+          return "${object.itemname}";
         });
 
         dinnerList = dinner.toList();
 
         print(" Dinner List $dinnerList");
       }
-      
-
     });
   }
+
+  Future<void> storeAndRetrieveList() async {
+    var sp = await SharedPreferences.getInstance();
+
+    // Retrieve the current list from SharedPreferences
+    List<String>? listString =
+        sp.getStringList(sharedprefkeysfinal.breakfastlist);
+
+    if (listString != null) {
+      // Decode the stored items into a List<dynamic>
+      List<dynamic> decodedList =
+          listString.map((item) => json.decode(item)).toList();
+
+      // // Add the new item to the decoded list
+      decodedList.add(
+          breakfastList.last); // Assuming breakfastList contains the new item
+
+      // Encode the updated list back to JSON strings
+      List<String> updatedList =
+          decodedList.map((item) => json.encode(item)).toList();
+      // Save the updated list back to SharedPreferences
+      await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
+
+      print('Updated list stored in SharedPreferences: $updatedList');
+    } else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrList =
+          breakfastList.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
+      print('Initial list stored in SharedPreferences: $usrList');
+    }
+
+    // Now, you can retrieve the updated list and update your UI
+    List<String>? finalList =
+        sp.getStringList(sharedprefkeysfinal.breakfastlist);
+    if (finalList != null) {
+      breakfastList =
+          finalList.map((item) => json.decode(item) as String).toList();
+      print('Getting Value from SharedPreferences is $breakfastList');
+    } else {
+      print('No value found in SharedPreferences');
+    }
+
+    setState(() {
+     
+    });
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +271,6 @@ class _DragandDropState extends State<DragandDrop>
   }
 
   Widget _builditemRow() {
-
     return Container(
       decoration: BoxDecoration(
           color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
@@ -255,7 +301,6 @@ class _DragandDropState extends State<DragandDrop>
         },
         onAcceptWithDetails: (details) {
           _itemDroppedOnMealsItem(mealsItems: details.data, mealtype: mealtype);
-
         },
       ),
     ));
@@ -307,7 +352,8 @@ class MealsCart extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: textcolor,
                       fontWeight:
-                          hasItems ? FontWeight.normal : FontWeight.bold,fontSize: 15,
+                          hasItems ? FontWeight.normal : FontWeight.bold,
+                      fontSize: 15,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(
@@ -357,10 +403,6 @@ class Mealtype {
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
     print(mealtype);
     print(totalcalaries);
-    
-
-
- 
 
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
@@ -370,11 +412,9 @@ class Mealtype {
       required this.mealtypeimageurl,
       List<MealsItems>? mealitem})
       : mealitem = mealitem ?? [];
-      
 }
 
 class DraggingListItem extends StatelessWidget {
-  
   final GlobalKey dragkey;
   final String dragableimageurl;
 
