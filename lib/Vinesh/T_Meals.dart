@@ -123,10 +123,7 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
    
 
-      // mealtype.mealitem.forEach((object) {
-      //   print("ItemName: ${object.itemname}"); // prints: barName: foo
-      //   print("Calaries: ${object.calaries}"); // prints: latitudeDbRef: bar
-      // });
+
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
@@ -157,10 +154,6 @@ class _DragandDropState extends State<DragandDrop>
 
         print(" Dinner List $dinnerList");
       }
-
-      // print("9898898989898989");
-      // print(_mealtype[1].mealitem[0]);
-      // print("9898898989898989");
       
 
     });
@@ -231,8 +224,7 @@ class _DragandDropState extends State<DragandDrop>
   }
 
   Widget _builditemRow() {
-    print("---------");
-    print(_mealtype);
+
     return Container(
       decoration: BoxDecoration(
           color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
@@ -366,14 +358,9 @@ class Mealtype {
     print(mealtype);
     print(totalcalaries);
     
-  
-    printlist() {
-      for (var items in mealitem) {
-        print(items.uid);
-      }
-    }
 
-    printlist();
+
+ 
 
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }

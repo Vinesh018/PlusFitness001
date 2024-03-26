@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus_fitness/Vinesh/Exercise/Running/running.dart';
 
 var width;
 class areaOfFocusCont extends StatefulWidget {
@@ -91,6 +93,9 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                     ],
                   ),
                   child: InkWell(
+                    onTap: () {
+                      Get.off(Running());
+                    },
                     child: Image.asset("assets/images/area3.png"),
                   ),
                 ),
