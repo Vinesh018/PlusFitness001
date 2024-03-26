@@ -1,14 +1,15 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+List<String> breakfastList = [];
 
-var breakfastList = [];
+List<String> lunchList = [];
 
-var lunchList = [];
-
-var dinnerList = [];
-
-
+List<String> dinnerList = [];
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -77,7 +78,7 @@ List<MealsItems> _mealsItem = [
       uid: '13',
       imageurl: 'assets/meals/veggies.png'),
 ];
- var screenwidth;
+var screenwidth;
 
 class MealsItems {
   final String itemname;
@@ -94,13 +95,15 @@ class MealsItems {
 class DragandDrop extends StatefulWidget {
   @override
   State<DragandDrop> createState() => _DragandDropState();
-
-
 }
 
 class _DragandDropState extends State<DragandDrop>
     with TickerProviderStateMixin {
-    
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final List<Mealtype> _mealtype = [
     Mealtype(
       mealtype: 'Breakfast',
@@ -108,63 +111,64 @@ class _DragandDropState extends State<DragandDrop>
     ),
     Mealtype(mealtype: 'Lunch', mealtypeimageurl: 'assets/images/lunch.png'),
     Mealtype(mealtype: 'Dinner', mealtypeimageurl: 'assets/images/dinner.png'),
-    
   ];
-
-  
 
   final GlobalKey _draggablekey = GlobalKey();
 
-  void _itemDroppedOnMealsItem(
-      {required MealsItems mealsItems, required Mealtype mealtype}) {
-    setState(() {
+  Future<void> _itemDroppedOnMealsItem(
+      {required MealsItems mealsItems, required Mealtype mealtype}) async {
+    mealtype.mealitem.add(mealsItems);
 
-      
-      mealtype.mealitem.add(mealsItems);
-   
+    if (mealtype.mealtype == "Breakfast") {
+      // Add only the new item to the existing breakfast list
+      final breakfast = mealtype.mealitem.map((object) {
+        return "${object.itemname}";
+      });
+      breakfastList = breakfast.toList();
 
-      // mealtype.mealitem.forEach((object) {
-      //   print("ItemName: ${object.itemname}"); // prints: barName: foo
-      //   print("Calaries: ${object.calaries}"); // prints: latitudeDbRef: bar
-      // });
+      print(" breakfastList  List is ${breakfastList.runtimeType}");
+    }
 
-      if (mealtype.mealtype == "Breakfast") {
-        final breakfast = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
-        });
+    if (mealtype.mealtype == "Lunch") {
+      final lunch = mealtype.mealitem.map((object) {
+        return "${object.itemname}";
+      });
+      lunchList = lunch.toList();
+      print(" Lunch List is ${lunchList.runtimeType}");
+    }
 
-        breakfastList = breakfast.toList();
+    if (mealtype.mealtype == "Dinner") {
+      final dinner = mealtype.mealitem.map((object) {
+        return "${object.itemname}";
+      });
+      dinnerList = dinner.toList();
+      print(" Dinner  List is ${dinnerList.runtimeType}");
+    }
 
-        print(" Breakfast List $breakfastList");
-      }
-
-      if (mealtype.mealtype == "Lunch") {
-        final lunch = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries},  Item Name:: ${object.itemname}";
-        });
-
-        lunchList = lunch.toList();
-
-        print(" Lunch List $lunchList");
-      }
-
-      if (mealtype.mealtype == "Dinner") {
-        final dinner = mealtype.mealitem.map((object) {
-          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
-        });
-
-        dinnerList = dinner.toList();
-
-        print(" Breakfast List $dinnerList");
-      }
-
-      // print("9898898989898989");
-      // print(_mealtype[1].mealitem[0]);
-      // print("9898898989898989");
-      
-
-    });
+    setState(() {});
   }
+//    List<String> breakfastlisttomap =
+//         breakfastList.map((item) => jsonEncode(item)).toList();
+
+//   loadSharedPreferences() async {
+//     var sharedPreferences = await SharedPreferences.getInstance();
+//     sharedPreferences.setStringList(
+//         "breakfastlist", breakfastlisttomap);
+//         print('dgbnjhsdbghjsd $breakfastlisttomap');
+//         setState(() {
+
+//         });
+//         print('The Run time type of string in sharedpref is ${breakfastlisttomap.runtimeType}'); //Instantiating the object of SharedPreferences class.
+//   }
+//   Future<List<String>> getListString() async {
+//    final prefs = await SharedPreferences.getInstance();
+//   var x = prefs.getStringList('breakfastlist') ?? [];
+//    print('Saved String From shared Pref is $x');
+//    setState(() {
+
+//    });
+//      return prefs.getStringList('breakfastlist') ?? [];
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +267,6 @@ class _DragandDropState extends State<DragandDrop>
         },
         onAcceptWithDetails: (details) {
           _itemDroppedOnMealsItem(mealsItems: details.data, mealtype: mealtype);
-
         },
       ),
     ));
@@ -315,7 +318,8 @@ class MealsCart extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: textcolor,
                       fontWeight:
-                          hasItems ? FontWeight.normal : FontWeight.bold,fontSize: 15,
+                          hasItems ? FontWeight.normal : FontWeight.bold,
+                      fontSize: 15,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(
@@ -365,8 +369,7 @@ class Mealtype {
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
     print(mealtype);
     print(totalcalaries);
-    
-  
+
     printlist() {
       for (var items in mealitem) {
         print(items.uid);
@@ -383,11 +386,9 @@ class Mealtype {
       required this.mealtypeimageurl,
       List<MealsItems>? mealitem})
       : mealitem = mealitem ?? [];
-      
 }
 
 class DraggingListItem extends StatelessWidget {
-  
   final GlobalKey dragkey;
   final String dragableimageurl;
 
