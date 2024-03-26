@@ -105,7 +105,7 @@ class _DragandDropState extends State<DragandDrop>
   void initState() {
     // TODO: implement initState
     super.initState();
-    storeAndRetrieveList();
+   
   }
 
 
@@ -124,7 +124,9 @@ class _DragandDropState extends State<DragandDrop>
   void _itemDroppedOnMealsItem(
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
+
       mealtype.mealitem.add(mealsItems);
+      storeAndRetrieveList();
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
@@ -172,12 +174,13 @@ class _DragandDropState extends State<DragandDrop>
 
       // // Add the new item to the decoded list
       decodedList.add(
-          breakfastList.last); // Assuming breakfastList contains the new item
+          breakfastList.last); 
+         
 
-      // Encode the updated list back to JSON strings
+      // Encode the updated list to JSON strings
       List<String> updatedList =
           decodedList.map((item) => json.encode(item)).toList();
-      // Save the updated list back to SharedPreferences
+      // Save the updated list to SharedPreferences
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
 
       print('Updated list stored in SharedPreferences: $updatedList');
