@@ -36,7 +36,7 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     weighonbody = getweight!;
     Heightonbody = getheight!;
     namedataonbody  = getname! ;
-    ageonbody  = getage! ;
+    ageonbody  = getage ;
 
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');

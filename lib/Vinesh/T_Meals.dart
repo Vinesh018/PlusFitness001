@@ -1,15 +1,16 @@
 import 'dart:convert';
-
+import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<String> breakfastList = [];
+var breakfastList = <String>[];
 
-List<String> lunchList = [];
+var lunchList = <String>[];
 
-List<String> dinnerList = [];
+var dinnerList = <String>[];
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -99,10 +100,15 @@ class DragandDrop extends StatefulWidget {
 
 class _DragandDropState extends State<DragandDrop>
     with TickerProviderStateMixin {
+        
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
+    storeAndRetrieveList();
   }
+
+
 
   final List<Mealtype> _mealtype = [
     Mealtype(
@@ -115,60 +121,90 @@ class _DragandDropState extends State<DragandDrop>
 
   final GlobalKey _draggablekey = GlobalKey();
 
-  Future<void> _itemDroppedOnMealsItem(
-      {required MealsItems mealsItems, required Mealtype mealtype}) async {
-    mealtype.mealitem.add(mealsItems);
+  void _itemDroppedOnMealsItem(
+      {required MealsItems mealsItems, required Mealtype mealtype}) {
+    setState(() {
+      mealtype.mealitem.add(mealsItems);
 
-    if (mealtype.mealtype == "Breakfast") {
-      // Add only the new item to the existing breakfast list
-      final breakfast = mealtype.mealitem.map((object) {
-        return "${object.itemname}";
-      });
-      breakfastList = breakfast.toList();
+      if (mealtype.mealtype == "Breakfast") {
+        final breakfast = mealtype.mealitem.map((object) {
+          return "${object.itemname}";
+        });
+
+        breakfastList = breakfast.toList();
 
       print(" breakfastList  List is ${breakfastList.runtimeType}");
     }
 
-    if (mealtype.mealtype == "Lunch") {
-      final lunch = mealtype.mealitem.map((object) {
-        return "${object.itemname}";
-      });
-      lunchList = lunch.toList();
-      print(" Lunch List is ${lunchList.runtimeType}");
-    }
+      if (mealtype.mealtype == "Lunch") {
+        final lunch = mealtype.mealitem.map((object) {
+          return "${object.itemname}";
+        });
 
-    if (mealtype.mealtype == "Dinner") {
-      final dinner = mealtype.mealitem.map((object) {
-        return "${object.itemname}";
-      });
-      dinnerList = dinner.toList();
-      print(" Dinner  List is ${dinnerList.runtimeType}");
-    }
+        lunchList = lunch.toList();
 
-    setState(() {});
+        print(" Lunch List $lunchList");
+      }
+
+      if (mealtype.mealtype == "Dinner") {
+        final dinner = mealtype.mealitem.map((object) {
+          return "${object.itemname}";
+        });
+
+        dinnerList = dinner.toList();
+
+        print(" Dinner List $dinnerList");
+      }
+    });
   }
-//    List<String> breakfastlisttomap =
-//         breakfastList.map((item) => jsonEncode(item)).toList();
 
-//   loadSharedPreferences() async {
-//     var sharedPreferences = await SharedPreferences.getInstance();
-//     sharedPreferences.setStringList(
-//         "breakfastlist", breakfastlisttomap);
-//         print('dgbnjhsdbghjsd $breakfastlisttomap');
-//         setState(() {
+  Future<void> storeAndRetrieveList() async {
+    var sp = await SharedPreferences.getInstance();
 
-//         });
-//         print('The Run time type of string in sharedpref is ${breakfastlisttomap.runtimeType}'); //Instantiating the object of SharedPreferences class.
-//   }
-//   Future<List<String>> getListString() async {
-//    final prefs = await SharedPreferences.getInstance();
-//   var x = prefs.getStringList('breakfastlist') ?? [];
-//    print('Saved String From shared Pref is $x');
-//    setState(() {
+    // Retrieve the current list from SharedPreferences
+    List<String>? listString =
+        sp.getStringList(sharedprefkeysfinal.breakfastlist);
 
-//    });
-//      return prefs.getStringList('breakfastlist') ?? [];
-//  }
+    if (listString != null) {
+      // Decode the stored items into a List<dynamic>
+      List<dynamic> decodedList =
+          listString.map((item) => json.decode(item)).toList();
+
+      // // Add the new item to the decoded list
+      decodedList.add(
+          breakfastList.last); // Assuming breakfastList contains the new item
+
+      // Encode the updated list back to JSON strings
+      List<String> updatedList =
+          decodedList.map((item) => json.encode(item)).toList();
+      // Save the updated list back to SharedPreferences
+      await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
+
+      print('Updated list stored in SharedPreferences: $updatedList');
+    } else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrList =
+          breakfastList.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
+      print('Initial list stored in SharedPreferences: $usrList');
+    }
+
+    // Now, you can retrieve the updated list and update your UI
+    List<String>? finalList =
+        sp.getStringList(sharedprefkeysfinal.breakfastlist);
+    if (finalList != null) {
+      breakfastList =
+          finalList.map((item) => json.decode(item) as String).toList();
+      print('Getting Value from SharedPreferences is $breakfastList');
+    } else {
+      print('No value found in SharedPreferences');
+    }
+
+    setState(() {
+     
+    });
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -235,8 +271,6 @@ class _DragandDropState extends State<DragandDrop>
   }
 
   Widget _builditemRow() {
-    print("---------");
-    print(_mealtype);
     return Container(
       decoration: BoxDecoration(
           color: Colors.pink.shade100, borderRadius: BorderRadius.circular(15)),
@@ -369,14 +403,6 @@ class Mealtype {
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
     print(mealtype);
     print(totalcalaries);
-
-    printlist() {
-      for (var items in mealitem) {
-        print(items.uid);
-      }
-    }
-
-    printlist();
 
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class mealsToday extends StatefulWidget {
   @override
@@ -6,6 +10,30 @@ class mealsToday extends StatefulWidget {
 }
 
 class mealsTodayState extends State<mealsToday> {
+  @override
+  void initState() {
+    super.initState();
+    storeAndRetrieveList();
+  }
+    Future<void> storeAndRetrieveList() async {
+    var sp = await SharedPreferences.getInstance();
+
+    // Retrieve the current list from SharedPreferences
+    List<String>? listString =
+        sp.getStringList(sharedprefkeysfinal.breakfastlist);
+
+    if (listString != null) {
+      // Decode the stored items into a List<dynamic>
+      List<dynamic> decodedList =
+          listString.map((item) => json.decode(item)).toList();
+          print('The List is Decode list $decodedList');
+          print('The List is Decode list ${decodedList.toString()}');
+    } 
+    setState(() {
+      // Assuming setState is defined in the same class
+      // and used to update UI after retrieving data.
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +50,7 @@ class mealsTodayState extends State<mealsToday> {
                 children: <Widget>[
                   Container(
                     height: 190,
-                    width: 125,
+                    width: 130,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -52,7 +80,7 @@ class mealsTodayState extends State<mealsToday> {
                                   fontSize: 17),
                             ),
                             Text(
-                              "Bread, Peanut Butter, Apple,Banana",
+                              'nice to meet you',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'FontMain',
@@ -103,7 +131,7 @@ class mealsTodayState extends State<mealsToday> {
                   children: <Widget>[
                     Container(
                       height: 190,
-                      width: 125,
+                      width: 130,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
@@ -185,7 +213,7 @@ class mealsTodayState extends State<mealsToday> {
                   children: <Widget>[
                     Container(
                       height: 190,
-                      width: 125,
+                      width: 130,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
@@ -269,7 +297,7 @@ class mealsTodayState extends State<mealsToday> {
                   children: <Widget>[
                     Container(
                       height: 190,
-                      width: 125,
+                       width: 130,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
