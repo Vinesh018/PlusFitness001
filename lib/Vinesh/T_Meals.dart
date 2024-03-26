@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 
+
+var breakfastList = [];
+
+var lunchList = [];
+
+var dinnerList = [];
+
+
+
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -85,6 +94,8 @@ class MealsItems {
 class DragandDrop extends StatefulWidget {
   @override
   State<DragandDrop> createState() => _DragandDropState();
+
+
 }
 
 class _DragandDropState extends State<DragandDrop>
@@ -97,6 +108,7 @@ class _DragandDropState extends State<DragandDrop>
     ),
     Mealtype(mealtype: 'Lunch', mealtypeimageurl: 'assets/images/lunch.png'),
     Mealtype(mealtype: 'Dinner', mealtypeimageurl: 'assets/images/dinner.png'),
+    
   ];
 
   
@@ -106,9 +118,51 @@ class _DragandDropState extends State<DragandDrop>
   void _itemDroppedOnMealsItem(
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
-      print(" meal type : $_mealtype");
 
+      
       mealtype.mealitem.add(mealsItems);
+   
+
+      // mealtype.mealitem.forEach((object) {
+      //   print("ItemName: ${object.itemname}"); // prints: barName: foo
+      //   print("Calaries: ${object.calaries}"); // prints: latitudeDbRef: bar
+      // });
+
+      if (mealtype.mealtype == "Breakfast") {
+        final breakfast = mealtype.mealitem.map((object) {
+          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
+        });
+
+        breakfastList = breakfast.toList();
+
+        print(" Breakfast List $breakfastList");
+      }
+
+      if (mealtype.mealtype == "Lunch") {
+        final lunch = mealtype.mealitem.map((object) {
+          return "Calaries: ${object.calaries},  Item Name:: ${object.itemname}";
+        });
+
+        lunchList = lunch.toList();
+
+        print(" Lunch List $lunchList");
+      }
+
+      if (mealtype.mealtype == "Dinner") {
+        final dinner = mealtype.mealitem.map((object) {
+          return "Calaries: ${object.calaries}, Item Name: ${object.itemname}";
+        });
+
+        dinnerList = dinner.toList();
+
+        print(" Breakfast List $dinnerList");
+      }
+
+      // print("9898898989898989");
+      // print(_mealtype[1].mealitem[0]);
+      // print("9898898989898989");
+      
+
     });
   }
 
@@ -193,7 +247,6 @@ class _DragandDropState extends State<DragandDrop>
         ),
       ),
     );
-
   }
 
   Widget _buildIteamWithDropZone(Mealtype mealtype) {
@@ -310,9 +363,17 @@ class Mealtype {
   String get formattedtotalcalaries {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
-    print(totalcalaries);
-    print(mealitem.length);
     print(mealtype);
+    print(totalcalaries);
+    
+  
+    printlist() {
+      for (var items in mealitem) {
+        print(items.uid);
+      }
+    }
+
+    printlist();
 
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
