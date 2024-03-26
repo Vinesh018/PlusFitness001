@@ -6,4 +6,5 @@ class sharedprefkeysfinal {
   static String waterdrinkinml = 'finalDrikedwatertoredinsharedpref';
   static String waterpercentageonbottle = 'Percentageonbottonstoreinsharedpref';
   static String lastwaterdrinktime = 'lastwaterdrinktime';
+  static String breakfastlist = 'Brekfast';
 }

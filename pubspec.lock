@@ -161,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  dynamic_shared_preferences:
+    dependency: "direct main"
+    description:
+      name: dynamic_shared_preferences
+      sha256: e5ef80d17c253c26ff1328fe753aa92d443c7de128c8474c72fff1c5d32c80d5
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   email_validator:
     dependency: "direct main"
     description:
