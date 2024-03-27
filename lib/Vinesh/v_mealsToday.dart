@@ -8,34 +8,59 @@ class mealsToday extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => mealsTodayState();
 }
-var decodedList;
+
+var decodedListbreakfast;
+var decodelistlunch;
+var decodelistdinner;
+
 class mealsTodayState extends State<mealsToday> {
   @override
   void initState() {
     super.initState();
     storeAndRetrieveList();
   }
-    Future<void> storeAndRetrieveList() async {
-    var sp = await SharedPreferences.getInstance();
 
-    // Retrieve the current list from SharedPreferences
+  Future<void> storeAndRetrieveList() async {
+    var sp = await SharedPreferences.getInstance();
     List<String>? listString =
         sp.getStringList(sharedprefkeysfinal.breakfastlist);
+    List<String>? listStringlunch =
+        sp.getStringList(sharedprefkeysfinal.lunchlist);
+    List<String>? listStringdinner =
+        sp.getStringList(sharedprefkeysfinal.dinnerlist);
 
     if (listString != null) {
       // Decode the stored items into a List<dynamic>
-      decodedList =
+      decodedListbreakfast =
           listString.map((item) => json.decode(item)).toList().join(",");
 
-         
-          print('The List is Decode list $decodedList');
-          print('The List is Decode list ${decodedList.toString()}');
-    } 
+      print('The List is Decode list $decodedListbreakfast');
+      print('The List is Decode list ${decodedListbreakfast.toString()}');
+    }
+    if (listStringlunch != null) {
+      // Decode the stored items into a List<dynamic>
+      decodelistlunch =
+          listStringlunch.map((item) => json.decode(item)).toList().join(",");
+
+      print('The List is Decode list for lunch $decodelistlunch');
+      print('The List is Decode list  for lunch ${decodelistlunch.toString()}');
+    }
+    if (listStringdinner != null) {
+      // Decode the stored items into a List<dynamic>
+      decodelistdinner =
+          listStringdinner.map((item) => json.decode(item)).toList().join(",");
+
+      print('The List is Decode list for dinner $decodelistdinner');
+      print(
+          'The List is Decode list  for dinner ${decodelistdinner.toString()}');
+    }
+
     setState(() {
       // Assuming setState is defined in the same class
       // and used to update UI after retrieving data.
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +70,6 @@ class mealsTodayState extends State<mealsToday> {
         child: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Row(
-                 
             children: [
               Stack(
                 clipBehavior: Clip.none,
@@ -192,14 +216,17 @@ class mealsTodayState extends State<mealsToday> {
                                     fontFamily: 'FontMainBold',
                                     fontSize: 17),
                               ),
-                              Text(
-                                "Salad, Mixed Veggies, Avocado",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 4,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FontMain',
-                                    fontSize: 12),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: Text(
+                                  decodelistlunch.toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 4,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'FontMain',
+                                      fontSize: 12),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 5),
@@ -280,12 +307,15 @@ class mealsTodayState extends State<mealsToday> {
                               ),
                               SizedBox(
                                 width: 80,
-                                child: Text(
-                                  "Recommended 800 Kcal",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'FontMain',
-                                      fontSize: 11),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Text(
+                                    "Recommended 800 Kcal",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'FontMain',
+                                        fontSize: 11),
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -333,7 +363,7 @@ class mealsTodayState extends State<mealsToday> {
                   children: <Widget>[
                     Container(
                       height: 190,
-                       width: 130,
+                      width: 130,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
@@ -364,10 +394,10 @@ class mealsTodayState extends State<mealsToday> {
                                     fontFamily: 'FontMainBold',
                                     fontSize: 17),
                               ),
-                              SizedBox(
-                                width: 80,
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
                                 child: Text(
-                                  "Recommended 703 Kcal",
+                                  decodelistdinner.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
@@ -376,55 +406,21 @@ class mealsTodayState extends State<mealsToday> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 5),
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.white,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.deepPurple,
-                                    ),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            scrollable: true,
-                                            title: Text('Add Product'),
-                                            content: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Form(
-                                                child: Container(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [Meal_Items()],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text("Cancel"),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () {},
-                                                child: Text("Add Product"),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: '525 ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'FontMain',
+                                        fontSize: 25),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Kcal',
+                                          style: TextStyle(fontSize: 13)),
+                                    ],
                                   ),
                                 ),
-                              ),
-
-                              //////
+                              )
                             ],
                           ),
                         ),
@@ -445,7 +441,6 @@ class mealsTodayState extends State<mealsToday> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -515,7 +510,8 @@ class cont_mealsState extends State<cont_meals> {
                     ],
                   ),
                 ),
-              )
+              ),
+
               //////
             ],
           ),
