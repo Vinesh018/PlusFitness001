@@ -11,9 +11,9 @@ class mealsToday extends StatefulWidget {
   State<StatefulWidget> createState() => mealsTodayState();
 }
 
-var decodedListbreakfast = "Eat your Breakfast";
-var decodelistlunch;
-var decodelistdinner;
+var decodedListbreakfast = "Add your Breakfast";
+var decodelistlunch = "Add your Lunch";
+var decodelistdinner = "Add your Dinner";
 
 class mealsTodayState extends State<mealsToday> {
   @override
