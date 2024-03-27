@@ -84,8 +84,12 @@ class mealsTodayState extends State<mealsToday> {
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
                                 decodedList.toString(),
                                 style: TextStyle(
+                                    
+                                    
                                     color: Colors.white,
                                     fontFamily: 'FontMain',
                                     fontSize: 12),
@@ -167,6 +171,8 @@ class mealsTodayState extends State<mealsToday> {
                               ),
                               Text(
                                 "Salad, Mixed Veggies, Avocado",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'FontMain',
@@ -241,6 +247,8 @@ class mealsTodayState extends State<mealsToday> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
                                 "Snack",
                                 style: TextStyle(
                                     color: Colors.white,
@@ -326,6 +334,8 @@ class mealsTodayState extends State<mealsToday> {
                             children: [
                               Text(
                                 "Dinner",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'FontMainBold',

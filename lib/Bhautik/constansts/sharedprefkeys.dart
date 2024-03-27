@@ -7,4 +7,6 @@ class sharedprefkeysfinal {
   static String waterpercentageonbottle = 'Percentageonbottonstoreinsharedpref';
   static String lastwaterdrinktime = 'lastwaterdrinktime';
   static String breakfastlist = 'Brekfast';
+  static String launchlist = 'lunch';
+  static String dinnerlist = 'dinner';
 }

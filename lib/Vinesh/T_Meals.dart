@@ -100,15 +100,11 @@ class DragandDrop extends StatefulWidget {
 
 class _DragandDropState extends State<DragandDrop>
     with TickerProviderStateMixin {
-        
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   
   }
-
-
 
   final List<Mealtype> _mealtype = [
     Mealtype(
@@ -124,7 +120,6 @@ class _DragandDropState extends State<DragandDrop>
   void _itemDroppedOnMealsItem(
       {required MealsItems mealsItems, required Mealtype mealtype}) {
     setState(() {
-
       mealtype.mealitem.add(mealsItems);
       storeAndRetrieveList();
 
@@ -135,8 +130,8 @@ class _DragandDropState extends State<DragandDrop>
 
         breakfastList = breakfast.toList();
 
-      print(" breakfastList  List is ${breakfastList.runtimeType}");
-    }
+        print(" breakfastList  List is ${breakfastList.runtimeType}");
+      }
 
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
@@ -164,32 +159,46 @@ class _DragandDropState extends State<DragandDrop>
     var sp = await SharedPreferences.getInstance();
 
     // Retrieve the current list from SharedPreferences
-    List<String>? listString =
+    List<String>? breakfastlistfromsharedpref =
         sp.getStringList(sharedprefkeysfinal.breakfastlist);
 
-    if (listString != null) {
+    List<String>? launchfromsharedpref =
+        sp.getStringList(sharedprefkeysfinal.launchlist);
+
+    if (breakfastlistfromsharedpref != null) {
       // Decode the stored items into a List<dynamic>
       List<dynamic> decodedList =
-          listString.map((item) => json.decode(item)).toList();
-
-      // // Add the new item to the decoded list
-      decodedList.add(
-          breakfastList.last); 
-         
-
-      // Encode the updated list to JSON strings
+          breakfastlistfromsharedpref.map((item) => json.decode(item)).toList();
+      decodedList.add(breakfastList.last);
       List<String> updatedList =
           decodedList.map((item) => json.encode(item)).toList();
-      // Save the updated list to SharedPreferences
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
-
-      print('Updated list stored in SharedPreferences: $updatedList');
-    } else {
+      print('Updated list stored in SharedPreferences of breakfast is: $updatedList');
+    }
+    
+     else {
       // If no list exists yet, create a new one with the current breakfastList
       List<String> usrList =
           breakfastList.map((item) => jsonEncode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
       print('Initial list stored in SharedPreferences: $usrList');
+    }
+    
+    if (launchfromsharedpref != null) {
+      // Decode the stored items into a List<dynamic>
+      List<dynamic> decodedList =
+         launchfromsharedpref.map((item) => json.decode(item)).toList();
+      decodedList.add(lunchList.last);
+      List<String> updatedListlunch =
+          decodedList.map((item) => json.encode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.launchlist, updatedListlunch);
+      print('Updated list stored in SharedPreferences: $updatedListlunch');
+    }   else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrListlunch =
+          breakfastList.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.launchlist,  usrListlunch);
+      print('Initial list stored in SharedPreferences: $usrListlunch');
     }
 
     // Now, you can retrieve the updated list and update your UI
@@ -202,12 +211,10 @@ class _DragandDropState extends State<DragandDrop>
     } else {
       print('No value found in SharedPreferences');
     }
+    
 
-    setState(() {
-     
-    });
+    setState(() {});
   }
-  
 
   @override
   Widget build(BuildContext context) {
