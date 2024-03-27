@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String weighonbody = '40';
 String  Heightonbody = '100';
 double bmi = 0;
-var BmiIndicator;
+var BmiIndicator = '--';
 
 
 
