@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,9 +9,15 @@ class mealsToday extends StatefulWidget {
   State<StatefulWidget> createState() => mealsTodayState();
 }
 
-var decodedListbreakfast = "Add your Breakfast";
-var decodelistlunch = "Add your Lunch";
-var decodelistdinner = "Add your Dinner";
+var decodedListbreakfast = 'Add Your Breakfast';
+var decodelistlunch = 'Add Your Lunch'; 
+var decodelistdinner = 'Add Your Dinner';
+var breakfastcallist;
+var lunchcallist;
+var dinnercallist;
+double sumofBrekfastcal = 0;
+double sumoflunchcal = 0;
+double sumofdinnercal = 0;
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -34,7 +38,7 @@ class mealsTodayState extends State<mealsToday> {
         sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
     List<String>? listStringlunchcal =
         sp.getStringList(sharedprefkeysfinal.lunchlistcal);
-      List<String>? listStringdinnercal =
+    List<String>? listStringdinnercal =
         sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
     if (listString != null) {
       // Decode the stored items into a List<dynamic>
@@ -99,7 +103,7 @@ class mealsTodayState extends State<mealsToday> {
         return double.parse(e);
       }).toList();
 
-      double sum =lunchcallistdouble.fold(
+      double sum = lunchcallistdouble.fold(
           0, (previousValue, element) => previousValue + element);
       sumoflunchcal = sum;
       sp.setDouble(sharedprefkeysfinal.lunchcalsum, sumoflunchcal);
@@ -125,14 +129,14 @@ class mealsTodayState extends State<mealsToday> {
       // print(
       //     'The List is Decode list  for dinner ${decodelistdinner.toString()}');
     }
-     if (listStringdinnercal != null) {
+    if (listStringdinnercal != null) {
       // Decode the stored items into a List<dynamic>
       dinnercallist = listStringdinnercal
           .map((item) => json.decode(item))
           .toList()
           .join(",");
       List<double> dinnercallistdouble;
-     dinnercallistdouble = dinnercallist
+      dinnercallistdouble = dinnercallist
           .replaceAll('[', '')
           .replaceAll(']', '')
           .split(',')
@@ -149,13 +153,11 @@ class mealsTodayState extends State<mealsToday> {
       );
       // sumofBrekfastcal = tempsum;
       print('The List lunch calaries is  $dinnercallist');
-      print(
-          'The List is lunch calaries is  ${dinnercallist.runtimeType}');
+      print('The List is lunch calaries is  ${dinnercallist.runtimeType}');
       print('The List lunch calaries double is  $dinnercallistdouble');
       print(
           'The List is lunch calaries double  is  ${dinnercallistdouble.runtimeType}');
-      print(
-          'The List is lunch calaries double  is  sum is ${sumofdinnercal}');
+      print('The List is lunch calaries double  is  sum is ${sumofdinnercal}');
     }
 
     setState(() {
@@ -188,7 +190,6 @@ class mealsTodayState extends State<mealsToday> {
                             title: Text('Breakfast'),
                             content: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(decodedListbreakfast.toString())),
                                 child: Text(decodedListbreakfast.toString())),
                             actions: [
                               ElevatedButton(
@@ -238,7 +239,6 @@ class mealsTodayState extends State<mealsToday> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                  decodedListbreakfast.toString(),
                                   decodedListbreakfast.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
@@ -290,93 +290,68 @@ class mealsTodayState extends State<mealsToday> {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.blueAccent.shade200,
-                              scrollable: true,
-                              title: Text('Lunch'),
-                              content: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(decodelistlunch.toString())),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("OK"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                        height: 190,
-                        width: 130,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.blueAccent.shade100,
-                                Colors.blueAccent.shade700
-                              ],
-                            ),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(70),
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 40, left: 15),
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Lunch",
+                    Container(
+                      height: 190,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.blueAccent.shade100,
+                              Colors.blueAccent.shade700
+                            ],
+                          ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(70),
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 15),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Lunch",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'FontMainBold',
+                                    fontSize: 17),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: Text(
+                                  decodelistlunch.toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 4,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'FontMainBold',
-                                      fontSize: 17),
+                                      fontFamily: 'FontMain',
+                                      fontSize: 12),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Text(
-                                    decodelistlunch.toString(),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 4,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: sumoflunchcal.toStringAsFixed(0),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
-                                        fontSize: 12),
+                                        fontSize: 25),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Kcal',
+                                          style: TextStyle(fontSize: 13)),
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 5),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: '602 ',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'FontMain',
-                                          fontSize: 25),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'Kcal',
-                                            style: TextStyle(fontSize: 13)),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                                //////
-                              ],
-                            ),
+                              )
+                              //////
+                            ],
                           ),
                         ),
                       ),
@@ -491,93 +466,67 @@ class mealsTodayState extends State<mealsToday> {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.deepPurple.shade200,
-                              scrollable: true,
-                              title: Text('Dinner'),
-                              content: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(decodelistdinner.toString())),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("OK"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                        height: 190,
-                        width: 130,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.deepPurple.shade100,
-                                Colors.deepPurple.shade700
-                              ],
-                            ),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(70),
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 40, left: 15),
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Dinner",
-                             
+                    Container(
+                      height: 190,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.deepPurple.shade100,
+                              Colors.deepPurple.shade700
+                            ],
+                          ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(70),
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 15),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Dinner",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'FontMainBold',
+                                    fontSize: 17),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: Text(
+                                  decodelistdinner.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'FontMainBold',
-                                      fontSize: 17),
+                                      fontFamily: 'FontMain',
+                                      fontSize: 11),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Text(
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 4,
-                                    decodelistdinner.toString(),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: sumofdinnercal.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
-                                        fontSize: 11),
+                                        fontSize: 25),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: ' Kcal',
+                                          style: TextStyle(fontSize: 13)),
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 5),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: '525 ',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'FontMain',
-                                          fontSize: 25),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'Kcal',
-                                            style: TextStyle(fontSize: 13)),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ),
