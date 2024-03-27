@@ -438,8 +438,7 @@ class mealsTodayState extends State<mealsToday> {
                               children: [
                                 Text(
                                   "Dinner",
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
+                             
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMainBold',
@@ -448,6 +447,8 @@ class mealsTodayState extends State<mealsToday> {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
                                     decodelistdinner.toString(),
                                     style: TextStyle(
                                         color: Colors.white,

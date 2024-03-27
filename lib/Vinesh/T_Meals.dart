@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:plus_fitness/Vinesh/deletemeals.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -293,7 +295,15 @@ class _DragandDropState extends State<DragandDrop>
             child: Column(
           children: [
             Expanded(child: _buildmenuList()),
-            _builditemRow(),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const deletemeals()),
+                  );
+                },
+                child: _builditemRow()),
           ],
         ))
       ],
