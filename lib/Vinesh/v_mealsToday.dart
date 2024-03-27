@@ -8,7 +8,7 @@ class mealsToday extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => mealsTodayState();
 }
-
+var decodedList;
 class mealsTodayState extends State<mealsToday> {
   @override
   void initState() {
@@ -24,8 +24,10 @@ class mealsTodayState extends State<mealsToday> {
 
     if (listString != null) {
       // Decode the stored items into a List<dynamic>
-      List<dynamic> decodedList =
-          listString.map((item) => json.decode(item)).toList();
+      decodedList =
+          listString.map((item) => json.decode(item)).toList().join(",");
+
+         
           print('The List is Decode list $decodedList');
           print('The List is Decode list ${decodedList.toString()}');
     } 
@@ -79,12 +81,15 @@ class mealsTodayState extends State<mealsToday> {
                                   fontFamily: 'FontMainBold',
                                   fontSize: 17),
                             ),
-                            Text(
-                              'nice to meet you',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'FontMain',
-                                  fontSize: 12),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                decodedList.toString(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'FontMain',
+                                    fontSize: 12),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 5),
