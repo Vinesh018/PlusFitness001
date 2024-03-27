@@ -12,6 +12,12 @@ class mealsToday extends StatefulWidget {
 var decodedListbreakfast;
 var decodelistlunch;
 var decodelistdinner;
+var breakfastcallist;
+var lunchcallist;
+var dinnercallist;
+double sumofBrekfastcal = 0;
+double sumoflunchcal = 0;
+double sumofdinnercal = 0;
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -28,31 +34,132 @@ class mealsTodayState extends State<mealsToday> {
         sp.getStringList(sharedprefkeysfinal.lunchlist);
     List<String>? listStringdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
-
+    List<String>? listStringbreakfastcal =
+        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
+    List<String>? listStringlunchcal =
+        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
+      List<String>? listStringdinnercal =
+        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
     if (listString != null) {
       // Decode the stored items into a List<dynamic>
       decodedListbreakfast =
           listString.map((item) => json.decode(item)).toList().join(",");
 
-      print('The List is Decode list $decodedListbreakfast');
-      print('The List is Decode list ${decodedListbreakfast.toString()}');
+      // print('The List is Decode list $decodedListbreakfast');
+      // print('The List is Decode list ${decodedListbreakfast.toString()}');
+    }
+    if (listStringbreakfastcal != null) {
+      // Decode the stored items into a List<dynamic>
+      breakfastcallist = listStringbreakfastcal
+          .map((item) => json.decode(item))
+          .toList()
+          .join(",");
+      List<double> breakfastcallistdouble;
+      breakfastcallistdouble = breakfastcallist
+          .replaceAll('[', '')
+          .replaceAll(']', '')
+          .split(',')
+          .map<double>((e) {
+        return double.parse(e);
+      }).toList();
+
+      double sum = breakfastcallistdouble.fold(
+          0, (previousValue, element) => previousValue + element);
+      sumofBrekfastcal = sum;
+      sp.setDouble(sharedprefkeysfinal.brekfastcalsum, sumofBrekfastcal);
+      var tempsum = sp.getDouble(
+        sharedprefkeysfinal.brekfastcalsum,
+      );
+      // sumofBrekfastcal = tempsum;
+      // print('The List brekfast calaries is  $breakfastcallist');
+      // print(
+      //     'The List is brekfast calaries is  ${breakfastcallist.runtimeType}');
+      // print('The List brekfast calaries double is  $breakfastcallistdouble');
+      // print(
+      //     'The List is brekfast calaries double  is  ${breakfastcallistdouble.runtimeType}');
+      // print(
+      //     'The List is brekfast calaries double  is  sum is ${sumofBrekfastcal}');
     }
     if (listStringlunch != null) {
       // Decode the stored items into a List<dynamic>
       decodelistlunch =
           listStringlunch.map((item) => json.decode(item)).toList().join(",");
 
-      print('The List is Decode list for lunch $decodelistlunch');
-      print('The List is Decode list  for lunch ${decodelistlunch.toString()}');
+      // print('The List is Decode list for lunch $decodelistlunch');
+      // print('The List is Decode list  for lunch ${decodelistlunch.toString()}');
+    }
+    if (listStringlunchcal != null) {
+      // Decode the stored items into a List<dynamic>
+      lunchcallist = listStringlunchcal
+          .map((item) => json.decode(item))
+          .toList()
+          .join(",");
+      List<double> lunchcallistdouble;
+      lunchcallistdouble = lunchcallist
+          .replaceAll('[', '')
+          .replaceAll(']', '')
+          .split(',')
+          .map<double>((e) {
+        return double.parse(e);
+      }).toList();
+
+      double sum =lunchcallistdouble.fold(
+          0, (previousValue, element) => previousValue + element);
+      sumoflunchcal = sum;
+      sp.setDouble(sharedprefkeysfinal.lunchcalsum, sumoflunchcal);
+      var tempsum = sp.getDouble(
+        sharedprefkeysfinal.lunchcalsum,
+      );
+      // sumofBrekfastcal = tempsum;
+      // print('The List lunch calaries is  $lunchcallist');
+      // print(
+      //     'The List is lunch calaries is  ${lunchcallist.runtimeType}');
+      // print('The List lunch calaries double is  $lunchcallistdouble');
+      // print(
+      //     'The List is lunch calaries double  is  ${lunchcallistdouble.runtimeType}');
+      // print(
+      //     'The List is lunch calaries double  is  sum is ${sumoflunchcal}');
     }
     if (listStringdinner != null) {
       // Decode the stored items into a List<dynamic>
       decodelistdinner =
           listStringdinner.map((item) => json.decode(item)).toList().join(",");
 
-      print('The List is Decode list for dinner $decodelistdinner');
+      // print('The List is Decode list for dinner $decodelistdinner');
+      // print(
+      //     'The List is Decode list  for dinner ${decodelistdinner.toString()}');
+    }
+     if (listStringdinnercal != null) {
+      // Decode the stored items into a List<dynamic>
+      dinnercallist = listStringdinnercal
+          .map((item) => json.decode(item))
+          .toList()
+          .join(",");
+      List<double> dinnercallistdouble;
+     dinnercallistdouble = dinnercallist
+          .replaceAll('[', '')
+          .replaceAll(']', '')
+          .split(',')
+          .map<double>((e) {
+        return double.parse(e);
+      }).toList();
+
+      double sum = dinnercallistdouble.fold(
+          0, (previousValue, element) => previousValue + element);
+      sumofdinnercal = sum;
+      sp.setDouble(sharedprefkeysfinal.dinnercalsum, sumofdinnercal);
+      var tempsum = sp.getDouble(
+        sharedprefkeysfinal.dinnercalsum,
+      );
+      // sumofBrekfastcal = tempsum;
+      print('The List lunch calaries is  $dinnercallist');
       print(
-          'The List is Decode list  for dinner ${decodelistdinner.toString()}');
+          'The List is lunch calaries is  ${dinnercallist.runtimeType}');
+      print('The List lunch calaries double is  $dinnercallistdouble');
+      print(
+          'The List is lunch calaries double  is  ${dinnercallistdouble.runtimeType}');
+      print(
+          'The List is lunch calaries double  is  sum is ${sumofdinnercal}');
     }
 
     setState(() {
@@ -85,7 +192,7 @@ class mealsTodayState extends State<mealsToday> {
                             title: Text('Breakfast'),
                             content: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(decodedList.toString())),
+                                child: Text(decodedListbreakfast.toString())),
                             actions: [
                               ElevatedButton(
                                 onPressed: () {
@@ -134,7 +241,7 @@ class mealsTodayState extends State<mealsToday> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                  decodedList.toString(),
+                                  decodedListbreakfast.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
@@ -145,14 +252,14 @@ class mealsTodayState extends State<mealsToday> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: '525 ',
+                                    text: sumofBrekfastcal.toStringAsFixed(0),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
                                         fontSize: 25),
                                     children: <TextSpan>[
                                       TextSpan(
-                                          text: 'Kcal',
+                                          text: ' Kcal',
                                           style: TextStyle(fontSize: 13)),
                                     ],
                                   ),
@@ -232,7 +339,7 @@ class mealsTodayState extends State<mealsToday> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: '602 ',
+                                    text: sumoflunchcal.toStringAsFixed(0),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
@@ -408,14 +515,14 @@ class mealsTodayState extends State<mealsToday> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: '525 ',
+                                    text: sumofdinnercal.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
                                         fontSize: 25),
                                     children: <TextSpan>[
                                       TextSpan(
-                                          text: 'Kcal',
+                                          text: ' Kcal',
                                           style: TextStyle(fontSize: 13)),
                                     ],
                                   ),

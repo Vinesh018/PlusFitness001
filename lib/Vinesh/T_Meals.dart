@@ -7,10 +7,13 @@ import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var breakfastList = <String>[];
+var breakfastListcal = <String>[];
 
 var lunchList = <String>[];
+var lunchListcal = <String>[];
 
 var dinnerList = <String>[];
+var dinnerlistcal = <String>[];
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -122,37 +125,52 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {
       mealtype.mealitem.add(mealsItems);
       storeAndRetrieveList();
+      storeAndRetrievebreakfastListofcal();
       storeAndRetrieveListlunch();
+      storeAndRetrieveListlunchcal();
       storeAndRetrieveListdinner();
+      storeAndRetrieveListdinnercal();
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
           return "${object.itemname}";
         });
+        final breakfastcal = mealtype.mealitem.map((object) {
+          return "${object.calaries}";
+        });
 
         breakfastList = breakfast.toList();
-
-        print(" breakfastList  List is ${breakfastList.runtimeType}");
+        breakfastListcal = breakfastcal.toList();
+        // print(" breakfastList  List is ${breakfastcal.runtimeType}");
+        // print(" breakfast calarie is List is ${breakfastcal}");
+        // print(" breakfast calarie is List is ${breakfastList}");
       }
 
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
           return "${object.itemname}";
         });
-
+        final lunchcal = mealtype.mealitem.map((object) {
+          return "${object.calaries}";
+        });
         lunchList = lunch.toList();
+        lunchListcal = lunchcal.toList();
 
-        print(" Lunch List $lunchList");
+        // print("Lunch List $lunchList");
       }
 
       if (mealtype.mealtype == "Dinner") {
         final dinner = mealtype.mealitem.map((object) {
           return "${object.itemname}";
         });
+         final dinnercal = mealtype.mealitem.map((object) {
+          return "${object.calaries}";
+        });
 
         dinnerList = dinner.toList();
+        dinnerlistcal = dinnercal.toList();
 
-        print(" Dinner List $dinnerList");
+        // print(" Dinner List $dinnerList");
       }
     });
   }
@@ -172,14 +190,14 @@ class _DragandDropState extends State<DragandDrop>
       List<String> updatedList =
           decodedList.map((item) => json.encode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
-      print(
-          'Updated list stored in SharedPreferences of breakfast is: $updatedList');
+      // print(
+      // 'Updated list stored in SharedPreferences of breakfast is: $updatedList');
     } else {
       // If no list exists yet, create a new one with the current breakfastList
       List<String> usrList =
           breakfastList.map((item) => jsonEncode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
-      print('Initial list stored in SharedPreferences: $usrList');
+      // print('Initial list stored in SharedPreferences: $usrList');
     }
 
     // Now, you can retrieve the updated list and update your UI
@@ -188,10 +206,48 @@ class _DragandDropState extends State<DragandDrop>
     if (finalList != null) {
       breakfastList =
           finalList.map((item) => json.decode(item) as String).toList();
+      // print('Getting Value from SharedPreferences is $breakfastList');
+    } else {
+      print('No value found in SharedPreferences');
+    }
+    setState(() {
+      
+    });
+  }
+
+  Future<void> storeAndRetrievebreakfastListofcal() async {
+    var sp = await SharedPreferences.getInstance();
+
+    List<String>? breakfastcallistofsp =
+        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
+    if (breakfastcallistofsp != null) {
+      List<dynamic> decodedList =
+          breakfastcallistofsp.map((item) => json.decode(item)).toList();
+      decodedList.add(breakfastListcal.last);
+      List<String> updatedList =
+          decodedList.map((item) => json.encode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, updatedList);
+      // print(
+      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+    } else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrList =
+          breakfastListcal.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, usrList);
+      // print('Initial list stored in SharedPreferences: $usrList');
+    }
+    List<String>? finalList =
+        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
+    if (finalList != null) {
+      breakfastListcal =
+          finalList.map((item) => json.decode(item) as String).toList();
+      print(
+          'Getting Value from SharedPreferences of calaries breakfastlist is $breakfastListcal');
       print('Getting Value from SharedPreferences is $breakfastList');
     } else {
       print('No value found in SharedPreferences');
     }
+    setState(() {});
   }
 
   Future<void> storeAndRetrieveListlunch() async {
@@ -229,6 +285,41 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {});
   }
 
+  Future<void> storeAndRetrieveListlunchcal() async {
+    var sp = await SharedPreferences.getInstance();
+    List<String>? lunchcallistofsp =
+        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
+    if (lunchcallistofsp != null) {
+      List<dynamic> decodedList =
+          lunchcallistofsp.map((item) => json.decode(item)).toList();
+      decodedList.add(lunchListcal.last);
+      List<String> updatedList =
+          decodedList.map((item) => json.encode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.lunchlistcal, updatedList);
+      // print(
+      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+    }
+    else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrList =
+          lunchListcal.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.lunchlistcal, usrList);
+      // print('Initial list stored in SharedPreferences: $usrList');
+    }
+       List<String>? finalList =
+        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
+    if (finalList != null) {
+      lunchListcal =
+          finalList.map((item) => json.decode(item) as String).toList();
+      print(
+          'Getting Value from SharedPreferences of calaries lunch is $lunchListcal');
+      print('Getting Value from SharedPreferences is $lunchList');
+    } else {
+      print('No value found in SharedPreferences');
+    }
+    setState(() {});
+  }
+
   Future<void> storeAndRetrieveListdinner() async {
     var sp = await SharedPreferences.getInstance();
 
@@ -241,29 +332,66 @@ class _DragandDropState extends State<DragandDrop>
       decodedList.add(dinnerList.last);
       List<String> updatedListldinner =
           decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlist,updatedListldinner);
+      await sp.setStringList(
+          sharedprefkeysfinal.dinnerlist, updatedListldinner);
       print(
           'Updated list stored in SharedPreferences of ldinner  is : $updatedListldinner');
     } else {
       // If no list exists yet, create a new one with the current breakfastList
       List<String> usrListdinner =
           dinnerList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlist,usrListdinner);
-      print('Initial list stored in SharedPreferences in dinner: $usrListdinner');
+      await sp.setStringList(sharedprefkeysfinal.dinnerlist, usrListdinner);
+      print(
+          'Initial list stored in SharedPreferences in dinner: $usrListdinner');
     }
     List<String>? finalListdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
     if (finalListdinner != null) {
       dinnerList =
           finalListdinner.map((item) => json.decode(item) as String).toList();
-      print('Getting Value from SharedPreferences is for dinner is $dinnerList');
+      print(
+          'Getting Value from SharedPreferences is for dinner is $dinnerList');
     } else {
       print('No value found in SharedPreferences');
     }
 
     setState(() {});
   }
-
+  
+  Future<void> storeAndRetrieveListdinnercal() async {
+    var sp = await SharedPreferences.getInstance();
+    List<String>? dinnercallistofsp =
+        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
+    if (dinnercallistofsp != null) {
+      List<dynamic> decodedList =
+          dinnercallistofsp.map((item) => json.decode(item)).toList();
+      decodedList.add(dinnerlistcal.last);
+      List<String> updatedList =
+          decodedList.map((item) => json.encode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, updatedList);
+      // print(
+      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+    }
+    else {
+      // If no list exists yet, create a new one with the current breakfastList
+      List<String> usrList =
+          dinnerlistcal.map((item) => jsonEncode(item)).toList();
+      await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, usrList);
+      // print('Initial list stored in SharedPreferences: $usrList');
+    }
+       List<String>? finalList =
+        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
+    if (finalList != null) {
+     dinnerlistcal =
+          finalList.map((item) => json.decode(item) as String).toList();
+      print(
+          'Getting Value from SharedPreferences of calaries dinner is $dinnerlistcal');
+      print('Getting Value from SharedPreferences is $dinnerList');
+    } else {
+      print('No value found in SharedPreferences');
+    }
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

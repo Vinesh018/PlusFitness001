@@ -9,4 +9,10 @@ class sharedprefkeysfinal {
   static String breakfastlist = 'Brekfast';
   static String lunchlist = 'lunch';
   static String dinnerlist = 'dinner';
+  static String braekfastlistcal = 'breakfastcal';
+  static String lunchlistcal = 'lunchcal';
+  static String dinnerlistcal = 'dinnercal';
+  static String brekfastcalsum  = 'breakfastcalsum';
+  static String lunchcalsum  = 'lunchcalsum';
+  static String dinnercalsum  = 'dinnercalsum';
 }
