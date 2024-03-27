@@ -57,6 +57,8 @@ dependencies:
   shared_preferences: ^2.2.2
   pedometer: ^4.0.1
   dynamic_shared_preferences: ^0.0.1
+  confetti: ^0.7.0
+
 
 
 dev_dependencies:
