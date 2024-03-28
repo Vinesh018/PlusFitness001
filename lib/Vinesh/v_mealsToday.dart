@@ -20,7 +20,7 @@ double sumoflunchcal = 0;
 double sumofdinnercal = 0;
 List<String> names = [];
 List<String> calaries = [];
- var result;
+// List<int> dataListAsInt = calaries.map((data) => int.parse(data)).toList();
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -41,16 +41,26 @@ class mealsTodayState extends State<mealsToday> {
     decodelistlunch = listStringlunch!;
     decodelistdinner = listStringdinner!;
     setState(() {
-      
+      names = [];
+      calaries = [];
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         print('The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
         String str = decodedListbreakfast[i];
-       result = str.split(',')[0];
-      //  print('=====================$result');
-      
-      print("&&&&&&&&&&&&&&&&&&&&&&&&&$names");
+        var resultname;
+        resultname = str.split(',')[0];
+        names.add(resultname);
+        print("the names are :: $names");
+
+        var resultcal;
+        resultcal = str.split(',')[1];
+        calaries.add(resultcal);
+        print("the calaries are :: $calaries");
       }
-      names.add(result);
+
+
+
+      // print(dataListAsInt);
+      // print(dataListAsInt.runtimeType);
 
     });
   }
@@ -147,7 +157,7 @@ class mealsTodayState extends State<mealsToday> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: sumofBrekfastcal.toStringAsFixed(0),
+                                    text: calaries.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
