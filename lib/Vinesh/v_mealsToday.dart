@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -13,15 +12,14 @@ class mealsToday extends StatefulWidget {
   State<StatefulWidget> createState() => mealsTodayState();
 }
 
-var decodedListbreakfast = 'Add Your Breakfast';
-var decodelistlunch = 'Add Your Lunch'; 
-var decodelistdinner = 'Add Your Dinner';
-var breakfastcallist;
-var lunchcallist;
-var dinnercallist;
+List<String> decodedListbreakfast = [];
+var decodelistlunch;
+var decodelistdinner;
 double sumofBrekfastcal = 0;
 double sumoflunchcal = 0;
 double sumofdinnercal = 0;
+List<String> names = [];
+List<String> calaries = [];
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -38,135 +36,16 @@ class mealsTodayState extends State<mealsToday> {
         sp.getStringList(sharedprefkeysfinal.lunchlist);
     List<String>? listStringdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    List<String>? listStringbreakfastcal =
-        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
-    List<String>? listStringlunchcal =
-        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
-    List<String>? listStringdinnercal =
-        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
-    if (listString != null) {
-      // Decode the stored items into a List<dynamic>
-      decodedListbreakfast =
-          listString.map((item) => json.decode(item)).toList().join(",");
-
-      // print('The List is Decode list $decodedListbreakfast');
-      // print('The List is Decode list ${decodedListbreakfast.toString()}');
-    }
-    if (listStringbreakfastcal != null) {
-      // Decode the stored items into a List<dynamic>
-      breakfastcallist = listStringbreakfastcal
-          .map((item) => json.decode(item))
-          .toList()
-          .join(",");
-      List<double> breakfastcallistdouble;
-      breakfastcallistdouble = breakfastcallist
-          .replaceAll('[', '')
-          .replaceAll(']', '')
-          .split(',')
-          .map<double>((e) {
-        return double.parse(e);
-      }).toList();
-
-      double sum = breakfastcallistdouble.fold(
-          0, (previousValue, element) => previousValue + element);
-      sumofBrekfastcal = sum;
-      sp.setDouble(sharedprefkeysfinal.brekfastcalsum, sumofBrekfastcal);
-      var tempsum = sp.getDouble(
-        sharedprefkeysfinal.brekfastcalsum,
-      );
-      // sumofBrekfastcal = tempsum;
-      // print('The List brekfast calaries is  $breakfastcallist');
-      // print(
-      //     'The List is brekfast calaries is  ${breakfastcallist.runtimeType}');
-      // print('The List brekfast calaries double is  $breakfastcallistdouble');
-      // print(
-      //     'The List is brekfast calaries double  is  ${breakfastcallistdouble.runtimeType}');
-      // print(
-      //     'The List is brekfast calaries double  is  sum is ${sumofBrekfastcal}');
-    }
-    if (listStringlunch != null) {
-      // Decode the stored items into a List<dynamic>
-      decodelistlunch =
-          listStringlunch.map((item) => json.decode(item)).toList().join(",");
-
-      // print('The List is Decode list for lunch $decodelistlunch');
-      // print('The List is Decode list  for lunch ${decodelistlunch.toString()}');
-    }
-    if (listStringlunchcal != null) {
-      // Decode the stored items into a List<dynamic>
-      lunchcallist = listStringlunchcal
-          .map((item) => json.decode(item))
-          .toList()
-          .join(",");
-      List<double> lunchcallistdouble;
-      lunchcallistdouble = lunchcallist
-          .replaceAll('[', '')
-          .replaceAll(']', '')
-          .split(',')
-          .map<double>((e) {
-        return double.parse(e);
-      }).toList();
-
-      double sum = lunchcallistdouble.fold(
-          0, (previousValue, element) => previousValue + element);
-      sumoflunchcal = sum;
-      sp.setDouble(sharedprefkeysfinal.lunchcalsum, sumoflunchcal);
-      var tempsum = sp.getDouble(
-        sharedprefkeysfinal.lunchcalsum,
-      );
-      // sumofBrekfastcal = tempsum;
-      // print('The List lunch calaries is  $lunchcallist');
-      // print(
-      //     'The List is lunch calaries is  ${lunchcallist.runtimeType}');
-      // print('The List lunch calaries double is  $lunchcallistdouble');
-      // print(
-      //     'The List is lunch calaries double  is  ${lunchcallistdouble.runtimeType}');
-      // print(
-      //     'The List is lunch calaries double  is  sum is ${sumoflunchcal}');
-    }
-    if (listStringdinner != null) {
-      // Decode the stored items into a List<dynamic>
-      decodelistdinner =
-          listStringdinner.map((item) => json.decode(item)).toList().join(",");
-
-      // print('The List is Decode list for dinner $decodelistdinner');
-      // print(
-      //     'The List is Decode list  for dinner ${decodelistdinner.toString()}');
-    }
-    if (listStringdinnercal != null) {
-      // Decode the stored items into a List<dynamic>
-      dinnercallist = listStringdinnercal
-          .map((item) => json.decode(item))
-          .toList()
-          .join(",");
-      List<double> dinnercallistdouble;
-      dinnercallistdouble = dinnercallist
-          .replaceAll('[', '')
-          .replaceAll(']', '')
-          .split(',')
-          .map<double>((e) {
-        return double.parse(e);
-      }).toList();
-
-      double sum = dinnercallistdouble.fold(
-          0, (previousValue, element) => previousValue + element);
-      sumofdinnercal = sum;
-      sp.setDouble(sharedprefkeysfinal.dinnercalsum, sumofdinnercal);
-      var tempsum = sp.getDouble(
-        sharedprefkeysfinal.dinnercalsum,
-      );
-      // sumofBrekfastcal = tempsum;
-      print('The List lunch calaries is  $dinnercallist');
-      print('The List is lunch calaries is  ${dinnercallist.runtimeType}');
-      print('The List lunch calaries double is  $dinnercallistdouble');
-      print(
-          'The List is lunch calaries double  is  ${dinnercallistdouble.runtimeType}');
-      print('The List is lunch calaries double  is  sum is ${sumofdinnercal}');
-    }
-
+    decodedListbreakfast = listString!;
+    decodelistlunch = listStringlunch!;
+    decodelistdinner = listStringdinner!;
     setState(() {
-      // Assuming setState is defined in the same class
-      // and used to update UI after retrieving data.
+      
+      for (var i = 0; i < decodedListbreakfast.length; i++) {
+        print('The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
+        String str = decodedListbreakfast[i];
+      }
+
     });
   }
 
@@ -185,7 +64,6 @@ class mealsTodayState extends State<mealsToday> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-
                       if (decodedListbreakfast == 'Add Your Breakfast') {
                         Navigator.push(
                             context,
@@ -193,29 +71,27 @@ class mealsTodayState extends State<mealsToday> {
                               builder: (context) => DragandDrop(),
                             ));
                       } else {
-
-                      
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            backgroundColor: Colors.deepOrange.shade100,
-                            scrollable: true,
-                            title: Text('Breakfast'),
-                            content: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(decodedListbreakfast.toString())),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: Colors.deepOrange.shade100,
+                              scrollable: true,
+                              title: Text('Breakfast'),
+                              content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(decodedListbreakfast.toString())),
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("OK"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                     child: Container(
@@ -254,7 +130,7 @@ class mealsTodayState extends State<mealsToday> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                  decodedListbreakfast.toString(),
+                                decodedListbreakfast.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
