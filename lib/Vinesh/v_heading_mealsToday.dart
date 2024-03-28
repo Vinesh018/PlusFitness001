@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
 
 class heading_mealsToday extends StatefulWidget {
   @override
@@ -18,7 +21,9 @@ class heading_mealsTodayState extends State<heading_mealsToday> {
             style: TextStyle(fontFamily: "FontMain", fontSize: 18),
           ),
           InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.off(DragandDrop());
+              },
               child: Row(
                 children: [
                   const Text(

@@ -1,7 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class mealsToday extends StatefulWidget {
@@ -181,6 +185,16 @@ class mealsTodayState extends State<mealsToday> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
+
+                      if (decodedListbreakfast == 'Add Your Breakfast') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DragandDrop(),
+                            ));
+                      } else {
+
+                      
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -202,6 +216,7 @@ class mealsTodayState extends State<mealsToday> {
                           );
                         },
                       );
+                      }
                     },
                     child: Container(
                       height: 190,
@@ -290,68 +305,101 @@ class mealsTodayState extends State<mealsToday> {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
-                    Container(
-                      height: 190,
-                      width: 130,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.blueAccent.shade100,
-                              Colors.blueAccent.shade700
-                            ],
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(70),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 40, left: 15),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Lunch",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FontMainBold',
-                                    fontSize: 17),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Text(
-                                  decodelistlunch.toString(),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
+                    GestureDetector(
+                      onTap: () {
+                        if (decodelistlunch == 'Add Your Lunch') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DragandDrop(),
+                              ));
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.blue.shade100,
+                                scrollable: true,
+                                title: Text('Lunch'),
+                                content: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(decodelistlunch.toString())),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text("OK"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: Container(
+                        height: 190,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.blueAccent.shade100,
+                                Colors.blueAccent.shade700
+                              ],
+                            ),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(70),
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 40, left: 15),
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Lunch",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'FontMain',
-                                      fontSize: 12),
+                                      fontFamily: 'FontMainBold',
+                                      fontSize: 17),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: sumoflunchcal.toStringAsFixed(0),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Text(
+                                    decodelistlunch.toString(),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
-                                        fontSize: 25),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Kcal',
-                                          style: TextStyle(fontSize: 13)),
-                                    ],
+                                        fontSize: 12),
                                   ),
                                 ),
-                              )
-                              //////
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: sumoflunchcal.toStringAsFixed(0),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'FontMain',
+                                          fontSize: 25),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'Kcal',
+                                            style: TextStyle(fontSize: 13)),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                //////
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -466,67 +514,100 @@ class mealsTodayState extends State<mealsToday> {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
-                    Container(
-                      height: 190,
-                      width: 130,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade700
-                            ],
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(70),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 40, left: 15),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Dinner",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 4,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FontMainBold',
-                                    fontSize: 17),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Text(
-                                  decodelistdinner.toString(),
+                    GestureDetector(
+                      onTap: () {
+                        if (decodelistdinner == 'Add Your Dinner') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DragandDrop(),
+                              ));
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.purple.shade200,
+                                scrollable: true,
+                                title: Text('Dinner'),
+                                content: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(decodelistdinner.toString())),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text("OK"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: Container(
+                        height: 190,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.deepPurple.shade100,
+                                Colors.deepPurple.shade700
+                              ],
+                            ),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(70),
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 40, left: 15),
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Dinner",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 4,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'FontMain',
-                                      fontSize: 11),
+                                      fontFamily: 'FontMainBold',
+                                      fontSize: 17),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: sumofdinnercal.toString(),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Text(
+                                    decodelistdinner.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
-                                        fontSize: 25),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: ' Kcal',
-                                          style: TextStyle(fontSize: 13)),
-                                    ],
+                                        fontSize: 11),
                                   ),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: sumofdinnercal.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'FontMain',
+                                          fontSize: 25),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: ' Kcal',
+                                            style: TextStyle(fontSize: 13)),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
