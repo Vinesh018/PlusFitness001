@@ -15,7 +15,7 @@ var lunchList = <String>[];
 var lunchListcal = <String>[];
 
 var dinnerList = <String>[];
-var dinnerlistcal = <String>[];
+  
 
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -128,27 +128,27 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
-        storeAndRetrievebreakfastListofcal();
+     //   storeAndRetrievebreakfastListofcal();
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
-        storeAndRetrieveListlunchcal();
+      //  storeAndRetrieveListlunchcal();
       }
       if (mealtype.mealtype == "Dinner") {
         storeAndRetrieveListdinner();
-        storeAndRetrieveListdinnercal();
+      //  storeAndRetrieveListdinnercal();
       }
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
-          return "${object.itemname}";
+          return "${object.itemname},${object.calaries}";
         });
-        final breakfastcal = mealtype.mealitem.map((object) {
-          return "${object.calaries}";
-        });
+        // final breakfastcal = mealtype.mealitem.map((object) {
+        //   return "${object.calaries}";
+        // });
 
         breakfastList = breakfast.toList();
-        breakfastListcal = breakfastcal.toList();
+        // breakfastListcal = breakfastcal.toList();
         // print(" breakfastList  List is ${breakfastcal.runtimeType}");
         // print(" breakfast calarie is List is ${breakfastcal}");
         // print(" breakfast calarie is List is ${breakfastList}");
@@ -156,27 +156,27 @@ class _DragandDropState extends State<DragandDrop>
 
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
-          return "${object.itemname}";
+          return "${object.itemname},${object.calaries}";
         });
-        final lunchcal = mealtype.mealitem.map((object) {
-          return "${object.calaries}";
-        });
+        // final lunchcal = mealtype.mealitem.map((object) {
+        //   return "${object.calaries}";
+        // });
         lunchList = lunch.toList();
-        lunchListcal = lunchcal.toList();
+ //       lunchListcal = lunchcal.toList();
 
         // print("Lunch List $lunchList");
       }
 
       if (mealtype.mealtype == "Dinner") {
         final dinner = mealtype.mealitem.map((object) {
-          return "${object.itemname}";
+          return "${object.itemname},${object.calaries}";
         });
-        final dinnercal = mealtype.mealitem.map((object) {
-          return "${object.calaries}";
-        });
+        // final dinnercal = mealtype.mealitem.map((object) {
+        //   return "${object.calaries}";
+        // });
 
         dinnerList = dinner.toList();
-        dinnerlistcal = dinnercal.toList();
+      //  dinnerlistcal = dinnercal.toList();
 
         // print(" Dinner List $dinnerList");
       }
@@ -221,40 +221,46 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {});
   }
 
-  Future<void> storeAndRetrievebreakfastListofcal() async {
-    var sp = await SharedPreferences.getInstance();
+  // Future<void> storeAndRetrievebreakfastListofcal() async {
+  //   var sp = await SharedPreferences.getInstance();
 
-    List<String>? breakfastcallistofsp =
-        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
-    if (breakfastcallistofsp != null) {
-      List<dynamic> decodedList =
-          breakfastcallistofsp.map((item) => json.decode(item)).toList();
-      decodedList.add(breakfastListcal.last);
-      List<String> updatedList =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, updatedList);
-      // print(
-      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
-    } else {
-      // If no list exists yet, create a new one with the current breakfastList
-      List<String> usrList =
-          breakfastListcal.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, usrList);
-      // print('Initial list stored in SharedPreferences: $usrList');
-    }
-    List<String>? finalList =
-        sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
-    if (finalList != null) {
-      breakfastListcal =
-          finalList.map((item) => json.decode(item) as String).toList();
-      print(
-          'Getting Value from SharedPreferences of calaries BREKFAST is $breakfastListcal');
-      print('Getting Value from SharedPreferences BREKFAST is $breakfastList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
-    setState(() {});
-  }
+  //   List<String>? breakfastcallistofsp =
+  //       sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
+  //   if (breakfastcallistofsp != null) {
+  //     List<dynamic> decodedList =
+  //         breakfastcallistofsp.map((item) => json.decode(item)).toList();
+  //     decodedList.add(breakfastListcal.last);
+  //     List<String> updatedList =
+  //         decodedList.map((item) => json.encode(item)).toList();
+  //   // Mealtype m = Mealtype(mealtype: 'Bread', mealtypeimageurl: '');
+     
+
+
+
+
+  //     await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, updatedList);
+  //     // print(
+  //     // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+  //   } else {
+  //     // If no list exists yet, create a new one with the current breakfastList
+  //     List<String> usrList =
+  //         breakfastListcal.map((item) => jsonEncode(item)).toList();
+  //     await sp.setStringList(sharedprefkeysfinal.braekfastlistcal, usrList);
+  //     // print('Initial list stored in SharedPreferences: $usrList');
+  //   }
+  //   List<String>? finalList =
+  //       sp.getStringList(sharedprefkeysfinal.braekfastlistcal);
+  //   if (finalList != null) {
+  //     breakfastListcal =
+  //         finalList.map((item) => json.decode(item) as String).toList();
+  //     print(
+  //         'Getting Value from SharedPreferences of calaries BREKFAST is $breakfastListcal');
+  //     print('Getting Value from SharedPreferences BREKFAST is $breakfastList');
+  //   } else {
+  //     print('No value found in SharedPreferences');
+  //   }
+  //   setState(() {});
+  // }
 
   Future<void> storeAndRetrieveListlunch() async {
     var sp = await SharedPreferences.getInstance();
@@ -291,39 +297,39 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {});
   }
 
-  Future<void> storeAndRetrieveListlunchcal() async {
-    var sp = await SharedPreferences.getInstance();
-    List<String>? lunchcallistofsp =
-        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
-    if (lunchcallistofsp != null) {
-      List<dynamic> decodedList =
-          lunchcallistofsp.map((item) => json.decode(item)).toList();
-      decodedList.add(lunchListcal.last);
-      List<String> updatedList =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlistcal, updatedList);
-      // print(
-      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
-    } else {
-      // If no list exists yet, create a new one with the current breakfastList
-      List<String> usrList =
-          lunchListcal.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlistcal, usrList);
-      // print('Initial list stored in SharedPreferences: $usrList');
-    }
-    List<String>? finalList =
-        sp.getStringList(sharedprefkeysfinal.lunchlistcal);
-    if (finalList != null) {
-      lunchListcal =
-          finalList.map((item) => json.decode(item) as String).toList();
-      print(
-          'Getting Value from SharedPreferences of calaries LUNCH is $lunchListcal');
-      print('Getting Value from SharedPreferences Lunch is $lunchList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
-    setState(() {});
-  }
+  // Future<void> storeAndRetrieveListlunchcal() async {
+  //   var sp = await SharedPreferences.getInstance();
+  //   List<String>? lunchcallistofsp =
+  //       sp.getStringList(sharedprefkeysfinal.lunchlistcal);
+  //   if (lunchcallistofsp != null) {
+  //     List<dynamic> decodedList =
+  //         lunchcallistofsp.map((item) => json.decode(item)).toList();
+  //     decodedList.add(lunchListcal.last);
+  //     List<String> updatedList =
+  //         decodedList.map((item) => json.encode(item)).toList();
+  //     await sp.setStringList(sharedprefkeysfinal.lunchlistcal, updatedList);
+  //     // print(
+  //     // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+  //   } else {
+  //     // If no list exists yet, create a new one with the current breakfastList
+  //     List<String> usrList =
+  //         lunchListcal.map((item) => jsonEncode(item)).toList();
+  //     await sp.setStringList(sharedprefkeysfinal.lunchlistcal, usrList);
+  //     // print('Initial list stored in SharedPreferences: $usrList');
+  //   }
+  //   List<String>? finalList =
+  //       sp.getStringList(sharedprefkeysfinal.lunchlistcal);
+  //   if (finalList != null) {
+  //     lunchListcal =
+  //         finalList.map((item) => json.decode(item) as String).toList();
+  //     print(
+  //         'Getting Value from SharedPreferences of calaries LUNCH is $lunchListcal');
+  //     print('Getting Value from SharedPreferences Lunch is $lunchList');
+  //   } else {
+  //     print('No value found in SharedPreferences');
+  //   }
+  //   setState(() {});
+  // }
 
   Future<void> storeAndRetrieveListdinner() async {
     var sp = await SharedPreferences.getInstance();
@@ -363,39 +369,39 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {});
   }
 
-  Future<void> storeAndRetrieveListdinnercal() async {
-    var sp = await SharedPreferences.getInstance();
-    List<String>? dinnercallistofsp =
-        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
-    if (dinnercallistofsp != null) {
-      List<dynamic> decodedList =
-          dinnercallistofsp.map((item) => json.decode(item)).toList();
-      decodedList.add(dinnerlistcal.last);
-      List<String> updatedList =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, updatedList);
-      // print(
-      // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
-    } else {
-      // If no list exists yet, create a new one with the current breakfastList
-      List<String> usrList =
-          dinnerlistcal.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, usrList);
-      // print('Initial list stored in SharedPreferences: $usrList');
-    }
-    List<String>? finalList =
-        sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
-    if (finalList != null) {
-      dinnerlistcal =
-          finalList.map((item) => json.decode(item) as String).toList();
-      print(
-          'Getting Value from SharedPreferences of calaries DINNER is $dinnerlistcal');
-      print('Getting Value from SharedPreferences DINNER is $dinnerList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
-    setState(() {});
-  }
+  // Future<void> storeAndRetrieveListdinnercal() async {
+  //   var sp = await SharedPreferences.getInstance();
+  //   List<String>? dinnercallistofsp =
+  //       sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
+  //   if (dinnercallistofsp != null) {
+  //     List<dynamic> decodedList =
+  //         dinnercallistofsp.map((item) => json.decode(item)).toList();
+  //   //  decodedList.add(dinnerlistcal.last);
+  //     List<String> updatedList =
+  //         decodedList.map((item) => json.encode(item)).toList();
+  //     await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, updatedList);
+  //     // print(
+  //     // 'Updated list stored in SharedPreferences of breakfast calarirs  is: $updatedList');
+  //   } else {
+  //     // If no list exists yet, create a new one with the current breakfastList
+  //     //List<String> usrList =
+  //      //   dinnerlistcal.map((item) => jsonEncode(item)).toList();
+  //   //  await sp.setStringList(sharedprefkeysfinal.dinnerlistcal, usrList);
+  //     // print('Initial list stored in SharedPreferences: $usrList');
+  //   }
+  //   List<String>? finalList =
+  //       sp.getStringList(sharedprefkeysfinal.dinnerlistcal);
+  //   if (finalList != null) {
+  //   //  dinnerlistcal =
+  //         finalList.map((item) => json.decode(item) as String).toList();
+  //     // print(
+  //     //     'Getting Value from SharedPreferences of calaries DINNER is $dinnerlistcal');
+  //     print('Getting Value from SharedPreferences DINNER is $dinnerList');
+  //   } else {
+  //     print('No value found in SharedPreferences');
+  //   }
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
