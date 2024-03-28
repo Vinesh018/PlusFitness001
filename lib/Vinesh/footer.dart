@@ -39,7 +39,7 @@ class _footerState extends State<footer> {
                         child: FloatingActionButton(
                           shape: const CircleBorder(),
                           onPressed: () {},
-                          backgroundColor: Colors.indigoAccent,
+                          backgroundColor: Colors.indigo.shade400,
                           child: Icon(
                             Icons.add,
                             color: Colors.white,
@@ -91,9 +91,12 @@ class _footerState extends State<footer> {
                                   Get.off(UserProfileMainRun());
                                 },
                                 icon: Image(
+                                  
                                   image: AssetImage("assets/images/tab_4.png"),
+                                  
                                   height: 50,
                                   width: 50,
+                                  
                                 )),
                           ],
                         )),
