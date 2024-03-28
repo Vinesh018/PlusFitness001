@@ -20,6 +20,7 @@ double sumoflunchcal = 0;
 double sumofdinnercal = 0;
 List<String> names = [];
 List<String> calaries = [];
+ var result;
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -44,7 +45,12 @@ class mealsTodayState extends State<mealsToday> {
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         print('The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
         String str = decodedListbreakfast[i];
+       result = str.split(',')[0];
+      //  print('=====================$result');
+      
+      print("&&&&&&&&&&&&&&&&&&&&&&&&&$names");
       }
+      names.add(result);
 
     });
   }
@@ -80,7 +86,7 @@ class mealsTodayState extends State<mealsToday> {
                               title: Text('Breakfast'),
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(decodedListbreakfast.toString())),
+                                  child: Text(names.toString())),
                               actions: [
                                 ElevatedButton(
                                   onPressed: () {
@@ -130,7 +136,7 @@ class mealsTodayState extends State<mealsToday> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                decodedListbreakfast.toString(),
+                                names.toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
