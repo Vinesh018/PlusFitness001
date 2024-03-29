@@ -16,6 +16,16 @@ List<String> calariesofdinner = [];
 double? eatencals = 0;
 Color textColor = Colors.black;
 
+Color carprofatColor = Colors.black;
+
+var carbs;
+var carbsper;
+
+var fats;
+var fatsper;
+
+var protein;
+var proteinper;
 
 class firstContainer extends StatelessWidget {
   @override
@@ -34,7 +44,7 @@ class FirstrowOfBody extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           Text(
+          Text(
             "Mediterranean diet",
             style: TextStyle(fontFamily: "FontMain", fontSize: 18),
           ),
@@ -72,7 +82,8 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
     storeAndRetrieveList();
     getsumofcals();
   }
-    Future<void> storeAndRetrieveList() async {
+
+  Future<void> storeAndRetrieveList() async {
     var sp = await SharedPreferences.getInstance();
     List<String>? listString =
         sp.getStringList(sharedprefkeysfinal.breakfastlist);
@@ -80,16 +91,16 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
         sp.getStringList(sharedprefkeysfinal.lunchlist);
     List<String>? listStringdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    decodedListbreakfast = listString??[];
+    decodedListbreakfast = listString ?? [];
 
     // print('The Lenth of Setting decodce is ${decodedListbreakfast.length}');
-    decodelistlunch = listStringlunch ??[];
-      // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
+    decodelistlunch = listStringlunch ?? [];
+    // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
     decodelistdinner = listStringdinner ?? [];
-        // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
+    // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
     setState(() {
       calariesofbreakfast = [];
-          // print('============================================================================');
+      // print('============================================================================');
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         String str = decodedListbreakfast[i];
         var resultcal;
@@ -126,10 +137,8 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       print(dataListAsDoubleoflunch.runtimeType);
       print(sumofBrekfastcal);
 
+      // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
 
-
-            // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
-  
       calariesofdinner = [];
       for (var i = 0; i < decodelistdinner.length; i++) {
         String str = decodelistdinner[i];
@@ -147,26 +156,67 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       if (Sumofcal > 2500) {
         textColor = Colors.red;
       }
-     if (Sumofcal <= 2500) {
+      if (Sumofcal <= 2500) {
         textColor = Colors.black;
-     }
-     
+      }
+
+      carbs = Sumofcal / 8;
+
+      if (carbs! >= 312.5) {
+        carbs = 312.5;
+      }
+      if (carbs! <= 0) {
+        carbs = 0;
+      }
+
+      carbsper = carbs / 312.5;
+      carbs = 312.5 - carbs;
+
+      protein = Sumofcal / 16;
+
+      if (protein! >= 156.25) {
+        protein = 156.25;
+      }
+      if (protein! <= 0) {
+        protein = 0;
+      }
+      proteinper = protein / 156.25;
+      protein = 156.25 - protein;
+
+      fats = Sumofcal / 36;
+
+      if (fats! >= 69.45) {
+        fats = 69.45;
+      }
+      if (fats! <= 0) {
+        fats = 0;
+      }
+      fatsper = fats / 69.45;
+      fats = 69.45 - fats;
+
+      print("----------------------------");
+
+      print("Carbs value $carbsper");
+
+      print("----------------------------");
+
       sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
     });
   }
 
   Future<void> getsumofcals() async {
-      var sp = await SharedPreferences.getInstance();
-      eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
-           if (eatencals! >= 2500) {
-        eatencals = 2500;
-      }
-      if (eatencals! <= 0 ) {
-        eatencals = 0;
-      }
+    var sp = await SharedPreferences.getInstance();
+    eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
+    if (eatencals! >= 2500) {
+      eatencals = 2500;
+    }
+    if (eatencals! <= 0) {
+      eatencals = 0;
+    }
 
-  setState(()  { });
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -329,22 +379,22 @@ class SecondRowOfShadow extends StatelessWidget {
             coolor1: Colors.indigo.shade200,
             coolor2: Colors.indigo.shade700,
             backgroundColor: Colors.indigo.shade100,
-            percentage: 0.7,
-            subtext: '12'),
+            percentage: carbsper ?? 0,
+            subtext: (carbs ?? 0).toStringAsFixed(1)),
         CommoncarbsProtinefat(
             headText: 'Protien',
             coolor1: Colors.pink.shade200,
             coolor2: Colors.pink.shade700,
             backgroundColor: Colors.pink.shade100,
-            percentage: 0.5,
-            subtext: '30'),
+            percentage: proteinper ?? 0,
+            subtext: (protein ?? 0).toStringAsFixed(1)),
         CommoncarbsProtinefat(
             headText: 'Fats',
             coolor1: Colors.amber.shade200,
             coolor2: Colors.amber.shade700,
             backgroundColor: Colors.amber.shade100,
-            percentage: 0.2,
-            subtext: '10'),
+            percentage: fatsper ?? 0,
+            subtext: (fats ?? 0).toStringAsFixed(1)),
       ],
     );
   }
@@ -385,7 +435,8 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
             style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontFamily: 'FontMain',
-                fontSize: 17),
+              fontSize: 17,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 3, bottom: 3),
@@ -403,8 +454,9 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
           ),
           Row(
             children: [
+
               Text(widget.subtext),
-              const Text('g left'),
+              const Text(' g left'),
             ],
           ),
         ],
@@ -415,8 +467,7 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
 
 // ignore: must_be_immutable
 class CircularIndicatorcustom extends StatefulWidget {
-  
-  double per = (eatencals??1) / 2500;
+  double per = (eatencals ?? 1) / 2500;
   @override
   State<CircularIndicatorcustom> createState() =>
       _CircularIndicatorcustomState();
@@ -438,7 +489,7 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
         child: Column(
           children: [
             Text(
-              '${(2500 -(eatencals ?? 0)).toInt()}',
+              '${(2500 - (eatencals ?? 0)).toInt()}',
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             Text(
