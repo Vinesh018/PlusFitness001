@@ -18,9 +18,12 @@ var decodelistdinner;
 double sumofBrekfastcal = 0;
 double sumoflunchcal = 0;
 double sumofdinnercal = 0;
-List<String> names = [];
-List<String> calaries = [];
-
+List<String> namesofbrekfast = [];
+List<String> calariesofbreakfast = [];
+List<String> namesoflunch = [];
+List<String> calariesoflunch = [];
+List<String> namesofdinner = [];
+List<String> calariesofdinner = [];
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -41,40 +44,90 @@ class mealsTodayState extends State<mealsToday> {
     decodelistlunch = listStringlunch!;
     decodelistdinner = listStringdinner!;
     setState(() {
-      names = [];
-      calaries = [];
+      namesofbrekfast = [];
+      calariesofbreakfast = [];
       for (var i = 0; i < decodedListbreakfast.length; i++) {
-        print('The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
         String str = decodedListbreakfast[i];
         String resultname;
         resultname = str.split(',')[0];
+        resultname = resultname.replaceAll('"', '');
+        namesofbrekfast.add(resultname);
+        var resultcal;
+        resultcal = str.split(',')[1];
+        resultcal = resultcal.replaceAll('"', '');
+        calariesofbreakfast.add(resultcal);
+      }
+
+      List<double> dataListAsDouble =
+          calariesofbreakfast.map((data) => double.parse(data)).toList();
+      sumofBrekfastcal =
+          dataListAsDouble.fold(0, (previous, current) => previous + current);
+
+      // For Lunch Name And Calaries Display -----------------------------------------------------------------------------------------------------
+      namesoflunch = [];
+      calariesoflunch = [];
+      for (var i = 0; i < decodelistlunch.length; i++) {
+        print(
+            'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
+        String str = decodelistlunch[i];
+        String resultname = str.split(',')[0];
 
         resultname = resultname.replaceAll('"', '');
-      
-        names.add(resultname);
-        print("the names are :: $names");
+
+        namesoflunch.add(resultname);
+        print("the names are :: $namesoflunch");
 
         var resultcal;
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
-        calaries.add(resultcal);
-        print("the calaries are :: $calaries");
-        print(calaries.runtimeType);
+        calariesoflunch.add(resultcal);
+        print("the calaries are :: $calariesoflunch");
+        print(calariesoflunch.runtimeType);
       }
 
-      
+      List<double> dataListAsDoubleoflunch =
+          calariesoflunch.map((data) => double.parse(data)).toList();
 
+      print(dataListAsDoubleoflunch);
+      sumoflunchcal = dataListAsDoubleoflunch.fold(
+          0, (previous, current) => previous + current);
 
-List<double> dataListAsDouble =
-          calaries.map((data) => double.parse(data)).toList();
-
-      print(dataListAsDouble);
-      sumofBrekfastcal =
-          dataListAsDouble.fold(0, (previous, current) => previous + current);
-
-      print(dataListAsDouble.runtimeType);
+      print(dataListAsDoubleoflunch.runtimeType);
       print(sumofBrekfastcal);
 
+
+
+            // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
+      namesofdinner = [];
+      calariesofdinner = [];
+      for (var i = 0; i < decodelistdinner.length; i++) {
+        print(
+            'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
+        String str = decodelistdinner[i];
+        String resultname = str.split(',')[0];
+
+        resultname = resultname.replaceAll('"', '');
+
+        namesofdinner.add(resultname);
+        print("the names are :: $namesofdinner");
+
+        var resultcal;
+        resultcal = str.split(',')[1];
+        resultcal = resultcal.replaceAll('"', '');
+        calariesofdinner.add(resultcal);
+        print("the calaries are :: $calariesofdinner");
+        print(calariesofdinner.runtimeType);
+      }
+
+      List<double> dataListAsDoubleofdinner =
+          calariesofdinner.map((data) => double.parse(data)).toList();
+
+      print(dataListAsDoubleofdinner);
+      sumofdinnercal = dataListAsDoubleofdinner.fold(
+          0, (previous, current) => previous + current);
+
+      print(dataListAsDoubleofdinner.runtimeType);
+      print(sumofBrekfastcal);
     });
   }
 
@@ -109,7 +162,7 @@ List<double> dataListAsDouble =
                               title: Text('Breakfast'),
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(names.join(","))),
+                                  child: Text(namesofbrekfast.join(","))),
                               actions: [
                                 ElevatedButton(
                                   onPressed: () {
@@ -159,7 +212,7 @@ List<double> dataListAsDouble =
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                  names.join(","),
+                                  namesofbrekfast.join(","),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
@@ -170,7 +223,7 @@ List<double> dataListAsDouble =
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: sumofBrekfastcal.toString(),
+                                    text: sumofBrekfastcal.toStringAsFixed(0),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
@@ -228,7 +281,7 @@ List<double> dataListAsDouble =
                                 title: Text('Lunch'),
                                 content: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(decodelistlunch.toString())),
+                                    child: Text(namesoflunch.join(","),)),
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
@@ -276,7 +329,7 @@ List<double> dataListAsDouble =
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: Text(
-                                    decodelistlunch.toString(),
+                                    namesoflunch.join(","),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
                                     style: TextStyle(
@@ -437,7 +490,7 @@ List<double> dataListAsDouble =
                                 title: Text('Dinner'),
                                 content: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(decodelistdinner.toString())),
+                                    child: Text(namesofdinner.toString())),
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
@@ -487,7 +540,7 @@ List<double> dataListAsDouble =
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: Text(
-                                    decodelistdinner.toString(),
+                                    namesofdinner.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
@@ -498,7 +551,7 @@ List<double> dataListAsDouble =
                                   padding: const EdgeInsets.only(bottom: 5),
                                   child: RichText(
                                     text: TextSpan(
-                                      text: sumofdinnercal.toString(),
+                                      text: sumofdinnercal.toStringAsFixed(0),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'FontMain',
