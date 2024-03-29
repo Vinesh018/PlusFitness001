@@ -9,11 +9,7 @@ import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var breakfastList = <String>[];
-var breakfastListcal = <String>[];
-
 var lunchList = <String>[];
-var lunchListcal = <String>[];
-
 var dinnerList = <String>[];
   
 
@@ -128,32 +124,21 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
-     //   storeAndRetrievebreakfastListofcal();
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
-      //  storeAndRetrieveListlunchcal();
       }
       if (mealtype.mealtype == "Dinner") {
         storeAndRetrieveListdinner();
-      //  storeAndRetrieveListdinnercal();
       }
 
       if (mealtype.mealtype == "Breakfast") {
         final breakfast = mealtype.mealitem.map((object) {
           return "${object.itemname},${object.calaries}";
         });
-        // final breakfastcal = mealtype.mealitem.map((object) {
-        //   return "${object.calaries}";
-        // });
-
         breakfastList = breakfast.toList();
-        // breakfastListcal = breakfastcal.toList();
-        // print(" breakfastList  List is ${breakfastcal.runtimeType}");
-        // print(" breakfast calarie is List is ${breakfastcal}");
-        // print(" breakfast calarie is List is ${breakfastList}");
-      }
 
+      }
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
           return "${object.itemname},${object.calaries}";
@@ -185,7 +170,6 @@ class _DragandDropState extends State<DragandDrop>
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
     } 
     else {
-
       List<String> usrList =
           breakfastList.map((item) => jsonEncode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
@@ -198,7 +182,7 @@ class _DragandDropState extends State<DragandDrop>
     if (finalList != null) {
       breakfastList =
           finalList.map((item) => json.decode(item) as String).toList();
-      // print('Getting Value from SharedPreferences is $breakfastList');
+      print('Getting Value from SharedPreferences is $breakfastList');
     } else {
       print('No value found in SharedPreferences');
     }
@@ -229,6 +213,7 @@ class _DragandDropState extends State<DragandDrop>
     if (finalListlunch != null) {
       lunchList =
           finalListlunch.map((item) => json.decode(item) as String).toList();
+           print('Getting Value from SharedPreferences is $lunchList');
     } else {
       print('No value found in SharedPreferences');
     }
@@ -262,6 +247,7 @@ class _DragandDropState extends State<DragandDrop>
     if (finalListdinner != null) {
       dinnerList =
           finalListdinner.map((item) => json.decode(item) as String).toList();
+            print('Getting Value from SharedPreferences is $dinnerList');
     } else {
       print('No value found in SharedPreferences');
     }
