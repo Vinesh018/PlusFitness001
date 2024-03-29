@@ -20,7 +20,7 @@ double sumoflunchcal = 0;
 double sumofdinnercal = 0;
 List<String> names = [];
 List<String> calaries = [];
-// List<int> dataListAsInt = calaries.map((data) => int.parse(data)).toList();
+List<int> dataListAsInt = calaries.map((data) => int.parse(data)).toList();
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -46,13 +46,17 @@ class mealsTodayState extends State<mealsToday> {
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         print('The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
         String str = decodedListbreakfast[i];
-        var resultname;
+        String resultname;
         resultname = str.split(',')[0];
+
+        resultname = resultname.replaceAll('"', '');
+      
         names.add(resultname);
         print("the names are :: $names");
 
         var resultcal;
         resultcal = str.split(',')[1];
+        resultcal = resultcal.replaceAll('"', '');
         calaries.add(resultcal);
         print("the calaries are :: $calaries");
       }
@@ -96,7 +100,7 @@ class mealsTodayState extends State<mealsToday> {
                               title: Text('Breakfast'),
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(names.toString())),
+                                  child: Text(names.join(","))),
                               actions: [
                                 ElevatedButton(
                                   onPressed: () {
@@ -146,7 +150,7 @@ class mealsTodayState extends State<mealsToday> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
-                                names.toString(),
+                                  names.join(","),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMain',
