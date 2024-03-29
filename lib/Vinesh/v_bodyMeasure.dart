@@ -26,8 +26,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
     var prefs = await SharedPreferences.getInstance();
     var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
     var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
-    weighonbody = getweight!;
-    Heightonbody = getheight!;
+    weighonbody = getweight ?? '40';
+    Heightonbody = getheight ?? '100';
     print('Getting Weight fromdatabase is $weighonbody');
     print('Getting height fromdatabase is $Heightonbody');
 

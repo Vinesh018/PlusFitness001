@@ -23,8 +23,6 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
 
     if (dateOnly.day > 9) {
       width = 10.0;
-      print(width);
-      print('Above nine');
     } else {
       width = 0.0;
       print('Below nine');

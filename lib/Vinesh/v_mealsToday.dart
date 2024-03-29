@@ -13,8 +13,8 @@ class mealsToday extends StatefulWidget {
 }
 
 List<String> decodedListbreakfast = [];
-var decodelistlunch;
-var decodelistdinner;
+List<String> decodelistlunch = [];
+List<String> decodelistdinner = [];
 double sumofBrekfastcal = 0;
 double sumoflunchcal = 0;
 double sumofdinnercal = 0;
@@ -40,15 +40,21 @@ class mealsTodayState extends State<mealsToday> {
         sp.getStringList(sharedprefkeysfinal.lunchlist);
     List<String>? listStringdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    decodedListbreakfast = listString!;
-    decodelistlunch = listStringlunch!;
-    decodelistdinner = listStringdinner!;
+    decodedListbreakfast = listString??[];
+
+    // print('The Lenth of Setting decodce is ${decodedListbreakfast.length}');
+    decodelistlunch = listStringlunch ??[];
+      // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
+    decodelistdinner = listStringdinner ?? [];
+        // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
     setState(() {
       namesofbrekfast = [];
       calariesofbreakfast = [];
+          // print('============================================================================');
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         String str = decodedListbreakfast[i];
         String resultname;
+        // print('============================================================================');
         resultname = str.split(',')[0];
         resultname = resultname.replaceAll('"', '');
         namesofbrekfast.add(resultname);
@@ -67,22 +73,22 @@ class mealsTodayState extends State<mealsToday> {
       namesoflunch = [];
       calariesoflunch = [];
       for (var i = 0; i < decodelistlunch.length; i++) {
-        print(
-            'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
+        // print(
+        //     'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
         String str = decodelistlunch[i];
         String resultname = str.split(',')[0];
 
         resultname = resultname.replaceAll('"', '');
 
         namesoflunch.add(resultname);
-        print("the names are :: $namesoflunch");
+        // print("the names are :: $namesoflunch");
 
         var resultcal;
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
         calariesoflunch.add(resultcal);
-        print("the calaries are :: $calariesoflunch");
-        print(calariesoflunch.runtimeType);
+        // print("the calaries are :: $calariesoflunch");
+        // print(calariesoflunch.runtimeType);
       }
 
       List<double> dataListAsDoubleoflunch =
@@ -101,33 +107,33 @@ class mealsTodayState extends State<mealsToday> {
       namesofdinner = [];
       calariesofdinner = [];
       for (var i = 0; i < decodelistdinner.length; i++) {
-        print(
-            'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
+        // print(
+        //     'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
         String str = decodelistdinner[i];
         String resultname = str.split(',')[0];
 
         resultname = resultname.replaceAll('"', '');
 
         namesofdinner.add(resultname);
-        print("the names are :: $namesofdinner");
+        // print("the names are :: $namesofdinner");
 
         var resultcal;
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
         calariesofdinner.add(resultcal);
-        print("the calaries are :: $calariesofdinner");
-        print(calariesofdinner.runtimeType);
+        // print("the calaries are :: $calariesofdinner");
+        // print(calariesofdinner.runtimeType);
       }
 
       List<double> dataListAsDoubleofdinner =
           calariesofdinner.map((data) => double.parse(data)).toList();
 
-      print(dataListAsDoubleofdinner);
+      // print(dataListAsDoubleofdinner);
       sumofdinnercal = dataListAsDoubleofdinner.fold(
           0, (previous, current) => previous + current);
 
-      print(dataListAsDoubleofdinner.runtimeType);
-      print(sumofBrekfastcal);
+      // print(dataListAsDoubleofdinner.runtimeType);
+      // print(sumofBrekfastcal);
     });
   }
 

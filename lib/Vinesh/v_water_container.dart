@@ -29,10 +29,10 @@ class waterContainerState extends State<waterContainer> {
          var getwaterml = prefs.getInt(sharedprefkeysfinal.waterdrinkinml);
          var getwaterperctage = prefs.getDouble(sharedprefkeysfinal.waterpercentageonbottle);
          var getwaterdrinktime = prefs.getString(sharedprefkeysfinal.lastwaterdrinktime);
-         waterInMl = getwaterml!;
-         waterpercentage = getwaterperctage!;
-         waterDrinkTime = getwaterdrinktime!;
-         print('Getting value of Water in ml is $getwaterml');
+         waterInMl = getwaterml ?? 0;
+         waterpercentage = getwaterperctage ?? 0;
+         waterDrinkTime = getwaterdrinktime ?? "--";
+        //  print('Getting value of Water in ml is $getwaterml');
          setState(() {
          });
 
