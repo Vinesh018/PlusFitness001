@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -42,6 +44,18 @@ class TutorialHome extends StatefulWidget {
 }
 
 class _TutorialHomeState extends State<TutorialHome> {
+
+  @override
+  // void initState() {
+  //   getsumofcals();
+  // }
+  //  Future<void> getsumofcals() async {
+  //     var sp = await SharedPreferences.getInstance();
+  //     eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
+  //     print('The vals of eaten cal is $eatencals');
+
+  // setState(()  {  });
+  // }
   AppBar appbar = AppBar(
     title: const Text('My Dairy'),
     backgroundColor: Color.fromARGB(255, 231, 235, 237),

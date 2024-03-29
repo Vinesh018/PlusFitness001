@@ -25,6 +25,8 @@ List<String> calariesoflunch = [];
 List<String> namesofdinner = [];
 List<String> calariesofdinner = [];
 
+ double Sumofcal  = 0;
+
 class mealsTodayState extends State<mealsToday> {
   @override
   void initState() {
@@ -134,7 +136,12 @@ class mealsTodayState extends State<mealsToday> {
 
       // print(dataListAsDoubleofdinner.runtimeType);
       // print(sumofBrekfastcal);
+
+      Sumofcal = sumofBrekfastcal + sumofdinnercal + sumoflunchcal;
+      print('The sum of calaries is $Sumofcal');
+      sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
     });
+        print('The sum of calaries is $Sumofcal');
   }
 
   @override
