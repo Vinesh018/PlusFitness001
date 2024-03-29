@@ -161,7 +161,7 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
            if (eatencals! >= 2500) {
         eatencals = 2500;
       }
-      if (eatencals! <= 0) {
+      if (eatencals! <= 0 ) {
         eatencals = 0;
       }
 
@@ -438,7 +438,7 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
         child: Column(
           children: [
             Text(
-              '${(2500 - eatencals!).toInt()}',
+              '${(2500 -(eatencals ?? 0)).toInt()}',
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             Text(
