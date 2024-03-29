@@ -15,4 +15,5 @@ class sharedprefkeysfinal {
   static String brekfastcalsum  = 'breakfastcalsum';
   static String lunchcalsum  = 'lunchcalsum';
   static String dinnercalsum  = 'dinnercalsum';
+  static String sumofallcalaries   = 'sumofcal';
 }
