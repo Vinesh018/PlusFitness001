@@ -13,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
  List<String> decodelistlunch = [];
  List<String> decodelistdinner = [];
 List<String> breakfastList = [];
+List<String> namesoflunch = [];
+List<String> namesofdinner = [];
 // double sumofBrekfastcal = 0;
 // double sumoflunchcal = 0;
 // double sumofdinnercal = 0;
@@ -58,6 +60,39 @@ class deletemealsState extends State<deletemeals> {
 
         breakfastList.add(resultname);
         print("the names are :: $breakfastList");
+
+        //////////////////////// lunch ///////////////////////////
+
+        namesoflunch = [];
+
+        for (var i = 0; i < decodelistlunch.length; i++) {
+          print(
+              'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
+          String str = decodelistlunch[i];
+          String resultname = str.split(',')[0];
+
+          resultname = resultname.replaceAll('"', '');
+
+          namesoflunch.add(resultname);
+          print("the names are :: $namesoflunch");
+        }
+      }
+
+      /////////////////// dinner //////////////////////
+      namesofdinner = [];
+
+      for (var i = 0; i < decodelistdinner.length; i++) {
+        print(
+            'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
+        String str = decodelistdinner[i];
+        String resultname = str.split(',')[0];
+
+        resultname = resultname.replaceAll('"', '');
+
+        namesofdinner.add(resultname);
+        print("the names are :: $namesofdinner");
+
+    
       }
     });
   }
@@ -189,7 +224,7 @@ class deletemealsState extends State<deletemeals> {
               title: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  decodelistlunch[index],
+                  namesoflunch[index],
                   style: TextStyle(
                       fontFamily: "FontMain",
                       color: Colors.grey.shade200,
@@ -248,7 +283,7 @@ class deletemealsState extends State<deletemeals> {
               title: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  decodelistdinner[index],
+                  namesofdinner[index],
                   style: TextStyle(
                       fontFamily: "FontMain",
                       color: Colors.grey.shade200,
