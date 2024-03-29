@@ -20,7 +20,7 @@ double sumoflunchcal = 0;
 double sumofdinnercal = 0;
 List<String> names = [];
 List<String> calaries = [];
-List<int> dataListAsInt = calaries.map((data) => int.parse(data)).toList();
+
 
 class mealsTodayState extends State<mealsToday> {
   @override
@@ -59,12 +59,21 @@ class mealsTodayState extends State<mealsToday> {
         resultcal = resultcal.replaceAll('"', '');
         calaries.add(resultcal);
         print("the calaries are :: $calaries");
+        print(calaries.runtimeType);
       }
 
+      
 
 
-      // print(dataListAsInt);
-      // print(dataListAsInt.runtimeType);
+List<double> dataListAsDouble =
+          calaries.map((data) => double.parse(data)).toList();
+
+      print(dataListAsDouble);
+      sumofBrekfastcal =
+          dataListAsDouble.fold(0, (previous, current) => previous + current);
+
+      print(dataListAsDouble.runtimeType);
+      print(sumofBrekfastcal);
 
     });
   }
@@ -161,7 +170,7 @@ class mealsTodayState extends State<mealsToday> {
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: RichText(
                                   text: TextSpan(
-                                    text: calaries.toString(),
+                                    text: sumofBrekfastcal.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
