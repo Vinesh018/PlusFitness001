@@ -354,8 +354,8 @@ class mealsTodayState extends State<mealsToday> {
                                           fontFamily: 'FontMain',
                                           fontSize: 25),
                                       children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'Kcal',
+                                        TextSpan( 
+                                            text: ' Kcal',
                                             style: TextStyle(fontSize: 13)),
                                       ],
                                     ),

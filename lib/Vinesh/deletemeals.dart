@@ -41,9 +41,9 @@ class deletemealsState extends State<deletemeals> {
     List<String>? listStringdinner =
         sp.getStringList(sharedprefkeysfinal.dinnerlist);
 
-    decodedListbreakfast = listString!;
-    decodelistlunch = listStringlunch!;
-    decodelistdinner = listStringdinner!;
+    decodedListbreakfast = listString ?? [];
+    decodelistlunch = listStringlunch ?? [];
+    decodelistdinner = listStringdinner ?? [];
 
    
 
