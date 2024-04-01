@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
@@ -424,6 +425,7 @@ class _AccountContainerState extends State<AccountContainer> {
   setState(() {
   });
 }
+
 }
 
 class AccountContainerforother extends StatefulWidget {
@@ -474,7 +476,7 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
                     style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
                   ),
                 ),
-                OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',ontap: contactUsOnTap),
                 OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',ontap: Personaldataontap),
                 OneListtileForAccountData(icons: Icons.settings,str: 'Setting',ontap: Personaldataontap),
               ],
@@ -489,6 +491,12 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
   await Get.to(PersonalDataMainShow());
   setState(() {
   });
+}
+    contactUsOnTap(){
+ Get.to(ContactusPageMain());
+ setState(() {
+   
+ });
 }
 }
 

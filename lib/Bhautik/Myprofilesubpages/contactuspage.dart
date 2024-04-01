@@ -29,11 +29,11 @@ class ContactusPageMain extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Have questions',
+            'Have questions?',
             style: headintextstyle,
           ),
           Text(
-            'Shoot us an email',
+            'Shoot us an email.',
             style: headintextstyle,
           ),
         ],
