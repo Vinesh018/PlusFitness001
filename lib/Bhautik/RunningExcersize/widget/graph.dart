@@ -32,70 +32,74 @@ class _GraphState extends State<Graph> {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(right: 20, top: 40),
-      child: SizedBox(
-        height: size.height / 3 + 40,
-        child: LineChart(
-          curve: Curves.bounceIn, // Animation type
-          duration: Duration(seconds: 1),
-          LineChartData(
-            lineTouchData: LineTouchData(
-                // Customize Tooltip data
-                touchTooltipData: LineTouchTooltipData(
-              getTooltipItems: (touchedSpots) {
-                return touchedSpots.map((LineBarSpot touchedSpot) {
-                  final textStyle = TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25);
-                  return LineTooltipItem(touchedSpot.y.toString(), textStyle);
-                }).toList();
-              },
-            )),
-            borderData: FlBorderData(show: false), //Show Border of the graph
-            // giving bottom or left side data
-            titlesData: FlTitlesData(
-                bottomTitles: AxisTitles(
-                    axisNameWidget: Text('Time'),
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 30,
-                    )),
-                leftTitles: AxisTitles(
-                    axisNameWidget: Text('steps'),
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 40,
-                    )),
-                rightTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false))),
-            gridData: FlGridData(show: false),
-            lineBarsData: [
-              // The red line
-              LineChartBarData(
-                spots: dummydata2, //name of list that data is use to show
-                aboveBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                        colors: [Colors.grey.shade300, Colors.purple.shade100],
-                        begin: Alignment.topRight)),
-                belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(colors: [
-                      Colors.indigo.shade400,
-                      Colors.indigo.shade100
-                    ])),
-                isCurved: true,
-                barWidth: 3,
-                dotData: FlDotData(show: false),
-                gradient: LinearGradient(
-                    colors: [Colors.indigo.shade300, Colors.indigo.shade400]),
-                preventCurveOverShooting:
-                    true, //not allow to go outside of y axis
-                // shadow: Shadow(color: Colors.black,blurRadius: 20),
-              ),
-            ],
+      child: AnimatedPositionedDirectional(
+       duration: const Duration(milliseconds: 500),
+         curve: Curves.easeInOut,
+        child: Container(
+          height: size.height / 3,
+          child: LineChart(
+            // curve: Curves.bounceIn, // Animation type
+            // duration: Duration(seconds: 1),
+            LineChartData(
+              lineTouchData: LineTouchData(
+                  // Customize Tooltip data
+                  touchTooltipData: LineTouchTooltipData(
+                getTooltipItems: (touchedSpots) {
+                  return touchedSpots.map((LineBarSpot touchedSpot) {
+                    final textStyle = TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25);
+                    return LineTooltipItem(touchedSpot.y.toString(), textStyle);
+                  }).toList();
+                },
+              )),
+              borderData: FlBorderData(show: false), //Show Border of the graph
+              // giving bottom or left side data
+              titlesData: FlTitlesData(
+                  bottomTitles: AxisTitles(
+                      axisNameWidget: Text('Time'),
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 30,
+                      )),
+                  leftTitles: AxisTitles(
+                      axisNameWidget: Text('steps'),
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 40,
+                      )),
+                  rightTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false))),
+              gridData: FlGridData(show: false),
+              lineBarsData: [
+                // The red line
+                LineChartBarData(
+                  spots: dummydata2, //name of list that data is use to show
+                  aboveBarData: BarAreaData(
+                      show: true,
+                      gradient: LinearGradient(
+                          colors: [Colors.grey.shade300, Colors.purple.shade100],
+                          begin: Alignment.topRight)),
+                  belowBarData: BarAreaData(
+                      show: true,
+                      gradient: LinearGradient(colors: [
+                        Colors.indigo.shade400,
+                        Colors.indigo.shade100
+                      ])),
+                  isCurved: true,
+                  barWidth: 3,
+                  dotData: FlDotData(show: false),
+                  gradient: LinearGradient(
+                      colors: [Colors.indigo.shade300, Colors.indigo.shade400]),
+                  preventCurveOverShooting:
+                      true, //not allow to go outside of y axis
+                  // shadow: Shadow(color: Colors.black,blurRadius: 20),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -107,6 +111,5 @@ class _GraphState extends State<Graph> {
 class Flspot {
   final double x;
   final double y;
-
   Flspot({required this.x, required this.y});
 }
