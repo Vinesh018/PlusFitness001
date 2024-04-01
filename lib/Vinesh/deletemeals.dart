@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 
@@ -12,12 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
  List<String> decodedListbreakfast = [];
  List<String> decodelistlunch = [];
  List<String> decodelistdinner = [];
-List<String> breakfastList = [];
-List<String> namesoflunch = [];
-List<String> namesofdinner = [];
-// double sumofBrekfastcal = 0;
-// double sumoflunchcal = 0;
-// double sumofdinnercal = 0;
+
 
 class deletemeals extends StatefulWidget {
   const deletemeals({super.key});
@@ -48,52 +44,7 @@ class deletemealsState extends State<deletemeals> {
    
 
     setState(() {
-      breakfastList = [];
-      for (var i = 0; i < decodedListbreakfast.length; i++) {
-        print(
-            'The Values of I is Eqauls to $i of and its ${decodedListbreakfast[i]}');
-        String str = decodedListbreakfast[i];
-        String resultname;
-        resultname = str.split(',')[0];
-
-        resultname = resultname.replaceAll('"', '');
-
-        breakfastList.add(resultname);
-        print("the names are :: $breakfastList");
-
-        //////////////////////// lunch ///////////////////////////
-
-        namesoflunch = [];
-
-        for (var i = 0; i < decodelistlunch.length; i++) {
-          print(
-              'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
-          String str = decodelistlunch[i];
-          String resultname = str.split(',')[0];
-
-          resultname = resultname.replaceAll('"', '');
-
-          namesoflunch.add(resultname);
-          print("the names are :: $namesoflunch");
-        }
-      }
-
-      /////////////////// dinner //////////////////////
-      namesofdinner = [];
-
-      for (var i = 0; i < decodelistdinner.length; i++) {
-        print(
-            'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
-        String str = decodelistdinner[i];
-        String resultname = str.split(',')[0];
-
-        resultname = resultname.replaceAll('"', '');
-
-        namesofdinner.add(resultname);
-        print("the names are :: $namesofdinner");
-
-    
-      }
+     
     });
   }
 
@@ -165,7 +116,7 @@ class deletemealsState extends State<deletemeals> {
               title: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  breakfastList[index],
+                  "${decodedListbreakfast[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
                   style: TextStyle(
                       fontFamily: "FontMain",
                       color: Colors.grey.shade200,
@@ -224,7 +175,7 @@ class deletemealsState extends State<deletemeals> {
               title: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  namesoflunch[index],
+                  "${decodelistlunch[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
                   style: TextStyle(
                       fontFamily: "FontMain",
                       color: Colors.grey.shade200,
@@ -283,7 +234,7 @@ class deletemealsState extends State<deletemeals> {
               title: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Text(
-                  namesofdinner[index],
+                  "${decodelistdinner[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
                   style: TextStyle(
                       fontFamily: "FontMain",
                       color: Colors.grey.shade200,

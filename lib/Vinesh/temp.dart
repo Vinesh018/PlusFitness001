@@ -33,13 +33,14 @@ class _ConfettiState extends State<Confetti> {
       child: Scaffold(
         body: ConfettiWidget(
           blastDirectionality: BlastDirectionality.explosive,
-          maxBlastForce: 15,
-          confettiController: _controllerCenterRight,
+          maxBlastForce: 25,
+          confettiController: _controllerCenterLeft,
           blastDirection: 170,
           particleDrag: 0.05,
           emissionFrequency: 0.05,
-          numberOfParticles: 20,
-          gravity: 0.2,
+          numberOfParticles: 30,
+          gravity: 0.1,
+
         ),
       ),
     );

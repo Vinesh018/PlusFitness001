@@ -27,7 +27,7 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-        //home: Confetti(),
+        //  home: Confetti(),
       //home: StoreusingSharedPreferences(),
       //  home: PersonalDataMainShow(),
       // home: SplashScreen(),
@@ -91,23 +91,24 @@ class _TutorialHomeState extends State<TutorialHome> {
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                ConfettiWidget(
-                  blastDirectionality: BlastDirectionality.explosive,
-                  maxBlastForce: 15,
-                  confettiController: _controllerCenterRight,
-                  blastDirection: 170,
-                  particleDrag: 0.05,
-                  emissionFrequency: 0.05,
-                  numberOfParticles: 20,
-                  gravity: 0.2,
-                ),
+                // ConfettiWidget(
+                //   blastDirectionality: BlastDirectionality.explosive,
+                //   maxBlastForce: 15,
+                //   confettiController: _controllerCenterRight,
+                //   blastDirection: 170,
+                //   particleDrag: 0.05,
+                //   emissionFrequency: 0.05,
+                //   numberOfParticles: 20,
+                //   gravity: 0.2,
+                // ),
                 firstContainer(),
                 heading_mealsToday(),
                 mealsToday(),
                 heading_BodyMeasurement(),
                 bodyMeasureCont(),
+
                 heading_water(),
-                
+
                 waterContainer(),
                 waterGlass(),
               ],
