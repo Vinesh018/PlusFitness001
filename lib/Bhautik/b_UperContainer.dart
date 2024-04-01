@@ -15,8 +15,9 @@ List<String> calariesoflunch = [];
 List<String> calariesofdinner = [];
 double? eatencals = 0;
 Color textColor = Colors.black;
-
-Color carprofatColor = Colors.black;
+Color carbscolor = Colors.black;
+Color protiencolor = Colors.black;
+Color fatscolor = Colors.black;
 
 var carbs;
 var carbsper;
@@ -171,6 +172,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
 
       carbsper = carbs / 312.5;
       carbs = 312.5 - carbs;
+      if (carbs! <= 0) {
+      carbscolor = Colors.green;
+      }
+      if (carbs > 0) {
+        carbscolor = Colors.black;
+      }
 
       protein = Sumofcal / 16;
 
@@ -182,6 +189,13 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       }
       proteinper = protein / 156.25;
       protein = 156.25 - protein;
+         if (protein! <= 0) {
+      protiencolor = Colors.green;
+      }
+      if (protein > 0) {
+        protiencolor = Colors.black;
+      }
+
 
       fats = Sumofcal / 36;
 
@@ -193,6 +207,13 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       }
       fatsper = fats / 69.45;
       fats = 69.45 - fats;
+         if (fats! <= 0) {
+      fatscolor = Colors.green;
+      }
+      if (fats > 0) {
+        fatscolor = Colors.black;
+      }
+
 
       print("----------------------------");
 
@@ -380,6 +401,7 @@ class SecondRowOfShadow extends StatelessWidget {
             coolor2: Colors.indigo.shade700,
             backgroundColor: Colors.indigo.shade100,
             percentage: carbsper ?? 0,
+            textcolor: carbscolor,
             subtext: (carbs ?? 0).toStringAsFixed(1)),
         CommoncarbsProtinefat(
             headText: 'Protien',
@@ -387,6 +409,7 @@ class SecondRowOfShadow extends StatelessWidget {
             coolor2: Colors.pink.shade700,
             backgroundColor: Colors.pink.shade100,
             percentage: proteinper ?? 0,
+            textcolor: protiencolor,
             subtext: (protein ?? 0).toStringAsFixed(1)),
         CommoncarbsProtinefat(
             headText: 'Fats',
@@ -394,6 +417,7 @@ class SecondRowOfShadow extends StatelessWidget {
             coolor2: Colors.amber.shade700,
             backgroundColor: Colors.amber.shade100,
             percentage: fatsper ?? 0,
+            textcolor: fatscolor,
             subtext: (fats ?? 0).toStringAsFixed(1)),
       ],
     );
@@ -407,14 +431,16 @@ class CommoncarbsProtinefat extends StatefulWidget {
   final Color backgroundColor;
   final String subtext;
   final double percentage;
+  Color textcolor;
 
-  const CommoncarbsProtinefat(
+   CommoncarbsProtinefat(
       {required this.headText,
       required this.coolor1,
       required this.coolor2,
       required this.subtext,
       required this.backgroundColor,
-      required this.percentage});
+      required this.percentage,
+      required this.textcolor});
 
   @override
   State<CommoncarbsProtinefat> createState() => _CommoncarbsProtinefatState();
@@ -455,8 +481,8 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
           Row(
             children: [
 
-              Text(widget.subtext),
-              const Text(' g left'),
+              Text(widget.subtext, style: TextStyle(color: widget.textcolor),),
+               Text(' g left',style: TextStyle(color: widget.textcolor),),
             ],
           ),
         ],
