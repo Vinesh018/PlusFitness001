@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus_fitness/Bhautik/RunningExcersize/steptracker.dart';
 import 'package:plus_fitness/Vinesh/Exercise/Running/running.dart';
 
 var width;
@@ -94,7 +95,8 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Get.off(FitnessTrackingApp());
+                      // Get.off(FitnessTrackingApp());
+                      Get.to(Steptracker());
                     },
                     child: Image.asset("assets/images/area3.png"),
                   ),
