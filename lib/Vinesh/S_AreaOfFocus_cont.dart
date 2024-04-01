@@ -94,7 +94,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Get.off(Running());
+                      Get.off(FitnessTrackingApp());
                     },
                     child: Image.asset("assets/images/area3.png"),
                   ),
