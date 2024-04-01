@@ -1,22 +1,49 @@
+
 import 'package:flutter/material.dart';
-import 'package:plus_fitness/Vinesh/Exercise/Running/RunningBody.dart';
+import 'package:sensors/sensors.dart';
 
-class Running extends StatefulWidget {
-  const Running({super.key});
 
+class FitnessTrackingApp extends StatefulWidget {
   @override
-  State<Running> createState() => _RunningState();
+  _FitnessTrackingAppState createState() => _FitnessTrackingAppState();
 }
 
-class _RunningState extends State<Running> {
+class _FitnessTrackingAppState extends State<FitnessTrackingApp> {
+  double _accelerometerX = 0.0;
+  double _accelerometerY = 0.0;
+  double _accelerometerZ = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    accelerometerEvents.listen((AccelerometerEvent event) {
+      setState(() {
+        _accelerometerX = event.x;
+        _accelerometerY = event.y;
+        _accelerometerZ = event.z;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 18)),
+          title: Text('Fitness Tracker'),
         ),
-        body: MyApp());
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Accelerometer Data'),
+              Text('X: $_accelerometerX'),
+              Text('Y: $_accelerometerY'),
+              Text('Z: $_accelerometerZ'),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
