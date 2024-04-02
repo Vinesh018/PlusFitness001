@@ -16,4 +16,5 @@ class sharedprefkeysfinal {
   static String lunchcalsum  = 'lunchcalsum';
   static String dinnercalsum  = 'dinnercalsum';
   static String sumofallcalaries   = 'sumofcal';
+  static String previousvalue   = 'prevalue';
 }

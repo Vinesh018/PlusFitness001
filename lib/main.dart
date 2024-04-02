@@ -34,8 +34,8 @@ Future<void> main() async {
         //home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
-        //home: TutorialHome()
-        home: ContactusPageMain()
+        home: TutorialHome()
+        // home: ContactusPageMain()
     ),
   );
 }
