@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/temp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,13 +28,14 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-        //  home: Confetti(),
+        //home: Confetti(),
       //home: StoreusingSharedPreferences(),
-      //  home: PersonalDataMainShow(),
-      // home: SplashScreen(),
+        //home: PersonalDataMainShow(),
+        //home: SplashScreen(),
       //home: MainSignUpPage(),
-      // home:UserProfileMainRun()
-        home: TutorialHome()
+        //home:UserProfileMainRun()
+        //home: TutorialHome()
+        home: ContactusPageMain()
     ),
   );
 }
