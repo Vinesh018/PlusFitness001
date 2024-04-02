@@ -86,9 +86,9 @@ class _AccelerometerExampleState extends State<AccelerometerExample> {
         stream: SensorsPlatform.instance.accelerometerEvents,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            x = snapshot.data!.x;
-            y = snapshot.data!.y;
-            z = snapshot.data!.z;
+            x = _accelerometerValues[0].x.toStringAsFixed(2) as double;
+            y = _accelerometerValues[0].y.toStringAsFixed(2) as double;
+            z = _accelerometerValues[0].z.toStringAsFixed(2) as double;
             distnace = getValue(x, y, z);
             if (distnace > 6) {
               step++;
