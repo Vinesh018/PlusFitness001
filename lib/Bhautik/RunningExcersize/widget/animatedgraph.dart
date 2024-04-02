@@ -40,46 +40,47 @@ class _graphdataState extends State<graphdata> {
         LinearGradient(colors: color, stops: stops);
 
     return Padding(
-      padding: const EdgeInsets.only(top: 45,right: 15),
+      padding: const EdgeInsets.only(top: 15,right: 15),
       child: Column(
         children: [
-          Text("Your Today's Activity",style: TextStyle(fontFamily: 'FontMain',color: Colors.black,
-          fontSize: 18),),
-          Padding(
-            padding: const EdgeInsets.only(top: 25),
-            child: Container(
-              height: size.height / 3,
-              child: SfCartesianChart(
-                  primaryXAxis: NumericAxis(
-                    edgeLabelPlacement: EdgeLabelPlacement.shift,
-                    interval: 1,
-                    majorGridLines: MajorGridLines(width: 0),
-                  ),
-                  
-                  primaryYAxis: NumericAxis(
-                    labelFormat: '{value}%',
-                    axisLine: AxisLine(width: 0),
-                    majorTickLines: MajorTickLines(color: Colors.transparent),
-                  ),
-                 plotAreaBackgroundColor: Colors.purple.shade50,
-                  series: <CartesianSeries>[
-                    AreaSeries<Flspot, num>(
-            
-                        animationDuration: 2500,
-                        dataSource: data,
-                        xValueMapper: (Flspot spot, _) => spot.x,
-                        yValueMapper: (Flspot spot, _) => spot.y,
-                        borderWidth: 4,
-                        
-                        gradient: LinearGradient(
-                          colors: color,
-                        ),
-                        borderGradient: const LinearGradient(
-                            colors: <Color>[Colors.blue, Colors.black],
-                            stops: <double>[0.2, 0.9]),
-                        markerSettings: MarkerSettings(isVisible: false)),
-                  ]),
-            ),
+          // Text("Your Today's Activity",style: TextStyle(fontFamily: 'FontMain',color: Colors.black,
+          // fontSize: 18),),
+          Container(
+            height: size.height / 3 - 40,
+            child: SfCartesianChart(
+              plotAreaBorderWidth: 0,
+                primaryXAxis: NumericAxis(
+                  edgeLabelPlacement: EdgeLabelPlacement.shift,
+                
+                  majorGridLines: MajorGridLines(width: 0),
+                  labelStyle: TextStyle(fontSize: 0),
+                ),
+                
+                primaryYAxis: NumericAxis(
+                  labelFormat: '{value}%',
+                  axisLine: AxisLine(width: 0),
+                   majorGridLines: MajorGridLines(width: 0),
+                  majorTickLines: MajorTickLines(color: Colors.transparent),
+                    labelStyle: TextStyle(fontSize: 0),
+                ),
+              //  plotAreaBackgroundColor: Colors.purple.shade50,
+                series: <CartesianSeries>[
+                  AreaSeries<Flspot, num>(
+                      
+                      animationDuration: 2500,
+                      dataSource: data,
+                      xValueMapper: (Flspot spot, _) => spot.x,
+                      yValueMapper: (Flspot spot, _) => spot.y,
+                      borderWidth: 4,
+                      
+                      gradient: LinearGradient(
+                        colors: color,
+                      ),
+                      borderGradient: const LinearGradient(
+                          colors: <Color>[Colors.blue, Colors.black],
+                          stops: <double>[0.2, 0.9]),
+                      markerSettings: MarkerSettings(isVisible: false)),
+                ]),
           ),
         ],
       ),
@@ -88,7 +89,6 @@ class _graphdataState extends State<graphdata> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     data.clear();
     super.dispose();
   }

@@ -6,6 +6,7 @@ import 'package:plus_fitness/Bhautik/RunningExcersize/widget/info.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/widget/stats.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/widget/step.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/widget/animatedgraph.dart';
+import 'package:plus_fitness/Bhautik/RunningExcersize/widget/accelerometer.dart';
 import 'package:plus_fitness/Vinesh/S_AreaOfFocus_cont.dart';
 import 'package:plus_fitness/exercise.dart';
 
@@ -21,15 +22,18 @@ class Steptracker extends StatelessWidget{
       title: Text('Activity',style: appbartextstyle,),
       centerTitle: true,
     ),
-    body: Column(
-      children: [
-        Dates(),
-        Steps(),
-        graphdata(),
-        // Graph(),//This graph is Without animation
-        Info(),
-        Stats()
-      ],
+    body: SingleChildScrollView(
+      child: Column(
+        children: [
+          AccelerometerExample(),
+          Dates(),
+          Steps(),
+          graphdata(),
+          // Graph(),//This graph is Without animation
+          Info(),
+          Stats()
+        ],
+      ),
     ),
    );
   }
