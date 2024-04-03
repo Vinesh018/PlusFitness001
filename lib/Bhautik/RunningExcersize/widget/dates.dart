@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/widget/Helper.dart';
 
 
-
+var screenWidth ;
+var screenHeight;
 class Dates extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
     List<DateBox> dateboxes = [];
     DateTime date = DateTime.now().subtract(Duration(days: 3));
     for (var i = 0; i < 7; i++) {
@@ -35,7 +38,7 @@ class DateBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Container(
-        width: 50,
+        width: screenWidth/8,
         height: 70,
         decoration: BoxDecoration(
           gradient: active? LinearGradient(colors: [Colors.indigoAccent,Colors.indigo.shade100],begin: Alignment.topCenter) : null,
