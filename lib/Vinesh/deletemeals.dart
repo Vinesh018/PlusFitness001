@@ -88,6 +88,7 @@ class deletemealsState extends State<deletemeals> {
       // itemCount: decodedListbreakfast.length,
       itemCount: decodedListbreakfast.length,
       itemBuilder: (context, index) {
+        final item = decodedListbreakfast[index];
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
@@ -112,31 +113,29 @@ class deletemealsState extends State<deletemeals> {
                     topRight: Radius.circular(50),
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8))),
-            child: ListTile(
-              title: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Text(
-                  "${decodedListbreakfast[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
-                  style: TextStyle(
-                      fontFamily: "FontMain",
-                      color: Colors.grey.shade200,
-                      fontSize: 20),
+            child: Dismissible(
+              key: Key(item),
+              onDismissed: (direction) async {
+                var sp = await SharedPreferences.getInstance();
+                decodedListbreakfast.removeAt(index);
+                decodedListbreakfast.removeWhere((item) => item == index);
+                sp.setStringList(
+                    sharedprefkeysfinal.breakfastlist, decodedListbreakfast);
+                setState(() {});
+              },
+            
+              child: ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text(
+                    "${decodedListbreakfast[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
+                    style: TextStyle(
+                        fontFamily: "FontMain",
+                        color: Colors.grey.shade200,
+                        fontSize: 20),
+                  ),
                 ),
               ),
-              trailing: IconButton(
-                  onPressed: () async {
-                    var sp = await SharedPreferences.getInstance();
-                    decodedListbreakfast.removeAt(index);
-                    decodedListbreakfast.removeWhere((item) => item == index);
-                    sp.setStringList(sharedprefkeysfinal.breakfastlist,
-                        decodedListbreakfast);
-                    setState(() {});
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                    size: 35,
-                  )),
             ),
           ),
         );
@@ -147,6 +146,7 @@ class deletemealsState extends State<deletemeals> {
     return ListView.builder(
       itemCount: decodelistlunch.length,
       itemBuilder: (context, index) {
+        final item = decodelistlunch[index];
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
@@ -171,31 +171,28 @@ class deletemealsState extends State<deletemeals> {
                     topRight: Radius.circular(50),
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8))),
-            child: ListTile(
-              title: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Text(
-                  "${decodelistlunch[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
-                  style: TextStyle(
-                      fontFamily: "FontMain",
-                      color: Colors.grey.shade200,
-                      fontSize: 20),
+            child: Dismissible(
+              key: Key(item),
+              onDismissed: (direction) async {
+                var sp = await SharedPreferences.getInstance();
+                decodelistlunch.removeAt(index);
+                decodelistlunch.removeWhere((item) => item == index);
+                sp.setStringList(
+                    sharedprefkeysfinal.lunchlist, decodelistlunch);
+                setState(() {});
+              },
+              child: ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text(
+                    "${decodelistlunch[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
+                    style: TextStyle(
+                        fontFamily: "FontMain",
+                        color: Colors.grey.shade200,
+                        fontSize: 20),
+                  ),
                 ),
               ),
-              trailing: IconButton(
-                  onPressed: () async {
-                    var sp = await SharedPreferences.getInstance();
-                    decodelistlunch.removeAt(index);
-                    decodelistlunch.removeWhere((item) => item == index);
-                    sp.setStringList(
-                        sharedprefkeysfinal.lunchlist, decodelistlunch);
-                    setState(() {});
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                    size: 35,
-                  )),
             ),
           ),
         );
@@ -206,6 +203,7 @@ class deletemealsState extends State<deletemeals> {
     return ListView.builder(
       itemCount: decodelistdinner.length,
       itemBuilder: (context, index) {
+        final item = decodelistdinner[index];
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
@@ -230,30 +228,26 @@ class deletemealsState extends State<deletemeals> {
                     topRight: Radius.circular(50),
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8))),
-            child: ListTile(
-              title: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Text(
-                  "${decodelistdinner[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
-                  style: TextStyle(
-                      fontFamily: "FontMain",
-                      color: Colors.grey.shade200,
-                      fontSize: 20),
-                ),
-              ),
-              trailing: IconButton(
-                onPressed: () async {
-                  var sp = await SharedPreferences.getInstance();
-                  decodelistdinner.removeAt(index);
-                  decodelistdinner.removeWhere((item) => item == index);
-                  sp.setStringList(
-                      sharedprefkeysfinal.dinnerlist, decodelistdinner);
-                  setState(() {});
-                },
-                icon: Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                  size: 35,
+            child: Dismissible(
+              key: Key(item),
+              onDismissed: (direction) async {
+                var sp = await SharedPreferences.getInstance();
+                decodelistdinner.removeAt(index);
+                decodelistdinner.removeWhere((item) => item == index);
+                sp.setStringList(
+                    sharedprefkeysfinal.dinnerlist, decodelistdinner);
+                setState(() {});
+              },
+              child: ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text(
+                    "${decodelistdinner[index].replaceAll(",", "  ").replaceAll('"', "")} Kcal",
+                    style: TextStyle(
+                        fontFamily: "FontMain",
+                        color: Colors.grey.shade200,
+                        fontSize: 20),
+                  ),
                 ),
               ),
             ),
