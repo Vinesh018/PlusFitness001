@@ -64,7 +64,10 @@ class _TutorialHomeState extends State<TutorialHome> {
     super.initState();
   }
   AppBar appbar = AppBar(
-    title: const Text('My Dairy'),
+    title: Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: const Text('My Dairy',style:  TextStyle(fontFamily: 'FontMain',fontSize: 22,color: Colors.indigo),),
+    ),
     backgroundColor: Color.fromARGB(255, 231, 235, 237),
     actions: const [
       Row(

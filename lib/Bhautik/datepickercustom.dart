@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:plus_fitness/Bhautik/RunningExcersize/widget/stats.dart';
 
 var width;
+
 
 class DatepickerCustom extends StatefulWidget {
   const DatepickerCustom({super.key});
@@ -51,10 +53,14 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Row(
       children: [
         GestureDetector(
-          child: const Icon(Icons.arrow_back_ios_new_rounded),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(Icons.arrow_back_ios_new_rounded),
+          ),
           onTap: () {
             setState(() {
               selectedDate = selectedDate.add(const Duration(days: -1));
@@ -79,8 +85,8 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
               },
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 10),
+                  icon:  Padding(
+                    padding: EdgeInsets.only(left: screenWidth/10 - 36),
                     child: Icon(
                       Icons.calendar_today_outlined,
                       size: 20,
@@ -102,7 +108,7 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
         ),
         GestureDetector(
           child: Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 10,left: 25),
             child: const Icon(Icons.arrow_forward_ios_rounded),
           ),
           onTap: () {

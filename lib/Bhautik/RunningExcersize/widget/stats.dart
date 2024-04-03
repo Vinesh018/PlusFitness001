@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+var screenwidth;
 
 class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           children: [
@@ -32,15 +34,13 @@ class Stats extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              InfoState(icon: Icons.timer, iconcolor:  Colors.green.shade300, iconbackground: Colors.blue, time: '+5s', value: '30:45', label: 'Time',),
-              InfoState(icon: Icons.favorite, iconcolor:  Colors.green.shade300, iconbackground: Colors.yellow, time: '+5s', value: '85 bpm', label: 'Heart rate',),
-              InfoState(icon: Icons.star_rate, iconcolor:  Colors.green.shade300, iconbackground: Colors.purple, time: '+5s', value: '169kcal', label: 'Energy',),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InfoState(icon: Icons.timer, iconcolor:  Colors.green.shade300, iconbackground: Colors.blue, time: '+5s', value: '30:45', label: 'Time',),
+            InfoState(icon: Icons.favorite, iconcolor:  Colors.green.shade300, iconbackground: Colors.yellow, time: '+5s', value: '85 bpm', label: 'Heart rate',),
+            InfoState(icon: Icons.star_rate, iconcolor:  Colors.green.shade300, iconbackground: Colors.purple, time: '+5s', value: '169 kcal', label: 'Energy',),
+          ],
         )
       ],
     );
@@ -64,44 +64,42 @@ class _InfoStateState extends State<InfoState> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 15),
-      child: Container(
-        height: 110,
-        width: 110,
-        padding: EdgeInsets.all(8),
-        margin: EdgeInsets.symmetric(vertical: 5),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.grey
-          ),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [BoxShadow(
-            color: Colors.black,
-            blurRadius: 3,
-            offset: Offset(3, 3)
-          )],
+    screenwidth = MediaQuery.of(context).size.width;
+    return Container(
+      height: 110,
+      width: screenwidth/4,
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.grey
         ),
-      child: Stack(
-        children: [
-          iconstate(widget: widget, icon: Icons.timer, backgroundcoloricon : widget.iconbackground,),
-          labeltext(widget: widget),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.label,style: TextStyle(fontSize: 14,),),
-                Text(widget.value,style: TextStyle(fontSize: 17,fontWeight: FontWeight.w800),)
-              ],
-            ),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [BoxShadow(
+          color: Colors.black,
+          blurRadius: 3,
+          offset: Offset(3, 3)
+        )],
+      ),
+    child: Stack(
+      children: [
+        iconstate(widget: widget, icon: Icons.timer, backgroundcoloricon : widget.iconbackground,),
+        labeltext(widget: widget),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.label,style: TextStyle(fontSize: screenwidth/24,),),
+              Text(widget.value,style: TextStyle(fontSize: screenwidth/26,fontWeight: FontWeight.w800),)
+            ],
           ),
-          
-        ],
-      ),
-      ),
+        ),
+        
+      ],
+    ),
     );
   }
 }
@@ -125,7 +123,7 @@ class labeltext extends StatelessWidget {
           color: Colors.green,
           borderRadius: BorderRadius.circular(500)
         ),
-        child: Text(widget.time,style: TextStyle(fontSize: 10,color: Colors.white),)));
+        child: Text(widget.time,style: TextStyle(fontSize: screenwidth/33,color: Colors.white),)));
   }
 }
 
@@ -148,6 +146,6 @@ class iconstate extends StatelessWidget {
         color: Colors.blue.shade100,
         borderRadius: BorderRadius.circular(9)
       ),
-      child: Icon(widget.icon,size: 15, color: backgroundcoloricon,));
+      child: Icon(widget.icon,size: screenwidth/30, color: backgroundcoloricon,));
   }
 }

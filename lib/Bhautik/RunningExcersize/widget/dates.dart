@@ -17,7 +17,7 @@ class Dates extends StatelessWidget {
       date = date.add(Duration(days: 1));
     }
      return Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 2),
+       padding: const EdgeInsets.symmetric(horizontal: 10),
        child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:dateboxes,
@@ -38,10 +38,10 @@ class DateBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Container(
-        width: screenWidth/8,
+        width: screenWidth/8 -1 ,
         height: 70,
         decoration: BoxDecoration(
-          gradient: active? LinearGradient(colors: [Colors.indigoAccent,Colors.indigo.shade100],begin: Alignment.topCenter) : null,
+          gradient: active? LinearGradient(colors: [Colors.indigoAccent,Colors.indigo.shade100],begin: Alignment.topCenter) : LinearGradient(colors: [Color.fromRGBO(251, 235, 209, 1), Color.fromRGBO(248, 207, 183, 1),  Color.fromRGBO(245, 184, 161, 1)],begin: Alignment.bottomLeft),
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.circular(11),
         ),
@@ -50,8 +50,8 @@ class DateBox extends StatelessWidget {
           child: Column(
            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(daysofweek[date.weekday]!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,fontFamily: 'FontMain')),
-              Text(date.day.toString().padLeft(2,'0'),style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,fontFamily: 'FontMain')),
+              Text(daysofweek[date.weekday]!,style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,fontFamily: 'FontMain')),
+              Text(date.day.toString().padLeft(2,'0'),style: TextStyle(fontSize: 21,fontWeight: FontWeight.w500,fontFamily: 'FontMain')),
             ],
           ),
         ),
