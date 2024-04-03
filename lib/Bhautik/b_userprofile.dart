@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/achievement.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
@@ -410,9 +411,9 @@ class _AccountContainerState extends State<AccountContainer> {
                   ),
                 ),
                 OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap:  Personaldataontap,),
-                OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: Personaldataontap),
-                OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: Personaldataontap),
-                OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: achievementontap),
+                OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: achievementontap),
+                OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: achievementontap),
               ],
             ),
           ),
@@ -422,6 +423,11 @@ class _AccountContainerState extends State<AccountContainer> {
   }
    Personaldataontap() async{
   await Get.off(PersonalDataMainShow());
+  setState(() {
+  });
+}
+   achievementontap() async{
+  await Get.to(achievementmain());
   setState(() {
   });
 }
@@ -477,8 +483,8 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
                   ),
                 ),
                 OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',ontap: contactUsOnTap),
-                OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',ontap: Personaldataontap),
-                OneListtileForAccountData(icons: Icons.settings,str: 'Setting',ontap: Personaldataontap),
+                OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',ontap: achievementontap),
+                OneListtileForAccountData(icons: Icons.settings,str: 'Setting',ontap: achievementontap),
               ],
             ),
           ),
@@ -498,6 +504,12 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
    
  });
 }
+   achievementontap() async{
+  await Get.to(achievementmain());
+  setState(() {
+  });
+}
+
 }
 
 class OneListtileForAccountData extends StatelessWidget {
