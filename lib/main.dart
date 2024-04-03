@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/sensorgetdata.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
@@ -36,6 +37,8 @@ Future<void> main() async {
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
         home: TutorialHome()
+        // home: MyHomePageb(),
+        // home: MyHomePageb(),
         // home: MyAppt(),
         // home: ContactusPageMain()
     ),
@@ -110,9 +113,7 @@ class _TutorialHomeState extends State<TutorialHome> {
                 mealsToday(),
                 heading_BodyMeasurement(),
                 bodyMeasureCont(),
-
                 heading_water(),
-
                 waterContainer(),
                 waterGlass(),
               ],
