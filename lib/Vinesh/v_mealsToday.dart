@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -154,131 +155,16 @@ class mealsTodayState extends State<mealsToday> {
           padding: const EdgeInsets.only(top: 30),
           child: Row(
             children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      if (decodedListbreakfast == 'Add Your Breakfast') {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DragandDrop(),
-                            ));
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.deepOrange.shade100,
-                              scrollable: true,
-                              title: Text('Breakfast'),
-                              content: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(namesofbrekfast.join(","))),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("OK"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                    child: Container(
-                      height: 190,
-                      width: 130,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.deepOrange.shade100,
-                              Colors.deepOrange.shade500
-                            ],
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(70),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 40, left: 15),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Breakfast",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FontMainBold',
-                                    fontSize: 17),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Text(
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  namesofbrekfast.join(","),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'FontMain',
-                                      fontSize: 12),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: sumofBrekfastcal.toStringAsFixed(0),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'FontMain',
-                                        fontSize: 25),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: ' Kcal',
-                                          style: TextStyle(fontSize: 13)),
-                                    ],
-                                  ),
-                                ),
-                              )
-                              //////
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: -2,
-                    top: -30,
-                    child: Container(
-                      child: Image.asset("assets/images/breakfast.png"),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(79, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(50)),
-                      width: 75,
-                      height: 70,
-                    ),
-                  ),
-                ],
-              ),
-              //-----------------------2nd Box for LUNCH ----------------------//
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 1), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        if (decodelistlunch == 'Add Your Lunch') {
+                        if (decodedListbreakfast == 'Add Your Breakfast') {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -289,12 +175,12 @@ class mealsTodayState extends State<mealsToday> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                backgroundColor: Colors.blue.shade100,
+                                backgroundColor: Colors.deepOrange.shade100,
                                 scrollable: true,
-                                title: Text('Lunch'),
+                                title: Text('Breakfast'),
                                 content: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(namesoflunch.join(","),)),
+                                    child: Text(namesofbrekfast.join(","))),
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
@@ -316,8 +202,8 @@ class mealsTodayState extends State<mealsToday> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blueAccent.shade100,
-                                Colors.blueAccent.shade700
+                                Colors.deepOrange.shade100,
+                                Colors.deepOrange.shade500
                               ],
                             ),
                             borderRadius: const BorderRadius.only(
@@ -333,7 +219,7 @@ class mealsTodayState extends State<mealsToday> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Lunch",
+                                  "Breakfast",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMainBold',
@@ -342,9 +228,9 @@ class mealsTodayState extends State<mealsToday> {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: Text(
-                                    namesoflunch.join(","),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
+                                    namesofbrekfast.join(","),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'FontMain',
@@ -355,13 +241,13 @@ class mealsTodayState extends State<mealsToday> {
                                   padding: const EdgeInsets.only(bottom: 5),
                                   child: RichText(
                                     text: TextSpan(
-                                      text: sumoflunchcal.toStringAsFixed(0),
+                                      text: sumofBrekfastcal.toStringAsFixed(0),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'FontMain',
                                           fontSize: 25),
                                       children: <TextSpan>[
-                                        TextSpan( 
+                                        TextSpan(
                                             text: ' Kcal',
                                             style: TextStyle(fontSize: 13)),
                                       ],
@@ -379,7 +265,7 @@ class mealsTodayState extends State<mealsToday> {
                       left: -2,
                       top: -30,
                       child: Container(
-                        child: Image.asset("assets/images/lunch.png"),
+                        child: Image.asset("assets/images/breakfast.png"),
                         decoration: BoxDecoration(
                             color: Color.fromARGB(79, 255, 255, 255),
                             borderRadius: BorderRadius.circular(50)),
@@ -390,136 +276,142 @@ class mealsTodayState extends State<mealsToday> {
                   ],
                 ),
               ),
-              //-------------------3rd Box for Snack ----------------------//
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: <Widget>[
-                    Container(
-                      height: 190,
-                      width: 130,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.pinkAccent.shade100,
-                              Colors.pinkAccent.shade700
-                            ],
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(70),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 40, left: 15),
+              //-----------------------2nd Box for LUNCH ----------------------//
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 3), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          if (decodelistlunch == 'Add Your Lunch') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DragandDrop(),
+                                ));
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.blue.shade100,
+                                  scrollable: true,
+                                  title: Text('Lunch'),
+                                  content: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(namesoflunch.join(","),)),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
                         child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 4,
-                                "Snack",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FontMainBold',
-                                    fontSize: 17),
+                          height: 190,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Colors.blueAccent.shade100,
+                                  Colors.blueAccent.shade700
+                                ],
                               ),
-                              SizedBox(
-                                width: 80,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Text(
-                                    "Recommended 800 Kcal",
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(70),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8))),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 15),
+                            child: Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Lunch",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'FontMain',
-                                        fontSize: 11),
+                                        fontFamily: 'FontMainBold',
+                                        fontSize: 17),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.white,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.pinkAccent,
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      namesoflunch.join(","),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 4,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'FontMain',
+                                          fontSize: 12),
                                     ),
-                                    onPressed: () {},
                                   ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: sumoflunchcal.toStringAsFixed(0),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'FontMain',
+                                            fontSize: 25),
+                                        children: <TextSpan>[
+                                          TextSpan( 
+                                              text: ' Kcal',
+                                              style: TextStyle(fontSize: 13)),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  //////
+                                ],
                               ),
-
-                              //////
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      left: -2,
-                      top: -30,
-                      child: Container(
-                        child: Image.asset("assets/images/snack.png"),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(79, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(50)),
-                        width: 75,
-                        height: 70,
+                      Positioned(
+                        left: -2,
+                        top: -30,
+                        child: Container(
+                          child: Image.asset("assets/images/lunch.png"),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(79, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(50)),
+                          width: 75,
+                          height: 70,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-
-              //--------------------------4th box for Dinner --------------//
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        if (decodelistdinner == 'Add Your Dinner') {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DragandDrop(),
-                              ));
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: Colors.purple.shade200,
-                                scrollable: true,
-                                title: Text('Dinner'),
-                                content: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      namesofdinner.join(","),
-                                    )),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text("OK"),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
-                      child: Container(
+              //-------------------3rd Box for Snack ----------------------//
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 5), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      Container(
                         height: 190,
                         width: 130,
                         decoration: BoxDecoration(
@@ -527,8 +419,8 @@ class mealsTodayState extends State<mealsToday> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.deepPurple.shade100,
-                                Colors.deepPurple.shade700
+                                Colors.pinkAccent.shade100,
+                                Colors.pinkAccent.shade700
                               ],
                             ),
                             borderRadius: const BorderRadius.only(
@@ -544,60 +436,189 @@ class mealsTodayState extends State<mealsToday> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Dinner",
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
+                                  "Snack",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'FontMainBold',
                                       fontSize: 17),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: Text(
-                                    namesofdinner.join(','),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'FontMain',
-                                        fontSize: 11),
+                                SizedBox(
+                                  width: 80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      "Recommended 800 Kcal",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'FontMain',
+                                          fontSize: 11),
+                                    ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 5),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: sumofdinnercal.toStringAsFixed(0),
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'FontMain',
-                                          fontSize: 25),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: ' Kcal',
-                                            style: TextStyle(fontSize: 13)),
-                                      ],
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.white,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                      onPressed: () {},
                                     ),
                                   ),
-                                )
+                                ),
+                
+                                //////
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      left: -2,
-                      top: -30,
-                      child: Container(
-                        child: Image.asset("assets/images/dinner.png"),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(79, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(50)),
-                        width: 75,
-                        height: 70,
+                      Positioned(
+                        left: -2,
+                        top: -30,
+                        child: Container(
+                          child: Image.asset("assets/images/snack.png"),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(79, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(50)),
+                          width: 75,
+                          height: 70,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+              ),
+
+              //--------------------------4th box for Dinner --------------//
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 5), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          if (decodelistdinner == 'Add Your Dinner') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DragandDrop(),
+                                ));
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.purple.shade200,
+                                  scrollable: true,
+                                  title: Text('Dinner'),
+                                  content: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        namesofdinner.join(","),
+                                      )),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 190,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Colors.deepPurple.shade100,
+                                  Colors.deepPurple.shade700
+                                ],
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(70),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8))),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 15),
+                            child: Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Dinner",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'FontMainBold',
+                                        fontSize: 17),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Text(
+                                      namesofdinner.join(','),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'FontMain',
+                                          fontSize: 11),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: sumofdinnercal.toStringAsFixed(0),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'FontMain',
+                                            fontSize: 25),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: ' Kcal',
+                                              style: TextStyle(fontSize: 13)),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: -2,
+                        top: -30,
+                        child: Container(
+                          child: Image.asset("assets/images/dinner.png"),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(79, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(50)),
+                          width: 75,
+                          height: 70,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

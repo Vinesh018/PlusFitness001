@@ -1,3 +1,4 @@
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/steptracker.dart';
@@ -25,49 +26,59 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
         children: [
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 180,
-                  width: width - 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 7,
-                        blurRadius: 10,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: InkWell(
-                    child: Image.asset("assets/images/area1.png"),
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 1), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_LEFT, 
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 180,
+                    width: width - 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 7,
+                          blurRadius: 10,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: InkWell(
+                      child: Image.asset("assets/images/area1.png"),
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 180,
-                 width: width -  40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 7,
-                        blurRadius: 10,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: InkWell(
-                    child: Image.asset("assets/images/area2.png"),
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 1), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 180,
+                   width: width -  40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 7,
+                          blurRadius: 10,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: InkWell(
+                      child: Image.asset("assets/images/area2.png"),
+                    ),
                   ),
                 ),
               ),
@@ -75,54 +86,64 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 180,
-                  width: width - 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 7,
-                        blurRadius: 10,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      // Get.off(FitnessTrackingApp());
-                      Get.to(Steptracker());
-                    },
-                    child: Image.asset("assets/images/area3.png"),
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 2), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_LEFT, 
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 180,
+                    width: width - 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 7,
+                          blurRadius: 10,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        // Get.off(FitnessTrackingApp());
+                        Get.to(Steptracker());
+                      },
+                      child: Image.asset("assets/images/area3.png"),
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 180,
-              width: width - 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 7,
-                        blurRadius: 10,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: InkWell(
-                    child: Image.asset("assets/images/area1.png"),
-                    onTap: () => print("tapped"),
+               DelayedWidget(
+                 delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 2), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 180,
+                width: width - 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 7,
+                          blurRadius: 10,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: InkWell(
+                      child: Image.asset("assets/images/area1.png"),
+                      onTap: () => print("tapped"),
+                    ),
                   ),
                 ),
               ),

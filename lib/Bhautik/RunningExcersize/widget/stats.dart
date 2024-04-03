@@ -1,3 +1,4 @@
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -65,41 +66,46 @@ class _InfoStateState extends State<InfoState> {
   @override
   Widget build(BuildContext context) {
     screenwidth = MediaQuery.of(context).size.width;
-    return Container(
-      height: 110,
-      width: screenwidth/4,
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(vertical: 5),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          color: Colors.grey
-        ),
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [BoxShadow(
-          color: Colors.black,
-          blurRadius: 3,
-          offset: Offset(3, 3)
-        )],
-      ),
-    child: Stack(
-      children: [
-        iconstate(widget: widget, icon: Icons.timer, backgroundcoloricon : widget.iconbackground,),
-        labeltext(widget: widget),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.label,style: TextStyle(fontSize: screenwidth/24,),),
-              Text(widget.value,style: TextStyle(fontSize: screenwidth/26,fontWeight: FontWeight.w800),)
-            ],
+    return  DelayedWidget(
+       delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 1), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_BOTTOM, 
+      child: Container(
+        height: 110,
+        width: screenwidth/4,
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.symmetric(vertical: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.grey
           ),
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [BoxShadow(
+            color: Colors.black,
+            blurRadius: 3,
+            offset: Offset(3, 3)
+          )],
         ),
-        
-      ],
-    ),
+      child: Stack(
+        children: [
+          iconstate(widget: widget, icon: Icons.timer, backgroundcoloricon : widget.iconbackground,),
+          labeltext(widget: widget),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.label,style: TextStyle(fontSize: screenwidth/24,),),
+                Text(widget.value,style: TextStyle(fontSize: screenwidth/26,fontWeight: FontWeight.w800),)
+              ],
+            ),
+          ),
+          
+        ],
+      ),
+      ),
     );
   }
 }

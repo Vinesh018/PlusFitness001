@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 
@@ -19,11 +19,19 @@ class Info extends StatelessWidget {
   } 
 }
 
-class CalaryDrationDistance extends StatelessWidget{
-  final double calvalue;
+class CalaryDrationDistance extends StatefulWidget{
+  double calvalue;
   final String unit;
   final String name;
-  const CalaryDrationDistance({ required this.calvalue,  required this.unit, required this.name,});
+ CalaryDrationDistance({ required this.calvalue,  required this.unit, required this.name,});
+
+  @override
+  State<CalaryDrationDistance> createState() => _CalaryDrationDistanceState();
+}
+
+class _CalaryDrationDistanceState extends State<CalaryDrationDistance> {
+
+
   @override
   Widget build(BuildContext context) {
    return Container(
@@ -32,14 +40,16 @@ class CalaryDrationDistance extends StatelessWidget{
         children: [
           Row(
             children: [
-              Text(calvalue.toString(), style: TextStyle(fontFamily: 'FontMain',fontSize: 25,fontWeight: FontWeight.w500),),
-              Text(' $unit',style: TextStyle(fontFamily: 'FontMain',fontSize: 11,fontWeight: FontWeight.w400),)
+              Text(widget.calvalue.toString(), style: TextStyle(fontFamily: 'FontMain',fontSize: 25,fontWeight: FontWeight.w500),),
+              Text(' ${widget.unit}',style: TextStyle(fontFamily: 'FontMain',fontSize: 11,fontWeight: FontWeight.w400),)
             ],
           ),
           SizedBox(height: 5,),
-          Text(name,style: TextStyle(fontFamily: 'FontMain',fontSize: 16,fontWeight: FontWeight.w400))
+          Text(widget.name,style: TextStyle(fontFamily: 'FontMain',fontSize: 16,fontWeight: FontWeight.w400))
         ],
       ),
    );
   }
+  
+ 
 }

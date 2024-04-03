@@ -6,8 +6,8 @@ import 'package:plus_fitness/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class waterContainer extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => waterContainerState();
 }
@@ -19,10 +19,15 @@ var waterDrinkTime = "--";
 String waterNotification = "Keep drinking water !!";
 int i = 1;
 
-class waterContainerState extends State<waterContainer> {
+class waterContainerState extends State<waterContainer> with SingleTickerProviderStateMixin {
+    Animation? animation;
+AnimationController? animationController;
   void initState() {
     super.initState();
     getweightfordisplay();
+    // animationController = AnimationController(vsync: this,duration: Duration(seconds: 8));
+    // animation = IntTween(begin: 0,end: 200).animate(CurvedAnimation(parent: animationController!, curve: Curves.easeOut));
+    // animationController!.forward();
   }
 
   Future<void> getweightfordisplay() async {
@@ -38,7 +43,6 @@ class waterContainerState extends State<waterContainer> {
     //  print('Getting value of Water in ml is $getwaterml');
     setState(() {});
   }
-
   @override
   Widget build(BuildContext context) {
     var screenwidth = MediaQuery.of(context).size.width;

@@ -1,3 +1,4 @@
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/widget/Helper.dart';
 
@@ -35,7 +36,7 @@ class DateBox extends StatelessWidget {
 //  TextStyle dateandname = TextStyle(fontFamily: 'FontMain',color: Colors.black);
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return  Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Container(
         width: screenWidth/8 -1 ,
