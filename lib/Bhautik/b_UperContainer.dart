@@ -1,3 +1,4 @@
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
@@ -173,7 +174,7 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       carbsper = carbs / 312.5;
       carbs = 312.5 - carbs;
       if (carbs! <= 0) {
-      carbscolor = Colors.green;
+        carbscolor = Colors.green;
       }
       if (carbs > 0) {
         carbscolor = Colors.black;
@@ -189,13 +190,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       }
       proteinper = protein / 156.25;
       protein = 156.25 - protein;
-         if (protein! <= 0) {
-      protiencolor = Colors.green;
+      if (protein! <= 0) {
+        protiencolor = Colors.green;
       }
       if (protein > 0) {
         protiencolor = Colors.black;
       }
-
 
       fats = Sumofcal / 36;
 
@@ -207,13 +207,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       }
       fatsper = fats / 69.45;
       fats = 69.45 - fats;
-         if (fats! <= 0) {
-      fatscolor = Colors.green;
+      if (fats! <= 0) {
+        fatscolor = Colors.green;
       }
       if (fats > 0) {
         fatscolor = Colors.black;
       }
-
 
       print("----------------------------");
 
@@ -242,38 +241,43 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(80),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
+      child: DelayedWidget(
+        delayDuration: Duration(milliseconds: 400), // Not required
+        animationDuration: Duration(seconds: 2), // Not required
+        animation: DelayedAnimations.SLIDE_FROM_BOTTOM, // Not required
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(80),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  FirstRowMakeCommon(),
+                  Divider(
+                    indent: 30.0,
+                    endIndent: 30.0,
+                  ),
+                  SecondRowOfShadow()
+                ],
+              ),
             ),
-            child: Column(
-              children: [
-                FirstRowMakeCommon(),
-                Divider(
-                  indent: 30.0,
-                  endIndent: 30.0,
-                ),
-                SecondRowOfShadow()
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -433,7 +437,7 @@ class CommoncarbsProtinefat extends StatefulWidget {
   final double percentage;
   Color textcolor;
 
-   CommoncarbsProtinefat(
+  CommoncarbsProtinefat(
       {required this.headText,
       required this.coolor1,
       required this.coolor2,
@@ -459,8 +463,8 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
           Text(
             widget.headText,
             style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: 'FontMain',
+              fontWeight: FontWeight.w500,
+              fontFamily: 'FontMain',
               fontSize: 17,
             ),
           ),
@@ -480,9 +484,14 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
           ),
           Row(
             children: [
-
-              Text(widget.subtext, style: TextStyle(color: widget.textcolor),),
-               Text(' g left',style: TextStyle(color: widget.textcolor),),
+              Text(
+                widget.subtext,
+                style: TextStyle(color: widget.textcolor),
+              ),
+              Text(
+                ' g left',
+                style: TextStyle(color: widget.textcolor),
+              ),
             ],
           ),
         ],
