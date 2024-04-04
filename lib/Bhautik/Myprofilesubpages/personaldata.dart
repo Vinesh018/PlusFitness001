@@ -177,12 +177,13 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
                     height: 32,
                     width: 32,
                     decoration: BoxDecoration(
+                        color: Colors.indigo.shade200,
                         border: Border.all(color: Colors.indigo, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: Icon(
-                      Icons.add_a_photo,
-                      size: 22,
-                      color: Colors.black,
+                      Icons.add_a_photo_rounded,
+                      size: 16,
+                      color: Colors.white,
                     ),
                   )))
         ],
