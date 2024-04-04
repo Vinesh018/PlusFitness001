@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -7,11 +8,10 @@ import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
-
 
 class PersonalDataMainShow extends StatelessWidget {
   @override
@@ -49,7 +49,7 @@ class PersonalDataMainShow extends StatelessWidget {
   }
 }
 
-
+Uint8List? image;
 
 class GradientContainerandimage extends StatefulWidget {
   @override
@@ -58,22 +58,33 @@ class GradientContainerandimage extends StatefulWidget {
 }
 
 class _GradientContainerandimageState extends State<GradientContainerandimage> {
-
-
-  
-  Uint8List? image;
   File? selectedImage;
-
-
   final ImagePicker picker = ImagePicker();
-  
+  @override
+  void initState() {
+    // TODO: implement initState
+    getImage();
+    
+  }
+
+
+  static Future<bool> saveImage(List<int> imageBytes) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String base64Image = base64Encode(imageBytes);
+    return prefs.setString("image", base64Image);
+  }
+
+   static Future<Image> getImage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? str = prefs.getString('image');
+    Uint8List bytes = base64Decode(str!);
+    return Image.memory(bytes);
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     void takephoto() async {
       final pickedfile = await picker.pickImage(source: ImageSource.camera);
-
       if (pickedfile == null) return;
       setState(() {
         selectedImage = File(pickedfile.path);
@@ -81,6 +92,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
         print("----------------");
         print(image.runtimeType);
         print("----------------");
+        saveImage(image!);
       });
     }
 
@@ -91,6 +103,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
       setState(() {
         selectedImage = File(pickedfile.path);
         image = File(pickedfile.path).readAsBytesSync();
+         saveImage(image!);
       });
     }
 
@@ -154,16 +167,12 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
 
     Widget Imageprofile() {
       return Stack(
-        
         children: [
           image != null
-              ? CircleAvatar(
-            radius: 80,
-            backgroundImage: MemoryImage(image!))
+              ? CircleAvatar(radius: 80, backgroundImage: MemoryImage(image!))
               : CircleAvatar(
                   radius: 80,
                   backgroundImage: AssetImage("assets/images/man.png")),
-         
           Positioned(
               bottom: 5,
               right: 10,
