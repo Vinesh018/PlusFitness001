@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plus_fitness/Vinesh/T_all-meals.dart';
 
 class addMealsPage extends StatefulWidget {
   const addMealsPage({super.key});
@@ -35,14 +34,11 @@ class _addMealsPageState extends State<addMealsPage> {
                       bottomLeft: Radius.circular(45),
                       bottomRight: Radius.circular(45)),
                 ),
-
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      allMealsadd(),
-                    ],
+                    children: [],
                   ),
                 ),
               ),

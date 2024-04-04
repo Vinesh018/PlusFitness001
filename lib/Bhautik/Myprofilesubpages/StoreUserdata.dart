@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -188,6 +189,7 @@ class _StoreusingSharedPreferencesState
                     print(
                         'Setting new value of name  in database is  $namedata');
                     print('Setting new value of age  in database is  $agedata');
+                    // pef.setString(sharedprefkeysfinal.userprofileimg, image);
                     setState(() {});
                     Get.off(UserProfileMainRun());
                   },
