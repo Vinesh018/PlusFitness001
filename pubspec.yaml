@@ -66,7 +66,6 @@ dependencies:
   mailer: ^6.1.0
   fl_chart: ^0.67.0
   syncfusion_flutter_charts: ^25.1.38
-  sensors_plus: ^5.0.0
   delayed_widget: ^1.1.2
   animated_text_kit: ^4.2.2
 

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
@@ -56,7 +60,10 @@ class GradientContainerandimage extends StatefulWidget {
 class _GradientContainerandimageState extends State<GradientContainerandimage> {
 
 
-  PickedFile? _imageFile;
+  
+  Uint8List? image;
+  File? selectedImage;
+
 
   final ImagePicker picker = ImagePicker();
   
@@ -67,16 +74,23 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
     void takephoto() async {
       final pickedfile = await picker.pickImage(source: ImageSource.camera);
 
+      if (pickedfile == null) return;
       setState(() {
-        _imageFile = pickedfile as PickedFile?;
+        selectedImage = File(pickedfile.path);
+        image = File(pickedfile.path).readAsBytesSync();
+        print("----------------");
+        print(image.runtimeType);
+        print("----------------");
       });
     }
 
-    void takephotofrmgallery() async {
+    Future takephotofrmgallery() async {
       final pickedfile = await picker.pickImage(source: ImageSource.gallery);
 
+      if (pickedfile == null) return;
       setState(() {
-        _imageFile = pickedfile as PickedFile?;
+        selectedImage = File(pickedfile.path);
+        image = File(pickedfile.path).readAsBytesSync();
       });
     }
 
@@ -105,6 +119,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
                         IconButton(
                           onPressed: () {
                             takephoto();
+                            Navigator.of(context).pop();
                           },
                           icon: Icon(
                             Icons.camera,
@@ -120,6 +135,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
                         IconButton(
                             onPressed: () {
                               takephotofrmgallery();
+                              Navigator.of(context).pop();
                             },
                             icon: Icon(
                               Icons.image,
@@ -138,21 +154,37 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
 
     Widget Imageprofile() {
       return Stack(
+        
         children: [
-          CircleAvatar(
+          image != null
+              ? CircleAvatar(
             radius: 80,
-            backgroundImage: AssetImage("assets/images/boy.png"),
-          ),
+            backgroundImage: MemoryImage(image!))
+              : CircleAvatar(
+                  radius: 80,
+                  backgroundImage: AssetImage("assets/images/man.png")),
+         
           Positioned(
-              bottom: 20,
-              right: 20,
+              bottom: 5,
+              right: 10,
               child: InkWell(
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
                         builder: ((builder) => bottomSheet()));
                   },
-                  child: Icon(Icons.edit)))
+                  child: Container(
+                    height: 32,
+                    width: 32,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.indigo, width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Icon(
+                      Icons.add_a_photo,
+                      size: 22,
+                      color: Colors.black,
+                    ),
+                  )))
         ],
       );
     }
