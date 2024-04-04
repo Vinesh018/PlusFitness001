@@ -1,3 +1,4 @@
+import 'package:animated_digit/animated_digit.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +7,8 @@ import 'package:plus_fitness/Vinesh/waveviwe.dart';
 // import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class waterContainer extends StatefulWidget {
 
+class waterContainer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => waterContainerState();
 }
@@ -19,9 +20,15 @@ var waterDrinkTime = "--";
 String waterNotification = "Keep drinking water !!";
 int i = 1;
 
-class waterContainerState extends State<waterContainer> with SingleTickerProviderStateMixin {
-    Animation? animation;
-AnimationController? animationController;
+class waterContainerState extends State<waterContainer>
+    with SingleTickerProviderStateMixin {
+  Animation? animation;
+  AnimationController? animationController;
+  AnimatedDigitController _controller = AnimatedDigitController(waterInMl);
+  // void _add() {
+  //   _controller.addValue(175);
+  //   setState(() {});
+  // }
   void initState() {
     super.initState();
     getweightfordisplay();
@@ -43,6 +50,7 @@ AnimationController? animationController;
     //  print('Getting value of Water in ml is $getwaterml');
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     var screenwidth = MediaQuery.of(context).size.width;
@@ -50,7 +58,7 @@ AnimationController? animationController;
       delayDuration: Duration(milliseconds: 200), // Not required
       animationDuration: Duration(seconds: 3), // Not required
       animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
-      
+
       child: Padding(
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
         child: Column(
@@ -85,19 +93,28 @@ AnimationController? animationController;
                       children: [
                         Column(
                           children: [
-                            Text.rich(TextSpan(
-                                text: waterInMl.toString(),
-                                style: TextStyle(
-                                    fontFamily: 'FontMain',
-                                    fontSize: 35,
-                                    color: Color.fromARGB(255, 19, 75, 232)),
-                                children: <InlineSpan>[
-                                  TextSpan(
-                                    text: 'ml',
-                                    style: TextStyle(
-                                        fontSize: 17, fontFamily: 'FontMain'),
-                                  )
-                                ])),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                AnimatedDigitWidget(
+                                  value: waterInMl,
+                                  textStyle: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.indigo,
+                                    fontFamily: "FontMain",
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text("ml",
+                                      style: TextStyle(
+                                          fontFamily: "FontMain",
+                                          color: Colors.indigo.shade300,
+                                          fontSize: 15)),
+                                )
+                              ],
+                            ),
                             Text(
                               "of daily goal 3.5L",
                               style: TextStyle(
@@ -194,6 +211,7 @@ AnimationController? animationController;
                                   ]),
                               child: InkWell(
                                 onTap: () async {
+                                  // _add;
                                   DateTime date = DateTime.now();
                                   String time = "${date.hour}:${date.minute}";
 

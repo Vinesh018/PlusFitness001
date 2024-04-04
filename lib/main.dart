@@ -4,6 +4,7 @@ import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/temp.dart';
+import 'package:plus_fitness/Vinesh/temp1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,9 @@ Future<void> main() async {
         //home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
-        home: TutorialHome()
+        // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
+        home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyAppt(),
         // home: ContactusPageMain()
