@@ -46,7 +46,7 @@ class _graphdataState extends State<graphdata> {
           // Text("Your Today's Activity",style: TextStyle(fontFamily: 'FontMain',color: Colors.black,
           // fontSize: 18),),
           Container(
-            height: size.height / 3 - 40,
+            height: size.height / 3 - 50,
             child: SfCartesianChart(
               plotAreaBorderWidth: 0,
                 primaryXAxis: NumericAxis(

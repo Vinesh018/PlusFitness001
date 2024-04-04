@@ -69,6 +69,8 @@ dependencies:
   sensors_plus: ^5.0.0
   delayed_widget: ^1.1.2
   animated_text_kit: ^4.2.2
+  animated_text_lerp: ^1.0.5
+  countup: ^0.1.4
 
 
 

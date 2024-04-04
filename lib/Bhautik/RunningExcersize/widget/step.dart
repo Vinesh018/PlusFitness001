@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
+int steps = 0;
+var xcoordinate;
+var ycoordinate;
+var zcoordinate;
+double miles = 0;
+double duration = 0;
+double calories = 0;
+double addValue = 0.025;
+double distnaces = 0.0;
+double previousDistance = 0.0;
 
-class Steps extends StatelessWidget {
+
+class Steps extends StatefulWidget {
+  @override
+  State<Steps> createState() => _StepsState();
+}
+
+class _StepsState extends State<Steps> {
+  
   @override
   Widget build(BuildContext context) {
      return Padding(
