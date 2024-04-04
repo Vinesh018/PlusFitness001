@@ -1,3 +1,4 @@
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,6 @@ String weighonbody = '40';
 String? Heightonbody = '100';
 String? namedataonbody = 'Your Name';
 String? ageonbody = '18';
-
 
 class UserProfileMainRun extends StatefulWidget {
   @override
@@ -37,8 +37,8 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
     weighonbody = getweight!;
     Heightonbody = getheight!;
-    namedataonbody  = getname! ;
-    ageonbody  = getage ;
+    namedataonbody = getname!;
+    ageonbody = getage;
 
     print('Getting Weight from database is in third page $weighonbody');
     print('Getting height from database is in third page $Heightonbody');
@@ -46,8 +46,6 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     print('Gettin age from database is in fourth page $ageonbody');
     setState(() {});
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +65,9 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
           children: [
             NameImageRow(),
             HeightWeightAge(),
-            AccountContainer(heading: "Account",),
+            AccountContainer(
+              heading: "Account",
+            ),
             AccountContainerforother(heading: 'Others')
           ],
         ),
@@ -82,7 +82,6 @@ class NameImageRow extends StatefulWidget {
 }
 
 class _NameImageRowState extends State<NameImageRow> {
-  
   @override
   Widget build(BuildContext context) {
     double x = MediaQuery.of(context).size.width;
@@ -102,10 +101,8 @@ class _NameImageRowState extends State<NameImageRow> {
               width: 200,
             )),
       ),
-      title:
-
-       Text(
-       namedataonbody.toString(),
+      title: Text(
+        namedataonbody.toString(),
         style: TextStyle(fontFamily: 'FontMain', fontSize: 19),
       ),
       // subtitle: Text(
@@ -116,11 +113,11 @@ class _NameImageRowState extends State<NameImageRow> {
       trailing: InkWell(
         onTap: () {
           FirebaseAuth.instance.signOut();
-          
+
           Get.off(MainLogInPage());
         },
         child: Container(
-          width: screenWidth/3,
+          width: screenWidth / 3,
           height: 40,
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -131,21 +128,21 @@ class _NameImageRowState extends State<NameImageRow> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              
                 Text(
                   'Logout',
                   style: TextStyle(
-                      fontFamily: 'FontMain', color: Colors.white, fontSize: 16),
+                      fontFamily: 'FontMain',
+                      color: Colors.white,
+                      fontSize: 16),
                 ),
                 SizedBox(
                   width: 6,
                 ),
-                  Icon(
+                Icon(
                   Icons.logout_rounded,
                   size: 15,
                   color: Colors.white,
                 ),
-                
               ],
             ),
             style: ElevatedButton.styleFrom(
@@ -158,16 +155,15 @@ class _NameImageRowState extends State<NameImageRow> {
     );
   }
 }
+
 String? weightvaluefromsharedprefrence;
+
 class HeightWeightAge extends StatefulWidget {
   @override
   State<HeightWeightAge> createState() => _HeightWeightAgeState();
 }
 
 class _HeightWeightAgeState extends State<HeightWeightAge> {
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -177,7 +173,7 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
         children: [
           Card(
             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -221,7 +217,8 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Text(
                         'Height',
                         style: TextStyle(
-                            fontFamily: 'FontMain', color: Colors.grey.shade600),
+                            fontFamily: 'FontMain',
+                            color: Colors.grey.shade600),
                       )
                     ],
                   ),
@@ -231,7 +228,7 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
           ),
           Card(
             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -273,7 +270,8 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Text(
                         'Weight',
                         style: TextStyle(
-                            fontFamily: 'FontMain', color: Colors.grey.shade600),
+                            fontFamily: 'FontMain',
+                            color: Colors.grey.shade600),
                       )
                     ],
                   ),
@@ -283,9 +281,9 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
           ),
           Card(
             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
+              borderRadius: BorderRadius.all(Radius.elliptical(15, 11)),
             ),
-          child: Container(
+            child: Container(
               decoration: BoxDecoration(
                 color: Colors.indigo.shade50,
                 border: Border.all(color: Colors.grey.shade500),
@@ -325,7 +323,8 @@ class _HeightWeightAgeState extends State<HeightWeightAge> {
                       Text(
                         'Age',
                         style: TextStyle(
-                            fontFamily: 'FontMain', color: Colors.grey.shade600),
+                            fontFamily: 'FontMain',
+                            color: Colors.grey.shade600),
                       )
                     ],
                   ),
@@ -363,7 +362,6 @@ class GradientText extends StatelessWidget {
 }
 
 class AccountContainer extends StatefulWidget {
-
   final String heading;
 
   const AccountContainer({required this.heading});
@@ -375,117 +373,141 @@ class AccountContainer extends StatefulWidget {
 class _AccountContainerState extends State<AccountContainer> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20,top: 25),
-      child: Card(
-        shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-              topRight: Radius.circular(110)
-            )
-        ),
-        color: Colors.indigo.shade50,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade500),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-              topRight: Radius.circular(110)
-            )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Text(
-                    widget.heading,
-                    style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
+    return DelayedWidget(
+      delayDuration: Duration(milliseconds: 200), // Not required
+      animationDuration: Duration(seconds: 1), // Not required
+      animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 25),
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                  topRight: Radius.circular(110))),
+          color: Colors.indigo.shade50,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade500),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                    topRight: Radius.circular(110))),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Text(
+                      widget.heading,
+                      style:
+                          TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
+                    ),
                   ),
-                ),
-                OneListtileForAccountData(icons: Icons.person_outline_rounded,str: 'Personal Data',ontap:  Personaldataontap,),
-                OneListtileForAccountData(icons: Icons.sticky_note_2_outlined,str: 'Achievement',ontap: achievementontap),
-                OneListtileForAccountData(icons: Icons.data_saver_on_sharp,str: 'Activity History',ontap: achievementontap),
-                OneListtileForAccountData(icons: Icons.sports_handball_rounded,str: 'Workout Progress',ontap: achievementontap),
-              ],
+                  OneListtileForAccountData(
+                    icons: Icons.person_outline_rounded,
+                    str: 'Personal Data',
+                    ontap: Personaldataontap,
+                  ),
+                  OneListtileForAccountData(
+                      icons: Icons.sticky_note_2_outlined,
+                      str: 'Achievement',
+                      ontap: achievementontap),
+                  OneListtileForAccountData(
+                      icons: Icons.data_saver_on_sharp,
+                      str: 'Activity History',
+                      ontap: achievementontap),
+                  OneListtileForAccountData(
+                      icons: Icons.sports_handball_rounded,
+                      str: 'Workout Progress',
+                      ontap: achievementontap),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
-   Personaldataontap() async{
-  await Get.off(PersonalDataMainShow());
-  setState(() {
-  });
-}
-   achievementontap() async{
-  await Get.to(achievementmain());
-  setState(() {
-  });
-}
 
+  Personaldataontap() async {
+    await Get.off(PersonalDataMainShow());
+    setState(() {});
+  }
+
+  achievementontap() async {
+    await Get.to(achievementmain());
+    setState(() {});
+  }
 }
 
 class AccountContainerforother extends StatefulWidget {
-
   final String heading;
 
   const AccountContainerforother({required this.heading});
 
   @override
-  State<AccountContainerforother> createState() => _AccountContainerforotherState();
+  State<AccountContainerforother> createState() =>
+      _AccountContainerforotherState();
 }
 
 class _AccountContainerforotherState extends State<AccountContainerforother> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20,top: 25,bottom: 20),
-      child: Card(
-        shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-              topRight: Radius.circular(110)
-            )
-        ),
-        color: Colors.indigo.shade50,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade500),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-              topRight: Radius.circular(110)
-            )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Text(
-                    widget.heading,
-                    style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
+    return DelayedWidget(
+       delayDuration: Duration(milliseconds: 200), // Not required
+              animationDuration: Duration(seconds: 1), // Not required
+              animation: DelayedAnimations.SLIDE_FROM_BOTTOM, 
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 20),
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                  topRight: Radius.circular(110))),
+          color: Colors.indigo.shade50,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade500),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                    topRight: Radius.circular(110))),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Text(
+                      widget.heading,
+                      style: TextStyle(fontFamily: 'FontMainBold', fontSize: 22),
+                    ),
                   ),
-                ),
-                OneListtileForAccountData(icons: Icons.mail_outline,str: 'Contact Us',ontap: contactUsOnTap),
-                OneListtileForAccountData(icons: Icons.privacy_tip_outlined,str: 'Privacy Policy',ontap: achievementontap),
-                OneListtileForAccountData(icons: Icons.settings,str: 'Setting',ontap: achievementontap),
-              ],
+                  OneListtileForAccountData(
+                      icons: Icons.mail_outline,
+                      str: 'Contact Us',
+                      ontap: contactUsOnTap),
+                  OneListtileForAccountData(
+                      icons: Icons.privacy_tip_outlined,
+                      str: 'Privacy Policy',
+                      ontap: achievementontap),
+                  OneListtileForAccountData(
+                      icons: Icons.settings,
+                      str: 'Setting',
+                      ontap: achievementontap),
+                ],
+              ),
             ),
           ),
         ),
@@ -493,64 +515,66 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
     );
   }
 
-     Personaldataontap() async{
-  await Get.to(PersonalDataMainShow());
-  setState(() {
-  });
-}
-    contactUsOnTap(){
- Get.to(ContactusPageMain());
- setState(() {
-   
- });
-}
-   achievementontap() async{
-  await Get.to(achievementmain());
-  setState(() {
-  });
-}
+  Personaldataontap() async {
+    await Get.to(PersonalDataMainShow());
+    setState(() {});
+  }
 
+  contactUsOnTap() {
+    Get.to(ContactusPageMain());
+    setState(() {});
+  }
+
+  achievementontap() async {
+    await Get.to(achievementmain());
+    setState(() {});
+  }
 }
 
 class OneListtileForAccountData extends StatelessWidget {
-final IconData icons;
-final String str;
-final Function ontap;
+  final IconData icons;
+  final String str;
+  final Function ontap;
 
-  const OneListtileForAccountData({ required this.icons, required this.str,required this.ontap});
+  const OneListtileForAccountData(
+      {required this.icons, required this.str, required this.ontap});
 
   @override
   Widget build(BuildContext context) {
-return  ListTile(
-          onTap: () {
-            ontap();
-          },
-          leading: GradientIcon(
-            icon: icons,
-            gradient: LinearGradient(
-              colors: [Colors.red, Colors.blue],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            size:29,
+    return ListTile(
+      onTap: () {
+        ontap();
+      },
+      leading: GradientIcon(
+        icon: icons,
+        gradient: LinearGradient(
+          colors: [Colors.red, Colors.blue],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        size: 29,
+      ),
+      title: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Text(
+          str,
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+        ),
+      ),
+      trailing: InkWell(
+        child: GradientIcon(
+          icon: Icons.arrow_forward_ios,
+          gradient: LinearGradient(
+            colors: [
+              Colors.blue,
+              Colors.red,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          title: Padding(
-            padding: const EdgeInsets.only(top:10),
-            child: Text(str,style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
-          ),
-          trailing: InkWell(
-            child:  GradientIcon(
-            icon: Icons.arrow_forward_ios,
-            gradient: LinearGradient(
-              colors: [ Colors.blue,Colors.red,],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            size: 20,
-          ),
-          ),
-        );
+          size: 20,
+        ),
+      ),
+    );
   }
-  
 }
-

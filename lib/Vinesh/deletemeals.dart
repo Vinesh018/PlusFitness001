@@ -14,7 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
  List<String> decodelistlunch = [];
  List<String> decodelistdinner = [];
 
-
 class deletemeals extends StatefulWidget {
   const deletemeals({super.key});
 
@@ -87,6 +86,7 @@ class deletemealsState extends State<deletemeals> {
     return ListView.builder(
       // itemCount: decodedListbreakfast.length,
       itemCount: decodedListbreakfast.length,
+      key: UniqueKey(),
       itemBuilder: (context, index) {
         final item = decodedListbreakfast[index];
         return Padding(
@@ -144,6 +144,7 @@ class deletemealsState extends State<deletemeals> {
   }
    Widget showslunchMeals() {
     return ListView.builder(
+       key: UniqueKey(),
       itemCount: decodelistlunch.length,
       itemBuilder: (context, index) {
         final item = decodelistlunch[index];
@@ -201,6 +202,7 @@ class deletemealsState extends State<deletemeals> {
   }
      Widget showsDinnerMeals() {
     return ListView.builder(
+       key: UniqueKey(),
       itemCount: decodelistdinner.length,
       itemBuilder: (context, index) {
         final item = decodelistdinner[index];

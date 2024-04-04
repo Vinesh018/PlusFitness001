@@ -6,7 +6,7 @@ class waterGlass extends StatelessWidget {
   Widget build(BuildContext context) {
     return DelayedWidget(
        delayDuration: Duration(milliseconds: 200), // Not required
-              animationDuration: Duration(seconds: 8), // Not required
+              animationDuration: Duration(seconds: 4), // Not required
               animation: DelayedAnimations.SLIDE_FROM_BOTTOM, 
       child: Padding(
         padding: const EdgeInsets.only(top: 10),

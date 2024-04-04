@@ -48,7 +48,7 @@ AnimationController? animationController;
     var screenwidth = MediaQuery.of(context).size.width;
     return DelayedWidget(
       delayDuration: Duration(milliseconds: 200), // Not required
-      animationDuration: Duration(seconds: 5), // Not required
+      animationDuration: Duration(seconds: 3), // Not required
       animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
       
       child: Padding(
