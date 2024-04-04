@@ -12,7 +12,7 @@ var breakfastList = <String>[];
 var lunchList = <String>[];
 var dinnerList = <String>[];
   
-
+double screenwidthv = 0.0;
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -410,7 +410,7 @@ class MealsCart extends StatelessWidget {
                       color: textcolor,
                       fontWeight:
                           hasItems ? FontWeight.normal : FontWeight.bold,
-                      fontSize: 15,
+                      fontSize: screenwidth/25,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(
@@ -425,7 +425,7 @@ class MealsCart extends StatelessWidget {
                         mealtype.formattedtotalcalaries,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: textcolor,
-                              fontSize: 18,
+                              fontSize: screenwidth / 24,
                               fontWeight: FontWeight.bold,
                             ),
                       ),

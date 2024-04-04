@@ -57,7 +57,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
       child: DelayedWidget(
         delayDuration: Duration(milliseconds: 400), // Not required
-        animationDuration: Duration(seconds: 5), // Not required
+        animationDuration: Duration(seconds: 3), // Not required
         animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

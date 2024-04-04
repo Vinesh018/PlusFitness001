@@ -30,7 +30,7 @@ class _addMealsPageState extends State<addMealsPage> {
                   ],
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(45),
-                      topRight: Radius.circular(5),
+                      topRight: Radius.circular(55),
                       bottomLeft: Radius.circular(45),
                       bottomRight: Radius.circular(45)),
                 ),
