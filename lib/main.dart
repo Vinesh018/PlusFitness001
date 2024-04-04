@@ -2,7 +2,6 @@ import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
-import 'package:plus_fitness/Bhautik/RunningExcersize/sensorgetdata.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/temp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
