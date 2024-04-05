@@ -223,6 +223,9 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       print("----------------------------");
 
       sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
+      // print("[][][][][][][][][][][]");
+      // print(Sumofcal);
+      // print("[][][][][][][][][][][]");
     });
   }
 
@@ -231,11 +234,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
     eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
     if (eatencals! >= 2500) {
       eatencals = 2500;
+   
     }
     if (eatencals! <= 0) {
       eatencals = 0;
     }
-
+    
     setState(() {});
   }
 
@@ -324,6 +328,7 @@ class FirstRowOfContainer extends StatelessWidget {
                       ),
                     ),
                     Row(
+                     
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
@@ -343,20 +348,23 @@ class FirstRowOfContainer extends StatelessWidget {
                           ),
                           
                         ),
-                        Align(
-                            child: Text(
-                          ' kcal',
-                          style: TextStyle(
-                              fontFamily: 'FontMain',
-                              fontSize: 13,
-                              color: Colors.grey),
-                        ))
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Align(
+                              child: Text(
+                            ' kcal',
+                            style: TextStyle(
+                                fontFamily: 'FontMain',
+                                fontSize: 13,
+                                color: Colors.grey),
+                          )),
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
-            ],
+            ], 
           ),
         ],
       ),
@@ -531,14 +539,19 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
         height: 50,
         child: Column(
           children: [
-            Text(
-              '${(2500 - (eatencals ?? 0)).toInt()}',
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+            AnimatedNumberText(
+              (2500 - (eatencals ?? 0)).toInt(), // int or double
+              curve: Curves.easeIn,
+              duration: const Duration(seconds: 2),
+              style: TextStyle(
+                color: textColor,
+                fontFamily: "FontMain",
+                fontSize: 20,
+              ),
             ),
-            Text(
-              'Kcal left',
-              style: TextStyle(fontFamily: 'FontMain', fontSize: 12),
-            )
+            Text("kcal left")
+          
+            
           ],
         ),
       ),

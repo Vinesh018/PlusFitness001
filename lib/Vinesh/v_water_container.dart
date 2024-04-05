@@ -257,21 +257,9 @@ class waterContainerState extends State<waterContainer>
                                 },
                                 child: Icon(Icons.add),
                               ),
-                              // child: IconButton(
-
-                              //     onPressed: () {
-                              //       waterpercentage = waterpercentage + 5;
-                              //       setState(() {
-                              //         print(
-                              //             "water percentage is in add is : $waterpercentage");
-                              //       });
-                              //     },
-                              //     icon: const Icon(
-                              //       Icons.add,
-                              //       size: 25,
-                              //       color: Color.fromARGB(255, 19, 75, 232),
-                              //     ))
                             ),
+                              
+                            
                             Container(
                                 height: 40,
                                 width: 40,

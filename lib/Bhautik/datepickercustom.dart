@@ -89,7 +89,8 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
                     padding: EdgeInsets.only(left: screenWidth/10 - 36),
                     child: Icon(
                       Icons.calendar_today_outlined,
-                      size: 20,
+                      size: 21,
+                      color: Colors.indigo,
                     ),
                   ),
                   hintText: dateValue.text =
