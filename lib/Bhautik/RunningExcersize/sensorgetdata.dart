@@ -181,7 +181,7 @@ class _MyHomePageState extends State<Runningpage> {
                  
           CalaryDrationDistance(calvalue: calories, unit: 'kcal', name: 'Calaries', imagepath: '${imagepath.imgpath}kcal.png', ),
           CalaryDrationDistance(calvalue: miles, unit: 'km', name: 'Distance', imagepath: '${imagepath.imgpath}distance.png',),
-          CalaryDrationDistance(calvalue: duration, unit: 'hr', name: 'Hours', imagepath: '${imagepath.imgpath}time.png',),
+          CalaryDrationDistance(calvalue: duration, unit: 'Min', name: 'Minutes', imagepath: '${imagepath.imgpath}time.png',),
 
                 ],
               ),

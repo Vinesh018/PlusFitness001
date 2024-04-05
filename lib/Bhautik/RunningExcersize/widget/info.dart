@@ -5,22 +5,6 @@ import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/constansts/imagepath.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 double showvalue = 0.0;
-class Info extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-     return Padding(
-       padding: const EdgeInsets.only(bottom: 25,top: 15),
-       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CalaryDrationDistance(calvalue: 345, unit: 'kcal', name: 'Calaries', imagepath: '${imagepath.imgpath}kcal.png', ),
-          CalaryDrationDistance(calvalue: 3.6, unit: 'km', name: 'Distance', imagepath: '${imagepath.imgpath}distance.png',),
-          CalaryDrationDistance(calvalue: 1.5, unit: 'hr', name: 'Hours', imagepath: '${imagepath.imgpath}time.png',),
-        ],
-       ),
-     );
-  } 
-}
 
 class CalaryDrationDistance extends StatefulWidget{
   final String imagepath;
