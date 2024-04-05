@@ -4,6 +4,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:animated_text_lerp/animated_text_lerp.dart';
+
 
 List<String> decodedListbreakfast = [];
 List<String> decodelistlunch = [];
@@ -15,7 +17,7 @@ List<String> calariesofbreakfast = [];
 List<String> calariesoflunch = [];
 List<String> calariesofdinner = [];
 double? eatencals = 0;
-Color textColor = Colors.black;
+Color textColor = Colors.indigo;
 Color carbscolor = Colors.black;
 Color protiencolor = Colors.black;
 Color fatscolor = Colors.black;
@@ -159,7 +161,7 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
         textColor = Colors.red;
       }
       if (Sumofcal <= 2500) {
-        textColor = Colors.black;
+        textColor = Colors.indigo;
       }
 
       carbs = Sumofcal / 8;
@@ -221,6 +223,9 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       print("----------------------------");
 
       sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
+      // print("[][][][][][][][][][][]");
+      // print(Sumofcal);
+      // print("[][][][][][][][][][][]");
     });
   }
 
@@ -229,11 +234,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
     eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
     if (eatencals! >= 2500) {
       eatencals = 2500;
+   
     }
     if (eatencals! <= 0) {
       eatencals = 0;
     }
-
+    
     setState(() {});
   }
 
@@ -286,16 +292,19 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
 class FirstRowOfContainer extends StatelessWidget {
   final String mainhead;
   final String imgadress;
-  final String subtext;
+  final double subtext;
   final Color bordercolor;
 
-  const FirstRowOfContainer(
+  FirstRowOfContainer(
       {required this.mainhead,
       required this.subtext,
       required this.bordercolor,
       required this.imgadress});
   @override
   Widget build(BuildContext context) {
+
+
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Row(
@@ -319,6 +328,7 @@ class FirstRowOfContainer extends StatelessWidget {
                       ),
                     ),
                     Row(
+                     
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
@@ -327,28 +337,34 @@ class FirstRowOfContainer extends StatelessWidget {
                           height: 40,
                           width: 40,
                         ),
-                        Text(
-                          subtext,
+                        AnimatedNumberText(
+                          subtext.toInt(), // int or double
+                          curve: Curves.easeIn,
+                          duration: const Duration(seconds: 2),
                           style: TextStyle(
-                              color: textColor,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'FontMain'),
+                            color: textColor,
+                            fontFamily: "FontMain",
+                            fontSize: 32,
+                          ),
+                          
                         ),
-                        const Align(
-                            child: Text(
-                          ' kcal',
-                          style: TextStyle(
-                              fontFamily: 'FontMain',
-                              fontSize: 13,
-                              color: Colors.grey),
-                        ))
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Align(
+                              child: Text(
+                            ' kcal',
+                            style: TextStyle(
+                                fontFamily: 'FontMain',
+                                fontSize: 13,
+                                color: Colors.grey),
+                          )),
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
-            ],
+            ], 
           ),
         ],
       ),
@@ -371,14 +387,14 @@ class FirstRowMakeCommon extends StatelessWidget {
                 mainhead: 'Eaten',
                 imgadress: 'assets/images/eaten.png',
                 bordercolor: Color.fromRGBO(206, 215, 240, 1),
-                subtext: Sumofcal!.toStringAsFixed(0) ?? '0',
+                subtext: Sumofcal,
               ),
             ),
             FirstRowOfContainer(
               mainhead: 'Burned',
               imgadress: 'assets/images/burned.png',
               bordercolor: Color.fromRGBO(236, 201, 209, 1),
-              subtext: '104',
+              subtext: 104,
             ),
           ],
         ),
@@ -523,14 +539,19 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
         height: 50,
         child: Column(
           children: [
-            Text(
-              '${(2500 - (eatencals ?? 0)).toInt()}',
-              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+            AnimatedNumberText(
+              (2500 - (eatencals ?? 0)).toInt(), // int or double
+              curve: Curves.easeIn,
+              duration: const Duration(seconds: 2),
+              style: TextStyle(
+                color: textColor,
+                fontFamily: "FontMain",
+                fontSize: 20,
+              ),
             ),
-            Text(
-              'Kcal left',
-              style: TextStyle(fontFamily: 'FontMain', fontSize: 12),
-            )
+            Text("kcal left")
+          
+            
           ],
         ),
       ),

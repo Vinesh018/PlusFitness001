@@ -67,9 +67,8 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.38
   delayed_widget: ^1.1.2
   animated_text_kit: ^4.2.2
-  animated_text_lerp: ^1.0.5
-  countup: ^0.1.4
-  sensors_plus: ^5.0.0
+  google_fonts: ^6.2.1
+  audio_video_progress_bar: ^2.0.2
 
 
 

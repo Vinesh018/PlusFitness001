@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
+import 'package:plus_fitness/Vinesh/temp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class mealsToday extends StatefulWidget {
@@ -33,6 +34,7 @@ class mealsTodayState extends State<mealsToday> {
   void initState() {
     super.initState();
     storeAndRetrieveList();
+    Confetti();
   }
 
   Future<void> storeAndRetrieveList() async {

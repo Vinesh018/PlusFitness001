@@ -1,9 +1,15 @@
 import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_utils/src/extensions/double_extensions.dart';
 import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:plus_fitness/Vinesh/setValue.dart';
+
 import 'package:plus_fitness/Vinesh/temp.dart';
+import 'package:plus_fitness/Vinesh/temp1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +35,15 @@ Future<void> main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Tutorial',
-        //home: Confetti(),
+        // home: Confetti(),
       //home: StoreusingSharedPreferences(),
         //home: PersonalDataMainShow(),
         //home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
+        // home: AnimatedDigitWidgetExample()
+        // home: MyHomePageb(),
         home: TutorialHome()
-        // home: Runningpage(),
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
@@ -54,24 +61,36 @@ class TutorialHome extends StatefulWidget {
 }
 
 class _TutorialHomeState extends State<TutorialHome> {
-  late ConfettiController _controllerCenterRight;
-  late ConfettiController _controllerCenterLeft;
+
   @override
   void initState() {
-    _controllerCenterRight =
-        ConfettiController(duration: const Duration(seconds: 4));
-    _controllerCenterLeft =
-        ConfettiController(duration: const Duration(seconds: 4));
-    _controllerCenterLeft.play();
-    _controllerCenterRight.play();
+
+    Confetti();
     super.initState();
   }
   AppBar appbar = AppBar(
+   
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+    ),
+    automaticallyImplyLeading: false,
     title: Padding(
       padding: const EdgeInsets.only(left: 10),
-      child: const Text('My Dairy',style:  TextStyle(fontFamily: 'FontMain',fontSize: 22,color: Colors.indigo),),
+      child: InkWell(
+        onTap: () {
+          Get.off(TutorialHome());
+        },
+        child: const Text(
+          'Plusfitness',
+          style: TextStyle(
+              fontFamily: 'FontMain', fontSize: 22, color: Colors.indigo),
+        ),
+      ),
     ),
     backgroundColor: Color.fromARGB(255, 231, 235, 237),
+
+  
     actions: const [
       Row(
         children: [
@@ -82,11 +101,7 @@ class _TutorialHomeState extends State<TutorialHome> {
   );
 
   @override
-  void dispose() {
-    _controllerCenterRight.dispose();
-    _controllerCenterLeft.dispose();
-    super.dispose();
-  }
+
   @override
   Widget build(BuildContext context) {
     // Scaffold is a layout for
@@ -101,16 +116,8 @@ class _TutorialHomeState extends State<TutorialHome> {
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                // ConfettiWidget(
-                //   blastDirectionality: BlastDirectionality.explosive,
-                //   maxBlastForce: 15,
-                //   confettiController: _controllerCenterRight,
-                //   blastDirection: 170,
-                //   particleDrag: 0.05,
-                //   emissionFrequency: 0.05,
-                //   numberOfParticles: 20,
-                //   gravity: 0.2,
-                // ),
+                name(),
+                Confetti(),
                 firstContainer(),
                 heading_mealsToday(),
                 mealsToday(),
