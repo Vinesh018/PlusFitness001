@@ -1,5 +1,7 @@
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plus_fitness/Bhautik/RunningExcersize/MusicScreens/views/musicsplash.dart';
 
 class yourProgram extends StatefulWidget {
   @override
@@ -102,7 +104,9 @@ class yourProgramState extends State<yourProgram> {
                               borderRadius: BorderRadius.circular(25)),
                           child: Center(
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(Splashscreenformusic());
+                                },
                                 icon: Icon(
                                   Icons.play_arrow,
                                   size: 30,
