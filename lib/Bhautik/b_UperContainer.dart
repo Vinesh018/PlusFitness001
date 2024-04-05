@@ -344,7 +344,7 @@ class FirstRowOfContainer extends StatelessWidget {
                           style: TextStyle(
                             color: textColor,
                             fontFamily: "FontMain",
-                            fontSize: 32,
+                            fontSize: 28,
                           ),
                           
                         ),

@@ -7,6 +7,7 @@ import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/setValue.dart';
+import 'package:plus_fitness/Vinesh/splashScreen.dart';
 
 import 'package:plus_fitness/Vinesh/temp.dart';
 import 'package:plus_fitness/Vinesh/temp1.dart';
@@ -38,12 +39,12 @@ Future<void> main() async {
         // home: Confetti(),
       //home: StoreusingSharedPreferences(),
         //home: PersonalDataMainShow(),
-        //home: SplashScreen(),
+        home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
-        home: TutorialHome()
+        // home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
