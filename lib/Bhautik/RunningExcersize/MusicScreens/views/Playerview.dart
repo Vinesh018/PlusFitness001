@@ -9,6 +9,8 @@ class Mainplayerscreen extends StatefulWidget {
 
 class _MainplayerscreenState extends State<Mainplayerscreen> {
   String artistName = 'Tablo(Epic High)';
+  String songName = 'Sleeping beauty';
+  String musictrackid = ' 6rWblGW0pBcB3uygxBuWZV';
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +85,14 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Sleeping Beauty',
+                        songName,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'FontMain',
                             fontSize: 22),
                       ),
                       Text(
-                        'End of the World,Epic High',
+                        artistName,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'FontMain',
@@ -106,9 +108,9 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
               ),
               SizedBox(height: 15,),
               ProgressBar(
-                progress: Duration(milliseconds: 1000),
-                buffered: Duration(milliseconds: 2000),
-                total: Duration(milliseconds: 5000),
+                progress: Duration(minutes: 1,seconds: 2),
+                buffered: Duration(seconds: 50),
+                total: Duration(minutes: 3,seconds: 30),
                 baseBarColor: Colors.white,
                 bufferedBarColor: Colors.grey,
                 thumbColor: Colors.white,
@@ -118,7 +120,19 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
                   print('User selected a new time: $duration');
                 },
               ),
-            ],
+              SizedBox(height: 8,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                IconButton(onPressed: (){}, icon: Icon(Icons.lyrics_outlined,color: Colors.green,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.skip_previous,color: Colors.white,size: 36,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.play_circle,color: Colors.white,size: 68,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.skip_next,color: Colors.white,size: 36,)),
+                IconButton(onPressed: (){}, icon: Icon(Icons.loop,color: Colors.green)),
+              ],)
+
+
+             ],
           ),
         ],
       ),
