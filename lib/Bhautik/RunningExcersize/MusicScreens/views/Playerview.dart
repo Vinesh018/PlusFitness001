@@ -1,6 +1,11 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:plus_fitness/Bhautik/constansts/spotifydata.dart';
+import 'package:spotify/spotify.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class Mainplayerscreen extends StatefulWidget {
   @override
@@ -11,6 +16,31 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
   String artistName = 'Tablo(Epic High)';
   String songName = 'Sleeping beauty';
   String musictrackid = ' 6rWblGW0pBcB3uygxBuWZV';
+  final player = AudioPlayer();
+  Duration? duration;
+
+  @override
+  void initState() {
+    final credentials = SpotifyApiCredentials(
+        CustomeString.Clientid, CustomeString.Clientsecreate);
+    final spotify = SpotifyApi(credentials);
+    spotify.tracks.get(musictrackid).then(
+      (track) async {
+        String? tempsongName = track.name;
+        if (tempsongName != null) {
+          final yt = YoutubeExplode();
+          final video = (await yt.search.search(tempsongName)).first;
+          final videoid = video.id.value;
+          duration = video.duration;
+
+          setState(() {});
+          var manifest = await yt.videos.streamsClient.getManifest(videoid);
+          var audiourl = manifest.audioOnly.first.url;
+          player.play(UrlSource(audiourl.toString()));
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,33 +136,66 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
                   )
                 ],
               ),
-              SizedBox(height: 15,),
-              ProgressBar(
-                progress: Duration(minutes: 1,seconds: 2),
-                buffered: Duration(seconds: 50),
-                total: Duration(minutes: 3,seconds: 30),
-                baseBarColor: Colors.white,
-                bufferedBarColor: Colors.grey,
-                thumbColor: Colors.white,
-                progressBarColor: Colors.green,
-                timeLabelTextStyle: TextStyle(color: Colors.green),
-                onSeek: (duration) {
-                  print('User selected a new time: $duration');
+              SizedBox(
+                height: 15,
+              ),
+              StreamBuilder(
+                stream: player.onPositionChanged,
+                builder: (context, data) {
+                  return ProgressBar(
+                    progress: data.data ?? Duration(seconds: 8),
+                    buffered: Duration(seconds: 50),
+                    total: duration ?? Duration(minutes: 4),
+                    baseBarColor: Colors.white,
+                    bufferedBarColor: Colors.grey,
+                    thumbColor: Colors.white,
+                    progressBarColor: Colors.green,
+                    timeLabelTextStyle: TextStyle(color: Colors.green),
+                    onSeek: (duration) {
+                      print('User selected a new time: $duration');
+                    },
+                  );
                 },
               ),
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.lyrics_outlined,color: Colors.green,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.skip_previous,color: Colors.white,size: 36,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.play_circle,color: Colors.white,size: 68,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.skip_next,color: Colors.white,size: 36,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.loop,color: Colors.green)),
-              ],)
-
-
-             ],
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.lyrics_outlined,
+                        color: Colors.green,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.skip_previous,
+                        color: Colors.white,
+                        size: 36,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.play_circle,
+                        color: Colors.white,
+                        size: 68,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.skip_next,
+                        color: Colors.white,
+                        size: 36,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.loop, color: Colors.green)),
+                ],
+              )
+            ],
           ),
         ],
       ),
