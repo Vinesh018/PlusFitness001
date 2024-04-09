@@ -1,17 +1,23 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/deletemeals.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var breakfastList = <String>[];
+List<String> breakfastfirebase = [];
+List<dynamic> arraydata = [];
 var lunchList = <String>[];
 var dinnerList = <String>[];
-  
+var usermail1;
+
 double screenwidthv = 0.0;
 List<MealsItems> _mealsItem = [
   MealsItems(
@@ -92,6 +98,21 @@ class MealsItems {
       required this.calaries,
       required this.uid,
       required this.imageurl});
+
+  dynamic toJson() => {
+        'itemname': itemname,
+        'calaries': calaries,
+        'uid': uid,
+        'imageurl': imageurl,
+      };
+
+  factory MealsItems.fromJson(Map<String, dynamic> json) {
+    return MealsItems(
+        itemname: json['itemname'],
+        calaries: json['calaries'],
+        uid: json['uid'],
+        imageurl: json['imageurl']);
+  }
 }
 
 class DragandDrop extends StatefulWidget {
@@ -124,6 +145,7 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
+        // featcharraydata();
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
@@ -137,7 +159,6 @@ class _DragandDropState extends State<DragandDrop>
           return "${object.itemname},${object.calaries}";
         });
         breakfastList = breakfast.toList();
-
       }
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
@@ -158,6 +179,7 @@ class _DragandDropState extends State<DragandDrop>
 
   Future<void> storeAndRetrieveList() async {
     var sp = await SharedPreferences.getInstance();
+      usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     // List<String>? breakfastlistfromsharedpref =
     //     sp.getStringList(sharedprefkeysfinal.breakfastlist);
 
@@ -168,14 +190,13 @@ class _DragandDropState extends State<DragandDrop>
     //   List<String> updatedList =
     //       decodedList.map((item) => json.encode(item)).toList();
     //   await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
-    // } 
+    // }
     // else {
     //   List<String> usrList =
     //       breakfastList.map((item) => jsonEncode(item)).toList();
     //   await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
 
     // }
-
 
     // List<String>? finalList =
     //     sp.getStringList(sharedprefkeysfinal.breakfastlist);
@@ -186,8 +207,66 @@ class _DragandDropState extends State<DragandDrop>
     // } else {
     //   print('No value found in SharedPreferences');
     // }
+
+
+    breakfastfirebase = [];
+    List<String> toList() {
+      breakfastList.forEach((element) {
+        breakfastfirebase.add(element);
+      });
+      return breakfastfirebase.toList();
+    }
+
+ 
+    FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail1)
+        .update({'breakfast': toList()});
+
     setState(() {});
   }
+
+featcharraydata() async {
+  final value = await FirebaseFirestore.instance
+      .collection(firebaseconst.usercollection)
+      .doc(usermail1)
+      .get();
+      // .then((value) => arraydata = value.data()?['breakfast']);
+
+      var comlist = await value.get('breakfast');
+      print(comlist);
+
+      if (value.data()?['breakfast'] == null) {
+        print('getting value from firebase is null');
+      }
+      else{
+      arraydata = value.data()?['breakfast'];
+      }
+
+
+      print(arraydata);
+      print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  
+  // var documentdata = document.data();
+  // if (documentdata != null) {
+  //   var breakfast = documentdata()['breakfast']; // Cast to List<dynamic> or null
+  //   if (breakfast != null) {
+  //     setState(() {
+  //       arraydata = breakfast;
+  //       print(arraydata);
+  //     });
+  //   } else {
+  //     print("No breakfast data found or data is not in the expected format.");
+  //   }
+  // } else {
+  //   print("Document snapshot is null.");
+  // }
+}
+
+
+
+
+
 
 
 // ---------------------Lunch List Code goes Here ---------------------------------------------
@@ -208,7 +287,6 @@ class _DragandDropState extends State<DragandDrop>
       List<String> usrListlunch =
           lunchList.map((item) => jsonEncode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.lunchlist, usrListlunch);
-
     }
     // List<String>? finalListlunch =
     //     sp.getStringList(sharedprefkeysfinal.lunchlist);
@@ -222,7 +300,6 @@ class _DragandDropState extends State<DragandDrop>
 
     setState(() {});
   }
-
 
 // ---------------------Dinner List Code goes Here ---------------------------------------------
   Future<void> storeAndRetrieveListdinner() async {
@@ -238,9 +315,7 @@ class _DragandDropState extends State<DragandDrop>
           decodedList.map((item) => json.encode(item)).toList();
       await sp.setStringList(
           sharedprefkeysfinal.dinnerlist, updatedListldinner);
-     
     } else {
-
       List<String> usrListdinner =
           dinnerList.map((item) => jsonEncode(item)).toList();
       await sp.setStringList(sharedprefkeysfinal.dinnerlist, usrListdinner);
@@ -412,7 +487,7 @@ class MealsCart extends StatelessWidget {
                       color: textcolor,
                       fontWeight:
                           hasItems ? FontWeight.normal : FontWeight.bold,
-                      fontSize: screenwidth/25,
+                      fontSize: screenwidth / 25,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(
