@@ -115,7 +115,7 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
                 progressBarColor: Colors.green,
                 timeLabelTextStyle: TextStyle(color: Colors.green),
                 onSeek: (duration) {
-                  print('User selected a new time: $duration');
+                  // print('User selected a new time: $duration');
                 },
               ),
             ],

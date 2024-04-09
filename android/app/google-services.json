@@ -12,7 +12,12 @@
           "package_name": "com.example.plus_fitness"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "175702299790-p606s24j7eqqnc7oqdpm9eb7r5021adq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA11X7fLNcUxixLXzhiIdRhf0liYnBproo"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175702299790-p606s24j7eqqnc7oqdpm9eb7r5021adq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "175702299790-cv3mhams9qtqmf8eflbj2q6p1299gcri.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.plusfitness.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

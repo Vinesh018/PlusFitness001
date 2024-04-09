@@ -1,6 +1,8 @@
 import 'package:animated_digit/animated_digit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/waveviwe.dart';
@@ -25,29 +27,44 @@ class waterContainerState extends State<waterContainer>
   Animation? animation;
   AnimationController? animationController;
   AnimatedDigitController _controller = AnimatedDigitController(waterInMl);
-  // void _add() {
-  //   _controller.addValue(175);
-  //   setState(() {});
-  // }
   void initState() {
     super.initState();
     getweightfordisplay();
-    // animationController = AnimationController(vsync: this,duration: Duration(seconds: 8));
-    // animation = IntTween(begin: 0,end: 200).animate(CurvedAnimation(parent: animationController!, curve: Curves.easeOut));
-    // animationController!.forward();
+  }
+
+  storeprofiledata(int waterdrinkinml, double waterper) async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    var usermail = sp.getString(sharedprefkeysfinal.useremail);
+    FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .update({'waterML': waterdrinkinml, 'waterper': waterper});
   }
 
   Future<void> getweightfordisplay() async {
     var prefs = await SharedPreferences.getInstance();
-    var getwaterml = prefs.getInt(sharedprefkeysfinal.waterdrinkinml);
-    var getwaterperctage =
-        prefs.getDouble(sharedprefkeysfinal.waterpercentageonbottle);
     var getwaterdrinktime =
         prefs.getString(sharedprefkeysfinal.lastwaterdrinktime);
-    waterInMl = getwaterml ?? 0;
-    waterpercentage = getwaterperctage ?? 0;
     waterDrinkTime = getwaterdrinktime ?? "--";
-    //  print('Getting value of Water in ml is $getwaterml');
+    setState(() {
+      getdata();
+    });
+  }
+
+  void getdata() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    var usermail = sp.getString(sharedprefkeysfinal.useremail);
+    final data = await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        waterInMl = fields!['waterML'] ?? 'Loading';
+        waterpercentage = fields!['waterper'] ?? 'Loading';
+      },
+    );
     setState(() {});
   }
 
@@ -214,9 +231,7 @@ class waterContainerState extends State<waterContainer>
                                   // _add;
                                   DateTime date = DateTime.now();
                                   String time = "${date.hour}:${date.minute}";
-
                                   waterDrinkTime = time;
-
                                   waterpercentage = waterpercentage + 5;
                                   waterInMl = waterInMl + 175;
                                   if (waterpercentage >= 100) {
@@ -237,29 +252,16 @@ class waterContainerState extends State<waterContainer>
                                   }
                                   var pef =
                                       await SharedPreferences.getInstance();
-                                  pef.setInt(sharedprefkeysfinal.waterdrinkinml,
-                                      waterInMl);
-                                  pef.setDouble(
-                                      sharedprefkeysfinal
-                                          .waterpercentageonbottle,
-                                      waterpercentage);
                                   pef.setString(
                                       sharedprefkeysfinal.lastwaterdrinktime,
                                       waterDrinkTime);
-                                  print(
-                                      'Stored dwater ml  in shared Prefrence is $waterInMl');
-                                  print(
-                                      'Stored dwater percetgae  in shared Prefrence is $waterpercentage');
-                                  print(
-                                      'Stored dwater percetgae  in shared Prefrence is $waterDrinkTime');
+                                  storeprofiledata(waterInMl, waterpercentage);
 
                                   setState(() {});
                                 },
                                 child: Icon(Icons.add),
                               ),
                             ),
-                              
-                            
                             Container(
                                 height: 40,
                                 width: 40,
@@ -294,17 +296,8 @@ class waterContainerState extends State<waterContainer>
                                       }
                                       var pef =
                                           await SharedPreferences.getInstance();
-                                      pef.setInt(
-                                          sharedprefkeysfinal.waterdrinkinml,
-                                          waterInMl);
-                                      pef.setDouble(
-                                          sharedprefkeysfinal
-                                              .waterpercentageonbottle,
-                                          waterpercentage);
-                                      print(
-                                          'Stored dwater ml  in shared Prefrence is $waterInMl');
-                                      print(
-                                          'Stored dwater percetgae  in shared Prefrence is $waterpercentage');
+                                      storeprofiledata(
+                                          waterInMl, waterpercentage);
                                       setState(() {});
                                     },
                                     icon: const Icon(Icons.remove,
@@ -355,7 +348,6 @@ class waterContainerState extends State<waterContainer>
 
 class waterIndicator extends StatefulWidget {
   const waterIndicator({super.key});
-
   @override
   State<waterIndicator> createState() => _waterIndicatorState();
 }
@@ -372,7 +364,6 @@ class _waterIndicatorState extends State<waterIndicator> {
       borderColor: Colors.black12,
       borderWidth: 2.0,
       borderRadius: 50.0,
-
       direction: Axis.vertical,
       center: const Text("Loading"),
     );

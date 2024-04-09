@@ -18,4 +18,5 @@ class sharedprefkeysfinal {
   static String sumofallcalaries   = 'sumofcal';
   static String previousvalue   = 'prevalue';
   static String stepcount   = 'stepcount';
+  static String useremail = 'useremail';
 }

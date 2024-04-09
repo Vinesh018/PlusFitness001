@@ -134,12 +134,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       List<double> dataListAsDoubleoflunch =
           calariesoflunch.map((data) => double.parse(data)).toList();
 
-      print(dataListAsDoubleoflunch);
+      // print(dataListAsDoubleoflunch);
       sumoflunchcal = dataListAsDoubleoflunch.fold(
           0, (previous, current) => previous + current);
 
-      print(dataListAsDoubleoflunch.runtimeType);
-      print(sumofBrekfastcal);
+      // print(dataListAsDoubleoflunch.runtimeType);
+      // print(sumofBrekfastcal);
 
       // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
 
@@ -216,11 +216,11 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
         fatscolor = Colors.black;
       }
 
-      print("----------------------------");
+      // print("----------------------------");
 
-      print("Carbs value $carbsper");
+      // print("Carbs value $carbsper");
 
-      print("----------------------------");
+      // print("----------------------------");
 
       sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
       // print("[][][][][][][][][][][]");

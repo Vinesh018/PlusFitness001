@@ -51,9 +51,9 @@ class _MyHomePageState extends State<Runningpage> {
   Future<void> getstepsinsp() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     steps = sp.getInt(sharedprefkeysfinal.stepcount) ?? 0;
-    print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
-    print(steps);
-    print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+    // print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+    // print(steps);
+    // print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
   }
 
   @override

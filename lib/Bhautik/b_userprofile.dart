@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/achievement.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,25 +28,25 @@ class UserProfileMainRun extends StatefulWidget {
 class _UserProfileMainRunState extends State<UserProfileMainRun> {
   void initState() {
     super.initState();
-    getweightfordisplay();
+    getdata();
   }
-
-  void getweightfordisplay() async {
-    var prefs = await SharedPreferences.getInstance();
-    var getweight = prefs.getString(sharedprefkeysfinal.weighoffuser);
-    var getheight = prefs.getString(sharedprefkeysfinal.heighoffuser);
-    var getname = prefs.getString(sharedprefkeysfinal.nameofuser);
-    var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
-    weighonbody = getweight!;
-    Heightonbody = getheight!;
-    namedataonbody = getname!;
-    ageonbody = getage;
-
-    print('Getting Weight from database is in third page $weighonbody');
-    print('Getting height from database is in third page $Heightonbody');
-    print('Gettin name from database is in third page $namedataonbody');
-    print('Gettin age from database is in fourth page $ageonbody');
-    setState(() {});
+    void getdata() async {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+    var useremail =   sp.getString(sharedprefkeysfinal.useremail);
+    final data = await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(useremail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+          namedataonbody = fields!['Name'] ?? 'Loading';
+          ageonbody = fields!['Age'] ?? 'Loading';
+          weighonbody = fields!['Weight'] ?? 'Loading';
+          Heightonbody = fields!['Height'] ?? 'Loading';
+      },
+    );
+     setState(() { });
   }
 
   @override

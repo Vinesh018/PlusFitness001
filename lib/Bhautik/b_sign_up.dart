@@ -468,7 +468,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           ).onError((error, stackTrace) {
             var snackBar = SnackBar(content: Text('Plese Enter Valid Details !'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            print('Error While Sign Up ${error.toString()}');
+            // print('Error While Sign Up ${error.toString()}');
           });  
           }
         },

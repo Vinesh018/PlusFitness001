@@ -72,6 +72,7 @@ dependencies:
   sensors_plus: ^5.0.0
   animated_text_lerp: ^1.0.5
   animated_digit: ^3.2.3
+  firebase_database: ^10.5.0
 
 
 

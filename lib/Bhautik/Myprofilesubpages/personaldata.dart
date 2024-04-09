@@ -89,9 +89,9 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
       setState(() {
         selectedImage = File(pickedfile.path);
         image = File(pickedfile.path).readAsBytesSync();
-        print("----------------");
-        print(image.runtimeType);
-        print("----------------");
+        // print("----------------");
+        // print(image.runtimeType);
+        // print("----------------");
         saveImage(image!);
       });
     }
@@ -202,8 +202,8 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
     screenWidth = MediaQuery.of(context).size.width;
     double y = MediaQuery.of(context).size.height;
     screenHeight = y;
-    print(screenHeight);
-    print(screenWidth);
+    // print(screenHeight);
+    // print(screenWidth);
     return Imageprofile();
   }
 }

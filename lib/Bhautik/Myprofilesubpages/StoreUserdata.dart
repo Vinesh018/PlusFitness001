@@ -1,15 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String  weighdat = '40';
+String weighdat = '40';
 String heightdata = '100';
 String namedata = 'Your Name';
 String agedata = '18';
-
+String usermail = '';
+DocumentSnapshot? snapshot;
 
 class StoreusingSharedPreferences extends StatefulWidget {
   @override
@@ -30,26 +35,46 @@ class _StoreusingSharedPreferencesState
 
   void getweightfordisplay() async {
     var prefs = await SharedPreferences.getInstance();
-    var getweight = prefs.getString(sharedprefkeysfinal.weighoffuser);
-    var getheight = prefs.getString(sharedprefkeysfinal.heighoffuser);
-    var getname = prefs.getString(sharedprefkeysfinal.nameofuser);
-    var getage = prefs.getString(sharedprefkeysfinal.ageoffuser);
-    weighdat = getweight!;
-    heightdata = getheight!;
-    namedata = getname!;
-    agedata = getage!;
-    print('Getting Weight fromdatabase is $weighdat');
-    print('Getting height fromdatabase is $heightdata');
-    print('Getting name fromdatabase is $namedata');
-    print('Getting name fromdatabase is $agedata ');
+    var getusermail = prefs.getString(sharedprefkeysfinal.useremail); //Firebase
+    usermail = getusermail!;
+    getdata();
     setState(() {});
+  }
+
+  void getdata() async {
+    final data = await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+          namedata = fields!['Name'] ?? 'Loading';
+          agedata = fields!['Age'] ?? 'Loading';
+          weighdat = fields!['Weight'] ?? 'Loading';
+          heightdata = fields!['Height'] ?? 'Loading';
+      },
+    );
+     setState(() { });
+  }
+
+
+
+  storeprofiledata(String name, String age, String weight, String height) {
+    FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .set({'Name': name, 'Age': age, 'Weight': weight, 'Height': height});
   }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController weightcontroller = TextEditingController(text: weighdat);
-    TextEditingController namecontroller = TextEditingController(text: namedata);
-    TextEditingController heightcontroller = TextEditingController(text: heightdata);
+    TextEditingController weightcontroller =
+        TextEditingController(text: weighdat);
+    TextEditingController namecontroller =
+        TextEditingController(text: namedata);
+    TextEditingController heightcontroller =
+        TextEditingController(text: heightdata);
     TextEditingController agecontroller = TextEditingController(text: agedata);
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -152,44 +177,27 @@ class _StoreusingSharedPreferencesState
                     var heighttextfieldvalue = heightcontroller.text.toString();
                     var nametextfieldvalue = namecontroller.text.toString();
                     var agetextfieldvalue = agecontroller.text.toString();
-                
+
                     if (weighttextfieldvalue.isEmpty) {
                       weighttextfieldvalue = weighdat;
-                      print('now weighttextfieldvaluee is is old weighdata');
+                      // print('now weighttextfieldvaluee is is old weighdata');
                     }
-                
+
                     if (agetextfieldvalue.isEmpty) {
                       agetextfieldvalue = agedata;
-                      print('now weighttextfieldvaluee is is old weighdata');
+                      // print('now weighttextfieldvaluee is is old weighdata');
                     }
-                
+
                     if (nametextfieldvalue.isEmpty) {
                       nametextfieldvalue = namedata;
-                      print('if name is null then its take old ');
+                      // print('if name is null then its take old ');
                     }
                     if (heighttextfieldvalue.isEmpty) {
                       heighttextfieldvalue = heightdata;
-                      print('if height is null then takes old height');
+                      // print('if height is null then takes old height');
                     }
-                    weighdat = weighttextfieldvalue;
-                    heightdata = heighttextfieldvalue;
-                    namedata = nametextfieldvalue;
-                    agedata = agetextfieldvalue;
-                    var pef = await SharedPreferences.getInstance();
-                    pef.setString(
-                        'finalweightvaluestoredinsharedpref', weighdat);
-                    pef.setString(
-                        'finalHeightvaluestoredinsharedpref', heightdata);
-                    pef.setString(
-                        'finalnamevaluestoredinsharedpref', namedata);
-                    pef.setString('finalagevaluestoredinsharedpref', agedata);
-                    print('Setting new value to databse weight  is $weighdat');
-                    print(
-                        'Setting new value of Height in database is  $heightdata');
-                    print(
-                        'Setting new value of name  in database is  $namedata');
-                    print('Setting new value of age  in database is  $agedata');
-                    // pef.setString(sharedprefkeysfinal.userprofileimg, image);
+                    storeprofiledata(nametextfieldvalue, agetextfieldvalue,
+                        weighttextfieldvalue, heighttextfieldvalue);
                     setState(() {});
                     Get.off(UserProfileMainRun());
                   },

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -39,12 +41,12 @@ Future<void> main() async {
         // home: Confetti(),
       //home: StoreusingSharedPreferences(),
         //home: PersonalDataMainShow(),
-        home: SplashScreen(),
+        // home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
-        // home: TutorialHome()
+        home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
@@ -65,10 +67,20 @@ class _TutorialHomeState extends State<TutorialHome> {
 
   @override
   void initState() {
-
+    _getuseremail();
     Confetti();
     super.initState();
   }
+
+  void _getuseremail() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    var useremail = sp.getString(sharedprefkeysfinal.useremail);
+    // print('#######################');
+    // print(useremail);
+    //   print('#######################');
+
+  }
+  
   AppBar appbar = AppBar(
    
     shape: RoundedRectangleBorder(
