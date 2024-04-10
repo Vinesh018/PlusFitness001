@@ -63,7 +63,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
   @override
   void initState() {
     // TODO: implement initState
-    getImage();
+    // getImage();
     
   }
 

@@ -61,8 +61,8 @@ class waterContainerState extends State<waterContainer>
         .then(
       (value) {
         var fields = value.data();
-        waterInMl = fields!['waterML'] ?? 'Loading';
-        waterpercentage = fields!['waterper'] ?? 'Loading';
+        waterInMl = fields!['waterML'] ?? 0;
+        waterpercentage = fields!['waterper'] ?? 0.0;
       },
     );
     setState(() {});

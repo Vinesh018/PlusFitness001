@@ -9,6 +9,7 @@ import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 String weighdat = '40';
 String heightdata = '100';
 String namedata = 'Your Name';
@@ -29,8 +30,11 @@ class _StoreusingSharedPreferencesState
   FocusNode namefocus = FocusNode();
   FocusNode agefocus = FocusNode();
   void initState() {
+   
     super.initState();
     getweightfordisplay();
+  
+
   }
 
   void getweightfordisplay() async {
@@ -49,22 +53,21 @@ class _StoreusingSharedPreferencesState
         .then(
       (value) {
         var fields = value.data();
-          namedata = fields!['Name'] ?? 'Loading';
-          agedata = fields!['Age'] ?? 'Loading';
-          weighdat = fields!['Weight'] ?? 'Loading';
-          heightdata = fields!['Height'] ?? 'Loading';
+        namedata = fields!['Name'] ?? '';
+        agedata = fields!['Age'] ?? '18';
+        weighdat = fields!['Weight'] ?? '40';
+        heightdata = fields!['Height'] ?? '100';
       },
     );
      setState(() { });
   }
 
-
-
   storeprofiledata(String name, String age, String weight, String height) {
+    
     FirebaseFirestore.instance
         .collection(firebaseconst.usercollection)
         .doc(usermail)
-        .set({'Name': name, 'Age': age, 'Weight': weight, 'Height': height});
+        .update({'Name': name, 'Age': age, 'Weight': weight, 'Height': height});
   }
 
   @override
@@ -198,6 +201,7 @@ class _StoreusingSharedPreferencesState
                     }
                     storeprofiledata(nametextfieldvalue, agetextfieldvalue,
                         weighttextfieldvalue, heighttextfieldvalue);
+                   
                     setState(() {});
                     Get.off(UserProfileMainRun());
                   },

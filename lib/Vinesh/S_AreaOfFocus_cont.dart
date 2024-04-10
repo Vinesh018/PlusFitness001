@@ -1,7 +1,7 @@
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plus_fitness/Bhautik/RunningExcersize/sensorgetdata.dart';
+
 import 'package:plus_fitness/Vinesh/Exercise/Running/running.dart';
 
 var width;
@@ -111,7 +111,7 @@ class _areaOfFocusContState extends State<areaOfFocusCont> {
                     child: InkWell(
                       onTap: () {
                         // Get.off(FitnessTrackingApp());
-                        Get.to(Runningpage());
+                        //  Get.to(Runningpage());
                       },
                       child: Image.asset("assets/images/area3.png"),
                     ),

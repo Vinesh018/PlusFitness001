@@ -13,10 +13,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 var breakfastList = <String>[];
 List<String> breakfastfirebase = [];
-List<dynamic> arraydata = [];
+var cals;
+
 var lunchList = <String>[];
+List<String> lunchlistfirebase = [];
+var calslunch;
+
 var dinnerList = <String>[];
+List<String> dinnerlistfirebase = [];
+var calsdinner;
+
 var usermail1;
+
+
+
 
 double screenwidthv = 0.0;
 List<MealsItems> _mealsItem = [
@@ -126,6 +136,10 @@ class _DragandDropState extends State<DragandDrop>
   void initState() {
     // TODO: implement initState
     super.initState();
+    getdatameals();
+    getlunchmeals();
+    getdinnermeals();
+   
   }
 
   final List<Mealtype> _mealtype = [
@@ -144,14 +158,19 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
+        
         storeAndRetrieveList();
+        getdatameals();
         // featcharraydata();
+        
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
+        getlunchmeals();
       }
       if (mealtype.mealtype == "Dinner") {
         storeAndRetrieveListdinner();
+        getdinnermeals();
       }
 
       if (mealtype.mealtype == "Breakfast") {
@@ -176,40 +195,79 @@ class _DragandDropState extends State<DragandDrop>
     });
   }
 // ---------------------Breakfast List Code goes Here ---------------------------------------------
+  void getdatameals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print("()()()()()()()()()()()()()()");
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+        print(cals.runtimeType);
+        print("()()()()()()()()()()()()()()");
+        
+      },
+    );
+  }
+
+  void getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
+        print(calslunch);
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+        print(calslunch.runtimeType);
+        print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
+      },
+    );
+  }
+
+  void getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        print("[][][][][][][][][][][][][][][][]");
+        print(calsdinner);
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+        print(calsdinner.runtimeType);
+        print("[][][][][][][][][][][][][][][][]");
+        
+      },
+    );
+  }
 
   Future<void> storeAndRetrieveList() async {
+
     var sp = await SharedPreferences.getInstance();
-      usermail1 = sp.getString(sharedprefkeysfinal.useremail);
-    // List<String>? breakfastlistfromsharedpref =
-    //     sp.getStringList(sharedprefkeysfinal.breakfastlist);
-
-    // if (breakfastlistfromsharedpref != null) {
-    //   List<dynamic> decodedList =
-    //       breakfastlistfromsharedpref.map((item) => json.decode(item)).toList();
-    //   decodedList.add(breakfastList.last);
-    //   List<String> updatedList =
-    //       decodedList.map((item) => json.encode(item)).toList();
-    //   await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
-    // }
-    // else {
-    //   List<String> usrList =
-    //       breakfastList.map((item) => jsonEncode(item)).toList();
-    //   await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
-
-    // }
-
-    // List<String>? finalList =
-    //     sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    // if (finalList != null) {
-    //   breakfastList =
-    //       finalList.map((item) => json.decode(item) as String).toList();
-    //   print('Getting Value from SharedPreferences is $breakfastList');
-    // } else {
-    //   print('No value found in SharedPreferences');
-    // }
-
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
     breakfastfirebase = [];
+    
+    breakfastfirebase = cals ?? [];
+   
     List<String> toList() {
       breakfastList.forEach((element) {
         breakfastfirebase.add(element);
@@ -220,83 +278,33 @@ class _DragandDropState extends State<DragandDrop>
  
     FirebaseFirestore.instance
         .collection(firebaseconst.usercollection)
-        .doc(usermail1)
+        .doc(usermail12)
         .update({'breakfast': toList()});
 
     setState(() {});
   }
 
-featcharraydata() async {
-  final value = await FirebaseFirestore.instance
-      .collection(firebaseconst.usercollection)
-      .doc(usermail1)
-      .get();
-      // .then((value) => arraydata = value.data()?['breakfast']);
-
-      var comlist = await value.get('breakfast');
-      print(comlist);
-
-      if (value.data()?['breakfast'] == null) {
-        print('getting value from firebase is null');
-      }
-      else{
-      arraydata = value.data()?['breakfast'];
-      }
-
-
-      print(arraydata);
-      print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-  
-  // var documentdata = document.data();
-  // if (documentdata != null) {
-  //   var breakfast = documentdata()['breakfast']; // Cast to List<dynamic> or null
-  //   if (breakfast != null) {
-  //     setState(() {
-  //       arraydata = breakfast;
-  //       print(arraydata);
-  //     });
-  //   } else {
-  //     print("No breakfast data found or data is not in the expected format.");
-  //   }
-  // } else {
-  //   print("Document snapshot is null.");
-  // }
-}
-
-
-
-
-
-
-
 // ---------------------Lunch List Code goes Here ---------------------------------------------
   Future<void> storeAndRetrieveListlunch() async {
     var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
-    List<String>? lunchfromsharedpref =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    if (lunchfromsharedpref != null) {
-      // Decode the stored items into a List<dynamic>
-      List<dynamic> decodedList =
-          lunchfromsharedpref.map((item) => json.decode(item)).toList();
-      decodedList.add(lunchList.last);
-      List<String> updatedListlunch =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlist, updatedListlunch);
-    } else {
-      List<String> usrListlunch =
-          lunchList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlist, usrListlunch);
+    lunchlistfirebase = [];
+    
+    lunchlistfirebase = calslunch ?? [];
+
+    List<String> toList() {
+      lunchList.forEach((element) {
+        lunchlistfirebase.add(element);
+      });
+      return lunchlistfirebase.toList();
     }
-    // List<String>? finalListlunch =
-    //     sp.getStringList(sharedprefkeysfinal.lunchlist);
-    // if (finalListlunch != null) {
-    //   lunchList =
-    //       finalListlunch.map((item) => json.decode(item) as String).toList();
-    //        print('Getting Value from SharedPreferences is $lunchList');
-    // } else {
-    //   print('No value found in SharedPreferences');
-    // }
+
+ 
+    FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail12)
+        .update({'lunch': toList()});
 
     setState(() {});
   }
@@ -304,31 +312,25 @@ featcharraydata() async {
 // ---------------------Dinner List Code goes Here ---------------------------------------------
   Future<void> storeAndRetrieveListdinner() async {
     var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
-    List<String>? dinnerfromsharedpref =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    if (dinnerfromsharedpref != null) {
-      List<dynamic> decodedList =
-          dinnerfromsharedpref.map((item) => json.decode(item)).toList();
-      decodedList.add(dinnerList.last);
-      List<String> updatedListldinner =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(
-          sharedprefkeysfinal.dinnerlist, updatedListldinner);
-    } else {
-      List<String> usrListdinner =
-          dinnerList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlist, usrListdinner);
+    dinnerlistfirebase = [];
+    
+    dinnerlistfirebase = calsdinner ?? [];
+   
+    List<String> toList() {
+      dinnerList.forEach((element) {
+        dinnerlistfirebase.add(element);
+      });
+      return dinnerlistfirebase.toList();
     }
-    // List<String>? finalListdinner =
-    //     sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    // if (finalListdinner != null) {
-    //   dinnerList =
-    //       finalListdinner.map((item) => json.decode(item) as String).toList();
-    //         print('Getting Value from SharedPreferences is $dinnerList');
-    // } else {
-    //   print('No value found in SharedPreferences');
-    // }
+
+ 
+    FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail12)
+        .update({'dinner': toList()});
+
     setState(() {});
   }
 

@@ -439,12 +439,12 @@ class _AccountContainerState extends State<AccountContainer> {
 
   Personaldataontap() async {
     await Get.off(PersonalDataMainShow());
-    setState(() {});
+    // setState(() {});
   }
 
   achievementontap() async {
     await Get.to(achievementmain());
-    setState(() {});
+    // setState(() {});
   }
 }
 
