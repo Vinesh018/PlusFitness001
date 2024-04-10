@@ -196,6 +196,7 @@ class _DragandDropState extends State<DragandDrop>
   }
 // ---------------------Breakfast List Code goes Here ---------------------------------------------
   void getdatameals() async {
+    
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
@@ -205,12 +206,13 @@ class _DragandDropState extends State<DragandDrop>
         .then(
       (value) {
         var fields = value.data();
+        
         cals = fields!['breakfast'];
-        print("()()()()()()()()()()()()()()");
-        print(cals);
+        // print("()()()()()()()()()()()()()()");
+        // print(cals);
         cals = (cals as List?)?.map((item) => item as String).toList();
-        print(cals.runtimeType);
-        print("()()()()()()()()()()()()()()");
+        // print(cals.runtimeType);
+        // print("()()()()()()()()()()()()()()");
         
       },
     );
@@ -227,12 +229,12 @@ class _DragandDropState extends State<DragandDrop>
       (value) {
         var fields = value.data();
         calslunch = fields!['lunch'];
-        print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
-        print(calslunch);
+        // print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
+        // print(calslunch);
         calslunch =
             (calslunch as List?)?.map((item) => item as String).toList();
-        print(calslunch.runtimeType);
-        print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
+        // print(calslunch.runtimeType);
+        // print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
       },
     );
   }
@@ -248,12 +250,12 @@ class _DragandDropState extends State<DragandDrop>
       (value) {
         var fields = value.data();
         calsdinner = fields!['dinner'];
-        print("[][][][][][][][][][][][][][][][]");
-        print(calsdinner);
+        // print("[][][][][][][][][][][][][][][][]");
+        // print(calsdinner);
         calsdinner =
             (calsdinner as List?)?.map((item) => item as String).toList();
-        print(calsdinner.runtimeType);
-        print("[][][][][][][][][][][][][][][][]");
+        // print(calsdinner.runtimeType);
+        // print("[][][][][][][][][][][][][][][][]");
         
       },
     );
@@ -263,23 +265,37 @@ class _DragandDropState extends State<DragandDrop>
 
     var sp = await SharedPreferences.getInstance();
     var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
-
-    breakfastfirebase = [];
-    
-    breakfastfirebase = cals ?? [];
    
+    // print("before breakfastlist ");
+    // print("breakfastList $breakfastList");
+    // print("breakfastfirebase  $breakfastfirebase");
+    // print("cals $cals");
+
+    breakfastfirebase.clear();
+  
+    breakfastfirebase = cals ?? [];
+    // print("after breakfastlist cals ");
+    // print("breakfastList $breakfastList");
+    // print("breakfastfirebase  $breakfastfirebase");
+    // print("cals $cals");
     List<String> toList() {
       breakfastList.forEach((element) {
         breakfastfirebase.add(element);
       });
+
+      // print("before return ");
+      // print("breakfastList $breakfastList");
+      // print("breakfastfirebase  $breakfastfirebase");
+      // print("cals $cals");
+      // breakfastfirebase = [];
       return breakfastfirebase.toList();
     }
-
+    breakfastfirebase = [];
  
-    FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
-        .doc(usermail12)
-        .update({'breakfast': toList()});
+    // FirebaseFirestore.instance
+    //     .collection(firebaseconst.usercollection)
+    //     .doc(usermail12)
+    //     .set({'breakfast': toList()});
 
     setState(() {});
   }
@@ -388,6 +404,8 @@ class _DragandDropState extends State<DragandDrop>
       },
       itemBuilder: (context, index) {
         final item = _mealsItem[index];
+        print(item.itemname);
+        print(item.calaries);
         return _buildMenuItem(mealsitem: item);
       },
     );
@@ -537,8 +555,8 @@ class Mealtype {
   String get formattedtotalcalaries {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
-    print(mealtype);
-    print(totalcalaries);
+    // print(mealtype);
+    // print(totalcalaries);
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
 
