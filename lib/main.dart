@@ -114,8 +114,6 @@ class _TutorialHomeState extends State<TutorialHome> {
   );
 
   @override
-
-  @override
   Widget build(BuildContext context) {
     // Scaffold is a layout for
     // the major Material Components.

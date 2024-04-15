@@ -14,21 +14,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 var breakfastList = <String>[];
 List<String> breakfastfirebase = [];
 var cals;
-
 var lunchList = <String>[];
 List<String> lunchlistfirebase = [];
 var calslunch;
-
 var dinnerList = <String>[];
 List<String> dinnerlistfirebase = [];
 var calsdinner;
-
 var usermail1;
-
-
-
-
 double screenwidthv = 0.0;
+
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -108,7 +102,6 @@ class MealsItems {
       required this.calaries,
       required this.uid,
       required this.imageurl});
-
 }
 
 class DragandDrop extends StatefulWidget {
@@ -125,7 +118,6 @@ class _DragandDropState extends State<DragandDrop>
     getdatameals();
     getlunchmeals();
     getdinnermeals();
-   
   }
 
   final List<Mealtype> _mealtype = [
@@ -144,11 +136,8 @@ class _DragandDropState extends State<DragandDrop>
     setState(() {
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
-        
         storeAndRetrieveList();
         getdatameals();
-       
-        
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
@@ -180,9 +169,9 @@ class _DragandDropState extends State<DragandDrop>
       }
     });
   }
+
 // ---------------------Breakfast List Code goes Here ---------------------------------------------
   void getdatameals() async {
-    
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
@@ -192,18 +181,37 @@ class _DragandDropState extends State<DragandDrop>
         .then(
       (value) {
         var fields = value.data();
-        
         cals = fields!['breakfast'];
-        // print("()()()()()()()()()()()()()()");
         print(cals);
         cals = (cals as List?)?.map((item) => item as String).toList();
-        // print(cals.runtimeType);
-        // print("()()()()()()()()()()()()()()");
-        
       },
     );
   }
 
+  Future<void> storeAndRetrieveList() async {
+    var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
+    breakfastfirebase.clear();
+    breakfastfirebase = cals ?? [];
+
+    for (var i = 0; i < breakfastList.length; i++) {
+      if (i == breakfastList.length - 1) {
+        breakfastfirebase.add(breakfastList[i]);
+      }
+    }
+
+    // breakfastfirebase = []; //make breakfast List Empty
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail12)
+        .set(
+      {'breakfast': breakfastfirebase},
+    );
+    breakfastfirebase = [];
+    setState(() {});
+  }
+
+// ---------------------Lunch List Code goes Here ---------------------------------------------
   void getlunchmeals() async {
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
@@ -215,16 +223,36 @@ class _DragandDropState extends State<DragandDrop>
       (value) {
         var fields = value.data();
         calslunch = fields!['lunch'];
-        // print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
-        // print(calslunch);
         calslunch =
             (calslunch as List?)?.map((item) => item as String).toList();
-        // print(calslunch.runtimeType);
-        // print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}");
       },
     );
   }
 
+  Future<void> storeAndRetrieveListlunch() async {
+    var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
+
+    lunchlistfirebase = [];
+
+    lunchlistfirebase = calslunch ?? [];
+    for (var i = 0; i < lunchList.length; i++) {
+      if (i == lunchList.length - 1) {
+        lunchlistfirebase.add(lunchList[i]);
+      }
+    }
+
+    //  lunchlistfirebase = []; //make lunch List Empty on firebase
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail12)
+        .set({'lunch': lunchlistfirebase});
+    lunchlistfirebase = [];
+
+    setState(() {});
+  }
+
+// ---------------------Dinner List Code goes Here ---------------------------------------------
   void getdinnermeals() async {
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
@@ -236,83 +264,34 @@ class _DragandDropState extends State<DragandDrop>
       (value) {
         var fields = value.data();
         calsdinner = fields!['dinner'];
-        // print("[][][][][][][][][][][][][][][][]");
-        // print(calsdinner);
         calsdinner =
             (calsdinner as List?)?.map((item) => item as String).toList();
-        // print(calsdinner.runtimeType);
-        // print("[][][][][][][][][][][][][][][][]");
-        
       },
     );
   }
 
-  Future<void> storeAndRetrieveList() async {
 
-    var sp = await SharedPreferences.getInstance();
-    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
-    breakfastfirebase.clear();
-    breakfastfirebase = cals ?? [];
- 
-    for (var i = 0; i < breakfastList.length; i++) {
-      if (i == breakfastList.length - 1) {
-          breakfastfirebase.add(breakfastList[i]);
-      }  
-    }
+  
 
-    // breakfastfirebase = []; //make breakfast List Empty
-    FirebaseFirestore.instance
-        .collection(firebaseconst.mealsBreakfast)
-        .doc(usermail12)
-        .set({'breakfast': breakfastfirebase},);
-        breakfastfirebase = [];
-    setState(() {});
-  }
-
-// ---------------------Lunch List Code goes Here ---------------------------------------------
-  Future<void> storeAndRetrieveListlunch() async {
-    var sp = await SharedPreferences.getInstance();
-    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
-
-    lunchlistfirebase = [];
-    
-    lunchlistfirebase = calslunch ?? [];
-      for (var i = 0; i < lunchList.length; i++) {
-      if (i == lunchList.length - 1) {
-          lunchlistfirebase.add(lunchList[i]);
-      }  
-    }
-
-    //  lunchlistfirebase = []; //make lunch List Empty on firebase
-    FirebaseFirestore.instance
-        .collection(firebaseconst.mealsLunch)
-        .doc(usermail12)
-        .set({'lunch': lunchlistfirebase});
-        lunchlistfirebase = [];
-
-    setState(() {});
-  }
-
-// ---------------------Dinner List Code goes Here ---------------------------------------------
   Future<void> storeAndRetrieveListdinner() async {
     var sp = await SharedPreferences.getInstance();
     var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
     dinnerlistfirebase = [];
-    
+
     dinnerlistfirebase = calsdinner ?? [];
 
-      for (var i = 0; i < dinnerList.length; i++) {
+    for (var i = 0; i < dinnerList.length; i++) {
       if (i == dinnerList.length - 1) {
-          dinnerlistfirebase.add(dinnerList[i]);
-      }  
+        dinnerlistfirebase.add(dinnerList[i]);
+      }
     }
     //  dinnerlistfirebase = [];  //Make List Empty on Firebase
     FirebaseFirestore.instance
         .collection(firebaseconst.mealsDinner)
         .doc(usermail12)
         .set({'dinner': dinnerlistfirebase});
-        dinnerlistfirebase = [];
+    dinnerlistfirebase = [];
 
     setState(() {});
   }
