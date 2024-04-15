@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:plus_fitness/Bhautik/constansts/spotifydata.dart';
 import 'package:spotify/spotify.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
@@ -22,7 +21,7 @@ class _MainplayerscreenState extends State<Mainplayerscreen> {
   @override
   void initState() {
     final credentials = SpotifyApiCredentials(
-        CustomeString.Clientid, CustomeString.Clientsecreate);
+        'Client id ', 'Client Secreate');
     final spotify = SpotifyApi(credentials);
     spotify.tracks.get(musictrackid).then(
       (track) async {
