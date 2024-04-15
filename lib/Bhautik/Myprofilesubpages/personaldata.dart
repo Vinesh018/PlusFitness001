@@ -172,7 +172,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
               ? CircleAvatar(radius: 80, backgroundImage: MemoryImage(image!))
               : CircleAvatar(
                   radius: 80,
-                  backgroundImage: AssetImage("assets/images/man.png")),
+                  backgroundImage: AssetImage("assets/images/boy.png")),
           Positioned(
               bottom: 5,
               right: 10,
@@ -187,7 +187,9 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
                     width: 32,
                     decoration: BoxDecoration(
                         color: Colors.indigo.shade200,
-                        border: Border.all(color: Colors.indigo, width: 2),
+                        border: Border.all(
+                            color: Color.fromARGB(255, 231, 235, 237),
+                            width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: Icon(
                       Icons.add_a_photo_rounded,

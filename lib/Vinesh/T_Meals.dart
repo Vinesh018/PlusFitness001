@@ -109,20 +109,6 @@ class MealsItems {
       required this.uid,
       required this.imageurl});
 
-  dynamic toJson() => {
-        'itemname': itemname,
-        'calaries': calaries,
-        'uid': uid,
-        'imageurl': imageurl,
-      };
-
-  factory MealsItems.fromJson(Map<String, dynamic> json) {
-    return MealsItems(
-        itemname: json['itemname'],
-        calaries: json['calaries'],
-        uid: json['uid'],
-        imageurl: json['imageurl']);
-  }
 }
 
 class DragandDrop extends StatefulWidget {
@@ -161,7 +147,7 @@ class _DragandDropState extends State<DragandDrop>
         
         storeAndRetrieveList();
         getdatameals();
-        // featcharraydata();
+       
         
       }
       if (mealtype.mealtype == "Lunch") {
@@ -200,7 +186,7 @@ class _DragandDropState extends State<DragandDrop>
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
+        .collection(firebaseconst.mealsBreakfast)
         .doc(usermail1)
         .get()
         .then(
@@ -209,7 +195,7 @@ class _DragandDropState extends State<DragandDrop>
         
         cals = fields!['breakfast'];
         // print("()()()()()()()()()()()()()()");
-        // print(cals);
+        print(cals);
         cals = (cals as List?)?.map((item) => item as String).toList();
         // print(cals.runtimeType);
         // print("()()()()()()()()()()()()()()");
@@ -222,7 +208,7 @@ class _DragandDropState extends State<DragandDrop>
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
+        .collection(firebaseconst.mealsLunch)
         .doc(usermail1)
         .get()
         .then(
@@ -243,7 +229,7 @@ class _DragandDropState extends State<DragandDrop>
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
+        .collection(firebaseconst.mealsDinner)
         .doc(usermail1)
         .get()
         .then(
@@ -274,28 +260,30 @@ class _DragandDropState extends State<DragandDrop>
     breakfastfirebase.clear();
   
     breakfastfirebase = cals ?? [];
-    // print("after breakfastlist cals ");
-    // print("breakfastList $breakfastList");
-    // print("breakfastfirebase  $breakfastfirebase");
-    // print("cals $cals");
+    // print(cals);
+
     List<String> toList() {
       breakfastList.forEach((element) {
-        breakfastfirebase.add(element);
+        cals.add(element);
       });
 
-      // print("before return ");
-      // print("breakfastList $breakfastList");
-      // print("breakfastfirebase  $breakfastfirebase");
-      // print("cals $cals");
-      // breakfastfirebase = [];
-      return breakfastfirebase.toList();
+      var ints = cals.map((s) => s as String).toString();
+      print("------");
+      print(ints);
+      print(ints.runtimeType);
+      print("------");
+      breakfastList = cals as List<String>;
+      return breakfastList.toList();
     }
+    cals = [];
     breakfastfirebase = [];
- 
-    // FirebaseFirestore.instance
-    //     .collection(firebaseconst.usercollection)
-    //     .doc(usermail12)
-    //     .set({'breakfast': toList()});
+
+
+    
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail12)
+        .set({'breakfast': toList()}, SetOptions(merge: true));
 
     setState(() {});
   }
@@ -318,7 +306,7 @@ class _DragandDropState extends State<DragandDrop>
 
  
     FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
+        .collection(firebaseconst.mealsLunch)
         .doc(usermail12)
         .update({'lunch': toList()});
 
@@ -343,7 +331,7 @@ class _DragandDropState extends State<DragandDrop>
 
  
     FirebaseFirestore.instance
-        .collection(firebaseconst.usercollection)
+        .collection(firebaseconst.mealsDinner)
         .doc(usermail12)
         .update({'dinner': toList()});
 
@@ -404,8 +392,8 @@ class _DragandDropState extends State<DragandDrop>
       },
       itemBuilder: (context, index) {
         final item = _mealsItem[index];
-        print(item.itemname);
-        print(item.calaries);
+        // print(item.itemname);
+        // print(item.calaries);
         return _buildMenuItem(mealsitem: item);
       },
     );

@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -460,9 +462,26 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                     .doc(_emailcontroller.text)
                     .set({
                   'Email': _emailcontroller.text,
-                  "Name": usernamecontroller.text
+                  "Name": usernamecontroller.text,
                 });
-      
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsBreakfast)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsLunch)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsDinner)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
                Get.off(
                   () => MainLogInPage(),
                   transition: Transition.downToUp,

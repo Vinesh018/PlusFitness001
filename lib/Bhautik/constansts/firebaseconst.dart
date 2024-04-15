@@ -3,4 +3,7 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 
 class firebaseconst {
   static String usercollection = 'PlusfitnessUsers';  
+  static String mealsBreakfast = 'Breakfast';
+  static String mealsLunch = 'Lunch';
+  static String mealsDinner = 'Dinner';  
 }
