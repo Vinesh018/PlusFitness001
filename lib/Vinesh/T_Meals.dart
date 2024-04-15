@@ -251,40 +251,21 @@ class _DragandDropState extends State<DragandDrop>
 
     var sp = await SharedPreferences.getInstance();
     var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
-   
-    // print("before breakfastlist ");
-    // print("breakfastList $breakfastList");
-    // print("breakfastfirebase  $breakfastfirebase");
-    // print("cals $cals");
-
     breakfastfirebase.clear();
-  
     breakfastfirebase = cals ?? [];
-    // print(cals);
-
-    List<String> toList() {
-      breakfastList.forEach((element) {
-        cals.add(element);
-      });
-
-      var ints = cals.map((s) => s as String).toString();
-      print("------");
-      print(ints);
-      print(ints.runtimeType);
-      print("------");
-      breakfastList = cals as List<String>;
-      return breakfastList.toList();
+ 
+    for (var i = 0; i < breakfastList.length; i++) {
+      if (i == breakfastList.length - 1) {
+          breakfastfirebase.add(breakfastList[i]);
+      }  
     }
-    cals = [];
-    breakfastfirebase = [];
 
-
-    
+    // breakfastfirebase = []; //make breakfast List Empty
     FirebaseFirestore.instance
         .collection(firebaseconst.mealsBreakfast)
         .doc(usermail12)
-        .set({'breakfast': toList()}, SetOptions(merge: true));
-
+        .set({'breakfast': breakfastfirebase},);
+        breakfastfirebase = [];
     setState(() {});
   }
 
@@ -296,19 +277,18 @@ class _DragandDropState extends State<DragandDrop>
     lunchlistfirebase = [];
     
     lunchlistfirebase = calslunch ?? [];
-
-    List<String> toList() {
-      lunchList.forEach((element) {
-        lunchlistfirebase.add(element);
-      });
-      return lunchlistfirebase.toList();
+      for (var i = 0; i < lunchList.length; i++) {
+      if (i == lunchList.length - 1) {
+          lunchlistfirebase.add(lunchList[i]);
+      }  
     }
 
- 
+    //  lunchlistfirebase = []; //make lunch List Empty on firebase
     FirebaseFirestore.instance
         .collection(firebaseconst.mealsLunch)
         .doc(usermail12)
-        .update({'lunch': toList()});
+        .set({'lunch': lunchlistfirebase});
+        lunchlistfirebase = [];
 
     setState(() {});
   }
@@ -321,19 +301,18 @@ class _DragandDropState extends State<DragandDrop>
     dinnerlistfirebase = [];
     
     dinnerlistfirebase = calsdinner ?? [];
-   
-    List<String> toList() {
-      dinnerList.forEach((element) {
-        dinnerlistfirebase.add(element);
-      });
-      return dinnerlistfirebase.toList();
-    }
 
- 
+      for (var i = 0; i < dinnerList.length; i++) {
+      if (i == dinnerList.length - 1) {
+          dinnerlistfirebase.add(dinnerList[i]);
+      }  
+    }
+    //  dinnerlistfirebase = [];  //Make List Empty on Firebase
     FirebaseFirestore.instance
         .collection(firebaseconst.mealsDinner)
         .doc(usermail12)
-        .update({'dinner': toList()});
+        .set({'dinner': dinnerlistfirebase});
+        dinnerlistfirebase = [];
 
     setState(() {});
   }
