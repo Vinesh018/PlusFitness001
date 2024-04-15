@@ -186,7 +186,7 @@ class ContactusPageMain extends StatelessWidget {
 
 //emailjs403
 Future sendemailjsemail() async {
-  print("object");
+ // print("object");
   final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
 
   const service_id = "service_p7512xo";
@@ -206,16 +206,16 @@ Future sendemailjsemail() async {
           'reply_to': "vinesh.thakkar.coen@gmail.com"
         }
       }));
-  print("object1");
-  print(response.statusCode);
+ // print("object1");
+ // print(response.statusCode);
   if (response.statusCode == 200) {
-    print("0982034580285025");
-    print(flag);
+   // print("0982034580285025");
+  //  print(flag);
     flag = 1;
-    print(flag);
-    print("0982034580285025");
+  //  print(flag);
+  //  print("0982034580285025");
   }
-  print(flag);
+ // print(flag);
   // return response.statusCode;
 }
 

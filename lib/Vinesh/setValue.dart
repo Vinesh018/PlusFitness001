@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +30,8 @@ var fatsper;
 var protein;
 var proteinper;
 
+var usermail1;
+
 class name extends StatefulWidget {
   const name({super.key});
 
@@ -38,25 +43,72 @@ class _nameState extends State<name> {
   @override
   void initState() {
     storeAndRetrieveList();
-    getsumofcals();
     super.initState();
   }
 
-  Future<void> storeAndRetrieveList() async {
-    var sp = await SharedPreferences.getInstance();
-    List<String>? listString =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    List<String>? listStringlunch =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    List<String>? listStringdinner =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    decodedListbreakfast = listString ?? [];
+  // Code For Get Data from Firebase
 
-    // print('The Lenth of Setting decodce is ${decodedListbreakfast.length}');
-    decodelistlunch = listStringlunch ?? [];
-    // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
-    decodelistdinner = listStringdinner ?? [];
-    // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
+  Future<void> getdatameals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+        decodedListbreakfast = cals ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  Future<void> getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+        decodelistlunch = calslunch ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  Future<void> getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        print(calsdinner);
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+        decodelistdinner = calsdinner ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  // =========================================
+
+  Future<void> storeAndRetrieveList() async {
+    await getdatameals();
+    await getlunchmeals();
+    await getdinnermeals();
     setState(() {
       calariesofbreakfast = [];
       // print('============================================================================');
@@ -79,25 +131,24 @@ class _nameState extends State<name> {
       for (var i = 0; i < decodelistlunch.length; i++) {
         String str = decodelistlunch[i];
         var resultcal;
-        resultcal = str.split(',')[1];
-        resultcal = resultcal.replaceAll('"', '');
-        calariesoflunch.add(resultcal);
+        if (str.isEmpty) {
+          resultcal = '';
+        } else {
+          resultcal = str.split(',')[1];
+          resultcal = resultcal.replaceAll('"', '');
+          calariesoflunch.add(resultcal);
+        }
+
         // print("the calaries are :: $calariesoflunch");
         // print(calariesoflunch.runtimeType);
       }
 
       List<double> dataListAsDoubleoflunch =
           calariesoflunch.map((data) => double.parse(data)).toList();
-
-      print(dataListAsDoubleoflunch);
       sumoflunchcal = dataListAsDoubleoflunch.fold(
           0, (previous, current) => previous + current);
 
-      print(dataListAsDoubleoflunch.runtimeType);
-      print(sumofBrekfastcal);
-
       // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
-
       calariesofdinner = [];
       for (var i = 0; i < decodelistdinner.length; i++) {
         String str = decodelistdinner[i];
@@ -170,31 +221,7 @@ class _nameState extends State<name> {
       if (fats > 0) {
         fatscolor = Colors.black;
       }
-
-      print("----------------------------");
-
-      print("Carbs value $carbsper");
-
-      print("----------------------------");
-
-      sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
-      print("[][][][][][][][][][][]");
-      print(Sumofcal);
-      print("[][][][][][][][][][][]");
     });
-  }
-
-  Future<void> getsumofcals() async {
-    var sp = await SharedPreferences.getInstance();
-    eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
-    if (eatencals! >= 2500) {
-      eatencals = 2500;
-    }
-    if (eatencals! <= 0) {
-      eatencals = 0;
-    }
-
-    setState(() {});
   }
 
   @override

@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/b_sign_up.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Bhautik/googleAuth.dart';
 import 'package:plus_fitness/Vinesh/forgotPass.dart';
 import 'package:plus_fitness/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainLogInPage extends StatelessWidget {
   @override
@@ -472,7 +474,8 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                     email: _emailcontroller1.text,
                     password: pswdController1.text)
                 .then(
-              (value) {
+              (value) async {
+               
                 Get.off(
                   () => TutorialHome(),
                   transition: Transition.rightToLeft,
@@ -483,13 +486,16 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
                   page: () => TutorialHome(),
                   transition: Transition.rightToLeft,
                 );
+
+                SharedPreferences sp = await SharedPreferences.getInstance();
+                sp.setString(sharedprefkeysfinal.useremail, _emailcontroller1.text);
               },
             ).onError(
               (error, stackTrace) {
                 var snackBar =
                     SnackBar(content: Text('Invalid Username or Password !'));
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                print('Error in password ${error.toString()}');
+                // print('Error in password ${error.toString()}');
               },
             );
           }

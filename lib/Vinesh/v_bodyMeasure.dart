@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String weighonbody = '40';
@@ -15,28 +18,34 @@ class bodyMeasureCont extends StatefulWidget {
 class bodyMeasureContState extends State<bodyMeasureCont> {
   void initState() {
     super.initState();
-    getweightfordisplay();
+    getdata();
+    // getweightfordisplay();
+  }
+
+  
+   void getdata() async {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+    var useremail =   sp.getString(sharedprefkeysfinal.useremail);
+    final data = await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(useremail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+          weighonbody = fields!['Weight'] ?? 'Loading';
+          Heightonbody = fields!['Height'] ?? 'Loading';
+           setState(() { getweightfordisplay(); });
+      },
+      
+    );
+    
   }
 
   void getweightfordisplay() async {
-    var prefs = await SharedPreferences.getInstance();
-    var getweight = prefs.getString('finalweightvaluestoredinsharedpref');
-    var getheight = prefs.getString('finalHeightvaluestoredinsharedpref');
-    weighonbody = getweight ?? '40';
-    Heightonbody = getheight ?? '100';
-    print('Getting Weight fromdatabase is $weighonbody');
-    print('Getting height fromdatabase is $Heightonbody');
-
     double height = double.parse(Heightonbody);
     double weight = double.parse(weighonbody);
-    print(height);
-    print(height.runtimeType);
-
-    print(weight);
-    print(weight.runtimeType);
-
     bmi = (weight / (height * height)) * 10000;
-
     if (bmi < 18.5) {
       BmiIndicator = " Underweight";
     } else if (bmi >= 18.5 && bmi <= 24.9) {
@@ -50,6 +59,7 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
 
     print(bmi);
   }
+
 
   @override
   Widget build(BuildContext context) {

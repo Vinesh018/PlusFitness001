@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:confetti/confetti.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/RunningExcersize/MusicScreens/MusicHome.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/setValue.dart';
+import 'package:plus_fitness/Vinesh/splashScreen.dart';
 
 import 'package:plus_fitness/Vinesh/temp.dart';
 import 'package:plus_fitness/Vinesh/temp1.dart';
@@ -40,12 +43,13 @@ Future<void> main() async {
         home: MusicHomeScreen(),
       //home: StoreusingSharedPreferences(),
         //home: PersonalDataMainShow(),
-        //home: SplashScreen(),
+        // home: SplashScreen(),
       //home: MainSignUpPage(),
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
         // home: TutorialHome()
+        // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
         // home: ContactusPageMain()
@@ -65,10 +69,20 @@ class _TutorialHomeState extends State<TutorialHome> {
 
   @override
   void initState() {
-
+    _getuseremail();
     Confetti();
     super.initState();
   }
+
+  void _getuseremail() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    var useremail = sp.getString(sharedprefkeysfinal.useremail);
+    // print('#######################');
+    // print(useremail);
+    //   print('#######################');
+
+  }
+  
   AppBar appbar = AppBar(
    
     shape: RoundedRectangleBorder(
@@ -100,8 +114,6 @@ class _TutorialHomeState extends State<TutorialHome> {
       ),
     ],
   );
-
-  @override
 
   @override
   Widget build(BuildContext context) {

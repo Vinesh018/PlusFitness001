@@ -1,18 +1,28 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/deletemeals.dart';
 import 'package:plus_fitness/Vinesh/footer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var breakfastList = <String>[];
+List<String> breakfastfirebase = [];
+var cals;
 var lunchList = <String>[];
+List<String> lunchlistfirebase = [];
+var calslunch;
 var dinnerList = <String>[];
-  
+List<String> dinnerlistfirebase = [];
+var calsdinner;
+var usermail1;
 double screenwidthv = 0.0;
+
 List<MealsItems> _mealsItem = [
   MealsItems(
       itemname: 'Avacado',
@@ -105,6 +115,9 @@ class _DragandDropState extends State<DragandDrop>
   void initState() {
     // TODO: implement initState
     super.initState();
+    getdatameals();
+    getlunchmeals();
+    getdinnermeals();
   }
 
   final List<Mealtype> _mealtype = [
@@ -124,12 +137,15 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
+        getdatameals();
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
+        getlunchmeals();
       }
       if (mealtype.mealtype == "Dinner") {
         storeAndRetrieveListdinner();
+        getdinnermeals();
       }
 
       if (mealtype.mealtype == "Breakfast") {
@@ -137,7 +153,6 @@ class _DragandDropState extends State<DragandDrop>
           return "${object.itemname},${object.calaries}";
         });
         breakfastList = breakfast.toList();
-
       }
       if (mealtype.mealtype == "Lunch") {
         final lunch = mealtype.mealitem.map((object) {
@@ -155,102 +170,127 @@ class _DragandDropState extends State<DragandDrop>
     });
   }
 
+// ---------------------Breakfast List Code goes Here ---------------------------------------------
+  void getdatameals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+      },
+    );
+  }
+
   Future<void> storeAndRetrieveList() async {
     var sp = await SharedPreferences.getInstance();
-    List<String>? breakfastlistfromsharedpref =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-
-    if (breakfastlistfromsharedpref != null) {
-      // Decode the stored items into a List<dynamic>
-      List<dynamic> decodedList =
-          breakfastlistfromsharedpref.map((item) => json.decode(item)).toList();
-      decodedList.add(breakfastList.last);
-      List<String> updatedList =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.breakfastlist, updatedList);
-    } 
-    else {
-      List<String> usrList =
-          breakfastList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.breakfastlist, usrList);
-
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
+    breakfastfirebase.clear();
+    breakfastfirebase = cals ?? [];
+    for (var i = 0; i < breakfastList.length; i++) {
+      if (i == breakfastList.length - 1) {
+        breakfastfirebase.add(breakfastList[i]);
+      }
     }
 
-
-    List<String>? finalList =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    if (finalList != null) {
-      breakfastList =
-          finalList.map((item) => json.decode(item) as String).toList();
-      print('Getting Value from SharedPreferences is $breakfastList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
+    // breakfastfirebase = []; //make breakfast List Empty
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail12)
+        .set(
+      {'breakfast': breakfastfirebase},
+    );
+    breakfastfirebase = [];
     setState(() {});
+  }
+
+// ---------------------Lunch List Code goes Here ---------------------------------------------
+  void getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+      },
+    );
   }
 
   Future<void> storeAndRetrieveListlunch() async {
     var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
-    List<String>? lunchfromsharedpref =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    if (lunchfromsharedpref != null) {
-      // Decode the stored items into a List<dynamic>
-      List<dynamic> decodedList =
-          lunchfromsharedpref.map((item) => json.decode(item)).toList();
-      decodedList.add(lunchList.last);
-      List<String> updatedListlunch =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlist, updatedListlunch);
-    } else {
-      List<String> usrListlunch =
-          lunchList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.lunchlist, usrListlunch);
+    lunchlistfirebase = [];
 
+    lunchlistfirebase = calslunch ?? [];
+    for (var i = 0; i < lunchList.length; i++) {
+      if (i == lunchList.length - 1) {
+        lunchlistfirebase.add(lunchList[i]);
+      }
     }
-    List<String>? finalListlunch =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    if (finalListlunch != null) {
-      lunchList =
-          finalListlunch.map((item) => json.decode(item) as String).toList();
-           print('Getting Value from SharedPreferences is $lunchList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
+
+    //  lunchlistfirebase = []; //make lunch List Empty on firebase
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail12)
+        .set({'lunch': lunchlistfirebase});
+    lunchlistfirebase = [];
 
     setState(() {});
   }
 
+// ---------------------Dinner List Code goes Here ---------------------------------------------
+  void getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+      },
+    );
+  }
+
+
+  
 
   Future<void> storeAndRetrieveListdinner() async {
     var sp = await SharedPreferences.getInstance();
+    var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
 
-    List<String>? dinnerfromsharedpref =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    if (dinnerfromsharedpref != null) {
-      List<dynamic> decodedList =
-          dinnerfromsharedpref.map((item) => json.decode(item)).toList();
-      decodedList.add(dinnerList.last);
-      List<String> updatedListldinner =
-          decodedList.map((item) => json.encode(item)).toList();
-      await sp.setStringList(
-          sharedprefkeysfinal.dinnerlist, updatedListldinner);
-     
-    } else {
+    dinnerlistfirebase = [];
 
-      List<String> usrListdinner =
-          dinnerList.map((item) => jsonEncode(item)).toList();
-      await sp.setStringList(sharedprefkeysfinal.dinnerlist, usrListdinner);
+    dinnerlistfirebase = calsdinner ?? [];
+
+    for (var i = 0; i < dinnerList.length; i++) {
+      if (i == dinnerList.length - 1) {
+        dinnerlistfirebase.add(dinnerList[i]);
+      }
     }
-    List<String>? finalListdinner =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    if (finalListdinner != null) {
-      dinnerList =
-          finalListdinner.map((item) => json.decode(item) as String).toList();
-            print('Getting Value from SharedPreferences is $dinnerList');
-    } else {
-      print('No value found in SharedPreferences');
-    }
+    //  dinnerlistfirebase = [];  //Make List Empty on Firebase
+    FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail12)
+        .set({'dinner': dinnerlistfirebase});
+    dinnerlistfirebase = [];
 
     setState(() {});
   }
@@ -309,6 +349,8 @@ class _DragandDropState extends State<DragandDrop>
       },
       itemBuilder: (context, index) {
         final item = _mealsItem[index];
+        // print(item.itemname);
+        // print(item.calaries);
         return _buildMenuItem(mealsitem: item);
       },
     );
@@ -410,7 +452,7 @@ class MealsCart extends StatelessWidget {
                       color: textcolor,
                       fontWeight:
                           hasItems ? FontWeight.normal : FontWeight.bold,
-                      fontSize: screenwidth/25,
+                      fontSize: screenwidth / 25,
                       fontFamily: "FontMain"),
                 ),
                 Visibility(
@@ -458,9 +500,8 @@ class Mealtype {
   String get formattedtotalcalaries {
     final totalcalaries =
         mealitem.fold(0, (pre, item) => (pre + item.calaries).toInt());
-    print(mealtype);
-    print(totalcalaries);
-
+    // print(mealtype);
+    // print(totalcalaries);
     return '${(totalcalaries).toStringAsFixed(0)} Kcal';
   }
 

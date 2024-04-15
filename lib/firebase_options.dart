@@ -66,6 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '175702299790',
     projectId: 'plusfitness',
     storageBucket: 'plusfitness.appspot.com',
+    androidClientId: '175702299790-q5e8uc08sf3i6fb5i58ikfd5u6pk27vh.apps.googleusercontent.com',
+    iosClientId: '175702299790-dd6q4ig9sd4mquui8dpiihl4d43l9k1h.apps.googleusercontent.com',
     iosBundleId: 'com.example.plusfitness',
   );
 
@@ -75,6 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '175702299790',
     projectId: 'plusfitness',
     storageBucket: 'plusfitness.appspot.com',
+    androidClientId: '175702299790-q5e8uc08sf3i6fb5i58ikfd5u6pk27vh.apps.googleusercontent.com',
+    iosClientId: '175702299790-cv3mhams9qtqmf8eflbj2q6p1299gcri.apps.googleusercontent.com',
     iosBundleId: 'com.example.plusfitness.RunnerTests',
   );
 }

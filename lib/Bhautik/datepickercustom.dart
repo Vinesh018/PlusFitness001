@@ -27,7 +27,7 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
       width = 10.0;
     } else {
       width = 0.0;
-      print('Below nine');
+      // print('Below nine');
     }
   }
 
@@ -124,7 +124,7 @@ class _DatepickerCustomState extends State<DatepickerCustom> {
                         .format(selectedDate)
                         .trim()
                         .substring(0, 3);
-                print(dateOnly.day.runtimeType);
+                // print(dateOnly.day.runtimeType);
               }
             });
           },

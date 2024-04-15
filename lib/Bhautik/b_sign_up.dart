@@ -1,7 +1,11 @@
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 
 class MainSignUpPage extends StatelessWidget {
   @override
@@ -453,6 +457,31 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           } else {
 
           FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailcontroller.text, password: pswdController.text).then((value) {
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.usercollection)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                  "Name": usernamecontroller.text,
+                });
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsBreakfast)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsLunch)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsDinner)
+                    .doc(_emailcontroller.text)
+                    .set({
+                  'Email': _emailcontroller.text,
+                });
                Get.off(
                   () => MainLogInPage(),
                   transition: Transition.downToUp,
@@ -468,7 +497,7 @@ class _InnerdataOfBlueContainerState extends State<InnerdataOfBlueContainer> {
           ).onError((error, stackTrace) {
             var snackBar = SnackBar(content: Text('Plese Enter Valid Details !'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            print('Error While Sign Up ${error.toString()}');
+            // print('Error While Sign Up ${error.toString()}');
           });  
           }
         },

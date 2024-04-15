@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:plus_fitness/Vinesh/temp.dart';
@@ -27,39 +29,82 @@ List<String> calariesoflunch = [];
 List<String> namesofdinner = [];
 List<String> calariesofdinner = [];
 
- double Sumofcal  = 0;
+double Sumofcal = 0;
 
 class mealsTodayState extends State<mealsToday> {
   @override
   void initState() {
-    super.initState();
     storeAndRetrieveList();
     Confetti();
+    super.initState();
   }
 
-  Future<void> storeAndRetrieveList() async {
+  Future<void> getdatameals() async {
     var sp = await SharedPreferences.getInstance();
-    List<String>? listString =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    List<String>? listStringlunch =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    List<String>? listStringdinner =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    decodedListbreakfast = listString??[];
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+        decodedListbreakfast = cals ?? ['Calculating Calaries'];
+      },
+    );
+  }
 
-    // print('The Lenth of Setting decodce is ${decodedListbreakfast.length}');
-    decodelistlunch = listStringlunch ??[];
-      // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
-    decodelistdinner = listStringdinner ?? [];
-        // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
+  Future<void> getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+        decodelistlunch = calslunch ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  Future<void> getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        print(calsdinner);
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+        decodelistdinner = calsdinner ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+
+  Future<void> storeAndRetrieveList() async {
+    await getdatameals();
+    await getlunchmeals();
+    await getdinnermeals();
     setState(() {
       namesofbrekfast = [];
       calariesofbreakfast = [];
-          // print('============================================================================');
       for (var i = 0; i < decodedListbreakfast.length; i++) {
         String str = decodedListbreakfast[i];
         String resultname;
-        // print('============================================================================');
         resultname = str.split(',')[0];
         resultname = resultname.replaceAll('"', '');
         namesofbrekfast.add(resultname);
@@ -78,73 +123,42 @@ class mealsTodayState extends State<mealsToday> {
       namesoflunch = [];
       calariesoflunch = [];
       for (var i = 0; i < decodelistlunch.length; i++) {
-        // print(
-        //     'The Values of I is Eqauls to $i of and its ${decodelistlunch[i]}');
         String str = decodelistlunch[i];
         String resultname = str.split(',')[0];
-
         resultname = resultname.replaceAll('"', '');
-
         namesoflunch.add(resultname);
-        // print("the names are :: $namesoflunch");
 
         var resultcal;
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
         calariesoflunch.add(resultcal);
-        // print("the calaries are :: $calariesoflunch");
-        // print(calariesoflunch.runtimeType);
       }
 
       List<double> dataListAsDoubleoflunch =
           calariesoflunch.map((data) => double.parse(data)).toList();
-
-      print(dataListAsDoubleoflunch);
       sumoflunchcal = dataListAsDoubleoflunch.fold(
           0, (previous, current) => previous + current);
 
-      print(dataListAsDoubleoflunch.runtimeType);
-      print(sumofBrekfastcal);
-
-
-
-            // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
+      // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
       namesofdinner = [];
       calariesofdinner = [];
       for (var i = 0; i < decodelistdinner.length; i++) {
-        // print(
-        //     'The Values of I is Eqauls to $i of and its ${decodelistdinner[i]}');
         String str = decodelistdinner[i];
         String resultname = str.split(',')[0];
-
         resultname = resultname.replaceAll('"', '');
-
         namesofdinner.add(resultname);
-        // print("the names are :: $namesofdinner");
-
         var resultcal;
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
         calariesofdinner.add(resultcal);
-        // print("the calaries are :: $calariesofdinner");
-        // print(calariesofdinner.runtimeType);
       }
-
       List<double> dataListAsDoubleofdinner =
           calariesofdinner.map((data) => double.parse(data)).toList();
-
-      // print(dataListAsDoubleofdinner);
       sumofdinnercal = dataListAsDoubleofdinner.fold(
           0, (previous, current) => previous + current);
-
-      // print(dataListAsDoubleofdinner.runtimeType);
-      // print(sumofBrekfastcal);
-
       Sumofcal = sumofBrekfastcal + sumofdinnercal + sumoflunchcal;
-      print('The sum of calaries is $Sumofcal');
-      sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
     });
-        print('The sum of calaries is $Sumofcal');
+    print('The sum of calaries is $Sumofcal');
   }
 
   @override
@@ -157,10 +171,10 @@ class mealsTodayState extends State<mealsToday> {
           padding: const EdgeInsets.only(top: 30),
           child: Row(
             children: [
-               DelayedWidget(
-                 delayDuration: Duration(milliseconds: 200), // Not required
-              animationDuration: Duration(seconds: 1), // Not required
-              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+              DelayedWidget(
+                delayDuration: Duration(milliseconds: 200), // Not required
+                animationDuration: Duration(seconds: 1), // Not required
+                animation: DelayedAnimations.SLIDE_FROM_RIGHT,
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
@@ -279,10 +293,10 @@ class mealsTodayState extends State<mealsToday> {
                 ),
               ),
               //-----------------------2nd Box for LUNCH ----------------------//
-               DelayedWidget(
-                 delayDuration: Duration(milliseconds: 200), // Not required
-              animationDuration: Duration(seconds: 3), // Not required
-              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+              DelayedWidget(
+                delayDuration: Duration(milliseconds: 200), // Not required
+                animationDuration: Duration(seconds: 3), // Not required
+                animation: DelayedAnimations.SLIDE_FROM_RIGHT,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Stack(
@@ -306,7 +320,9 @@ class mealsTodayState extends State<mealsToday> {
                                   title: Text('Lunch'),
                                   content: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(namesoflunch.join(","),)),
+                                      child: Text(
+                                        namesoflunch.join(","),
+                                      )),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
@@ -341,7 +357,8 @@ class mealsTodayState extends State<mealsToday> {
                             padding: const EdgeInsets.only(top: 40, left: 15),
                             child: Container(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -373,7 +390,7 @@ class mealsTodayState extends State<mealsToday> {
                                             fontFamily: 'FontMain',
                                             fontSize: 25),
                                         children: <TextSpan>[
-                                          TextSpan( 
+                                          TextSpan(
                                               text: ' Kcal',
                                               style: TextStyle(fontSize: 13)),
                                         ],
@@ -404,10 +421,10 @@ class mealsTodayState extends State<mealsToday> {
                 ),
               ),
               //-------------------3rd Box for Snack ----------------------//
-               DelayedWidget(
-                 delayDuration: Duration(milliseconds: 200), // Not required
-              animationDuration: Duration(seconds: 5), // Not required
-              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+              DelayedWidget(
+                delayDuration: Duration(milliseconds: 200), // Not required
+                animationDuration: Duration(seconds: 5), // Not required
+                animation: DelayedAnimations.SLIDE_FROM_RIGHT,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Stack(
@@ -473,7 +490,7 @@ class mealsTodayState extends State<mealsToday> {
                                     ),
                                   ),
                                 ),
-                
+
                                 //////
                               ],
                             ),
@@ -498,10 +515,10 @@ class mealsTodayState extends State<mealsToday> {
               ),
 
               //--------------------------4th box for Dinner --------------//
-               DelayedWidget(
-                 delayDuration: Duration(milliseconds: 200), // Not required
-              animationDuration: Duration(seconds: 5), // Not required
-              animation: DelayedAnimations.SLIDE_FROM_RIGHT, 
+              DelayedWidget(
+                delayDuration: Duration(milliseconds: 200), // Not required
+                animationDuration: Duration(seconds: 5), // Not required
+                animation: DelayedAnimations.SLIDE_FROM_RIGHT,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Stack(
@@ -562,7 +579,8 @@ class mealsTodayState extends State<mealsToday> {
                             padding: const EdgeInsets.only(top: 40, left: 15),
                             child: Container(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(

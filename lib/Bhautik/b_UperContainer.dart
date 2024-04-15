@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
+import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
@@ -31,6 +34,10 @@ var fatsper;
 
 var protein;
 var proteinper;
+
+var usermail1;
+double percntage = 0.0;
+int leftcal = 0;
 
 class firstContainer extends StatelessWidget {
   @override
@@ -85,24 +92,67 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
   @override
   void initState() {
     storeAndRetrieveList();
-    getsumofcals();
+  }
+
+  Future<void> getdatameals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+        decodedListbreakfast = cals ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  Future<void> getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+        decodelistlunch = calslunch ?? ['Calculating Calaries'];
+      },
+    );
+  }
+
+  Future<void> getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        print(calsdinner);
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+        decodelistdinner = calsdinner ?? ['Calculating Calaries'];
+      },
+    );
   }
 
   Future<void> storeAndRetrieveList() async {
-    var sp = await SharedPreferences.getInstance();
-    List<String>? listString =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    List<String>? listStringlunch =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    List<String>? listStringdinner =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
-    decodedListbreakfast = listString ?? [];
-
-    // print('The Lenth of Setting decodce is ${decodedListbreakfast.length}');
-    decodelistlunch = listStringlunch ?? [];
-    // print('The Lenth of Setting decodce lunch is ${decodelistlunch.length}');
-    decodelistdinner = listStringdinner ?? [];
-    // print('The Lenth of Setting decodce dinner is ${decodelistdinner.length}');
+     await getdatameals();
+    await getlunchmeals();
+    await getdinnermeals();
     setState(() {
       calariesofbreakfast = [];
       // print('============================================================================');
@@ -128,19 +178,12 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
         resultcal = str.split(',')[1];
         resultcal = resultcal.replaceAll('"', '');
         calariesoflunch.add(resultcal);
-        // print("the calaries are :: $calariesoflunch");
-        // print(calariesoflunch.runtimeType);
       }
 
       List<double> dataListAsDoubleoflunch =
           calariesoflunch.map((data) => double.parse(data)).toList();
-
-      print(dataListAsDoubleoflunch);
       sumoflunchcal = dataListAsDoubleoflunch.fold(
           0, (previous, current) => previous + current);
-
-      print(dataListAsDoubleoflunch.runtimeType);
-      print(sumofBrekfastcal);
 
       // For Dinner Name And Calaries Display -----------------------------------------------------------------------------------------------------
 
@@ -158,6 +201,7 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       sumofdinnercal = dataListAsDoubleofdinner.fold(
           0, (previous, current) => previous + current);
       Sumofcal = sumofBrekfastcal + sumofdinnercal + sumoflunchcal;
+      eatencals = Sumofcal;
       if (Sumofcal > 2500) {
         textColor = Colors.red;
       }
@@ -216,32 +260,22 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       if (fats > 0) {
         fatscolor = Colors.black;
       }
+      percntage = (eatencals ?? 1) / 2500;
+      if (percntage > 1) {
+        percntage = 1;
+      }
+      if (percntage < 0) {
+        percntage = 1;
+      }
 
-      print("----------------------------");
-
-      print("Carbs value $carbsper");
-
-      print("----------------------------");
-
-      sp.setDouble(sharedprefkeysfinal.sumofallcalaries, Sumofcal);
-      // print("[][][][][][][][][][][]");
-      // print(Sumofcal);
-      // print("[][][][][][][][][][][]");
+      leftcal = 2500 - Sumofcal.toInt();
+      if (leftcal > 2500) {
+        leftcal = 2500;
+      }
+      if (leftcal < 0) {
+        leftcal = 0;
+      }
     });
-  }
-
-  Future<void> getsumofcals() async {
-    var sp = await SharedPreferences.getInstance();
-    eatencals = sp.getDouble(sharedprefkeysfinal.sumofallcalaries);
-    if (eatencals! >= 2500) {
-      eatencals = 2500;
-   
-    }
-    if (eatencals! <= 0) {
-      eatencals = 0;
-    }
-    
-    setState(() {});
   }
 
   @override
@@ -345,7 +379,7 @@ class FirstRowOfContainer extends StatelessWidget {
                           style: TextStyle(
                             color: textColor,
                             fontFamily: "FontMain",
-                            fontSize: 32,
+                            fontSize: 28,
                           ),
                           
                         ),
@@ -519,7 +553,6 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
 
 // ignore: must_be_immutable
 class CircularIndicatorcustom extends StatefulWidget {
-  double per = (eatencals ?? 1) / 2500;
   @override
   State<CircularIndicatorcustom> createState() =>
       _CircularIndicatorcustomState();
@@ -534,16 +567,16 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
       curve: Curves.easeIn,
       lineWidth: 12.0,
       animation: true,
+      percent: percntage,
       animationDuration: 1000,
-      percent: widget.per,
       center: SizedBox(
         height: 50,
         child: Column(
           children: [
             AnimatedNumberText(
-              (2500 - (eatencals ?? 0)).toInt(), // int or double
+              leftcal, // int or double
               curve: Curves.easeIn,
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 3),
               style: TextStyle(
                 color: textColor,
                 fontFamily: "FontMain",

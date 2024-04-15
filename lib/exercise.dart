@@ -20,7 +20,7 @@ class exercisePageState extends State<exercisePage> {
     Future<List<String>> getListString() async {
    final prefs = await SharedPreferences.getInstance();
   var x = prefs.getStringList('breakfastlist') ?? [];
-   print('Saved String From shared Pref is $x');
+  //  print('Saved String From shared Pref is $x');
      return prefs.getStringList('breakfastlist') ?? [];
  }
   @override

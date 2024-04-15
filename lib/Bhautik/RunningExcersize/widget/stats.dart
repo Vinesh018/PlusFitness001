@@ -4,50 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 var screenwidth;
 
-class Stats extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Workout Status',
-                style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 17,
-                    fontFamily: 'FontMain'),
-              ),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Icon(
-              Icons.pie_chart_rounded,
-              size: 15,
-              color: Colors.blue,
-            )
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            InfoState(icon: Icons.timer, iconcolor:  Colors.green.shade300, iconbackground: Colors.blue, time: '+5s', value: '30:45', label: 'Time',),
-            InfoState(icon: Icons.favorite, iconcolor:  Colors.green.shade300, iconbackground: Colors.yellow, time: '+5s', value: '85 bpm', label: 'Heart rate',),
-            InfoState(icon: Icons.star_rate, iconcolor:  Colors.green.shade300, iconbackground: Colors.purple, time: '+5s', value: '169 kcal', label: 'Energy',),
-          ],
-        )
-      ],
-    );
-  }
-}
-
 class InfoState extends StatefulWidget {
     final IconData icon;
   final Color iconcolor;
