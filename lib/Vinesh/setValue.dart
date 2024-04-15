@@ -48,7 +48,7 @@ class _nameState extends State<name> {
 
   // Code For Get Data from Firebase
 
-Future<void> getdatameals() async {
+  Future<void> getdatameals() async {
     var sp = await SharedPreferences.getInstance();
     usermail1 = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
@@ -103,14 +103,10 @@ Future<void> getdatameals() async {
     );
   }
 
-
-
-
   // =========================================
 
   Future<void> storeAndRetrieveList() async {
- 
-     await getdatameals();
+    await getdatameals();
     await getlunchmeals();
     await getdinnermeals();
     setState(() {
@@ -135,9 +131,14 @@ Future<void> getdatameals() async {
       for (var i = 0; i < decodelistlunch.length; i++) {
         String str = decodelistlunch[i];
         var resultcal;
-        resultcal = str.split(',')[1];
-        resultcal = resultcal.replaceAll('"', '');
-        calariesoflunch.add(resultcal);
+        if (str.isEmpty) {
+          resultcal = '';
+        } else {
+          resultcal = str.split(',')[1];
+          resultcal = resultcal.replaceAll('"', '');
+          calariesoflunch.add(resultcal);
+        }
+
         // print("the calaries are :: $calariesoflunch");
         // print(calariesoflunch.runtimeType);
       }
@@ -222,7 +223,6 @@ Future<void> getdatameals() async {
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

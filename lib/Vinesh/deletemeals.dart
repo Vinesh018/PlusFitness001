@@ -1,18 +1,22 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:plus_fitness/Bhautik/b_UperContainer.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/T_Meals.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
- List<String> decodedListbreakfast = [];
- List<String> decodelistlunch = [];
- List<String> decodelistdinner = [];
+List<String> decodedListbreakfast = [];
+List<String> decodelistlunch = [];
+List<String> decodelistdinner = [];
+
+var usermail1;
 
 class deletemeals extends StatefulWidget {
   const deletemeals({super.key});
@@ -27,24 +31,68 @@ class deletemealsState extends State<deletemeals> {
     storeAndRetrieveList();
   }
 
+  Future<void> getdatameals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsBreakfast)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        cals = fields!['breakfast'];
+        print(cals);
+        cals = (cals as List?)?.map((item) => item as String).toList();
+        decodedListbreakfast = cals ?? [];
+      },
+    );
+  }
+
+  Future<void> getlunchmeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsLunch)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calslunch = fields!['lunch'];
+        calslunch =
+            (calslunch as List?)?.map((item) => item as String).toList();
+        decodelistlunch = calslunch ?? [];
+      },
+    );
+  }
+
+  Future<void> getdinnermeals() async {
+    var sp = await SharedPreferences.getInstance();
+    usermail1 = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.mealsDinner)
+        .doc(usermail1)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        calsdinner = fields!['dinner'];
+        print(calsdinner);
+        calsdinner =
+            (calsdinner as List?)?.map((item) => item as String).toList();
+        decodelistdinner = calsdinner ?? [];
+      },
+    );
+  }
+
   Future<void> storeAndRetrieveList() async {
     var sp = await SharedPreferences.getInstance();
-    List<String>? listString =
-        sp.getStringList(sharedprefkeysfinal.breakfastlist);
-    List<String>? listStringlunch =
-        sp.getStringList(sharedprefkeysfinal.lunchlist);
-    List<String>? listStringdinner =
-        sp.getStringList(sharedprefkeysfinal.dinnerlist);
 
-    decodedListbreakfast = listString ?? [];
-    decodelistlunch = listStringlunch ?? [];
-    decodelistdinner = listStringdinner ?? [];
-
-   
-
-    setState(() {
-     
-    });
+    await getdatameals();
+    await getlunchmeals();
+    await getdinnermeals();
+    setState(() {});
   }
 
   @override
@@ -84,7 +132,6 @@ class deletemealsState extends State<deletemeals> {
 
   Widget showsBreakfastMeals() {
     return ListView.builder(
-      // itemCount: decodedListbreakfast.length,
       itemCount: decodedListbreakfast.length,
       key: UniqueKey(),
       itemBuilder: (context, index) {
@@ -117,13 +164,19 @@ class deletemealsState extends State<deletemeals> {
               key: Key(item),
               onDismissed: (direction) async {
                 var sp = await SharedPreferences.getInstance();
+                var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
                 decodedListbreakfast.removeAt(index);
                 decodedListbreakfast.removeWhere((item) => item == index);
-                sp.setStringList(
-                    sharedprefkeysfinal.breakfastlist, decodedListbreakfast);
+                // Storing Updated List To Firebase 
+                FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsBreakfast)
+                    .doc(usermail12)
+                    .set(
+                  {'breakfast': decodedListbreakfast},
+                );
+
                 setState(() {});
               },
-            
               child: ListTile(
                 title: Padding(
                   padding: const EdgeInsets.all(15),
@@ -142,9 +195,10 @@ class deletemealsState extends State<deletemeals> {
       },
     );
   }
-   Widget showslunchMeals() {
+
+  Widget showslunchMeals() {
     return ListView.builder(
-       key: UniqueKey(),
+      key: UniqueKey(),
       itemCount: decodelistlunch.length,
       itemBuilder: (context, index) {
         final item = decodelistlunch[index];
@@ -176,10 +230,15 @@ class deletemealsState extends State<deletemeals> {
               key: Key(item),
               onDismissed: (direction) async {
                 var sp = await SharedPreferences.getInstance();
+                  var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
                 decodelistlunch.removeAt(index);
                 decodelistlunch.removeWhere((item) => item == index);
-                sp.setStringList(
-                    sharedprefkeysfinal.lunchlist, decodelistlunch);
+                 FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsLunch)
+                    .doc(usermail12)
+                    .set(
+                  {'lunch': decodelistlunch},
+                );
                 setState(() {});
               },
               child: ListTile(
@@ -200,9 +259,10 @@ class deletemealsState extends State<deletemeals> {
       },
     );
   }
-     Widget showsDinnerMeals() {
+
+  Widget showsDinnerMeals() {
     return ListView.builder(
-       key: UniqueKey(),
+      key: UniqueKey(),
       itemCount: decodelistdinner.length,
       itemBuilder: (context, index) {
         final item = decodelistdinner[index];
@@ -236,8 +296,14 @@ class deletemealsState extends State<deletemeals> {
                 var sp = await SharedPreferences.getInstance();
                 decodelistdinner.removeAt(index);
                 decodelistdinner.removeWhere((item) => item == index);
-                sp.setStringList(
-                    sharedprefkeysfinal.dinnerlist, decodelistdinner);
+                 var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
+                   FirebaseFirestore.instance
+                    .collection(firebaseconst.mealsDinner)
+                    .doc(usermail12)
+                    .set(
+                  {'dinner': decodelistdinner},
+                );
+
                 setState(() {});
               },
               child: ListTile(

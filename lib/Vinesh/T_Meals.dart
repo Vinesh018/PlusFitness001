@@ -193,7 +193,6 @@ class _DragandDropState extends State<DragandDrop>
     var usermail12 = sp.getString(sharedprefkeysfinal.useremail);
     breakfastfirebase.clear();
     breakfastfirebase = cals ?? [];
-
     for (var i = 0; i < breakfastList.length; i++) {
       if (i == breakfastList.length - 1) {
         breakfastfirebase.add(breakfastList[i]);
