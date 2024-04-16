@@ -69,6 +69,7 @@ class _StoreusingSharedPreferencesState
         .doc(usermail)
         .update({'Name': name, 'Age': age, 'Weight': weight, 'Height': height});
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -199,8 +200,11 @@ class _StoreusingSharedPreferencesState
                       heighttextfieldvalue = heightdata;
                       // print('if height is null then takes old height');
                     }
+                    
                     storeprofiledata(nametextfieldvalue, agetextfieldvalue,
                         weighttextfieldvalue, heighttextfieldvalue);
+
+                        
                    
                     setState(() {});
                     Get.off(UserProfileMainRun());

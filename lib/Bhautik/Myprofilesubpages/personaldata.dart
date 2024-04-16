@@ -3,15 +3,23 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
 double screenHeight = 0;
+
+String imagefromfirebase = "";
+
+
+
 
 class PersonalDataMainShow extends StatelessWidget {
   @override
@@ -60,25 +68,76 @@ class GradientContainerandimage extends StatefulWidget {
 class _GradientContainerandimageState extends State<GradientContainerandimage> {
   File? selectedImage;
   final ImagePicker picker = ImagePicker();
+
+  final storageRef = FirebaseStorage.instance.ref();
+
+
   @override
   void initState() {
     // TODO: implement initState
     // getImage();
-    
+    getimagefromfirebase();
   }
 
+  // static Future<bool> saveImage(List<int> imageBytes) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String base64Image = base64Encode(imageBytes);
+  //   return prefs.setString("image", base64Image);
+  // }
+  String imageurl = "";
+  Future<void> addImageToFirebase(image) async {
+    print("in addiamge");
 
-  static Future<bool> saveImage(List<int> imageBytes) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String base64Image = base64Encode(imageBytes);
-    return prefs.setString("image", base64Image);
+    // String base64Image = base64Encode(image!);
+
+    try {
+      final ref = storageRef.child("UserprofileImages/$usermail.png");
+
+      await ref
+          .putFile(
+              selectedImage!,
+              SettableMetadata(
+                contentType: "image/jpeg",
+              ))
+          .whenComplete(() => print("image stores to firebase"));
+
+      imageurl = await ref.getDownloadURL();
+
+      FirebaseFirestore.instance
+          .collection(firebaseconst.usercollection)
+          .doc(usermail)
+          .update({'imageUrl': imageurl});
+      print(imageurl);
+
+      setState(() {});
+    } on FirebaseException catch (e) {
+      print(e.message);
+      // ...
+    }
+  
+
   }
 
-   static Future<Image> getImage() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? str = prefs.getString('image');
-    Uint8List bytes = base64Decode(str!);
-    return Image.memory(bytes);
+  getimagefromfirebase() async {
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+        imagefromfirebase = fields!['imageUrl'] ?? "";
+        print("[[][][][][][][][][][][][][][][][][][]]");
+        print("in getimage");
+
+        print(imagefromfirebase);
+        print("[[][][][][][][][][][][][][][][][][][]]");
+
+        setState(() {});
+      },
+    );
+
+ 
   }
 
   @override
@@ -92,7 +151,8 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
         // print("----------------");
         // print(image.runtimeType);
         // print("----------------");
-        saveImage(image!);
+        // saveImage(image!);
+        addImageToFirebase(image);
       });
     }
 
@@ -103,9 +163,12 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
       setState(() {
         selectedImage = File(pickedfile.path);
         image = File(pickedfile.path).readAsBytesSync();
-         saveImage(image!);
+        //  saveImage(image!);
+
+        addImageToFirebase(image);
       });
     }
+
 
     Widget bottomSheet() {
       return Container(
@@ -168,8 +231,9 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
     Widget Imageprofile() {
       return Stack(
         children: [
-          image != null
-              ? CircleAvatar(radius: 80, backgroundImage: MemoryImage(image!))
+          imagefromfirebase != ""
+              ? CircleAvatar(
+                  radius: 80, backgroundImage: NetworkImage(imagefromfirebase!))
               : CircleAvatar(
                   radius: 80,
                   backgroundImage: AssetImage("assets/images/boy.png")),

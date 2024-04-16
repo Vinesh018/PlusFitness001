@@ -47,11 +47,11 @@ Future<void> main() async {
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
-        // home: TutorialHome()
+        home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
-        home: MainLogInPage()
+        //  home: MainLogInPage()
         // home: ContactusPageMain()
     ),
   );
