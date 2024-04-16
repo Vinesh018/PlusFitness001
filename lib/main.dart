@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/src/extensions/double_extensions.dart';
 import 'package:plus_fitness/Bhautik/Animation/delayanimation.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
+import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:plus_fitness/Vinesh/setValue.dart';
 import 'package:plus_fitness/Vinesh/splashScreen.dart';
@@ -46,10 +47,11 @@ Future<void> main() async {
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
-        home: TutorialHome()
+        // home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
+        home: MainLogInPage()
         // home: ContactusPageMain()
     ),
   );

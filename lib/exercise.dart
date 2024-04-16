@@ -14,22 +14,19 @@ class exercisePage extends StatefulWidget {
 
 class exercisePageState extends State<exercisePage> {
 @override
-  void initState() {
-    getListString();
-  }
-    Future<List<String>> getListString() async {
-   final prefs = await SharedPreferences.getInstance();
-  var x = prefs.getStringList('breakfastlist') ?? [];
-  //  print('Saved String From shared Pref is $x');
-     return prefs.getStringList('breakfastlist') ?? [];
- }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.only(left: 25),
-          child: Text('Myexercise'),
+          child: Text(
+            'My Exercise',
+            style: TextStyle(
+                fontFamily: 'FontMain', fontSize: 22, color: Colors.indigo),
+          ),
         ),
         backgroundColor: Color.fromARGB(255, 231, 235, 237),
           surfaceTintColor: Color.fromARGB(255, 231, 235, 237),

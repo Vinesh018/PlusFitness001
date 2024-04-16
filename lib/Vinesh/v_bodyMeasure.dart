@@ -33,8 +33,8 @@ class bodyMeasureContState extends State<bodyMeasureCont> {
         .then(
       (value) {
         var fields = value.data();
-          weighonbody = fields!['Weight'] ?? 'Loading';
-          Heightonbody = fields!['Height'] ?? 'Loading';
+        weighonbody = fields!['Weight'] ?? '65*';
+        Heightonbody = fields!['Height'] ?? '170*';
            setState(() { getweightfordisplay(); });
       },
       
