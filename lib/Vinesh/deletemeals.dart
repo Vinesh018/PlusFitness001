@@ -87,7 +87,7 @@ class deletemealsState extends State<deletemeals> {
   }
 
   Future<void> storeAndRetrieveList() async {
-    var sp = await SharedPreferences.getInstance();
+    
 
     await getdatameals();
     await getlunchmeals();

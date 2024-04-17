@@ -40,10 +40,10 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
         .then(
       (value) {
         var fields = value.data();
-          namedataonbody = fields!['Name'] ?? 'Loading';
-          ageonbody = fields!['Age'] ?? 'Loading';
-          weighonbody = fields!['Weight'] ?? 'Loading';
-          Heightonbody = fields!['Height'] ?? 'Loading';
+        namedataonbody = fields!['Name'] ?? '';
+        ageonbody = fields!['Age'] ?? '18*';
+        weighonbody = fields!['Weight'] ?? '60*';
+        Heightonbody = fields!['Height'] ?? '10*';
       },
     );
      setState(() { });
@@ -54,11 +54,16 @@ class _UserProfileMainRunState extends State<UserProfileMainRun> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 235, 237),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         surfaceTintColor: Colors.transparent,
         backgroundColor: Color.fromARGB(255, 231, 235, 237),
         title: Padding(
           padding: const EdgeInsets.only(left: 25),
-          child: Text("My Profile"),
+          child: Text(
+            "My Profile",
+            style: TextStyle(
+                fontFamily: 'FontMain', fontSize: 22, color: Colors.indigo),
+          ),
         ),
       ),
       bottomNavigationBar: footer(),

@@ -125,12 +125,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25),
               child: ElevatedButton(
-                  onPressed: () {
-                    print("email; is :  $_emailcontroller1");
-                    print(_emailcontroller1.text);
+                  onPressed: () async {
+                    // print("email; is :  $_emailcontroller1");
+                    // print(_emailcontroller1.text);
                     try {
-                      FirebaseAuth.instance.sendPasswordResetEmail(
+                      await FirebaseAuth.instance.sendPasswordResetEmail(
                           email: _emailcontroller1.text);
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -150,7 +151,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             );
                           });
                     } on FirebaseAuthException catch (e) {
-                      print("in catch");
+                      print("-------------");
+                      print("${e.message}");
+                      print("-------------");
                       showDialog(
                           context: context,
                           builder: (context) {

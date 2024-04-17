@@ -88,7 +88,7 @@ List<MealsItems> _mealsItem = [
       itemname: 'Veggies',
       calaries: 65,
       uid: '13',
-      imageurl: 'assets/meals/veggies.png'),
+      imageurl: 'assets/meals/veggies.png'), 
 ];
 var screenwidth;
 
@@ -102,6 +102,8 @@ class MealsItems {
       required this.calaries,
       required this.uid,
       required this.imageurl});
+
+      
 }
 
 class DragandDrop extends StatefulWidget {
@@ -138,6 +140,7 @@ class _DragandDropState extends State<DragandDrop>
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
         getdatameals();
+      
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
@@ -305,7 +308,8 @@ class _DragandDropState extends State<DragandDrop>
         backgroundColor: Color.fromARGB(255, 231, 235, 237),
         title: Text(
           "Add Meals to your Bucket",
-          style: TextStyle(color: Colors.indigo, fontFamily: "FontMain"),
+          style: TextStyle(
+              fontFamily: 'FontMain', fontSize: 22, color: Colors.indigo),
         ),
       ),
       bottomNavigationBar: footer(),

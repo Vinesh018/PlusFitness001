@@ -127,8 +127,8 @@ class waterContainerState extends State<waterContainer>
                                   child: Text("ml",
                                       style: TextStyle(
                                           fontFamily: "FontMain",
-                                          color: Colors.indigo.shade300,
-                                          fontSize: 15)),
+                                          color: Colors.indigo.shade500,
+                                          fontSize: 17)),
                                 )
                               ],
                             ),
@@ -248,7 +248,7 @@ class waterContainerState extends State<waterContainer>
                                         " Your bottle is empty refill it";
                                   } else {
                                     waterNotification =
-                                        "Keep drinking water !!";
+                                        "Stay hydrated !!";
                                   }
                                   var pef =
                                       await SharedPreferences.getInstance();
@@ -292,7 +292,7 @@ class waterContainerState extends State<waterContainer>
                                             " Your bottle is empty refill it";
                                       } else {
                                         waterNotification =
-                                            "Keep drinking water !!";
+                                            "Stay hydrated !!";
                                       }
                                       var pef =
                                           await SharedPreferences.getInstance();
