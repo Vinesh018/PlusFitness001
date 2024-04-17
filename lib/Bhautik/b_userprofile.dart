@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_icon/gradient_icon.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/achievement.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
@@ -19,6 +20,7 @@ String weighonbody = '40';
 String? Heightonbody = '100';
 String? namedataonbody = 'Your Name';
 String? ageonbody = '18';
+String imagefromfirebase1 = "";
 
 class UserProfileMainRun extends StatefulWidget {
   @override
@@ -28,11 +30,29 @@ class UserProfileMainRun extends StatefulWidget {
 class _UserProfileMainRunState extends State<UserProfileMainRun> {
   void initState() {
     super.initState();
+    getimagefromfirebase();
     getdata();
   }
+
+    getimagefromfirebase() async {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? usermail = sp.getString(sharedprefkeysfinal.useremail);
+    await FirebaseFirestore.instance
+        .collection(firebaseconst.usercollection)
+        .doc(usermail)
+        .get()
+        .then(
+      (value) {
+        var fields = value.data();
+     imagefromfirebase1 = fields!['imageUrl'] ?? " ";
+        setState(() {});
+      },
+    );
+    }
     void getdata() async {
       SharedPreferences sp = await SharedPreferences.getInstance();
     var useremail =   sp.getString(sharedprefkeysfinal.useremail);
+
     final data = await FirebaseFirestore.instance
         .collection(firebaseconst.usercollection)
         .doc(useremail)
@@ -99,14 +119,14 @@ class _NameImageRowState extends State<NameImageRow> {
       leading: SizedBox(
         width: 50,
         height: 80,
-        child: CircleAvatar(
-            radius: 100,
-            backgroundColor: Color.fromARGB(255, 231, 235, 237),
-            child: Image.asset(
-              'assets/images/userprofile.png',
-              height: 200,
-              width: 200,
-            )),
+        child:  imagefromfirebase1 != ""
+              ? CircleAvatar(
+                backgroundImage: AssetImage("assets/images/boy.png"),
+                  radius: 80, foregroundImage: NetworkImage(imagefromfirebase1,
+                  ))
+              : CircleAvatar(
+                  radius: 80,
+                  backgroundImage: AssetImage("assets/images/boy.png")),
       ),
       title: Text(
         namedataonbody.toString(),

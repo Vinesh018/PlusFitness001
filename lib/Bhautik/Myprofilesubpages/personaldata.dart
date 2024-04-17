@@ -11,6 +11,7 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/b_userprofile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
+import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 double screenWidth = 0;
@@ -108,6 +109,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
           .doc(usermail)
           .update({'imageUrl': imageurl});
       print(imageurl);
+     getimagefromfirebase();
 
       setState(() {});
     } on FirebaseException catch (e) {
@@ -119,6 +121,8 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
   }
 
   getimagefromfirebase() async {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? usermail = sp.getString(sharedprefkeysfinal.useremail);
     await FirebaseFirestore.instance
         .collection(firebaseconst.usercollection)
         .doc(usermail)
@@ -126,7 +130,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
         .then(
       (value) {
         var fields = value.data();
-        imagefromfirebase = fields!['imageUrl'] ?? "";
+        imagefromfirebase = fields!['imageUrl'] ?? " ";
         print("[[][][][][][][][][][][][][][][][][][]]");
         print("in getimage");
 
@@ -233,7 +237,9 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
         children: [
           imagefromfirebase != ""
               ? CircleAvatar(
-                  radius: 80, backgroundImage: NetworkImage(imagefromfirebase!))
+                // backgroundImage: AssetImage("assets/images/boy.png"),
+                backgroundColor: Color.fromARGB(255, 231, 235, 237),
+                  radius: 80, foregroundImage: NetworkImage(imagefromfirebase))
               : CircleAvatar(
                   radius: 80,
                   backgroundImage: AssetImage("assets/images/boy.png")),

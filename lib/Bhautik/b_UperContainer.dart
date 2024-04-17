@@ -8,6 +8,7 @@ import 'package:plus_fitness/Vinesh/T_Meals.dart';
 import 'package:plus_fitness/Vinesh/v_mealsToday.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 
 List<String> decodedListbreakfast = [];
