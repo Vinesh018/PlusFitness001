@@ -139,8 +139,9 @@ class _DragandDropState extends State<DragandDrop>
       mealtype.mealitem.add(mealsItems);
       if (mealtype.mealtype == "Breakfast") {
         storeAndRetrieveList();
+        _mealsItem.add(
+            MealsItems(itemname: "Tea", calaries: 40, uid: "14", imageurl: ""));
         getdatameals();
-      
       }
       if (mealtype.mealtype == "Lunch") {
         storeAndRetrieveListlunch();
