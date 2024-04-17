@@ -8,6 +8,7 @@ import 'package:plus_fitness/Bhautik/Myprofilesubpages/StoreUserdata.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/achievement.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/contactuspage.dart';
 import 'package:plus_fitness/Bhautik/Myprofilesubpages/personaldata.dart';
+import 'package:plus_fitness/Bhautik/Myprofilesubpages/privacy_policy.dart';
 import 'package:plus_fitness/Bhautik/b_login.dart';
 import 'package:plus_fitness/Bhautik/constansts/firebaseconst.dart';
 import 'package:plus_fitness/Bhautik/constansts/sharedprefkeys.dart';
@@ -528,7 +529,7 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
                   OneListtileForAccountData(
                       icons: Icons.privacy_tip_outlined,
                       str: 'Privacy Policy',
-                      ontap: achievementontap),
+                      ontap: privacypolicyonTap),
                   OneListtileForAccountData(
                       icons: Icons.settings,
                       str: 'Setting',
@@ -549,6 +550,11 @@ class _AccountContainerforotherState extends State<AccountContainerforother> {
 
   contactUsOnTap() {
     Get.to(ContactusPageMain());
+    setState(() {});
+  }
+
+  privacypolicyonTap() {
+    Get.to(privacypolicy());
     setState(() {});
   }
 
