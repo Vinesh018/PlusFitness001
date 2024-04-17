@@ -47,11 +47,11 @@ Future<void> main() async {
         //home:UserProfileMainRun()
         // home: AnimatedDigitWidgetExample()
         // home: MyHomePageb(),
-        home: TutorialHome()
+        // home: TutorialHome()
         // home: MyHomePageb(),
         // home: MyHomePageb(),
         // home: MyAppt(),
-        //  home: MainLogInPage()
+        home: MainLogInPage()
         // home: ContactusPageMain()
     ),
   );
@@ -77,9 +77,9 @@ class _TutorialHomeState extends State<TutorialHome> {
   void _getuseremail() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var useremail = sp.getString(sharedprefkeysfinal.useremail);
-    // print('#######################');
-    // print(useremail);
-    //   print('#######################');
+    print('#######################');
+    print(useremail);
+    print('#######################');
 
   }
   

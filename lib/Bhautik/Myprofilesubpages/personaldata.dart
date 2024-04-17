@@ -99,7 +99,7 @@ class _GradientContainerandimageState extends State<GradientContainerandimage> {
               SettableMetadata(
                 contentType: "image/jpeg",
               ))
-          .whenComplete(() => print("image stores to firebase"));
+          .whenComplete(() => print("image stored to firebase"));
 
       imageurl = await ref.getDownloadURL();
 
