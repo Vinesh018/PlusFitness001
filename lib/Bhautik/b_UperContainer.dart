@@ -21,10 +21,10 @@ List<String> calariesofbreakfast = [];
 List<String> calariesoflunch = [];
 List<String> calariesofdinner = [];
 double? eatencals = 0;
-Color textColor = Colors.indigo;
-Color carbscolor = Colors.black;
-Color protiencolor = Colors.black;
-Color fatscolor = Colors.black;
+Color textColor = Color(0xFF9FA8DA);
+Color carbscolor = Color(0xBEFFFFFF);
+Color protiencolor = Color(0xBEFFFFFF);
+Color fatscolor = Color(0xBEFFFFFF);
 
 var carbs;
 var carbsper;
@@ -62,13 +62,13 @@ class FirstrowOfBody extends StatelessWidget {
           ),
           InkWell(
               onTap: () {},
-              child: const Row(
+              child: Row(
                 children: [
                   Text(
                     'Details ',
                     style: TextStyle(
                         fontSize: 18,
-                        color: Colors.blue,
+                        color: Color(0xFF90CAF9),
                         fontFamily: 'FontMain'),
                   ),
                   Icon(
@@ -203,10 +203,10 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       Sumofcal = sumofBrekfastcal + sumofdinnercal + sumoflunchcal;
       eatencals = Sumofcal;
       if (Sumofcal > 2500) {
-        textColor = Colors.red;
+        textColor = Color(0xFFE57373);
       }
       if (Sumofcal <= 2500) {
-        textColor = Colors.indigo;
+        textColor = Color(0xFF9FA8DA);
       }
 
       carbs = Sumofcal / 8;
@@ -221,10 +221,10 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       carbsper = carbs / 312.5;
       carbs = 312.5 - carbs;
       if (carbs! <= 0) {
-        carbscolor = Colors.green;
+        carbscolor = Color(0xFFA5D6A7);
       }
       if (carbs > 0) {
-        carbscolor = Colors.black;
+        carbscolor = Color(0xFFF3D9D9);
       }
 
       protein = Sumofcal / 16;
@@ -238,10 +238,11 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       proteinper = protein / 156.25;
       protein = 156.25 - protein;
       if (protein! <= 0) {
-        protiencolor = Colors.green;
+        protiencolor = Color(0xFFA5D6A7);
       }
       if (protein > 0) {
-        protiencolor = Colors.black;
+        protiencolor = carbscolor = Color(0xFFF3D9D9);
+
       }
 
       fats = Sumofcal / 36;
@@ -255,10 +256,11 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
       fatsper = fats / 69.45;
       fats = 69.45 - fats;
       if (fats! <= 0) {
-        fatscolor = Colors.green;
+        fatscolor = Color(0xFFA5D6A7);
       }
       if (fats > 0) {
-        fatscolor = Colors.black;
+        fatscolor = carbscolor = Color(0xFFF3D9D9);
+
       }
       percntage = (eatencals ?? 1) / 2500;
       if (percntage > 1) {
@@ -291,7 +293,15 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                 
+                gradient: SweepGradient(
+                  center: Alignment.topLeft,
+                  startAngle: 1.0,
+                  endAngle: 3.14,
+                  colors: [Color(0xF31B1A1A), Colors.indigo.shade200],
+                  stops: [0.0, 1.0],
+                ),
+                color: Color(0xF31B1A1A),
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(80),
@@ -299,7 +309,7 @@ class _SecondRowAndContainerState extends State<SecondRowAndContainer> {
                     bottomRight: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Color(0xFF5C6BC0).withOpacity(1),
                     spreadRadius: 5,
                     blurRadius: 7,
                     offset: const Offset(0, 3), // changes position of shadow
@@ -359,18 +369,23 @@ class FirstRowOfContainer extends StatelessWidget {
                       child: Text(
                         mainhead,
                         style: TextStyle(
-                            fontFamily: 'FontMain', color: Colors.grey),
+                            fontFamily: 'FontMain', color: Color(0xFF9FA8DA)),
                       ),
                     ),
                     Row(
                      
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          // 'assets/images/eaten.png',
-                          imgadress,
-                          height: 40,
-                          width: 40,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 5),
+                          child: Image.asset(
+                            // 'assets/images/eaten.png',
+                            imgadress,
+                            color: Color(0xFF536DFE),
+                            height: 25,
+                            width: 25,
+                          ),
                         ),
                         AnimatedNumberText(
                           subtext.toInt(), // int or double
@@ -420,15 +435,15 @@ class FirstRowMakeCommon extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: FirstRowOfContainer(
                 mainhead: 'Eaten',
-                imgadress: 'assets/images/eaten.png',
-                bordercolor: Color.fromRGBO(206, 215, 240, 1),
+                imgadress: 'assets/images/dish.png',
+                bordercolor: Color(0xBEFFFFFF),
                 subtext: Sumofcal,
               ),
             ),
             FirstRowOfContainer(
               mainhead: 'Burned',
-              imgadress: 'assets/images/burned.png',
-              bordercolor: Color.fromRGBO(236, 201, 209, 1),
+              imgadress: 'assets/images/kcal.png',
+              bordercolor: Color(0xBEFFFFFF),
               subtext: 104,
             ),
           ],
@@ -468,8 +483,8 @@ class SecondRowOfShadow extends StatelessWidget {
             subtext: (protein ?? 0).toStringAsFixed(1)),
         CommoncarbsProtinefat(
             headText: 'Fats',
-            coolor1: Colors.amber.shade200,
-            coolor2: Colors.amber.shade700,
+            coolor1: Colors.amber.shade300,
+            coolor2: Colors.amber.shade600,
             backgroundColor: Colors.amber.shade100,
             percentage: fatsper ?? 0,
             textcolor: fatscolor,
@@ -514,6 +529,7 @@ class _CommoncarbsProtinefatState extends State<CommoncarbsProtinefat>
           Text(
             widget.headText,
             style: const TextStyle(
+              color: Color(0xBEFFFFFF),
               fontWeight: FontWeight.w500,
               fontFamily: 'FontMain',
               fontSize: 17,
@@ -583,7 +599,10 @@ class _CircularIndicatorcustomState extends State<CircularIndicatorcustom> {
                 fontSize: 20,
               ),
             ),
-            Text("kcal left")
+            Text(
+              "kcal left",
+              style: TextStyle(color: Color(0xFFF3D9D9)),
+            )
           
             
           ],

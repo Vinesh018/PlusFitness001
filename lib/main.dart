@@ -97,14 +97,16 @@ class _TutorialHomeState extends State<TutorialHome> {
         onTap: () {
           Get.off(TutorialHome());
         },
-        child: const Text(
+        child: Text(
           'Plusfitness',
           style: TextStyle(
-              fontFamily: 'FontMain', fontSize: 22, color: Colors.indigo),
+              fontFamily: 'FontMain',
+              fontSize: 22,
+              color: Color(0xFFC5CAE9)), // font color title
         ),
       ),
     ),
-    backgroundColor: Color.fromARGB(255, 231, 235, 237),
+    backgroundColor: Color(0xF3242323), //appbar
 
   
     actions: const [
@@ -123,7 +125,7 @@ class _TutorialHomeState extends State<TutorialHome> {
     return Scaffold(
         bottomNavigationBar: footer(),
         appBar: appbar,
-        backgroundColor: Color.fromARGB(255, 231, 235, 237),
+        backgroundColor: Color(0xF31B1A1A), // background color
         // ignore: prefer_const_constructors
         body: SingleChildScrollView(
           child: Padding(
